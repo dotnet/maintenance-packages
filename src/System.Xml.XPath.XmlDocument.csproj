@@ -40,6 +40,9 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
+  <PropertyGroup>
+    <CommonPath>..\..\Common\src</CommonPath>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System.Runtime" />
     <Reference Include="System.Diagnostics.Debug" />
@@ -54,23 +57,23 @@
     <Reference Include="System.IO" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\System.Xml.Common\System\Xml\Schema\XmlUntypedConverter.cs" />
-    <Compile Include="..\System.Xml.Common\System\Xml\Schema\XsdDateTime.cs" />
-    <Compile Include="..\System.Xml.Common\System\Xml\Base64Encoder.cs" />
-    <Compile Include="..\System.Xml.Common\System\Xml\Bits.cs" />
-    <Compile Include="..\System.Xml.Common\System\Xml\Ref.cs" />
-    <Compile Include="..\System.Xml.Common\System\Xml\XmlRawWriter.cs" />
-    <Compile Include="..\System.Xml.Common\System\Xml\SecureStringHasher.cs" />
-    <Compile Include="..\System.Xml.Common\System\Xml\XmlRawWriterBase64Encoder.cs" />
-    <Compile Include="..\System.Xml.Common\System\Xml\ValidateNames.cs" />
-    <Compile Include="..\System.Xml.Common\System\Xml\XmlCharType.cs" />
-    <Compile Include="..\System.Xml.Common\System\Xml\XmlStandalone.cs" />
-    <Compile Include="..\System.Xml.Common\System\Xml\XmlConvertEx.cs" />
-    <Compile Include="..\System.Xml.Common\System\Xml\ExceptionType.cs" />
-    <Compile Include="..\System.Xml.Common\System\Xml\XPathNavigatorEx.cs" />
-    <Compile Include="..\System.Xml.Common\System\Xml\XmlParsingHelper.cs" />
-    <Compile Include="..\System.Xml.Common\System\Xml\XmlAttributeCollectionEx.cs" />
-    <Compile Include="..\System.Xml.Common\System\Xml\XmlConst.cs" />
+    <Compile Include="$(CommonPath)\System\Xml\Schema\XmlUntypedConverter.cs" />
+    <Compile Include="$(CommonPath)\System\Xml\Schema\XsdDateTime.cs" />
+    <Compile Include="$(CommonPath)\System\Xml\Base64Encoder.cs" />
+    <Compile Include="$(CommonPath)\System\Xml\Bits.cs" />
+    <Compile Include="$(CommonPath)\System\Xml\Ref.cs" />
+    <Compile Include="$(CommonPath)\System\Xml\XmlRawWriter.cs" />
+    <Compile Include="$(CommonPath)\System\Xml\SecureStringHasher.cs" />
+    <Compile Include="$(CommonPath)\System\Xml\XmlRawWriterBase64Encoder.cs" />
+    <Compile Include="$(CommonPath)\System\Xml\ValidateNames.cs" />
+    <Compile Include="$(CommonPath)\System\Xml\XmlCharType.cs" />
+    <Compile Include="$(CommonPath)\System\Xml\XmlStandalone.cs" />
+    <Compile Include="$(CommonPath)\System\Xml\XmlConvertEx.cs" />
+    <Compile Include="$(CommonPath)\System\Xml\ExceptionType.cs" />
+    <Compile Include="$(CommonPath)\System\Xml\XPathNavigatorEx.cs" />
+    <Compile Include="$(CommonPath)\System\Xml\XmlParsingHelper.cs" />
+    <Compile Include="$(CommonPath)\System\Xml\XmlAttributeCollectionEx.cs" />
+    <Compile Include="$(CommonPath)\System\Xml\XmlConst.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Resources\Strings.Designer.cs">
@@ -90,16 +93,16 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\System.Xml.Common\System\SR.cs" />
-    <Compile Include="..\System.Xml.Common\System\ArrayT.cs" />
-    <Compile Include="..\System.Xml.Common\System\NotImplemented.cs" />
+    <Compile Include="$(CommonPath)\System\SR.cs" />
+    <Compile Include="$(CommonPath)\System\ArrayT.cs" />
+    <Compile Include="$(CommonPath)\System\NotImplemented.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\System.Xml.XmlDocument\src\System.Xml.XmlDocument.csproj">
+    <ProjectReference Include="..\..\System.Xml.XmlDocument\src\System.Xml.XmlDocument.csproj">
       <Project>{16ee5522-f387-4c9e-9ef2-b5134b043f37}</Project>
       <Name>System.Xml.XmlDocument</Name>
     </ProjectReference>
-    <ProjectReference Include="..\System.Xml.XPath\System.Xml.XPath.csproj">
+    <ProjectReference Include="..\..\System.Xml.XPath\src\System.Xml.XPath.csproj">
       <Project>{be28323e-327a-4e0f-b7f9-16ab7eab59dd}</Project>
       <Name>System.Xml.XPath</Name>
     </ProjectReference>
