@@ -134,11 +134,11 @@ namespace System
         public static bool TryGetString(this ReadOnlyMemory<char> readOnlyMemory, out string text, out int start, out int length) { throw null; }
 
         public static int BinarySearch<T>(this ReadOnlySpan<T> span, IComparable<T> comparable) { throw null; }
-        public static int BinarySearch<T, TComparable>(this ReadOnlySpan<T> span, TComparable comparable) where TComparable : IComparable<T> { throw null; }
-        public static int BinarySearch<T, TComparer>(this ReadOnlySpan<T> span, T value, TComparer comparer) where TComparer : IComparer<T> { throw null; }
+        public static int BinarySearch<T, TComparable>(this ReadOnlySpan<T> span, in TComparable comparable) where TComparable : IComparable<T> { throw null; }
+        public static int BinarySearch<T, TComparer>(this ReadOnlySpan<T> span, in T value, in TComparer comparer) where TComparer : IComparer<T> { throw null; }
         public static int BinarySearch<T>(this Span<T> span, IComparable<T> comparable) { throw null; }
-        public static int BinarySearch<T, TComparable>(this Span<T> span, TComparable comparable) where TComparable : IComparable<T> { throw null; }
-        public static int BinarySearch<T, TComparer>(this Span<T> span, T value, TComparer comparer) where TComparer : IComparer<T> { throw null; }
+        public static int BinarySearch<T, TComparable>(this Span<T> span, in TComparable comparable) where TComparable : IComparable<T> { throw null; }
+        public static int BinarySearch<T, TComparer>(this Span<T> span, in T value, in TComparer comparer) where TComparer : IComparer<T> { throw null; }
     }
 
     public readonly struct ReadOnlyMemory<T>
