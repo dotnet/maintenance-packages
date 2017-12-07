@@ -68,9 +68,9 @@ namespace System
         [MethodImpl(MethodImplOptions.NoInlining)]
         private static Exception CreateFormatException_BadFormatSpecifier() { return new FormatException(SR.Argument_BadFormatSpecifier); }
 
-        internal static void ThrowArgumentException_OverlapAlignmentMismatch() { throw CreateArgumentException_OverlapAlignmentMismatch(); }
+        internal static void ThrowInvalidOperationException_IComparableFailed(Exception e) { throw CreateInvalidOperationException_IComparableFailed(e); }
         [MethodImpl(MethodImplOptions.NoInlining)]
-        private static Exception CreateArgumentException_OverlapAlignmentMismatch() { return new ArgumentException(SR.Argument_OverlapAlignmentMismatch); }
+        private static Exception CreateInvalidOperationException_IComparableFailed(Exception e) { return new InvalidOperationException(SR.InvalidOperation_IComparableFailed, e); }
 
         //
         // Enable use of ThrowHelper from TryFormat() routines without introducing dozens of non-code-coveraged "bytesWritten = 0; return false" boilerplate.
