@@ -99,6 +99,7 @@ namespace System
         obj,
         ownedMemory,
         pointer,
-        comparable
+        comparable,
+        comparer
     }
 }
