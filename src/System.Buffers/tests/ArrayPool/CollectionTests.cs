@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
+using Microsoft.DotNet.RemoteExecutor;
 using System.Collections.Generic;
 using System.Diagnostics.Tracing;
 using System.Linq;
@@ -16,22 +17,16 @@ namespace System.Buffers.ArrayPool.Tests
     public class CollectionTests : ArrayPoolTest
     {
         [OuterLoop("This is a long running test (over 2 minutes)")]
-        [Theory,
-            InlineData(true),
-            InlineData(false)]
-        public void BuffersAreCollectedWhenStale(bool trim)
+        [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
+        public void BuffersAreCollectedWhenStale()
         {
-            RemoteInvokeWithTrimming((trimString) =>
+            RemoteInvokeWithTrimming(() =>
             {
-                // Check that our environment is as we expect
-                Assert.Equal(trimString, Environment.GetEnvironmentVariable(TrimSwitchName));
-
                 const int BufferCount = 8;
                 const int BufferSize = 1025;
 
                 // Get the pool and check our trim setting
                 var pool = ArrayPool<int>.Shared;
-                bool parsedTrim = ValidateTrimState(pool, trimString);
 
                 List<int[]> rentedBuffers = new List<int[]>();
 
@@ -72,26 +67,21 @@ namespace System.Buffers.ArrayPool.Tests
                 }
 
                 // Should only have found a new buffer if we're trimming
-                Assert.Equal(parsedTrim, foundNewBuffer);
-                return SuccessExitCode;
-            }, trim, 3 * 60 * 1000); // This test has to wait for the buffers to go stale (give it three minutes)
+                Assert.True(foundNewBuffer);
+            }, 3 * 60 * 1000); // This test has to wait for the buffers to go stale (give it three minutes)
         }
+
+        private static bool IsStressModeEnabledAndRemoteExecutorSupported => TestEnvironment.IsStressModeEnabled && RemoteExecutor.IsSupported;
 
         // This test can cause problems for other tests run in parallel (from other assemblies) as
         // it pushes the physical memory usage above 80% temporarily.
-        [ConditionalTheory(typeof(TestEnvironment), nameof(TestEnvironment.IsStressModeEnabled)),
-            InlineData(true),
-            InlineData(false)]
-        public unsafe void ThreadLocalIsCollectedUnderHighPressure(bool trim)
+        [ConditionalFact(nameof(IsStressModeEnabledAndRemoteExecutorSupported))]
+        public unsafe void ThreadLocalIsCollectedUnderHighPressure()
         {
-            RemoteInvokeWithTrimming((trimString) =>
+            RemoteInvokeWithTrimming(() =>
             {
-                // Check that our environment is as we expect
-                Assert.Equal(trimString, Environment.GetEnvironmentVariable(TrimSwitchName));
-
                 // Get the pool and check our trim setting
                 var pool = ArrayPool<byte>.Shared;
-                bool parsedTrim = ValidateTrimState(pool, trimString);
 
                 // Create our buffer, return it, re-rent it and ensure we have the same one
                 const int BufferSize = 4097;
@@ -119,19 +109,10 @@ namespace System.Buffers.ArrayPool.Tests
                 } while ((int)pressureMethod.Invoke(null, null) != 2);
 
                 GC.WaitForPendingFinalizers();
-                if (parsedTrim)
-                {
-                    // Should have a new buffer now
-                    Assert.NotSame(buffer, pool.Rent(BufferSize));
-                }
-                else
-                {
-                    // Disabled, should not have trimmed buffer
-                    Assert.Same(buffer, pool.Rent(BufferSize));
-                }
 
-                return SuccessExitCode;
-            }, trim);
+                // Should have a new buffer now
+                Assert.NotSame(buffer, pool.Rent(BufferSize));
+            });
         }
 
         private static bool ValidateTrimState(object pool, string trimString)
@@ -143,15 +124,14 @@ namespace System.Buffers.ArrayPool.Tests
             return parsedTrim;
         }
 
-        [Theory,
-            InlineData(true),
-            InlineData(false)]
-        public void PollingEventFires(bool trim)
+        private static bool IsPreciseGcSupportedAndRemoteExecutorSupported => PlatformDetection.IsPreciseGcSupported && RemoteExecutor.IsSupported;
+
+        [ConditionalFact(nameof(IsPreciseGcSupportedAndRemoteExecutorSupported))]
+        public void PollingEventFires()
         {
-            RemoteInvokeWithTrimming((trimString) =>
+            RemoteInvokeWithTrimming(() =>
             {
                 var pool = ArrayPool<float>.Shared;
-                bool parsedTrim = ValidateTrimState(pool, trimString);
                 bool pollEventFired = false;
                 var buffer = pool.Rent(10);
 
@@ -186,9 +166,8 @@ namespace System.Buffers.ArrayPool.Tests
                 });
 
                 // Polling events should only fire when trimming is enabled
-                Assert.Equal(parsedTrim, pollEventFired);
-                return SuccessExitCode;
-            }, trim);
+                Assert.True(pollEventFired);
+            });
         }
     }
 }

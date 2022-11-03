@@ -2,13 +2,14 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
+using Microsoft.DotNet.RemoteExecutor;
 using System.Diagnostics;
 using System.Diagnostics.Tracing;
 using System.Threading;
 
 namespace System.Buffers.ArrayPool.Tests
 {
-    public abstract class ArrayPoolTest : RemoteExecutorTestBase
+    public abstract class ArrayPoolTest
     {
         protected const string TrimSwitchName = "DOTNET_SYSTEM_BUFFERS_ARRAYPOOL_TRIMSHARED";
 
@@ -35,16 +36,7 @@ namespace System.Buffers.ArrayPool.Tests
             }
         }
 
-        protected static void RemoteInvokeWithTrimming(Action action, bool trim = false)
-        {
-            RemoteInvokeOptions options = new RemoteInvokeOptions();
-            options.StartInfo.UseShellExecute = false;
-            options.StartInfo.EnvironmentVariables.Add(TrimSwitchName, trim.ToString());
-
-            RemoteInvoke(action).Dispose();
-        }
-
-        protected static void RemoteInvokeWithTrimming(Func<string, int> method, bool trim = false, int timeout = FailWaitTimeoutMilliseconds)
+        protected static void RemoteInvokeWithTrimming(Action method, int timeout = RemoteExecutor.FailWaitTimeoutMilliseconds)
         {
             RemoteInvokeOptions options = new RemoteInvokeOptions
             {
@@ -52,9 +44,9 @@ namespace System.Buffers.ArrayPool.Tests
             };
 
             options.StartInfo.UseShellExecute = false;
-            options.StartInfo.EnvironmentVariables.Add(TrimSwitchName, trim.ToString());
+            options.StartInfo.EnvironmentVariables.Add(TrimSwitchName, true.ToString());
 
-            RemoteInvoke(method, trim.ToString(), options).Dispose();
+            RemoteExecutor.Invoke(method, options).Dispose();
         }
     }
 }
