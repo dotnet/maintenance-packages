@@ -13,7 +13,10 @@
     <UsingToolXliff>false</UsingToolXliff>
     <!-- Libs -->
     <MicrosoftNETTestSdkVersion>16.7.1</MicrosoftNETTestSdkVersion>
-    <XUnitVersion>2.4.1</XUnitVersion>
+    <XUnitVersion>2.4.2</XUnitVersion>
     <XUnitRunnerVisualStudioVersion>2.4.3</XUnitRunnerVisualStudioVersion>
+    <!-- Toolset Dependencies -->
+    <MicrosoftDotNetRemoteExecutorVersion>8.0.0-beta.22524.5</MicrosoftDotNetRemoteExecutorVersion>
+    <MicrosoftDotNetXUnitExtensionsVersion>8.0.0-beta.22524.5</MicrosoftDotNetXUnitExtensionsVersion>
   </PropertyGroup>
 </Project>

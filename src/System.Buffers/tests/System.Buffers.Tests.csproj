@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net461</TargetFramework>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="$(CommonPath)\tests\System\Diagnostics\Tracing\TestEventListener.cs" Link="Common\System\Diagnostics\Tracing\TestEventListener.cs" />
+    <Compile Include="$(CommonPath)\tests\TestUtilities\System\AssertExtensions.cs" Link="Common\System\AssertExtensions.cs" />
+    <Compile Include="$(CommonPath)\tests\TestUtilities\System\TestEnvironment.cs" Link="Common\System\TestEnvironment.cs" />
+    <Compile Include="$(CommonPath)\tests\TestUtilities\System\PlatformDetection.cs" Link="Common\System\PlatformDetection.cs" />
+    
+    <ProjectReference Include="..\src\System.Buffers.csproj" />
+    <PackageReference Include="Microsoft.DotNet.RemoteExecutor" Version="$(MicrosoftDotNetRemoteExecutorVersion)" />
+    <PackageReference Include="Microsoft.DotNet.XunitExtensions" Version="$(MicrosoftDotNetXUnitExtensionsVersion)" />
+    <PackageReference Include="System.Memory" Version="4.5.5" /> <!--Replace this Package Reference for a project reference if the library gets added to this repo-->
+  </ItemGroup>
+
+</Project>

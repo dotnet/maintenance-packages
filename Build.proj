@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.Build.Traversal">
+
+  <ItemGroup>
+    <!-- Build all src projects -->
+    <ProjectToBuild Include="$(MSBuildThisFileDirectory)src\*\src\*.*proj" />
+
+    <!-- Build all Test Projects -->
+    <TestExclusions Condition="'$(OS)' != 'Windows_NT'" Include="$(MSBuildThisFileDirectory)src\System.Buffers\tests\System.Buffers.Tests.csproj" /> <!-- This test is .NET Framework only -->
+    <ProjectToBuild Condition="'$(BuildTests)' == 'true'" Include="$(MSBuildThisFileDirectory)src\*\tests\*.*proj" Exclude="@(TestExclusions)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Subsets are already imported by Directory.Build.props. -->
+    <ProjectReference Include="@(ProjectToBuild)" />
+  </ItemGroup>
+
+</Project>
