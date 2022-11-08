@@ -1,8 +1,0 @@
-<Project>
-  <PropertyGroup>
-    <VersionPrefix>4.5.2</VersionPrefix>
-    <AssemblyVersion>4.0.3.0</AssemblyVersion>
-  </PropertyGroup>
-
-  <Import Project="$(MSBuildThisFileDirectory)../../Directory.Build.props" />
-</Project>

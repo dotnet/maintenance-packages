@@ -11,10 +11,6 @@
     <IsPackable>true</IsPackable>
     <EnablePackageValidation>true</EnablePackageValidation>
 
-    <!-- Set this property to false if you don't want to use the runtime
-          framework version defined in Versions.props -->
-    <UseCustomRuntimeVersion>true</UseCustomRuntimeVersion>
-    <RuntimeFrameworkVersion Condition="$(UseCustomRuntimeVersion)">$(MicrosoftNETCoreAppVersion)</RuntimeFrameworkVersion>
     <CommonPath>$(MSBuildThisFileDirectory)src/Common/</CommonPath>
   </PropertyGroup>
 

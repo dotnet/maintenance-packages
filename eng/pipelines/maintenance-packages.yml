@@ -55,7 +55,6 @@ stages:
       archType: x64
       ${{ if and(ne(variables['System.TeamProject'], 'public'), notin(variables['Build.Reason'], 'PullRequest')) }}:
         isOfficialBuild: true
-        runTests: false
         pool:
           name: NetCore1ESPool-Internal
           demands: ImageOverride -equals windows.vs2022preview.amd64
