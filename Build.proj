@@ -1,5 +1,12 @@
 <Project Sdk="Microsoft.Build.Traversal">
 
+  <!-- Ensure that packages are only created when GeneratePackOnBuild is set to true -->
+  <ItemDefinitionGroup>
+    <ProjectToBuild>
+      <Pack>false</Pack>
+    </ProjectToBuild>
+  </ItemDefinitionGroup>
+
   <ItemGroup>
     <!-- Build all src projects -->
     <ProjectToBuild Include="$(MSBuildThisFileDirectory)src\*\src\*.*proj" />
@@ -10,7 +17,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <!-- Subsets are already imported by Directory.Build.props. -->
     <ProjectReference Include="@(ProjectToBuild)" />
   </ItemGroup>
 

@@ -12,7 +12,7 @@ jobs:
 - template: /eng/common/templates/jobs/jobs.yml
   parameters:
     enableTelemetry: true
-    helixRepo: dotnet/runtimelab
+    helixRepo: dotnet/maintenance-packages
     pool: ${{ parameters.pool }}
     enablePublishBuildArtifacts: true
     enablePublishBuildAssets: true
