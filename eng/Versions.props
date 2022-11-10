@@ -10,7 +10,7 @@
     <XUnitVersion>2.4.2</XUnitVersion>
     <XUnitRunnerVisualStudioVersion>2.4.3</XUnitRunnerVisualStudioVersion>
     <!-- Toolset Dependencies -->
-    <MicrosoftDotNetRemoteExecutorVersion>7.0.0-beta.22557.1</MicrosoftDotNetRemoteExecutorVersion>
-    <MicrosoftDotNetXUnitExtensionsVersion>7.0.0-beta.22557.1</MicrosoftDotNetXUnitExtensionsVersion>
+    <MicrosoftDotNetRemoteExecutorVersion>7.0.0-beta.22558.4</MicrosoftDotNetRemoteExecutorVersion>
+    <MicrosoftDotNetXUnitExtensionsVersion>7.0.0-beta.22558.4</MicrosoftDotNetXUnitExtensionsVersion>
   </PropertyGroup>
 </Project>
