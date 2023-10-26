@@ -700,7 +700,6 @@ namespace System.Data.SqlClient
             int payloadOffset = 0;
             int payloadLength = 0;
             int option = payload[offset++];
-            bool encryptSupported = false;
 
             while (option != (byte)PreLoginOptions.LASTOPT)
             {
@@ -737,11 +736,18 @@ namespace System.Data.SqlClient
                             LOGIN
                         } */
 
-                        // Any response other than NOT_SUP means the server supports encryption.
-                        encryptSupported = serverOption != EncryptionOptions.NOT_SUP;
-
                         switch (_encryptionOption)
                         {
+                            case (EncryptionOptions.ON):
+                                if (serverOption == EncryptionOptions.NOT_SUP)
+                                {
+                                    _physicalStateObj.AddError(new SqlError(TdsEnums.ENCRYPTION_NOT_SUPPORTED, (byte)0x00, TdsEnums.FATAL_ERROR_CLASS, _server, SQLMessage.EncryptionNotSupportedByServer(), "", 0));
+                                    _physicalStateObj.Dispose();
+                                    ThrowExceptionAndWarning(_physicalStateObj);
+                                }
+
+                                break;
+
                             case (EncryptionOptions.OFF):
                                 if (serverOption == EncryptionOptions.OFF)
                                 {
@@ -759,7 +765,6 @@ namespace System.Data.SqlClient
                             case (EncryptionOptions.NOT_SUP):
                                 if (serverOption == EncryptionOptions.REQ)
                                 {
-                                    // Server requires encryption, but client does not support it.
                                     _physicalStateObj.AddError(new SqlError(TdsEnums.ENCRYPTION_NOT_SUPPORTED, (byte)0x00, TdsEnums.FATAL_ERROR_CLASS, _server, SQLMessage.EncryptionNotSupportedByClient(), "", 0));
                                     _physicalStateObj.Dispose();
                                     ThrowExceptionAndWarning(_physicalStateObj);
@@ -768,15 +773,40 @@ namespace System.Data.SqlClient
                                 break;
 
                             default:
-                                // Any other client option needs encryption
-                                if (serverOption == EncryptionOptions.NOT_SUP)
-                                {
-                                    _physicalStateObj.AddError(new SqlError(TdsEnums.ENCRYPTION_NOT_SUPPORTED, (byte)0x00, TdsEnums.FATAL_ERROR_CLASS, _server, SQLMessage.EncryptionNotSupportedByServer(), "", 0));
-                                    _physicalStateObj.Dispose();
-                                    ThrowExceptionAndWarning(_physicalStateObj);
-                                }
-
+                                Debug.Fail("Invalid client encryption option detected");
                                 break;
+                        }
+
+                        if (_encryptionOption == EncryptionOptions.ON ||
+                            _encryptionOption == EncryptionOptions.LOGIN)
+                        {
+                            uint error = 0;
+                            // If we're using legacy server certificate validation behavior (not using access token), then validate if Encrypt=true and Trust Sever Certificate = false.
+                            // If using access token, validate if Trust Server Certificate=false.
+                            bool shouldValidateServerCert = (encrypt && !trustServerCert) || (_connHandler._accessTokenInBytes != null && !trustServerCert);
+                            uint info = (shouldValidateServerCert ? TdsEnums.SNI_SSL_VALIDATE_CERTIFICATE : 0)
+                                | (isYukonOrLater ? TdsEnums.SNI_SSL_USE_SCHANNEL_CACHE : 0);
+
+                            if (encrypt && !integratedSecurity)
+                            {
+                                // optimization: in case of SQL Authentication and encryption, set SNI_SSL_IGNORE_CHANNEL_BINDINGS to let SNI 
+                                // know that it does not need to allocate/retrieve the Channel Bindings from the SSL context.
+                                // This applies to Native SNI 
+                                info |= TdsEnums.SNI_SSL_IGNORE_CHANNEL_BINDINGS;
+                            }
+
+                            error = _physicalStateObj.EnableSsl(ref info);
+
+                            if (error != TdsEnums.SNI_SUCCESS)
+                            {
+                                _physicalStateObj.AddError(ProcessSNIError(_physicalStateObj));
+                                ThrowExceptionAndWarning(_physicalStateObj);
+                            }
+
+                            WaitForSSLHandShakeToComplete(ref error);
+
+                            // create a new packet encryption changes the internal packet size
+                            _physicalStateObj.ClearAllWritePackets();
                         }
 
                         break;
@@ -851,44 +881,6 @@ namespace System.Data.SqlClient
                 {
                     break;
                 }
-            }
-
-            if (_encryptionOption == EncryptionOptions.ON || _encryptionOption == EncryptionOptions.LOGIN)
-            {
-                if (!encryptSupported)
-                {
-                    _physicalStateObj.AddError(new SqlError(TdsEnums.ENCRYPTION_NOT_SUPPORTED, (byte)0x00, TdsEnums.FATAL_ERROR_CLASS, _server, SQLMessage.EncryptionNotSupportedByServer(), "", 0));
-                    _physicalStateObj.Dispose();
-                    ThrowExceptionAndWarning(_physicalStateObj);
-                }
-
-                uint error = 0;
-                // If we're using legacy server certificate validation behavior (not using access token), then validate if Encrypt=true and Trust Sever Certificate = false.
-                // If using access token, validate if Trust Server Certificate=false.
-                bool shouldValidateServerCert = (encrypt && !trustServerCert) || (_connHandler._accessTokenInBytes != null && !trustServerCert);
-                uint info = (shouldValidateServerCert ? TdsEnums.SNI_SSL_VALIDATE_CERTIFICATE : 0)
-                    | (isYukonOrLater ? TdsEnums.SNI_SSL_USE_SCHANNEL_CACHE : 0);
-
-                if (encrypt && !integratedSecurity)
-                {
-                    // optimization: in case of SQL Authentication and encryption, set SNI_SSL_IGNORE_CHANNEL_BINDINGS to let SNI 
-                    // know that it does not need to allocate/retrieve the Channel Bindings from the SSL context.
-                    // This applies to Native SNI 
-                    info |= TdsEnums.SNI_SSL_IGNORE_CHANNEL_BINDINGS;
-                }
-
-                error = _physicalStateObj.EnableSsl(ref info);
-
-                if (error != TdsEnums.SNI_SUCCESS)
-                {
-                    _physicalStateObj.AddError(ProcessSNIError(_physicalStateObj));
-                    ThrowExceptionAndWarning(_physicalStateObj);
-                }
-
-                WaitForSSLHandShakeToComplete(ref error);
-
-                // create a new packet encryption changes the internal packet size
-                _physicalStateObj.ClearAllWritePackets();
             }
 
             return PreLoginHandshakeStatus.Successful;
@@ -2652,7 +2644,7 @@ namespace System.Data.SqlClient
                     stateObj._pendingData = false;
                 }
             }
-
+            
             // _pendingData set by e.g. 'TdsExecuteSQLBatch'
             // _hasOpenResult always set to true by 'WriteMarsHeader'
             //
@@ -9228,7 +9220,7 @@ namespace System.Data.SqlClient
             }
             using (ConstrainedTextWriter writer = new ConstrainedTextWriter(new StreamWriter(new TdsOutputStream(this, stateObj, preambleToSkip), encoding), size))
             using (XmlWriter ww = XmlWriter.Create(writer, writerSettings))
-            {
+            { 
                 if (feed._source.ReadState == ReadState.Initial)
                 {
                     feed._source.Read();
@@ -9451,7 +9443,7 @@ namespace System.Data.SqlClient
                 case TdsEnums.SQLUNIQUEID:
                     {
                         Debug.Assert(actualLength == 16, "Invalid length for guid type in com+ object");
-                        Span<byte> b = stackalloc byte[16];
+                        Span<byte> b = stackalloc byte[16];                        
                         FillGuidBytes((System.Guid)value, b);
                         stateObj.WriteByteSpan(b);
 
