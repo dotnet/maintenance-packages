@@ -3,6 +3,8 @@
   <PropertyGroup>
     <TargetFramework>$(NetFrameworkMinimum)</TargetFramework>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <!-- Don't run .NET Framework only tests on non Windows. -->
+    <SkipTests Condition="'$(OS)' != 'Windows_NT'">true</SkipTests>
   </PropertyGroup>
 
   <ItemGroup>
