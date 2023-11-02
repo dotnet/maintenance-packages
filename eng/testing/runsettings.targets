@@ -23,7 +23,7 @@
       <RunSettingsFileContent>$([System.IO.File]::ReadAllText('$(RunSettingsInputFilePath)'))</RunSettingsFileContent>
       <RunSettingsFileContent>$(RunSettingsFileContent.Replace('$$RESULTSDIRECTORY$$', '$(ArtifactsTestResultsDir)')
                                                       .Replace('$$SOLUTIONDIRECTORY$$', '$(RepoRoot)')
-                                                      .Replace('$$TARGETPLATFORM$$', 'x64')
+                                                      .Replace('$$TARGETPLATFORM$$', '$(TargetPlatform)')
                                                       .Replace('$$TRXRESULTSNAME$$', '$(ResultsFileName).trx')
                                                       .Replace('$$HTMLRESULTSNAME$$', '$(ResultsFileName).html')
                                                       .Replace('$$DOTNETHOSTPATH$$', '$(DotNetTool)'))</RunSettingsFileContent>
