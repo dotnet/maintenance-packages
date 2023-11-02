@@ -7,7 +7,7 @@
   </PropertyGroup>
   <PropertyGroup>
     <!-- Arcade dependencies -->
-    <MicrosoftDotNetRemoteExecutorVersion>9.0.0-beta.23531.4</MicrosoftDotNetRemoteExecutorVersion>
-    <MicrosoftDotNetXUnitExtensionsVersion>9.0.0-beta.23531.4</MicrosoftDotNetXUnitExtensionsVersion>
+    <MicrosoftDotNetRemoteExecutorVersion>9.0.0-beta.23551.1</MicrosoftDotNetRemoteExecutorVersion>
+    <MicrosoftDotNetXUnitExtensionsVersion>9.0.0-beta.23551.1</MicrosoftDotNetXUnitExtensionsVersion>
   </PropertyGroup>
 </Project>
