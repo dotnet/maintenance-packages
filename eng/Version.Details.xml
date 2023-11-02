@@ -3,17 +3,17 @@
   <ProductDependencies>
   </ProductDependencies>
   <ToolsetDependencies>
-    <Dependency Name="Microsoft.DotNet.RemoteExecutor" Version="7.0.0-beta.23517.4">
+    <Dependency Name="Microsoft.DotNet.RemoteExecutor" Version="9.0.0-beta.23551.1">
       <Uri>https://github.com/dotnet/arcade</Uri>
-      <Sha>cb3ccc523ed844c82a63898ed3fa269680396f26</Sha>
+      <Sha>aa96cf38432123dc5de1a2ad877e3ff6b079c928</Sha>
     </Dependency>
-    <Dependency Name="Microsoft.DotNet.XUnitExtensions" Version="7.0.0-beta.23517.4">
+    <Dependency Name="Microsoft.DotNet.XUnitExtensions" Version="9.0.0-beta.23551.1">
       <Uri>https://github.com/dotnet/arcade</Uri>
-      <Sha>cb3ccc523ed844c82a63898ed3fa269680396f26</Sha>
+      <Sha>aa96cf38432123dc5de1a2ad877e3ff6b079c928</Sha>
     </Dependency>
-    <Dependency Name="Microsoft.DotNet.Arcade.Sdk" Version="7.0.0-beta.23517.4">
+    <Dependency Name="Microsoft.DotNet.Arcade.Sdk" Version="9.0.0-beta.23551.1">
       <Uri>https://github.com/dotnet/arcade</Uri>
-      <Sha>cb3ccc523ed844c82a63898ed3fa269680396f26</Sha>
+      <Sha>aa96cf38432123dc5de1a2ad877e3ff6b079c928</Sha>
     </Dependency>
   </ToolsetDependencies>
 </Dependencies>
