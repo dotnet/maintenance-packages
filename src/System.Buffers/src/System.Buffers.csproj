@@ -1,17 +1,14 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard1.1;netstandard2.0;net461</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;$(NetFrameworkMinimum)</TargetFrameworks>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <StrongNameKeyId>Open</StrongNameKeyId>
     <AssemblyVersion>4.0.3.0</AssemblyVersion>
-    <!-- Bump the below version each time we need to service a new version and ensure GeneratePackageOnBuild is set to true -->
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <ServicingVersion>2</ServicingVersion>
-
-    <!-- Package version properties -->
-    <VersionPrefix>4.5.$(ServicingVersion)</VersionPrefix>
-    <PackageValidationBaselineVersion>4.5.$([MSBuild]::Subtract($(ServicingVersion), 1))</PackageValidationBaselineVersion>
+    <!-- Bump the below versions each time we need to service a new version and ensure IsPackable is set to true -->
+    <IsPackable>true</IsPackable>
+    <VersionPrefix>4.6.0</VersionPrefix>
+    <PackageValidationBaselineVersion>4.5.1</PackageValidationBaselineVersion>
   </PropertyGroup>
 
 </Project>

@@ -8,7 +8,7 @@
     "dotnet": "7.0.111"
   },
   "msbuild-sdks": {
-    "Microsoft.DotNet.Arcade.Sdk": "7.0.0-beta.23478.1",
-    "Microsoft.Build.Traversal": "3.1.6"
+    "Microsoft.DotNet.Arcade.Sdk": "9.0.0-beta.23531.4",
+    "Microsoft.Build.Traversal": "3.4.0"
   }
 }

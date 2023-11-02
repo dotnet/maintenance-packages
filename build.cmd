@@ -1,10 +1,9 @@
 @echo off
 setlocal
 
-for %%x in (%*) do (
-    if "%%x"=="-pack" set _packArg=/p:BuildPackages=true
-    if "%%x"=="-test" set _testArg=/p:BuildTests=true
-)
+set _args=%*
+if "%~1"=="-?" set _args=-help
+if "%~1"=="/?" set _args=-help
 
-powershell -ExecutionPolicy ByPass -NoProfile -command "& """%~dp0eng\common\Build.ps1""" -restore -build %* %_packArg% %_testArg%"
-exit /b %ErrorLevel%
+powershell -ExecutionPolicy ByPass -NoProfile -Command "& '%~dp0eng\common\build.ps1' -restore -build" %_args%
+exit /b %ERRORLEVEL%

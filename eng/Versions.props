@@ -1,16 +1,13 @@
-<?xml version="1.0" encoding="utf-8"?>
 <Project>
   <PropertyGroup>
     <PreReleaseVersionLabel>prerelease</PreReleaseVersionLabel>
     <!-- Opt-out repo features -->
     <UseVSTestRunner>true</UseVSTestRunner>
     <UsingToolXliff>false</UsingToolXliff>
-    <!-- Libs -->
-    <MicrosoftNETTestSdkVersion>16.7.1</MicrosoftNETTestSdkVersion>
-    <XUnitVersion>2.4.2</XUnitVersion>
-    <XUnitRunnerVisualStudioVersion>2.4.3</XUnitRunnerVisualStudioVersion>
-    <!-- Toolset Dependencies -->
-    <MicrosoftDotNetRemoteExecutorVersion>7.0.0-beta.23478.1</MicrosoftDotNetRemoteExecutorVersion>
-    <MicrosoftDotNetXUnitExtensionsVersion>7.0.0-beta.23478.1</MicrosoftDotNetXUnitExtensionsVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <!-- Arcade dependencies -->
+    <MicrosoftDotNetRemoteExecutorVersion>9.0.0-beta.23531.4</MicrosoftDotNetRemoteExecutorVersion>
+    <MicrosoftDotNetXUnitExtensionsVersion>9.0.0-beta.23531.4</MicrosoftDotNetXUnitExtensionsVersion>
   </PropertyGroup>
 </Project>
