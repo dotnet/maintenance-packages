@@ -4,10 +4,10 @@
     <TargetFrameworks>netstandard2.0;$(NetFrameworkMinimum)</TargetFrameworks>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <StrongNameKeyId>Open</StrongNameKeyId>
-    <AssemblyVersion>4.0.3.0</AssemblyVersion>
     <!-- Bump the below versions each time we need to service a new version and ensure IsPackable is set to true -->
     <IsPackable>true</IsPackable>
     <VersionPrefix>4.6.0</VersionPrefix>
+    <AssemblyVersion>4.0.6.0</AssemblyVersion>
     <PackageValidationBaselineVersion>4.5.1</PackageValidationBaselineVersion>
   </PropertyGroup>
 
