@@ -1,0 +1,8 @@
+<Project>
+
+  <PropertyGroup>
+    <!-- This repository uses incremental servicing therefore packages might not be produced. -->
+    <AllowEmptySignList>true</AllowEmptySignList>
+  </PropertyGroup>
+
+</Project>
