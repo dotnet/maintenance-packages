@@ -1,24 +1,24 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-    <PropertyGroup>
-      <TargetFrameworks>$(NetMinimum);netstandard2.0;$(NetFrameworkMinimum)</TargetFrameworks>
-      <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-      <StrongNameKeyId>Open</StrongNameKeyId>
-      <IsPackable>false</IsPackable>
-      <Nullable>enable</Nullable>
-      <VersionPrefix>1.1.1</VersionPrefix>
-      <VersionPrefix Condition="'$(IsPackable)' == 'true'">1.2.0</VersionPrefix>
-      <AssemblyVersion>1.0.1.0</AssemblyVersion>
-      <AssemblyVersion Condition="'$(IsPackable)' == 'true'">1.0.2.0</AssemblyVersion>
-      <PackageValidationBaselineVersion>1.1.1</PackageValidationBaselineVersion>
-    </PropertyGroup>
+  <PropertyGroup>
+    <TargetFrameworks>$(NetMinimum);netstandard2.0;$(NetFrameworkMinimum)</TargetFrameworks>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <StrongNameKeyId>Open</StrongNameKeyId>
+    <IsPackable>false</IsPackable>
+    <Nullable>enable</Nullable>
+    <VersionPrefix>1.1.1</VersionPrefix>
+    <VersionPrefix Condition="'$(IsPackable)' == 'true'">1.2.0</VersionPrefix>
+    <AssemblyVersion>1.0.1.0</AssemblyVersion>
+    <AssemblyVersion Condition="'$(IsPackable)' == 'true'">1.0.2.0</AssemblyVersion>
+    <PackageValidationBaselineVersion>1.1.1</PackageValidationBaselineVersion>
+  </PropertyGroup>
 
-    <ItemGroup>
-        <Compile Include="$(CommonPath)\System\LocalAppContextSwitches.Common.cs" Link="Common\System\LocalAppContextSwitches.Common.cs" />
-    </ItemGroup>
+  <ItemGroup>
+    <Compile Include="$(CommonPath)\System\LocalAppContextSwitches.Common.cs" Link="Common\System\LocalAppContextSwitches.Common.cs" />
+  </ItemGroup>
 
-    <ItemGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETCoreApp'">
-      <Compile Remove="BitOperations.cs" />
-    </ItemGroup>
+  <ItemGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETCoreApp'">
+    <Compile Remove="BitOperations.cs" />
+  </ItemGroup>
 
-  </Project>
+</Project>
