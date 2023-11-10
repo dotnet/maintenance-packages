@@ -1,6 +1,8 @@
 <Project InitialTargets="GenerateRunSettingsFile">
 
   <PropertyGroup>
+    <TargetPlatform Condition="'$(TargetPlatform)' == ''">x64</TargetPlatform>
+
     <RunSettingsInputFilePath>$(MSBuildThisFileDirectory).runsettings</RunSettingsInputFilePath>
     <RunSettingsAppOutputFilePath>$(OutputPath).runsettings</RunSettingsAppOutputFilePath>
 

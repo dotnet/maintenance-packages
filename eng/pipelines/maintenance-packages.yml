@@ -1,87 +1,102 @@
-# Setting batch to true, triggers one build at a time.
-# if there is a push while a build in progress, it will wait,
-# until the running build finishes, and produce a build with all the changes
-# that happened during the last build.
 trigger:
   batch: true
   branches:
     include:
-    - release/*
     - main
-  paths:
-    include:
-    - '*'
-    exclude:
-    - eng/Version.Details.xml
-    - .github/*
-    - docs/*
-    - CODE-OF-CONDUCT.md
-    - LICENSE.TXT
-    - PATENTS.TXT
-    - README.md
-    - SECURITY.md
-    - THIRD-PARTY-NOTICES.TXT
+    - release/*
 
 pr:
   branches:
     include:
-    - release/*
     - main
-  paths:
-    include:
-    - '*'
-    exclude:
-    - eng/Version.Details.xml
-    - .github/*
-    - docs/*
-    - CODE-OF-CONDUCT.md
-    - LICENSE.TXT
-    - PATENTS.TXT
-    - README.md
-    - SECURITY.md
-    - THIRD-PARTY-NOTICES.TXT
+    - release/*
 
 variables:
-  - name: _TeamName
-    value: dotnet-core
+- template: /eng/pipelines/common-variables.yml
+- template: /eng/common/templates/variables/pool-providers.yml
+
+- ${{ if eq(variables['_RunAsPublic'], 'true') }}:
+  - name: _AdditionalBuildArgs
+    value: ''
+  - name: _BuildJobDisplayName
+    value: 'Build and Test'
+- ${{ else }}:
+  - name: _AdditionalBuildArgs
+    value: '/p:Test=false'
+  - name: _BuildJobDisplayName
+    value: 'Build, Sign and Publish'
+
+resources:
+  containers:
+  - container: LinuxContainer
+    image: mcr.microsoft.com/dotnet-buildtools/prereqs:cbl-mariner-2.0-fpm
 
 stages:
 - stage: build
   displayName: Build
   jobs:
-  - template: /eng/pipelines/templates/build-job.yml
+  - template: /eng/common/templates/jobs/jobs.yml
     parameters:
-      osGroup: Windows_NT
-      archType: x64
-      ${{ if and(ne(variables['System.TeamProject'], 'public'), notin(variables['Build.Reason'], 'PullRequest')) }}:
-        isOfficialBuild: true
+      artifacts:
+        publish:
+          artifacts: false
+          logs: true
+          manifests: true
+      enableMicrobuild: true
+      enablePublishUsingPipelines: true
+      publishAssetsImmediately: true
+      enablePublishTestResults: true
+      testResultsFormat: vstest
+      enableSourceIndex: ${{ and(eq(variables._RunAsInternal, True), eq(variables['Build.SourceBranch'], 'refs/heads/main')) }}
+      workspace:
+        clean: all
+      jobs:
+      - job: windows
+        timeoutInMinutes: 60
         pool:
-          name: NetCore1ESPool-Internal
-          demands: ImageOverride -equals windows.vs2022preview.amd64
-      ${{ if or(eq(variables['System.TeamProject'], 'public'), in(variables['Build.Reason'], 'PullRequest')) }}:
-        pool:
-          vmImage: 'windows-latest'
+          ${{ if eq(variables._RunAsPublic, True) }}:
+            vmImage: windows-latest
+          ${{ if eq(variables._RunAsInternal, True) }}:
+            name: $(DncEngInternalBuildPool)
+            demands: ImageOverride -equals 1es-windows-2022
+        strategy:
+          matrix:
+            release:
+              _BuildConfig: Release
+        preSteps:
+        - checkout: self
+          fetchDepth: 0
+          clean: true
+        steps:
+        - script: eng\common\cibuild.cmd
+            -configuration $(_BuildConfig)
+            -prepareMachine
+            $(_AdditionalBuildArgs)
+            $(_InternalBuildArgs)
+          displayName: $(_BuildJobDisplayName)
 
-  - ${{ if or(eq(variables['System.TeamProject'], 'public'), in(variables['Build.Reason'], 'PullRequest')) }}:
-    - template: /eng/pipelines/templates/build-job.yml
-      parameters:
-        osGroup: OSX
-        archType: x64
-        pool:
-          vmImage: 'macOS-latest'
+      - ${{ if eq(variables._RunAsPublic, True) }}:
+        - job: linux
+          timeoutInMinutes: 60
+          container: LinuxContainer
+          pool:
+            vmImage: ubuntu-latest
+          strategy:
+            matrix:
+              debug:
+                _BuildConfig: Debug
+          preSteps:
+          - checkout: self
+            clean: true
+          steps:
+          - script: eng/common/cibuild.sh
+              --configuration $(_BuildConfig)
+              --prepareMachine
+              $(_AdditionalBuildArgs)
+              $(_InternalBuildArgs)
+            displayName: $(_BuildJobDisplayName)
 
-    - template: /eng/pipelines/templates/build-job.yml
-      parameters:
-        osGroup: Linux
-        archType: x64
-        pool:
-          vmImage: 'ubuntu-latest'
-
-# Publish and validation steps. Only run in official builds
-- ${{ if and(ne(variables['System.TeamProject'], 'public'), notin(variables['Build.Reason'], 'PullRequest')) }}:
-  - template: \eng\common\templates\post-build\post-build.yml
+- ${{ if eq(variables._RunAsInternal, True) }}:
+  - template: /eng/common/templates/post-build/post-build.yml
     parameters:
-      publishingInfraVersion: 3
-      validateDependsOn:
-        - build
-      enableSourceLinkValidation: true
+      publishAssetsImmediately: true
