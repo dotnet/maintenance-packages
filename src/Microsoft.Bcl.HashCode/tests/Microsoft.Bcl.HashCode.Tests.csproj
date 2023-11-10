@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+      <TargetFramework>$(NetFrameworkMinimum)</TargetFramework>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <Compile Include="$(CommonPath)\tests\TestUtilities\System\RetryHelper.cs" Link="Common\System\RetryHelper.cs" />
+
+        <ProjectReference Include="..\src\Microsoft.Bcl.HashCode.csproj" />
+        <PackageReference Include="Microsoft.DotNet.RemoteExecutor" />
+        <PackageReference Include="Microsoft.DotNet.XunitExtensions" />
+    </ItemGroup>
+  
+  </Project>
+  
