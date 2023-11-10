@@ -7,19 +7,26 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "System.Buffers", "System.Bu
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{C49A5915-FC2A-446B-916A-8428FDB53894}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "System.Buffers", "src\System.Buffers\src\System.Buffers.csproj", "{0616E313-AAB2-447D-B85C-846E99E82B2F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "System.Buffers", "src\System.Buffers\src\System.Buffers.csproj", "{0616E313-AAB2-447D-B85C-846E99E82B2F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{098C3481-D67D-4808-9417-BDB03A2EBDA5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "System.Buffers.Tests", "src\System.Buffers\tests\System.Buffers.Tests.csproj", "{D62C613F-3EE0-45E9-83C1-5F00D4979E55}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "System.Buffers.Tests", "src\System.Buffers\tests\System.Buffers.Tests.csproj", "{D62C613F-3EE0-45E9-83C1-5F00D4979E55}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Microsoft.Bcl.HashCode", "Microsoft.Bcl.HashCode", "{E8080F67-E0C1-45FE-88A1-B075D7478B39}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{C4349F63-7703-4B32-A4ED-1E574E463C69}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{5D534C7F-F3F1-4F7F-A88B-6C8107C4C757}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.Bcl.HashCode", "src\Microsoft.Bcl.HashCode\src\Microsoft.Bcl.HashCode.csproj", "{72A3385C-6B43-4D0C-AC5C-AF7EBF320D62}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.Bcl.HashCode.Tests", "src\Microsoft.Bcl.HashCode\tests\Microsoft.Bcl.HashCode.Tests.csproj", "{023DAED8-926C-40B5-982B-34ABD650AE6E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{0616E313-AAB2-447D-B85C-846E99E82B2F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -30,11 +37,26 @@ Global
 		{D62C613F-3EE0-45E9-83C1-5F00D4979E55}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D62C613F-3EE0-45E9-83C1-5F00D4979E55}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D62C613F-3EE0-45E9-83C1-5F00D4979E55}.Release|Any CPU.Build.0 = Release|Any CPU
+		{72A3385C-6B43-4D0C-AC5C-AF7EBF320D62}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{72A3385C-6B43-4D0C-AC5C-AF7EBF320D62}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{72A3385C-6B43-4D0C-AC5C-AF7EBF320D62}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{72A3385C-6B43-4D0C-AC5C-AF7EBF320D62}.Release|Any CPU.Build.0 = Release|Any CPU
+		{023DAED8-926C-40B5-982B-34ABD650AE6E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{023DAED8-926C-40B5-982B-34ABD650AE6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{023DAED8-926C-40B5-982B-34ABD650AE6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{023DAED8-926C-40B5-982B-34ABD650AE6E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{C49A5915-FC2A-446B-916A-8428FDB53894} = {2C54303C-7D38-4CAA-AA02-BD3A3AAC8A57}
 		{0616E313-AAB2-447D-B85C-846E99E82B2F} = {C49A5915-FC2A-446B-916A-8428FDB53894}
 		{098C3481-D67D-4808-9417-BDB03A2EBDA5} = {2C54303C-7D38-4CAA-AA02-BD3A3AAC8A57}
 		{D62C613F-3EE0-45E9-83C1-5F00D4979E55} = {098C3481-D67D-4808-9417-BDB03A2EBDA5}
+		{C4349F63-7703-4B32-A4ED-1E574E463C69} = {E8080F67-E0C1-45FE-88A1-B075D7478B39}
+		{5D534C7F-F3F1-4F7F-A88B-6C8107C4C757} = {E8080F67-E0C1-45FE-88A1-B075D7478B39}
+		{72A3385C-6B43-4D0C-AC5C-AF7EBF320D62} = {C4349F63-7703-4B32-A4ED-1E574E463C69}
+		{023DAED8-926C-40B5-982B-34ABD650AE6E} = {5D534C7F-F3F1-4F7F-A88B-6C8107C4C757}
 	EndGlobalSection
 EndGlobal
