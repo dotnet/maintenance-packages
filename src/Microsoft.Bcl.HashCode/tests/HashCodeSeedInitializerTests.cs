@@ -59,7 +59,5 @@ namespace Microsoft.Bcl.HashCode.Tests
                 return hc.ToHashCode();
             };
         }
-
     }
-
 }

@@ -4,12 +4,12 @@
       <TargetFrameworks>$(NetMinimum);netstandard2.0;$(NetFrameworkMinimum)</TargetFrameworks>
       <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
       <StrongNameKeyId>Open</StrongNameKeyId>
-      <IsPackable>fase</IsPackable>
+      <IsPackable>false</IsPackable>
       <Nullable>enable</Nullable>
       <VersionPrefix>1.1.1</VersionPrefix>
       <VersionPrefix Condition="'$(IsPackable)' == 'true'">1.2.0</VersionPrefix>
       <AssemblyVersion>1.0.1.0</AssemblyVersion>
-      <AssemblyVersion Condition="'$(IsPackable)' == 'true' and '$(TargetFrameworkIdentifier)' == '.NETFramework'">1.0.2.0</AssemblyVersion>
+      <AssemblyVersion Condition="'$(IsPackable)' == 'true'">1.0.2.0</AssemblyVersion>
       <PackageValidationBaselineVersion>1.1.1</PackageValidationBaselineVersion>
     </PropertyGroup>
 

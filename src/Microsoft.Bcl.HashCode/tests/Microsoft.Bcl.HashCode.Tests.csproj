@@ -5,7 +5,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <Compile Include="$(CommonPath)\tests\TestUtilities\System\RetryHelper.cs" Link="Common\System\RetryHelper.cs" />
+        <Compile Include="$(CommonPath)tests\TestUtilities\System\RetryHelper.cs" Link="Common\System\RetryHelper.cs" />
 
         <ProjectReference Include="..\src\Microsoft.Bcl.HashCode.csproj" />
         <PackageReference Include="Microsoft.DotNet.RemoteExecutor" />
@@ -13,4 +13,3 @@
     </ItemGroup>
   
   </Project>
-  
