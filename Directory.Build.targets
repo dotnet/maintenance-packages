@@ -3,5 +3,12 @@
   <Import Project="$(RepositoryEngineeringDir)resources.targets" />
   <Import Project="Sdk.targets" Sdk="Microsoft.DotNet.Arcade.Sdk" />
   <Import Project="$(RepositoryEngineeringDir)testing\runsettings.targets" Condition="'$(IsTestProject)' == 'true'" />
+  <Import Project="$(RepositoryEngineeringDir)packaging.targets" Condition="'$(IsPackable)' == 'true'" />
+
+  <!-- Default item exclude patterns -->
+  <PropertyGroup>
+    <DefaultExcludesInProjectFolder Condition="'$(TargetFrameworkIdentifier)' != '.NETCoreApp'">$(DefaultExcludesInProjectFolder);**/*.net$(DefaultLanguageSourceExtension)</DefaultExcludesInProjectFolder>
+    <DefaultExcludesInProjectFolder Condition="'$(TargetFrameworkIdentifier)' != '.NETFramework'">$(DefaultExcludesInProjectFolder);**/*.netframework$(DefaultLanguageSourceExtension)</DefaultExcludesInProjectFolder>
+  </PropertyGroup>
 
 </Project>
