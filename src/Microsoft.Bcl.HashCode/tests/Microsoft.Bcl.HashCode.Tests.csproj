@@ -7,13 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-      <Compile Include="$(CommonPath)tests\TestUtilities\System\RetryHelper.cs" Link="Common\System\RetryHelper.cs" />
+    <Compile Include="$(CommonPath)tests\TestUtilities\System\RetryHelper.cs" Link="Common\System\RetryHelper.cs" />
   </ItemGroup>
   
   <ItemGroup>
-      <ProjectReference Include="..\src\Microsoft.Bcl.HashCode.csproj" />
-      <PackageReference Include="Microsoft.DotNet.RemoteExecutor" />
-      <PackageReference Include="Microsoft.DotNet.XunitExtensions" />
+    <ProjectReference Include="..\src\Microsoft.Bcl.HashCode.csproj" />
+    <PackageReference Include="Microsoft.DotNet.RemoteExecutor" />
+    <PackageReference Include="Microsoft.DotNet.XunitExtensions" />
   </ItemGroup>
 
 </Project>
