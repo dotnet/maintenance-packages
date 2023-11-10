@@ -15,9 +15,7 @@ variables:
       value: True
     - name: _SignType
       value: real
-    # DotNet-Blob-Feed provides: dotnetfeed-storage-access-key-1
     # Publish-Build-Assets provides: MaestroAccessToken, BotAccount-dotnet-maestro-bot-PAT
-    - group: DotNet-Blob-Feed
     - group: Publish-Build-Assets
     - group: SDL_Settings
     - name: _InternalBuildArgs
