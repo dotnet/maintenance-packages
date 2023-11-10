@@ -13,17 +13,15 @@
     <PackageValidationBaselineVersion>1.1.1</PackageValidationBaselineVersion>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Compile Include="$(CommonPath)System\LocalAppContextSwitches.Common.cs" Link="Common\System\LocalAppContextSwitches.Common.cs" />
-  </ItemGroup>
-
-  <ItemGroup Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'netstandard2.1'))">
-    <Compile Include="BitOperations.cs" />
-    <Compile Include="TypeForwards.net.cs" />
-  </ItemGroup>
-
   <PropertyGroup Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'netstandard2.1'))">
     <EnableDefaultItems>false</EnableDefaultItems>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Include="TypeForwards.cs"
+             Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'netstandard2.1'))" />
+    <Compile Remove="TypeForwards.cs"
+             Condition="!$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'netstandard2.1'))" />
+    <Compile Include="$(CommonPath)System\LocalAppContextSwitches.Common.cs" Link="Common\System\LocalAppContextSwitches.Common.cs" />
+  </ItemGroup>
 </Project>
