@@ -7,6 +7,15 @@
     <PackageReadmeFile Condition="'$(PackageReadmeFile)' == '' and Exists('PACKAGE.md')">PACKAGE.md</PackageReadmeFile>
   </PropertyGroup>
 
+  <!-- .NETCoreApp TFMs < NetMinimum aren't supported and intentionally dropped. -->
+  <ItemGroup>
+    <PackageValidationBaselineFrameworkToIgnore Include="netcoreapp2.1;" />
+    <PackageValidationBaselineFrameworkToIgnore Include="netcoreapp2.2" />
+    <PackageValidationBaselineFrameworkToIgnore Include="netcoreapp3.0" />
+    <PackageValidationBaselineFrameworkToIgnore Include="netcoreapp3.1" />
+    <PackageValidationBaselineFrameworkToIgnore Include="net5.0" />
+  </ItemGroup>
+
   <!-- Add a package README file from. -->
   <ItemGroup Condition="'$(PackageReadmeFile)' != ''">
     <None Include="$(PackageReadmeFile)" Pack="true" PackagePath="\" />

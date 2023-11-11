@@ -13,4 +13,8 @@
     <PackageVersion Include="System.Memory" Version="4.5.5" />
   </ItemGroup>
 
+  <ItemGroup>
+    <GlobalPackageReference Include="Microsoft.DotNet.ApiCompat.Task" Version="9.0.100-alpha.1.23560.11" />
+  </ItemGroup>
+
 </Project>
