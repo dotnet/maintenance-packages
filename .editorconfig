@@ -12,6 +12,27 @@ indent_style = space
 indent_size = 4
 trim_trailing_whitespace = true
 
+# License header
+file_header_template = Licensed to the .NET Foundation under one or more agreements.\nThe .NET Foundation licenses this file to you under the MIT license.
+
+# IDE2000: Allow multiple blank lines
+dotnet_style_allow_multiple_blank_lines_experimental = false
+
+# IDE2001: Embedded statements must be on their own line
+csharp_style_allow_embedded_statements_on_same_line_experimental = false
+
+# IDE2002: Consecutive braces must not have blank line between them
+csharp_style_allow_blank_lines_between_consecutive_braces_experimental = false
+
+# IDE2003: Blank line required between block and subsequent statement
+dotnet_style_allow_statement_immediately_after_block_experimental = false
+
+# IDE2004: Blank line not allowed after constructor initializer colon
+csharp_style_allow_blank_line_after_colon_in_constructor_initializer_experimental = false
+
+# IDE0073: The file header is missing or not located at the top of the file
+dotnet_diagnostic.IDE0073.severity = error
+
 # C++ Files
 [*.{cpp,h,in}]
 curly_bracket_next_line = true
@@ -45,27 +66,3 @@ indent_size = 2
 end_of_line = lf
 [*.{cmd,bat}]
 end_of_line = crlf
-
-# Compile items
-[*.{cs,vb}]
-
-# License header
-file_header_template = Licensed to the .NET Foundation under one or more agreements.\nThe .NET Foundation licenses this file to you under the MIT license.
-
-# IDE2000: Allow multiple blank lines
-dotnet_style_allow_multiple_blank_lines_experimental = false
-
-# IDE2001: Embedded statements must be on their own line
-csharp_style_allow_embedded_statements_on_same_line_experimental = false
-
-# IDE2002: Consecutive braces must not have blank line between them
-csharp_style_allow_blank_lines_between_consecutive_braces_experimental = false
-
-# IDE2003: Blank line required between block and subsequent statement
-dotnet_style_allow_statement_immediately_after_block_experimental = false
-
-# IDE2004: Blank line not allowed after constructor initializer colon
-csharp_style_allow_blank_line_after_colon_in_constructor_initializer_experimental = false
-
-# IDE0073: The file header is missing or not located at the top of the file
-dotnet_diagnostic.IDE0073.severity = error
