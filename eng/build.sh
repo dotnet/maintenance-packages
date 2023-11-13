@@ -18,7 +18,7 @@ usage()
 {
   echo "Common settings:"
   echo "  --binaryLog (-bl)               Output binary log."
-  echo "  --configuration (-c)            Build configuration: Debug, Release or Checked."
+  echo "  --configuration (-c)            Build configuration: Debug or Release."
   echo "                                  [Default: Debug]"
   echo "  --help (-h)                     Print help and exit."
   echo "  --projects <value>              Project or solution file(s) to build."
