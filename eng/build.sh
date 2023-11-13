@@ -45,7 +45,6 @@ usage()
 }
 
 arguments=''
-extraargs=''
 
 # Check if an action is passed in
 declare -a actions=("b" "build" "r" "restore" "rebuild" "sign" "publish" "clean")
@@ -81,7 +80,7 @@ while [[ $# > 0 ]]; do
       ;;
 
       *)
-      extraargs="$extraargs $1"
+      arguments="$arguments $1"
       shift 1
       ;;
   esac
