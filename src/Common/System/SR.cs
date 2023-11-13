@@ -2,17 +2,16 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 #nullable enable
+
 using System.Resources;
+
+#pragma warning disable CA1304,CA1305
 
 namespace System
 {
     internal static partial class SR
     {
-#if !NETSTANDARD1_1
         private static readonly bool s_usingResourceKeys = AppContext.TryGetSwitch("System.Resources.UseSystemResourceKeys", out bool usingResourceKeys) ? usingResourceKeys : false;
-#else
-        private static readonly bool s_usingResourceKeys = false;
-#endif
 
         // This method is used to decide if we need to append the exception message parameters to the message when calling SR.Format.
         // by default it returns the value of System.Resources.UseSystemResourceKeys AppContext switch or false if not specified.
@@ -31,11 +30,7 @@ namespace System
             try
             {
                 resourceString =
-#if SYSTEM_PRIVATE_CORELIB || NATIVEAOT
-                    InternalGetResourceString(resourceKey);
-#else
                     ResourceManager.GetString(resourceKey);
-#endif
             }
             catch (MissingManifestResourceException) { }
 
