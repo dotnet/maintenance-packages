@@ -12,14 +12,6 @@ indent_style = space
 indent_size = 4
 trim_trailing_whitespace = true
 
-# License header
-file_header_template = Licensed to the .NET Foundation under one or more agreements.\nThe .NET Foundation licenses this file to you under the MIT license.
-
-# C++ Files
-[*.{cpp,h,in}]
-curly_bracket_next_line = true
-indent_brace_style = Allman
-
 # Xml project files
 [*.{csproj,vbproj,vcxproj,vcxproj.filters,proj,nativeproj,locproj}]
 indent_size = 2
@@ -27,12 +19,8 @@ indent_size = 2
 [*.{csproj,vbproj,proj,nativeproj,locproj}]
 charset = utf-8
 
-# Xml build files
-[*.builds]
-indent_size = 2
-
 # Xml files
-[*.{xml,stylecop,resx,ruleset}]
+[*.{xml,resx,ruleset}]
 indent_size = 2
 
 # Xml config files
@@ -40,7 +28,7 @@ indent_size = 2
 indent_size = 2
 
 # YAML config files
-[*.{yml,yaml}]
+[*.{yml}]
 indent_size = 2
 
 # Shell scripts
@@ -67,4 +55,5 @@ dotnet_style_allow_statement_immediately_after_block_experimental = false
 csharp_style_allow_blank_line_after_colon_in_constructor_initializer_experimental = false
 
 # IDE0073: The file header is missing or not located at the top of the file
+file_header_template = Licensed to the .NET Foundation under one or more agreements.\nThe .NET Foundation licenses this file to you under the MIT license.
 dotnet_diagnostic.IDE0073.severity = error
