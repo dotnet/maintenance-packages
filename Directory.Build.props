@@ -10,9 +10,9 @@
     <DebugSymbols>true</DebugSymbols>
     <LangVersion>Latest</LangVersion>
     <CommonPath>$([MSBuild]::NormalizeDirectory('$(RepoRoot)', 'src', 'Common'))</CommonPath>
-    <CodeAnalysisTreatWarningsAsErrors>true</CodeAnalysisTreatWarningsAsErrors>
     <EnableNETAnalyzers>true</EnableNETAnalyzers>
     <AnalysisMode>Recommended</AnalysisMode>
+    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
   </PropertyGroup>
 
 </Project>
