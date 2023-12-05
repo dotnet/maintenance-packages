@@ -8,7 +8,8 @@
     <VersionPrefix>4.5.1</VersionPrefix>
     <VersionPrefix Condition="'$(IsPackable)' == 'true'">4.6.0</VersionPrefix>
     <AssemblyVersion>4.0.3.0</AssemblyVersion>
-    <AssemblyVersion Condition="'$(IsPackable)' == 'true' and '$(TargetFrameworkIdentifier)' == '.NETFramework'">4.0.4.0</AssemblyVersion>
+    <AssemblyVersion Condition="$([MSBuild]::GetTargetFrameworkIdentifier('$(TargetFramework)')) == '.NETFramework'">4.0.3.0</AssemblyVersion>
+    <AssemblyVersion Condition="'$(IsPackable)' == 'true' and $([MSBuild]::GetTargetFrameworkIdentifier('$(TargetFramework)')) == '.NETFramework'">4.0.4.0</AssemblyVersion>
     <PackageValidationBaselineVersion>4.5.1</PackageValidationBaselineVersion>
   </PropertyGroup>
 
