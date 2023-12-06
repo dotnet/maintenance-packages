@@ -22,7 +22,7 @@ variables:
     value: 'Build and Test'
 - ${{ else }}:
   - name: _AdditionalBuildArgs
-    value: '/p:Test=false /p:PostBuildSign=true'
+    value: '/p:Test=false'
   - name: _BuildJobDisplayName
     value: 'Build, Sign and Publish'
 
