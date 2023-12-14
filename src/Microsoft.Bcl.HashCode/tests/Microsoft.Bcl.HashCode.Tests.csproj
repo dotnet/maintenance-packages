@@ -1,9 +1,7 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>$(NetFrameworkMinimum)</TargetFramework>
-    <!-- Don't run .NET Framework only tests on non Windows. -->
-    <SkipTests Condition="'$(OS)' != 'Windows_NT'">true</SkipTests>
   </PropertyGroup>
 
   <ItemGroup>
@@ -12,8 +10,6 @@
   
   <ItemGroup>
     <ProjectReference Include="..\src\Microsoft.Bcl.HashCode.csproj" />
-    <PackageReference Include="Microsoft.DotNet.RemoteExecutor" />
-    <PackageReference Include="Microsoft.DotNet.XunitExtensions" />
   </ItemGroup>
 
 </Project>

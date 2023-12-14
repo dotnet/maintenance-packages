@@ -1,8 +1,9 @@
 <Project>
-  
+
   <Import Project="$(RepositoryEngineeringDir)resources.targets" />
   <Import Project="Sdk.targets" Sdk="Microsoft.DotNet.Arcade.Sdk" />
   <Import Project="$(RepositoryEngineeringDir)testing\runsettings.targets" Condition="'$(IsTestProject)' == 'true'" />
+  <Import Project="$(RepositoryEngineeringDir)placeholderpackaging.targets" Condition="'$(IsPlaceholderTargetFramework)' == 'true'" />
   <Import Project="$(RepositoryEngineeringDir)packaging.targets" Condition="'$(IsPackable)' == 'true'" />
 
   <!-- Default item exclude patterns -->
@@ -11,4 +12,24 @@
     <DefaultExcludesInProjectFolder Condition="'$(TargetFrameworkIdentifier)' != '.NETFramework'">$(DefaultExcludesInProjectFolder);**/*.netframework$(DefaultLanguageSourceExtension)</DefaultExcludesInProjectFolder>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(IsTestProject)' == 'true'">
+    <!-- Don't run .NET Framework only tests on non Windows. -->
+    <SkipTests Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework' and '$(OS)' != 'Windows_NT'">true</SkipTests>
+    <!-- Unsafe code is required by PlatformDetection. -->
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <ItemGroup Condition="'$(IsTestProject)' == 'true'">
+    <Compile Include="$(CommonPath)tests\TestUtilities\System\AssertExtensions.cs" Link="Common\System\AssertExtensions.cs" />
+    <Compile Include="$(CommonPath)tests\TestUtilities\System\PlatformDetection.cs" Link="Common\System\PlatformDetection.cs" />
+    <Compile Condition="'$(OS)' != 'Windows_NT'" Include="$(CommonPath)tests\TestUtilities\System\PlatformDetection.Unix.cs" Link="Common\System\PlatformDetection.Unix.cs" />
+    <Compile Condition="'$(OS)' == 'Windows_NT'" Include="$(CommonPath)tests\TestUtilities\System\PlatformDetection.Windows.cs" Link="Common\System\PlatformDetection.Windows.cs" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(IsTestProject)' == 'true'">
+    <PackageReference Include="Microsoft.DotNet.RemoteExecutor" />
+    <PackageReference Include="Microsoft.DotNet.XunitExtensions" />
+    <PackageReference Include="Microsoft.DotNet.PlatformAbstractions" />
+  </ItemGroup>
+  
 </Project>

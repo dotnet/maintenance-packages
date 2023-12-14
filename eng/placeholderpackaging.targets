@@ -1,0 +1,26 @@
+<Project>
+
+  <PropertyGroup>
+    <!-- Prevent copying the build DLL into the bin. -->
+    <SkipCopyBuildProduct>true</SkipCopyBuildProduct>
+    <!-- Prevent restoring packages from frameworks that should not be built. -->
+    <DisableImplicitFrameworkReferences>true</DisableImplicitFrameworkReferences>
+    <!-- Prevent including the build output in the package. -->
+    <IncludeBuildOutput>false</IncludeBuildOutput>
+    <!-- Hook up a target to include the placeholder file in the package. -->
+    <TargetsForTfmSpecificContentInPackage>$(TargetsForTfmSpecificBuildOutput);_AddPlaceholderFileToPackage</TargetsForTfmSpecificContentInPackage>
+  <!-- TFMs that are only used as placeholders should not include any default items. -->
+    <EnableDefaultItems>false</EnableDefaultItems>
+  </PropertyGroup>
+
+  <!-- Override to prevent building. -->
+  <Target Name="CoreCompile" />
+
+  <!-- Inserts a placeholder file in the package. -->
+  <Target Name="_AddPlaceholderFileToPackage">
+    <ItemGroup>
+      <TfmSpecificPackageFile Include="$(RepositoryEngineeringDir)_._" PackagePath="lib/$(TargetFramework)" />
+    </ItemGroup>
+  </Target>
+
+</Project>
