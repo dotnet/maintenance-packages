@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>$(NetFrameworkMinimum)</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\src\System\MutableDecimal.cs" Link="System\MutableDecimal.cs" />
+    <Compile Include="$(CommonPath)tests\System\Buffers\NativeMemoryManager.cs" Link="Common\System\Buffers\NativeMemoryManager.cs" />
+    <Compile Include="$(CommonPath)tests\System\Diagnostics\Tracing\TestEventListener.cs" Link="Common\System\Diagnostics\Tracing\TestEventListener.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\src\System.Memory.csproj" />
+  </ItemGroup>
+
+</Project>
