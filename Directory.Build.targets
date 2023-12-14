@@ -29,7 +29,6 @@
   <ItemGroup Condition="'$(IsTestProject)' == 'true'">
     <PackageReference Include="Microsoft.DotNet.RemoteExecutor" />
     <PackageReference Include="Microsoft.DotNet.XunitExtensions" />
-    <PackageReference Include="Microsoft.DotNet.PlatformAbstractions" />
   </ItemGroup>
   
 </Project>
