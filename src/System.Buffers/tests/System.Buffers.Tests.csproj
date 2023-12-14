@@ -1,26 +1,16 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>$(NetFrameworkMinimum)</TargetFramework>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <!-- Don't run .NET Framework only tests on non Windows. -->
-    <SkipTests Condition="'$(OS)' != 'Windows_NT'">true</SkipTests>
   </PropertyGroup>
 
   <ItemGroup>
     <Compile Include="$(CommonPath)tests\System\Diagnostics\Tracing\TestEventListener.cs" Link="Common\System\Diagnostics\Tracing\TestEventListener.cs" />
-    <Compile Include="$(CommonPath)tests\TestUtilities\System\AssertExtensions.cs" Link="Common\System\AssertExtensions.cs" />
-    <Compile Include="$(CommonPath)tests\TestUtilities\System\PlatformDetection.cs" Link="Common\System\PlatformDetection.cs" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\src\System.Buffers.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Microsoft.DotNet.RemoteExecutor" />
-    <PackageReference Include="Microsoft.DotNet.XUnitExtensions" />
-    <PackageReference Include="System.Memory" />
+    <ProjectReference Include="..\..\System.Memory\src\System.Memory.csproj" />
   </ItemGroup>
 
 </Project>
