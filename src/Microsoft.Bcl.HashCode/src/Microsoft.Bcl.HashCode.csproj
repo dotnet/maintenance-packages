@@ -9,17 +9,20 @@
     <VersionPrefix>1.1.1</VersionPrefix>
     <VersionPrefix Condition="'$(IsPackable)' == 'true'">1.2.0</VersionPrefix>
     <PackageValidationBaselineVersion>1.1.1</PackageValidationBaselineVersion>
-    <IsNetStandard21 Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'netstandard2.1'))">true</IsNetStandard21>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(IsNetStandard21)' == 'true'">
+  <PropertyGroup Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'netstandard2.1'))">
     <EnableDefaultItems>false</EnableDefaultItems>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Compile Include="TypeForwards.cs" Condition="'$(IsNetStandard21)' == 'true'" />
-    <Compile Remove="TypeForwards.cs"  Condition="'$(IsNetStandard21)' != 'true'" />
+  <ItemGroup Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'netstandard2.1'))">
+    <Compile Remove="$(CommonPath)src\System\LocalAppContextSwitches.Common.cs" />
+    <Compile Include="TypeForwards.cs" />
+  </ItemGroup
+  >
+  <ItemGroup Condition="!$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'netstandard2.1'))">
     <Compile Include="$(CommonPath)src\System\LocalAppContextSwitches.Common.cs" Link="Common\System\LocalAppContextSwitches.Common.cs" />
+    <Compile Remove="TypeForwards.cs" />
   </ItemGroup>
 
 </Project>
