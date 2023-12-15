@@ -23,7 +23,7 @@
                       GenerateSource="true"
                       ClassName="$(StringResourcesNamespace).$(StringResourcesClassName)" />
     <!-- Include common SR helper when resources are included. -->
-    <Compile Include="$(CommonPath)System\SR$(DefaultLanguageSourceExtension)"
+    <Compile Include="$(CommonPath)src\System\SR$(DefaultLanguageSourceExtension)"
              Visible="true"
              Link="Resources/Common/SR$(DefaultLanguageSourceExtension)" />
   </ItemGroup>
