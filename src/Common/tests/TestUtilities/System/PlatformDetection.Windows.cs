@@ -1,64 +1,80 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using Microsoft.Win32;
-using System.Diagnostics;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Security;
-using System.Text;
+using Microsoft.Win32;
 using Xunit;
 
 namespace System
 {
     public static partial class PlatformDetection
     {
-        public static Version OSXVersion => throw new PlatformNotSupportedException();
-        public static Version OpenSslVersion => throw new PlatformNotSupportedException();
-        public static bool IsSuperUser => throw new PlatformNotSupportedException();
-        public static bool IsCentos6 => false;
-        public static bool IsOpenSUSE => false;
-        public static bool IsUbuntu => false;
-        public static bool IsDebian => false;
-        public static bool IsAlpine => false;
-        public static bool IsDebian8 => false;
-        public static bool IsUbuntu1404 => false;
-        public static bool IsUbuntu1604 => false;
-        public static bool IsUbuntu1704 => false;
-        public static bool IsUbuntu1710 => false;
-        public static bool IsUbuntu1710OrHigher => false;
-        public static bool IsUbuntu1804 => false;
-        public static bool IsUbuntu1810OrHigher => false;
-        public static bool IsTizen => false;
-        public static bool IsNotFedoraOrRedHatFamily => true;
-        public static bool IsFedora => false;
-        public static bool IsWindowsNanoServer => (IsNotWindowsIoTCore && GetInstallationType().Equals("Nano Server", StringComparison.OrdinalIgnoreCase));
-        public static bool IsWindowsServerCore => GetInstallationType().Equals("Server Core", StringComparison.OrdinalIgnoreCase);
-        public static int WindowsVersion => GetWindowsVersion();
-        public static bool IsMacOsHighSierraOrHigher { get; } = false;
-        public static Version ICUVersion => new Version(0, 0, 0, 0);
-        public static bool IsRedHatFamily => false;
-        public static bool IsNotRedHatFamily => true;
-        public static bool IsRedHatFamily6 => false;
-        public static bool IsRedHatFamily7 => false;
-        public static bool IsNotRedHatFamily6 => true;
-        public static bool SupportsSsl3 => GetSsl3Support();
+        //
+        // Do not use the " { get; } = <expression> " pattern here. Having all the initialization happen in the type initializer
+        // means that one exception anywhere means all tests using PlatformDetection fail. If you feel a value is worth latching,
+        // do it in a way that failures don't cascade.
+        //
 
-        public static bool IsWindows10Version1607OrGreater => 
-            GetWindowsVersion() == 10 && GetWindowsMinorVersion() == 0 && GetWindowsBuildNumber() >= 14393;
-        public static bool IsWindows10Version1703OrGreater => 
-            GetWindowsVersion() == 10 && GetWindowsMinorVersion() == 0 && GetWindowsBuildNumber() >= 15063;
-        public static bool IsWindows10Version1709OrGreater => 
-            GetWindowsVersion() == 10 && GetWindowsMinorVersion() == 0 && GetWindowsBuildNumber() >= 16299;
+        public static bool IsWindows => RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
+        public static bool IsNetFramework => RuntimeInformation.FrameworkDescription.StartsWith(".NET Framework", StringComparison.OrdinalIgnoreCase);
+        public static bool HasWindowsShell => IsWindows && IsNotWindowsServerCore && IsNotWindowsNanoServer && IsNotWindowsIoTCore;
+        public static bool IsWindows7 => IsWindows && GetWindowsVersion() == 6 && GetWindowsMinorVersion() == 1;
+        public static bool IsWindows8x => IsWindows && GetWindowsVersion() == 6 && (GetWindowsMinorVersion() == 2 || GetWindowsMinorVersion() == 3);
+        public static bool IsWindows8xOrLater => IsWindowsVersionOrLater(6, 2);
+        public static bool IsWindows10OrLater => IsWindowsVersionOrLater(10, 0);
+        public static bool IsWindowsServer2019 => IsWindows && IsNotWindowsNanoServer && GetWindowsVersion() == 10 && GetWindowsMinorVersion() == 0 && GetWindowsBuildVersion() == 17763;
+        public static bool IsWindowsNanoServer => IsWindows && (IsNotWindowsIoTCore && GetWindowsInstallationType().Equals("Nano Server", StringComparison.OrdinalIgnoreCase));
+        public static bool IsWindowsServerCore => IsWindows && GetWindowsInstallationType().Equals("Server Core", StringComparison.OrdinalIgnoreCase);
+        public static int WindowsVersion => IsWindows ? (int)GetWindowsVersion() : -1;
+        public static bool IsNotWindows7 => !IsWindows7;
+        public static bool IsNotWindows8x => !IsWindows8x;
+        public static bool IsNotWindowsNanoServer => !IsWindowsNanoServer;
+        public static bool IsNotWindowsServerCore => !IsWindowsServerCore;
+        public static bool IsNotWindowsNanoNorServerCore => IsNotWindowsNanoServer && IsNotWindowsServerCore;
+        public static bool IsNotWindowsIoTCore => !IsWindowsIoTCore;
+        public static bool IsNotWindowsHomeEdition => !IsWindowsHomeEdition;
+        public static bool IsSoundPlaySupported => IsWindows && IsNotWindowsNanoServer;
+        public static bool IsBrowserOnWindows => IsBrowser && Path.DirectorySeparatorChar == '\\';
 
-        // Windows OneCoreUAP SKU doesn't have httpapi.dll
-        public static bool IsNotOneCoreUAP =>  
-            File.Exists(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Windows), "System32", "httpapi.dll"));
+        // >= Windows 10 Anniversary Update
+        public static bool IsWindows10Version1607OrGreater => IsWindowsVersionOrLater(10, 0, 14393);
+
+        // >= Windows 10 Creators Update
+        public static bool IsWindows10Version1703OrGreater => IsWindowsVersionOrLater(10, 0, 15063);
+
+        // >= Windows 10 Fall Creators Update
+        public static bool IsWindows10Version1709OrGreater => IsWindowsVersionOrLater(10, 0, 16299);
+
+        // >= Windows 10 April 2018 Update
+        public static bool IsWindows10Version1803OrGreater => IsWindowsVersionOrLater(10, 0, 17134);
+
+        // >= Windows 10 May 2019 Update (19H1)
+        public static bool IsWindows10Version1903OrGreater => IsWindowsVersionOrLater(10, 0, 18362);
+
+        // >= Windows 10 20H1 Update
+        public static bool IsWindows10Version2004OrGreater => IsWindowsVersionOrLater(10, 0, 19041);
+
+        // WinHTTP update
+        public static bool IsWindows10Version19573OrGreater => IsWindowsVersionOrLater(10, 0, 19573);
+
+        // Windows Server 2022
+        public static bool IsWindows10Version20348OrGreater => IsWindowsVersionOrLater(10, 0, 20348);
+        public static bool IsWindows10Version20348OrLower => IsWindowsVersionOrEarlier(10, 0, 20348);
+
+        // Windows 11 aka 21H2
+        public static bool IsWindows10Version22000OrGreater => IsWindowsVersionOrLater(10, 0, 22000);
 
         public static bool IsWindowsIoTCore
         {
             get
             {
+                if (!IsWindows)
+                {
+                    return false;
+                }
+
                 int productType = GetWindowsProductType();
                 if ((productType == PRODUCT_IOTUAPCOMMERCIAL) ||
                     (productType == PRODUCT_IOTUAP))
@@ -69,109 +85,34 @@ namespace System
             }
         }
 
-        public static bool IsWindows => true;
-        public static bool IsWindows7 => GetWindowsVersion() == 6 && GetWindowsMinorVersion() == 1;
-        public static bool IsWindows8x => GetWindowsVersion() == 6 && (GetWindowsMinorVersion() == 2 || GetWindowsMinorVersion() == 3);
-
-        public static string GetDistroVersionString() { return "WindowsProductType=" + GetWindowsProductType() + " WindowsInstallationType=" + GetInstallationType(); }
-
-        private static int s_isInAppContainer = -1;
-
-        public static bool IsInAppContainer
-        {
-            // This actually checks whether code is running in a modern app. 
-            // Currently this is the only situation where we run in app container.
-            // If we want to distinguish the two cases in future,
-            // EnvironmentHelpers.IsAppContainerProcess in desktop code shows how to check for the AC token.
-            get
-            {
-                if (s_isInAppContainer != -1)
-                    return s_isInAppContainer == 1;
-
-                if (!IsWindows || IsWindows7)
-                {
-                    s_isInAppContainer = 0;
-                    return false;
-                }
-
-                byte[] buffer = new byte[0];
-                uint bufferSize = 0;
-                try
-                {
-                    int result = GetCurrentApplicationUserModelId(ref bufferSize, buffer);
-                    switch (result)
-                    {
-                        case 15703: // APPMODEL_ERROR_NO_APPLICATION
-                            s_isInAppContainer = 0;
-                            break;
-                        case 0:     // ERROR_SUCCESS
-                        case 122:   // ERROR_INSUFFICIENT_BUFFER
-                                    // Success is actually insufficent buffer as we're really only looking for
-                                    // not NO_APPLICATION and we're not actually giving a buffer here. The
-                                    // API will always return NO_APPLICATION if we're not running under a
-                                    // WinRT process, no matter what size the buffer is.
-                            s_isInAppContainer = 1;
-                            break;
-                        default:
-                            throw new InvalidOperationException($"Failed to get AppId, result was {result}.");
-                    }
-                }
-                catch (Exception e)
-                {
-                    // We could catch this here, being friendly with older portable surface area should we
-                    // desire to use this method elsewhere.
-                    if (e.GetType().FullName.Equals("System.EntryPointNotFoundException", StringComparison.Ordinal))
-                    {
-                        // API doesn't exist, likely pre Win8
-                        s_isInAppContainer = 0;
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-
-                return s_isInAppContainer == 1;
-            }
-        }
-
-        private static int s_isWindowsElevated = -1;
-
-        public static bool IsWindowsAndElevated
+        public static bool IsWindowsHomeEdition
         {
             get
             {
-                if (s_isWindowsElevated != -1)
-                    return s_isWindowsElevated == 1;
-
-                if (!IsWindows || IsInAppContainer)
+                if (!IsWindows)
                 {
-                    s_isWindowsElevated = 0;
                     return false;
                 }
 
-                IntPtr processToken;
-                Assert.True(OpenProcessToken(GetCurrentProcess(), TOKEN_READ, out processToken));
-
-                try
+                int productType = GetWindowsProductType();
+                switch (productType)
                 {
-                    uint tokenInfo;
-                    uint returnLength;
-                    Assert.True(GetTokenInformation(
-                        processToken, TokenElevation, out tokenInfo, sizeof(uint), out returnLength));
-
-                    s_isWindowsElevated = tokenInfo == 0 ? 0 : 1;
+                    case PRODUCT_CORE:
+                    case PRODUCT_CORE_COUNTRYSPECIFIC:
+                    case PRODUCT_CORE_N:
+                    case PRODUCT_CORE_SINGLELANGUAGE:
+                    case PRODUCT_HOME_BASIC:
+                    case PRODUCT_HOME_BASIC_N:
+                    case PRODUCT_HOME_PREMIUM:
+                    case PRODUCT_HOME_PREMIUM_N:
+                        return true;
+                    default:
+                        return false;
                 }
-                finally
-                {
-                    CloseHandle(processToken);
-                }
-
-                return s_isWindowsElevated == 1;
             }
         }
 
-        private static string GetInstallationType()
+        private static string GetWindowsInstallationType()
         {
             string key = @"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion";
             string value = "";
@@ -180,32 +121,11 @@ namespace System
             {
                 value = (string)Registry.GetValue(key, "InstallationType", defaultValue: "");
             }
-            catch (Exception e) when (e is SecurityException || e is InvalidCastException || e is PlatformNotSupportedException /* UAP */)
+            catch (Exception e) when (e is SecurityException || e is InvalidCastException)
             {
             }
 
             return value;
-        }
-
-        private static bool GetSsl3Support()
-        {
-            string clientKey = @"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\SSL 3.0\Client";
-            string serverKey = @"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\SSL 3.0\Server";
-            bool enabled = true;
-
-            // This may change in future but for now, missing key means protocol is enabled.
-            try
-            {
-                if ((int)Registry.GetValue(clientKey, "Enabled", 1) == 0 || (int)Registry.GetValue(serverKey, "Enabled", 1) == 0)
-                {
-                    enabled = false;
-                }
-            }
-            catch (Exception e) when (e is SecurityException || e is InvalidCastException || e is NullReferenceException)
-            {
-            }
-
-            return enabled;
         }
 
         private static int GetWindowsProductType()
@@ -214,40 +134,20 @@ namespace System
             return productType;
         }
 
-        private static int GetWindowsMinorVersion()
-        {
-            RTL_OSVERSIONINFOEX osvi = new RTL_OSVERSIONINFOEX();
-            osvi.dwOSVersionInfoSize = (uint)Marshal.SizeOf(osvi);
-            Assert.Equal(0, RtlGetVersion(out osvi));
-            return (int)osvi.dwMinorVersion;
-        }
-
-        private static int GetWindowsBuildNumber()
-        {
-            RTL_OSVERSIONINFOEX osvi = new RTL_OSVERSIONINFOEX();
-            osvi.dwOSVersionInfoSize = (uint)Marshal.SizeOf(osvi);
-            Assert.Equal(0, RtlGetVersion(out osvi));
-            return (int)osvi.dwBuildNumber;
-        }
-
-        private const uint TokenElevation = 20;
-        private const uint STANDARD_RIGHTS_READ = 0x00020000;
-        private const uint TOKEN_QUERY = 0x0008;
-        private const uint TOKEN_READ = STANDARD_RIGHTS_READ | TOKEN_QUERY;
-
-        [DllImport("advapi32.dll", SetLastError = true, ExactSpelling = true)]
-        private static extern bool GetTokenInformation(
-            IntPtr TokenHandle,
-            uint TokenInformationClass,
-            out uint TokenInformation,
-            uint TokenInformationLength,
-            out uint ReturnLength);
-
         private const int PRODUCT_IOTUAP = 0x0000007B;
         private const int PRODUCT_IOTUAPCOMMERCIAL = 0x00000083;
+        private const int PRODUCT_CORE = 0x00000065;
+        private const int PRODUCT_CORE_COUNTRYSPECIFIC = 0x00000063;
+        private const int PRODUCT_CORE_N = 0x00000062;
+        private const int PRODUCT_CORE_SINGLELANGUAGE = 0x00000064;
+        private const int PRODUCT_HOME_BASIC = 0x00000002;
+        private const int PRODUCT_HOME_BASIC_N = 0x00000005;
+        private const int PRODUCT_HOME_PREMIUM = 0x00000003;
+        private const int PRODUCT_HOME_PREMIUM_N = 0x0000001A;
 
-        [DllImport("kernel32.dll", SetLastError = false)]
-        private static extern bool GetProductInfo(
+        [LibraryImport("kernel32.dll", SetLastError = false)]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        private static partial bool GetProductInfo(
             int dwOSMajorVersion,
             int dwOSMinorVersion,
             int dwSpMajorVersion,
@@ -255,40 +155,34 @@ namespace System
             out int pdwReturnedProductType
         );
 
-        [DllImport("ntdll.dll")]
-        private static extern int RtlGetVersion(out RTL_OSVERSIONINFOEX lpVersionInformation);
+        [LibraryImport("kernel32.dll")]
+        private static partial int GetCurrentApplicationUserModelId(ref uint applicationUserModelIdLength, byte[] applicationUserModelId);
 
-        [StructLayout(LayoutKind.Sequential)]
-        private struct RTL_OSVERSIONINFOEX
+        private static volatile Version s_windowsVersionObject;
+        internal static Version GetWindowsVersionObject()
         {
-            internal uint dwOSVersionInfoSize;
-            internal uint dwMajorVersion;
-            internal uint dwMinorVersion;
-            internal uint dwBuildNumber;
-            internal uint dwPlatformId;
-            [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 128)]
-            internal string szCSDVersion;
+            if (s_windowsVersionObject is null)
+            {
+                Assert.Equal(0, Interop.NtDll.RtlGetVersionEx(out Interop.NtDll.RTL_OSVERSIONINFOEX osvi));
+                Version newObject = new Version(checked((int)osvi.dwMajorVersion), checked((int)osvi.dwMinorVersion), checked((int)osvi.dwBuildNumber));
+                s_windowsVersionObject = newObject;
+            }
+
+            return s_windowsVersionObject;
         }
 
-        private static int GetWindowsVersion()
+        internal static uint GetWindowsVersion() => (uint)GetWindowsVersionObject().Major;
+        internal static uint GetWindowsMinorVersion() => (uint)GetWindowsVersionObject().Minor;
+        internal static uint GetWindowsBuildVersion() => (uint)GetWindowsVersionObject().Build;
+
+        internal static bool IsWindowsVersionOrLater(int major, int minor, int build = -1)
         {
-            RTL_OSVERSIONINFOEX osvi = new RTL_OSVERSIONINFOEX();
-            osvi.dwOSVersionInfoSize = (uint)Marshal.SizeOf(osvi);
-            Assert.Equal(0, RtlGetVersion(out osvi));
-            return (int)osvi.dwMajorVersion;
+            return IsWindows && GetWindowsVersionObject() >= (build != -1 ? new Version(major, minor, build) : new Version(major, minor));
         }
 
-        [DllImport("kernel32.dll", ExactSpelling = true)]
-        private static extern int GetCurrentApplicationUserModelId(ref uint applicationUserModelIdLength, byte[] applicationUserModelId);
-            
-        [DllImport("kernel32.dll", SetLastError = true, ExactSpelling = true)]
-        private static extern bool CloseHandle(IntPtr handle);
-
-        [DllImport("advapi32.dll", SetLastError = true, ExactSpelling = true)]
-        private static extern bool OpenProcessToken(IntPtr ProcessHandle, uint DesiredAccess, out IntPtr TokenHandle);
-
-        // The process handle does NOT need closing
-        [DllImport("kernel32.dll", ExactSpelling = true)]
-        private static extern IntPtr GetCurrentProcess();
- }
+        internal static bool IsWindowsVersionOrEarlier(int major, int minor, int build = -1)
+        {
+            return IsWindows && GetWindowsVersionObject() <= (build != -1 ? new Version(major, minor, build) : new Version(major, minor));
+        }
+    }
 }
