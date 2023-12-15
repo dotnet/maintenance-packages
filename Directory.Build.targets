@@ -24,6 +24,8 @@
     <Compile Include="$(CommonPath)tests\TestUtilities\System\PlatformDetection.cs" Link="Common\System\PlatformDetection.cs" />
     <Compile Condition="'$(OS)' != 'Windows_NT'" Include="$(CommonPath)tests\TestUtilities\System\PlatformDetection.Unix.cs" Link="Common\System\PlatformDetection.Unix.cs" />
     <Compile Condition="'$(OS)' == 'Windows_NT'" Include="$(CommonPath)tests\TestUtilities\System\PlatformDetection.Windows.cs" Link="Common\System\PlatformDetection.Windows.cs" />
+    <Compile Condition="'$(OS)' == 'Windows_NT'" Include="$(CommonPath)src\Interop\Interop.Libraries.cs" Link="Common\Interop\Interop.Libraries.cs" />
+    <Compile Condition="'$(OS)' == 'Windows_NT'" Include="$(CommonPath)src\Interop\NtDll\Interop.RtlGetVersion.cs" Link="Common\Interop\NtDll\Interop.RtlGetVersion.cs" />
   </ItemGroup>
 
   <ItemGroup Condition="'$(IsTestProject)' == 'true'">
