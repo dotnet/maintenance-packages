@@ -16,7 +16,7 @@
   </PropertyGroup>
 
   <ItemGroup Condition="'$(IsPlaceholderTargetFramework)' != 'true'">
-    <Compile Include="$(CommonPath)\System\Numerics\Hashing\HashHelpers.cs" Link="Common\System\Numerics\Hashing\HashHelpers.cs" />
+    <Compile Include="$(CommonPath)src\System\Numerics\Hashing\HashHelpers.cs" Link="Common\System\Numerics\Hashing\HashHelpers.cs" />
   </ItemGroup>
 
   <ItemGroup Condition="'$(IsPlaceholderTargetFramework)' != 'true'">
