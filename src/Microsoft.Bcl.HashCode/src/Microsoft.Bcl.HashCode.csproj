@@ -16,10 +16,9 @@
   </PropertyGroup>
 
   <ItemGroup Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'netstandard2.1'))">
-    <Compile Remove="$(CommonPath)src\System\LocalAppContextSwitches.Common.cs" />
     <Compile Include="TypeForwards.cs" />
-  </ItemGroup
-  >
+  </ItemGroup>
+
   <ItemGroup Condition="!$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'netstandard2.1'))">
     <Compile Include="$(CommonPath)src\System\LocalAppContextSwitches.Common.cs" Link="Common\System\LocalAppContextSwitches.Common.cs" />
     <Compile Remove="TypeForwards.cs" />
