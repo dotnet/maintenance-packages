@@ -1,0 +1,1 @@
+C:\Users\calope\.nuget\packages\microsoft.dotnet.arcade.sdk\1.0.0-beta.21552.6\tools\Build.proj
