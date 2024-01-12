@@ -1,9 +1,5 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
-// See the LICENSE file in the project root for more information.
-
-using System;
-using System.Reflection;
 
 namespace System.Reflection
 {
@@ -15,6 +11,9 @@ namespace System.Reflection
     {
         protected DispatchProxy()
         {
+#if NETSTANDARD2_0
+            throw new PlatformNotSupportedException(SR.PlatformNotSupported_ReflectionDispatchProxy);
+#endif
         }
 
         /// <summary>
@@ -24,7 +23,14 @@ namespace System.Reflection
         /// <param name="targetMethod">The method the caller invoked</param>
         /// <param name="args">The arguments the caller passed to the method</param>
         /// <returns>The object to return to the caller, or <c>null</c> for void methods</returns>
+#if NETSTANDARD2_0
+        protected object Invoke(MethodInfo targetMethod, object[] args)
+        {
+            throw new PlatformNotSupportedException(SR.PlatformNotSupported_ReflectionDispatchProxy);
+        }
+#else
         protected abstract object Invoke(MethodInfo targetMethod, object[] args);
+#endif
 
         /// <summary>
         /// Creates an object instance that derives from class <typeparamref name="TProxy"/>
@@ -38,7 +44,11 @@ namespace System.Reflection
         public static T Create<T, TProxy>()
             where TProxy : DispatchProxy
         {
+#if NETSTANDARD2_0
+            throw new PlatformNotSupportedException(SR.PlatformNotSupported_ReflectionDispatchProxy);
+#else
             return (T)DispatchProxyGenerator.CreateProxyInstance(typeof(TProxy), typeof(T));
+#endif
         }
     }
 }
