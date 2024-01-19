@@ -1,6 +1,5 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
-// See the LICENSE file in the project root for more information.
 
 using System.Runtime.CompilerServices;
 using Xunit;
@@ -214,7 +213,6 @@ namespace System.Threading.Tasks.Tests
         }
 
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/corefx/issues/22506", TargetFrameworkMonikers.UapAot)]
         public void NonGeneric_SetStateMachine_InvalidArgument_ThrowsException()
         {
             AsyncValueTaskMethodBuilder b = default;
@@ -222,7 +220,6 @@ namespace System.Threading.Tasks.Tests
         }
 
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/corefx/issues/22506", TargetFrameworkMonikers.UapAot)]
         public void Generic_SetStateMachine_InvalidArgument_ThrowsException()
         {
             AsyncValueTaskMethodBuilder<int> b = default;

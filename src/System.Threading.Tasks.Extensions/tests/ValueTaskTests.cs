@@ -1,6 +1,5 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
-// See the LICENSE file in the project root for more information.
 
 using System.Linq;
 using System.Reflection;
@@ -41,7 +40,7 @@ namespace System.Threading.Tasks.Tests
             Assert.True(default(ValueTask<string>).IsCompletedSuccessfully);
             Assert.False(default(ValueTask<string>).IsFaulted);
             Assert.False(default(ValueTask<string>).IsCanceled);
-            Assert.Equal(null, default(ValueTask<string>).Result);
+            Assert.Null(default(ValueTask<string>).Result);
         }
 
         [Theory]
@@ -1180,31 +1179,31 @@ namespace System.Threading.Tasks.Tests
         }
 
         [Fact]
-        public void NonGeneric_AsTask_ValueTaskSourcePassesInvalidStateToOnCompleted_Throws()
+        public async Task NonGeneric_AsTask_ValueTaskSourcePassesInvalidStateToOnCompleted_Throws()
         {
-            void Validate(IValueTaskSource vts)
+            Task ValidateAsync(IValueTaskSource vts)
             {
                 var vt = new ValueTask(vts, 0);
-                Assert.Throws<ArgumentOutOfRangeException>(() => { vt.AsTask(); });
+                return Assert.ThrowsAsync<ArgumentOutOfRangeException>(() => vt.AsTask());
             }
 
-            Validate(new DelegateValueTaskSource<int> { OnCompletedFunc = (continuation, state, token, flags) => continuation(null) });
-            Validate(new DelegateValueTaskSource<int> { OnCompletedFunc = (continuation, state, token, flags) => continuation(new object()) });
-            Validate(new DelegateValueTaskSource<int> { OnCompletedFunc = (continuation, state, token, flags) => { continuation(state); continuation(state); } });
+            await ValidateAsync(new DelegateValueTaskSource<int> { OnCompletedFunc = (continuation, state, token, flags) => continuation(null) });
+            await ValidateAsync(new DelegateValueTaskSource<int> { OnCompletedFunc = (continuation, state, token, flags) => continuation(new object()) });
+            await ValidateAsync(new DelegateValueTaskSource<int> { OnCompletedFunc = (continuation, state, token, flags) => { continuation(state); continuation(state); } });
         }
 
         [Fact]
-        public void Generic_AsTask_ValueTaskSourcePassesInvalidStateToOnCompleted_Throws()
+        public async Task Generic_AsTask_ValueTaskSourcePassesInvalidStateToOnCompleted_Throws()
         {
-            void Validate(IValueTaskSource<int> vts)
+            Task ValidateAsync(IValueTaskSource<int> vts)
             {
                 var vt = new ValueTask<int>(vts, 0);
-                Assert.Throws<ArgumentOutOfRangeException>(() => { vt.AsTask(); });
+                return Assert.ThrowsAsync<ArgumentOutOfRangeException>(() => vt.AsTask());
             }
 
-            Validate(new DelegateValueTaskSource<int> { OnCompletedFunc = (continuation, state, token, flags) => continuation(null) });
-            Validate(new DelegateValueTaskSource<int> { OnCompletedFunc = (continuation, state, token, flags) => continuation(new object()) });
-            Validate(new DelegateValueTaskSource<int> { OnCompletedFunc = (continuation, state, token, flags) => { continuation(state); continuation(state); } });
+            await ValidateAsync(new DelegateValueTaskSource<int> { OnCompletedFunc = (continuation, state, token, flags) => continuation(null) });
+            await ValidateAsync(new DelegateValueTaskSource<int> { OnCompletedFunc = (continuation, state, token, flags) => continuation(new object()) });
+            await ValidateAsync(new DelegateValueTaskSource<int> { OnCompletedFunc = (continuation, state, token, flags) => { continuation(state); continuation(state); } });
         }
 
         [Fact]
