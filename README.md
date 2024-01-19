@@ -15,9 +15,51 @@ This project hosts different packages from the .NET Platform whose original home
 
 Package versions produced by official builds for this repo will automatically contain a prerelease suffix. This is in order to be able to iterate through changes until we are ready to have a final build when we are ready for a new servicing release. When that time comes, all that is needed in order to produce packages that don't have the prerelease suffix is to manually queue a build in the official pipeline, and set the variable `DotNetFinalVersionKind` to `release`. This will automatically cause Arcade to set the right version for the package, as well as use a dedicated NuGet feed to push the final build assets (in order to avoid potential version clashes).
 
-# How to migrate a library
+## How to migrate a library
 
-TODO
+1. You can use the `eng/Migrate-Package.ps1` script to automate most of the migration work. Depending on the repo and branches of origin, you'll have to adjust the arguments. For example:
+
+    a. Migrating a package from .NET Core 2.1:
+   ```powershell
+   .\Migrate-Package.ps1 \
+      -OriginRepoPath D:/dotnet-corefx \
+      -OriginRemote upstream \
+      -OriginBranch release/2.1.30 \
+      -AssemblyFileOrDirectoryToMigrate System.Migratable.Assembly \
+      -AssemblyFileOrDirectoryRelativeDirectoryPath src \
+      -DestinationRepoPath D:/maintenance-packages
+    ```
+
+    b. Migrating a package from .NET Core 3.1:
+    ```powershell
+    .\Migrate-Package.ps1 \
+      -OriginRepoPath D:/dotnet-corefx \
+      -OriginRemote upstream \
+      -OriginBranch release/3.1.32 \
+      -AssemblyFileOrDirectoryToMigrate System.Migratable.Assembly \
+      -AssemblyFileOrDirectoryRelativeDirectoryPath src \
+      -DestinationRepoPath D:/maintenance-packages
+    ```
+
+    c. Migrating a package from .NET 5.0:
+    ```powershell
+      .\Migrate-Package.ps1 \
+      -OriginRepoPath D:/runtime \
+      -OriginRemote upstream \
+      -OriginBranch v5.0.18 \
+      -AssemblyFileOrDirectoryToMigrate System.Migratable.Assembly \
+      -AssemblyFileOrDirectoryRelativeDirectoryPath src/libraries \
+      -DestinationRepoPath D:/maintenance-packages
+    ```
+Note: You'll most likely have to port from the internal repo. Please consult with the @dotnet/area-infrastructure-libraries members for guidance on choosing the right repo of origin.
+
+2. Manually copy any source code files that were not brought in by the script. For example, those located under the `Common/` or the `CoreLib/` directories in the origin repo.
+3. Delete the obsolete infrastructure files that are not relevant anymore when using the latest version of arcade.
+4. Use the modern Microsoft.NET.Sdk for the csproj files.
+5. Set the target frameworks to those the package should continue supporting. This might not be as straightforward so please feel free to reach out to the @dotnet/area-infrastructure-libraries members for guidance.
+6. Delete dead source code. For example, code protected by preprocessor directives that are not relevant anymore due to the specified framework being out of support.
+7. Turn `<IsPackable>` to `true`, then run `dotnet pack` to see if APICompat / PackageValidation complain, in which case you'll have to address the issues.
+8. Submit the PR and tag @dotnet/area-infrastructure-libraries for review.
 
 ## How to service a library
 
