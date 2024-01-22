@@ -14,4 +14,8 @@
     <ProjectReference Include="..\src\System.Memory.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="System.ValueTuple" />
+  </ItemGroup>
+
 </Project>
