@@ -1,5 +1,5 @@
 // Licensed to the .NET Foundation under one or more agreements.
-// See the LICENSE file in the project root for more information.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Collections;
 using System.Collections.Generic;
@@ -15,7 +15,7 @@ namespace System.Json.Tests
         public static IEnumerable<object[]> Ctor_JsonValueArray_TestData()
         {
             yield return new object[] { null };
-            yield return new object[] { new JsonValue[0] };
+            yield return new object[] { Array.Empty<JsonValue>() };
             yield return new object[] { new JsonValue[] { null } };
             yield return new object[] { new JsonValue[] { new JsonPrimitive(true) } };
         }
@@ -35,7 +35,7 @@ namespace System.Json.Tests
 
         public static IEnumerable<object[]> Ctor_IEnumerableJsonValue_TestData()
         {
-            yield return new object[] { new JsonValue[0] };
+            yield return new object[] { Array.Empty<JsonValue>() };
             yield return new object[] { new JsonValue[] { null } };
             yield return new object[] { new JsonValue[] { new JsonPrimitive(true) } };
         }
@@ -105,7 +105,7 @@ namespace System.Json.Tests
             JsonArray array = new JsonArray();
             JsonValue value = new JsonPrimitive(true);
             array.Add(value);
-            Assert.Equal(1, array.Count);
+            Assert.Single(array);
             Assert.Same(value, array[0]);
         }
 
@@ -114,7 +114,7 @@ namespace System.Json.Tests
         {
             JsonArray array = new JsonArray();
             array.Add(null);
-            Assert.Equal(1, array.Count);
+            Assert.Single(array);
         }
 
         [Fact]
@@ -146,7 +146,7 @@ namespace System.Json.Tests
         {
             JsonArray array = new JsonArray();
             array.AddRange(null);
-            Assert.Equal(0, array.Count);
+            Assert.Empty(array);
         }
 
         [Fact]
@@ -192,8 +192,20 @@ namespace System.Json.Tests
             JsonValue[] items = new JsonValue[] { new JsonPrimitive(true) };
             JsonArray array = new JsonArray((IEnumerable<JsonValue>)items);
 
-            Assert.True(array.Contains(items[0]));
-            Assert.False(array.Contains(new JsonPrimitive(false)));
+            Assert.Contains(items[0], array);
+
+            var falseItem = new JsonPrimitive(false);
+
+            // Workaround to avoid using Assert.DoesNotContain, which unlike Assert.Contains,
+            // it needs to access JsonValue.GetEnumerator, which is not implemented.
+            if(array.Contains(falseItem))
+            {
+                Assert.False(true, "Contains returned true for an item that is not in the array.");
+            }
+            else
+            {
+                Assert.True(true);
+            }
         }
 
         [Theory]
@@ -222,10 +234,10 @@ namespace System.Json.Tests
             JsonArray array = new JsonArray((IEnumerable<JsonValue>)items);
 
             array.Remove(items[0]);
-            Assert.Equal(0, array.Count);
+            Assert.Empty(array);
 
             array.Remove(items[0]);
-            Assert.Equal(0, array.Count);
+            Assert.Empty(array);
         }
 
         [Fact]
@@ -235,7 +247,7 @@ namespace System.Json.Tests
             JsonArray array = new JsonArray((IEnumerable<JsonValue>)items);
 
             array.RemoveAt(0);
-            Assert.Equal(0, array.Count);
+            Assert.Empty(array);
         }
 
         [Fact]
@@ -252,10 +264,10 @@ namespace System.Json.Tests
         {
             JsonArray array = new JsonArray(new JsonValue[3]);
             array.Clear();
-            Assert.Equal(0, array.Count);
+            Assert.Empty(array);
 
             array.Clear();
-            Assert.Equal(0, array.Count);
+            Assert.Empty(array);
         }
 
         [Fact]

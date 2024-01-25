@@ -1,5 +1,5 @@
 // Licensed to the .NET Foundation under one or more agreements.
-// See the LICENSE file in the project root for more information.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -13,7 +13,7 @@ namespace System.Runtime.Serialization.Json
     internal class JavaScriptReader
     {
         private readonly TextReader _r;
-        private int _line = 1, _column = 0;
+        private int _line = 1, _column;
         private int _peek;
         private bool _has_peek;
         private bool _prev_lf;

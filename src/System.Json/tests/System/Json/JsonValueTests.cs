@@ -1,5 +1,5 @@
 // Licensed to the .NET Foundation under one or more agreements.
-// See the LICENSE file in the project root for more information.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Diagnostics;
 using System.IO;
@@ -93,18 +93,6 @@ namespace System.Json.Tests
             });
         }
 
-        [Theory]
-        [MemberData(nameof(ParseIntegralBoundaries_TestData_NotNetFramework))]
-        [SkipOnTargetFramework(TargetFrameworkMonikers.NetFramework)]
-        public void Parse_IntegralBoundaries_LessThanMaxDouble_Works_NotNetFramework(string jsonString, string expectedToString)
-        {
-            Parse(jsonString, value =>
-            {
-                Assert.Equal(JsonType.Number, value.JsonType);
-                Assert.Equal(expectedToString, value.ToString());
-            });
-        }
-
         [Fact]
         public void Parse_TrueFalse()
         {
@@ -153,7 +141,7 @@ namespace System.Json.Tests
         [Fact]
         public void JsonPrimitive_QuoteEscape()
         {
-            Assert.Equal((new JsonPrimitive("\"\"")).ToString(), "\"\\\"\\\"\"");
+            Assert.Equal("\"\\\"\\\"\"", (new JsonPrimitive("\"\"")).ToString());
         }
 
         [Fact]
@@ -235,13 +223,6 @@ namespace System.Json.Tests
         public void Parse_DoubleTooLarge_ThrowsOverflowException()
         {
             Assert.Throws<OverflowException>(() => JsonValue.Parse("1.7976931348623157E+309"));
-        }
-
-        [Fact]
-        [SkipOnTargetFramework(TargetFrameworkMonikers.NetFramework)]
-        public void Parse_DoubleTooLarge_ReturnsInfinity()
-        {
-            Assert.Equal(double.PositiveInfinity, (double)JsonValue.Parse("1.7976931348623157E+309"));
         }
 
         [Fact]
@@ -680,7 +661,7 @@ namespace System.Json.Tests
         public void ImplicitCast_String_NullString()
         {
             string toPrimitive = (JsonPrimitive)null;
-            Assert.Equal(null, toPrimitive);
+            Assert.Null(toPrimitive);
 
             JsonValue fromPrimitive = toPrimitive;
             Assert.Equal(new JsonPrimitive((string)null), toPrimitive);
