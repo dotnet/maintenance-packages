@@ -161,8 +161,10 @@ Execute-Command "Set-Location $DestinationRepoPath -Verbose"
 # Change to main and update it if needed
 Execute-Command "git checkout main"
 
-# Remove the remote if it already exists, just in case
+# Remove the remote to upstream if it already exists, just in case
 Execute-Command "git remote remove $NewRepoRemoteName"
+
+# Add the target repo as a remote with a known name
 Execute-Command "git remote add $NewRepoRemoteName https://github.com/dotnet/maintenance-packages"
 Execute-Command "git fetch $NewRepoRemoteName main"
 Execute-Command "git checkout main"
@@ -185,6 +187,9 @@ Execute-Command "git reset --hard"
 
 # Just in case, to avoid bringing in any leftover files
 Execute-Command "git clean -fdx"
+
+# Remove the remote to the old repo if it already exists, just in case
+Execute-Command "git remote remove $OldRepoRemoteName"
 
 # Add origin repo as a remote
 Execute-Command "git remote add $OldRepoRemoteName $OriginRepoPath"
