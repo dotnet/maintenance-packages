@@ -37,6 +37,9 @@ end_of_line = lf
 [*.{cmd,bat}]
 end_of_line = crlf
 
+##########################################
+# Analyzer configuration for all C# files.
+##########################################
 [*.cs]
 
 # IDE2000: Allow multiple blank lines
@@ -57,3 +60,36 @@ csharp_style_allow_blank_line_after_colon_in_constructor_initializer_experimenta
 # IDE0073: The file header is missing or not located at the top of the file
 file_header_template = Licensed to the .NET Foundation under one or more agreements.\nThe .NET Foundation licenses this file to you under the MIT license.
 dotnet_diagnostic.IDE0073.severity = error
+
+# CA1010: Generic interface should also be implemented
+dotnet_diagnostic.CA1010.severity = none
+
+# CA1305: Specify IFormatProvider
+dotnet_diagnostic.CA1305.severity = none
+
+# CA1710: Identifiers should have correct suffix
+dotnet_diagnostic.CA1710.severity = none
+
+# CA1720: Identifier contains type name
+dotnet_diagnostic.CA1720.severity = none
+
+# CA1725: Parameter names should match base declaration
+dotnet_diagnostic.CA1725.severity = none
+
+
+###############################################
+# Analyzer configuration for all test C# files.
+###############################################
+[src/*/tests/**.cs]
+
+# CA1310: Specify StringComparison for correctness
+dotnet_diagnostic.CA1310.severity = none
+
+# CA1707: Identifiers should not contain underscores
+dotnet_diagnostic.CA1707.severity = none
+
+# CA1822: Mark members as static
+dotnet_diagnostic.CA1822.severity = none
+
+# CA2201: Do not raise reserved exception types
+dotnet_diagnostic.CA2201.severity = none
