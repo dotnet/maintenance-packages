@@ -14,6 +14,6 @@
     <PackageVersion Include="System.ValueTuple" Version="4.5.0" />
   </ItemGroup>
   <ItemGroup>
-    <GlobalPackageReference Include="Microsoft.DotNet.ApiCompat.Task" Version="9.0.100-alpha.1.23560.11" />
+    <GlobalPackageReference Include="Microsoft.DotNet.ApiCompat.Task" Version="9.0.100-preview.2.24101.4" />
   </ItemGroup>
 </Project>
