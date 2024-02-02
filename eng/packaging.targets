@@ -36,6 +36,7 @@
     <PackageValidationBaselineFrameworkToIgnore Include="netstandard1.5" />
     <PackageValidationBaselineFrameworkToIgnore Include="netstandard1.6" />
     <PackageValidationBaselineFrameworkToIgnore Include="portable-net45+win8+wp8+wpa81" />
+    <PackageValidationBaselineFrameworkToIgnore Include="uap10.0.16299" />
   </ItemGroup>
 
   <!-- Add a package README file from. -->
