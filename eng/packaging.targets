@@ -9,34 +9,17 @@
 
   <!-- .NETCoreApp TFMs < NetMinimum aren't supported and intentionally dropped. -->
   <ItemGroup>
-    <PackageValidationBaselineFrameworkToIgnore Include="net11" />
-    <PackageValidationBaselineFrameworkToIgnore Include="net20" />
     <PackageValidationBaselineFrameworkToIgnore Include="net35" />
-    <PackageValidationBaselineFrameworkToIgnore Include="net40" />
-    <PackageValidationBaselineFrameworkToIgnore Include="net403" />
-    <PackageValidationBaselineFrameworkToIgnore Include="net45" />
-    <PackageValidationBaselineFrameworkToIgnore Include="net451" />
-    <PackageValidationBaselineFrameworkToIgnore Include="net452" />
+    <PackageValidationBaselineFrameworkToIgnore Include="net40*" />
+    <PackageValidationBaselineFrameworkToIgnore Include="net45*" />
     <PackageValidationBaselineFrameworkToIgnore Include="net46" />
     <PackageValidationBaselineFrameworkToIgnore Include="net461" />
-    <PackageValidationBaselineFrameworkToIgnore Include="netcoreapp1.0" />
-    <PackageValidationBaselineFrameworkToIgnore Include="netcoreapp1.1" />
-    <PackageValidationBaselineFrameworkToIgnore Include="netcoreapp2.0" />
-    <PackageValidationBaselineFrameworkToIgnore Include="netcoreapp2.1" />
-    <PackageValidationBaselineFrameworkToIgnore Include="netcoreapp2.2" />
-    <PackageValidationBaselineFrameworkToIgnore Include="netcoreapp3.0" />
-    <PackageValidationBaselineFrameworkToIgnore Include="netcoreapp3.1" />
+    <PackageValidationBaselineFrameworkToIgnore Include="netcoreapp*" />
     <PackageValidationBaselineFrameworkToIgnore Include="net5.0" />
-    <PackageValidationBaselineFrameworkToIgnore Include="netcore50" />
-    <PackageValidationBaselineFrameworkToIgnore Include="netstandard1.0" />
-    <PackageValidationBaselineFrameworkToIgnore Include="netstandard1.1" />
-    <PackageValidationBaselineFrameworkToIgnore Include="netstandard1.2" />
-    <PackageValidationBaselineFrameworkToIgnore Include="netstandard1.3" />
-    <PackageValidationBaselineFrameworkToIgnore Include="netstandard1.4" />
-    <PackageValidationBaselineFrameworkToIgnore Include="netstandard1.5" />
-    <PackageValidationBaselineFrameworkToIgnore Include="netstandard1.6" />
-    <PackageValidationBaselineFrameworkToIgnore Include="portable-net45+win8+wp8+wpa81" />
-    <PackageValidationBaselineFrameworkToIgnore Include="uap10.0.16299" />
+    <PackageValidationBaselineFrameworkToIgnore Include="netcore*" />
+    <PackageValidationBaselineFrameworkToIgnore Include="netstandard1.*" />
+    <PackageValidationBaselineFrameworkToIgnore Include="portable-*" />
+    <PackageValidationBaselineFrameworkToIgnore Include="uap*" />
   </ItemGroup>
 
   <!-- Add a package README file from. -->
