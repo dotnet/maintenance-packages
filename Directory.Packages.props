@@ -20,7 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <GlobalPackageReference Include="Microsoft.DotNet.ApiCompat.Task" Version="9.0.100-preview.2.24102.3" />
+    <GlobalPackageReference Include="Microsoft.DotNet.ApiCompat.Task" Version="9.0.100-preview.2.24102.10" />
   </ItemGroup>
 
 </Project>
