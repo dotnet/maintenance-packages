@@ -7,19 +7,19 @@
     <PackageReadmeFile Condition="'$(PackageReadmeFile)' == '' and Exists('PACKAGE.md')">PACKAGE.md</PackageReadmeFile>
   </PropertyGroup>
 
-  <!-- .NETCoreApp TFMs < NetMinimum aren't supported and intentionally dropped. -->
+  <!-- Exclude TFMs that are out-of-support. -->
   <ItemGroup>
     <PackageValidationBaselineFrameworkToIgnore Include="net35" />
-    <PackageValidationBaselineFrameworkToIgnore Include="net40*" />
-    <PackageValidationBaselineFrameworkToIgnore Include="net45*" />
+    <PackageValidationBaselineFrameworkToIgnore Include="net40%2A" />
+    <PackageValidationBaselineFrameworkToIgnore Include="net45%2A" />
     <PackageValidationBaselineFrameworkToIgnore Include="net46" />
     <PackageValidationBaselineFrameworkToIgnore Include="net461" />
-    <PackageValidationBaselineFrameworkToIgnore Include="netcoreapp*" />
+    <PackageValidationBaselineFrameworkToIgnore Include="netcoreapp%2A" />
     <PackageValidationBaselineFrameworkToIgnore Include="net5.0" />
-    <PackageValidationBaselineFrameworkToIgnore Include="netcore*" />
-    <PackageValidationBaselineFrameworkToIgnore Include="netstandard1.*" />
-    <PackageValidationBaselineFrameworkToIgnore Include="portable-*" />
-    <PackageValidationBaselineFrameworkToIgnore Include="uap*" />
+    <PackageValidationBaselineFrameworkToIgnore Include="netcore%2A" />
+    <PackageValidationBaselineFrameworkToIgnore Include="netstandard1.%2A" />
+    <PackageValidationBaselineFrameworkToIgnore Include="portable-%2A" />
+    <PackageValidationBaselineFrameworkToIgnore Include="uap%2A" />
   </ItemGroup>
 
   <!-- Add a package README file from. -->
