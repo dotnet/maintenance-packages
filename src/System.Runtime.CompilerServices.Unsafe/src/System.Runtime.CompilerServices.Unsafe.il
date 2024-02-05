@@ -280,11 +280,6 @@
 // https://github.com/dotnet/runtime/issues/8730
 // and
 // https://github.com/dotnet/coreclr/pull/11218
-#ifdef netcoreapp
-        .maxstack 1
-        ldarg.0
-        ret
-#else
         .locals (int32&)
         .maxstack 1
         ldarg.0
@@ -292,18 +287,13 @@
         stloc.0
         ldloc.0
         ret
-#endif
   } // end of method Unsafe::AsRef
 
   .method public hidebysig static !!T& AsRef<T>(!!T& source) cil managed aggressiveinlining
   {
         .custom instance void System.Runtime.Versioning.NonVersionableAttribute::.ctor() = ( 01 00 00 00 )
         .param [1]
-#ifdef netcoreapp
-        .custom instance void [CORE_ASSEMBLY]System.Runtime.CompilerServices.IsReadOnlyAttribute::.ctor() = ( 01 00 00 00 )
-#else
         .custom instance void System.Runtime.CompilerServices.IsReadOnlyAttribute::.ctor() = ( 01 00 00 00 )
-#endif
         .maxstack 1
         ldarg.0
         ret
@@ -561,8 +551,6 @@
 
 } // end of class System.Runtime.Versioning.NonVersionableAttribute
 
-#ifdef netcoreapp
-#else
 .class private auto ansi sealed beforefieldinit System.Runtime.CompilerServices.IsReadOnlyAttribute
        extends [CORE_ASSEMBLY]System.Attribute
 {
@@ -576,7 +564,6 @@
   } // end of method IsReadOnlyAttribute::.ctor
 
 } // end of class System.Runtime.CompilerServices.IsReadOnlyAttribute
-#endif
 
 .class private auto ansi sealed beforefieldinit Microsoft.CodeAnalysis.EmbeddedAttribute
     extends [CORE_ASSEMBLY]System.Attribute

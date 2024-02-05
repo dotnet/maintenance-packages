@@ -6,6 +6,11 @@
   <Import Project="$(RepositoryEngineeringDir)placeholderpackaging.targets" Condition="'$(IsPlaceholderTargetFramework)' == 'true'" />
   <Import Project="$(RepositoryEngineeringDir)packaging.targets" Condition="'$(IsPackable)' == 'true'" />
 
+  <PropertyGroup>
+    <!-- SDK sets product to assembly but we want it to be our product name -->
+    <Product>Microsoft%AE .NET</Product>
+  </PropertyGroup>
+
   <!-- Default item exclude patterns -->
   <PropertyGroup>
     <DefaultExcludesInProjectFolder Condition="'$(TargetFrameworkIdentifier)' != '.NETCoreApp'">$(DefaultExcludesInProjectFolder);**/*.net$(DefaultLanguageSourceExtension)</DefaultExcludesInProjectFolder>

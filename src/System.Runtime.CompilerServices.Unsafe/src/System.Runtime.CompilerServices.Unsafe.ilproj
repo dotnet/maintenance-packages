@@ -1,42 +1,53 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.IL">
+<Project Sdk="Microsoft.NET.Sdk.IL">
+
   <PropertyGroup>
-    <TargetFrameworks>$(NetCoreAppCurrent);netcoreapp3.1;netstandard2.0;net461</TargetFrameworks>
+    <TargetFrameworks>$(NetFrameworkMinimum);netstandard2.0;net7.0</TargetFrameworks>
+    <StrongNameKeyId>Microsoft</StrongNameKeyId>
+    <AssemblyVersion>6.0.0.0</AssemblyVersion> <!-- NO-INCREMENT: This version is frozen for .NET Standard and .NETCoreApp because the assembly ships inbox. -->
     <!-- Make sure that the DebuggableAttribute is set properly. -->
     <DebugOptimization>IMPL</DebugOptimization>
     <DebugOptimization Condition="'$(Configuration)' == 'Release'">OPT</DebugOptimization>
     <CoreCompileDependsOn>$(CoreCompileDependsOn);GenerateVersionFile</CoreCompileDependsOn>
     <DocumentationFile>$(MSBuildThisFileDirectory)System.Runtime.CompilerServices.Unsafe.xml</DocumentationFile>
     <IlasmFlags>$(IlasmFlags) -DEBUG=$(DebugOptimization)</IlasmFlags>
-    <IsPackable>true</IsPackable>
     <PackageDescription>Provides the System.Runtime.CompilerServices.Unsafe class, which provides generic, low-level functionality for manipulating pointers.
 
 Commonly Used Types:
 System.Runtime.CompilerServices.Unsafe</PackageDescription>
   </PropertyGroup>
-  <PropertyGroup Condition="$([MSBuild]::GetTargetFrameworkIdentifier('$(TargetFramework)')) == '.NETCoreApp'">
-    <ExtraMacros>#define netcoreapp</ExtraMacros>
-    <CoreAssembly>System.Runtime</CoreAssembly>
+
+  <!-- Package servicing properties -->
+  <!-- VersionPrefix is defined in the parent folder's Directory.Build.props -->
+  <PropertyGroup>
+    <IsPackable>false</IsPackable>
+    <AssemblyVersion Condition="$([MSBuild]::GetTargetFrameworkIdentifier('$(TargetFramework)')) == '.NETFramework'">6.0.0.0</AssemblyVersion>
+    <AssemblyVersion Condition="'$(IsPackable)' == 'true' and $([MSBuild]::GetTargetFrameworkIdentifier('$(TargetFramework)')) == '.NETFramework'">6.0.1.0</AssemblyVersion>
+    <PackageValidationBaselineVersion>4.7.1</PackageValidationBaselineVersion>
+    <IsPlaceholderTargetFramework Condition="$([MSBuild]::GetTargetFrameworkIdentifier('$(TargetFramework)')) == '.NETCoreApp'">true</IsPlaceholderTargetFramework>
   </PropertyGroup>
+
   <PropertyGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
     <CoreAssembly>netstandard</CoreAssembly>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(TargetFramework)' == 'net461'">
+
+  <PropertyGroup Condition="'$(TargetFramework)' == '$(NetFrameworkMinimum)'">
     <CoreAssembly>mscorlib</CoreAssembly>
     <ExtraMacros>#define $(TargetFramework)</ExtraMacros>
   </PropertyGroup>
+
   <ItemGroup>
-    <Compile Include="System.Runtime.CompilerServices.Unsafe.il" />
-  </ItemGroup>
-  <ItemGroup>
+    <DocFileItem Include="$(DocumentationFile)" Condition="'$(DocumentationFile)'!=''"/>
     <!-- mscorlib is passed in as an explicit reference from C# targets but not via the IL SDK. -->
-    <Reference Include="$(CoreAssembly)"
-               Condition="'$(TargetFramework)' != 'netstandard2.0'" />
+    <Reference Include="$(CoreAssembly)" Condition="'$(TargetFramework)' == '$(NetFrameworkMinimum)'" />
+    <Compile Remove="System.Runtime.CompilerServices.Unsafe.il" Condition="'$(IsPlaceholderTargetFramework)' == 'true'" />
   </ItemGroup>
 
   <Target Name="GenerateVersionFile"
+          Condition="'$(IsPlaceholderTargetFramework)' != 'true'"
           DependsOnTargets="GetAssemblyVersion;ResolveReferences"
           Inputs="$(MSBuildAllProjects)"
           Outputs="'$(VersionFilePath)">
+
    <PropertyGroup>
       <IncludePath>$([MSBuild]::NormalizeDirectory('$(IntermediateOutputPath)', 'version'))</IncludePath>
       <IncludePathTrimmed>$(IncludePath.TrimEnd('\'))</IncludePathTrimmed>
@@ -67,7 +78,7 @@ $(ExtraMacros)
   .publickeytoken = ($(_coreAssemblyPublicKeyToken) )
   .ver CORE_ASSEMBLY_VERSION
 }
- ]]>      
+ ]]>
       </_VersionFileContents>
     </PropertyGroup>
 
@@ -80,14 +91,13 @@ $(ExtraMacros)
     <ItemGroup>
       <FileWrites Include="$(VersionFilePath)" />
     </ItemGroup>
+
   </Target>
 
-  <!-- Decompile the ILResourceReference to get native resources. -->
-  <Target Name="SetILResourceReference"
-          BeforeTargets="DisassembleIlasmResourceFile"
-          Condition="'@(ResolvedMatchingContract)' != ''">
-    <ItemGroup>
-      <ILResourceReference Include="@(ResolvedMatchingContract)" />
-    </ItemGroup>
-  </Target>
+  <ItemGroup Condition="'$(IsPlaceholderTargetFramework)' != 'true'">
+    <ProjectReference Include="..\ver\System.Runtime.CompilerServices.Unsafe.Versioning.csproj"
+                      PrivateAssets="All"
+                      ReferenceOutputAssembly="false"
+                      OutputItemType="ILResourceReference" />
+  </ItemGroup>
 </Project>
