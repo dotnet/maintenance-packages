@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>$(NetFrameworkMinimum)</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="$(CommonPath)tests\TestUtilities\System\RetryHelper.cs" Link="Common\System\RetryHelper.cs" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <ProjectReference Include="..\src\Microsoft.Bcl.HashCode.csproj" />
+  </ItemGroup>
+
+</Project>
