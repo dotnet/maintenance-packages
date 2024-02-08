@@ -163,8 +163,6 @@ Execute-Command "git checkout main"
 
 # Remove the remote to upstream if it already exists, just in case
 Execute-Command "git remote remove $NewRepoRemoteName"
-
-# Add the target repo as a remote with a known name
 Execute-Command "git remote add $NewRepoRemoteName https://github.com/dotnet/maintenance-packages"
 Execute-Command "git fetch $NewRepoRemoteName main"
 Execute-Command "git checkout main"
@@ -190,7 +188,6 @@ Execute-Command "git clean -fdx"
 
 # Remove the remote to the old repo if it already exists, just in case
 Execute-Command "git remote remove $OldRepoRemoteName"
-
 # Add origin repo as a remote
 Execute-Command "git remote add $OldRepoRemoteName $OriginRepoPath"
 
@@ -198,7 +195,7 @@ Execute-Command "git remote add $OldRepoRemoteName $OriginRepoPath"
 Execute-Command "git pull $OldRepoRemoteName $SplittedBranchName"
 
 Write-Color red "PAUSE"
-$IN = Read-Host "Please check the contents of $NoHistoryBranchName before merging with it into $WorkingBranchName, then press any key to continue..."
+$IN = Read-Host "Please check the contents of $NoHistoryBranchName before merging it with $WorkingBranchName, then press any key to continue..."
 
 # # Switch to final branch
 Execute-Command "git checkout $WorkingBranchName"
