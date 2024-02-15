@@ -1,19 +1,10 @@
 <Project>
-
-  <Import Project="Sdk.props" Sdk="Microsoft.DotNet.Arcade.Sdk" />
-
+  <Import Project="..\Directory.Build.props" />
   <PropertyGroup>
-    <Copyright>$(CopyrightNetFoundation)</Copyright>
-    <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
-    <DebugType>embedded</DebugType>
-    <DebugSymbols>true</DebugSymbols>
-    <LangVersion>Latest</LangVersion>
-    <CommonPath>$([MSBuild]::NormalizeDirectory('$(RepoRoot)', 'src', 'Common'))</CommonPath>
-    <EnableNETAnalyzers>true</EnableNETAnalyzers>
-    <AnalysisMode>Recommended</AnalysisMode>
-    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
-    <DotNetUseShippingVersions>true</DotNetUseShippingVersions>
+    <AssemblyVersion>4.0.5.0</AssemblyVersion>
+    <StrongNameKeyId>ECMA</StrongNameKeyId>
+    <IsNETCoreApp>true</IsNETCoreApp>
+    <IsNETCoreAppRef>false</IsNETCoreAppRef>
+    <IsUAP>true</IsUAP>
   </PropertyGroup>
-
 </Project>
