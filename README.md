@@ -72,12 +72,21 @@ After executing the script, do the following:
 4. Delete the obsolete infrastructure files that are not relevant anymore when using the latest version of arcade.
 5. Use the modern Microsoft.NET.Sdk for the csproj files.
 6. Set the target frameworks to those the package should continue supporting. This might not be as straightforward so please feel free to reach out to the @dotnet/area-infrastructure-libraries members for guidance.
-7. Add the csprojs to the base sln file.
-8. Delete dead source code. For example, code protected by preprocessor directives that are not relevant anymore due to the specified framework being out of support.
-9. Build the whole repo using the base `build.cmd|sh` script.
-10. Turn `<IsPackable>` to `true`, then run `dotnet pack` to see if APICompat / PackageValidation complain, in which case you'll have to address the issues. When done, set it back to `false`.
-11. Squash all the _new_ commits introduced by you in this repo, excluding the migrated commit history.
-12. Submit the PR and tag @dotnet/area-infrastructure-libraries for review.
+7. Update the `AssemblyVersion`, `VersionPrefix` and `PackageValidationBaselineVersion` in the src csproj file as needed:
+  A. We only need to set the `AssemblyVersion` when an assembly has overlap with a framework assembly (for example, `System.Buffers`). If the package is behaving completely out of band, it can use the repo-wide versioning, meaning we don't need to add the `AssemblyVersion` properties (For example: `Microsoft.Bcl.HashCode` and `System.Net.WebSockets.WebSocketProtocol`). There should be three separate property values for `AssemblyVersion`:
+    i. The unconditioned property, which should match the assembly version value of the last stable package we released. It should also be suffixed with the comment: `<!-- NO-INCREMENT: This version is frozen for .NET Standard and .NETCoreApp because the assembly ships inbox. -->`.
+    ii. A property conditioned to check if the framework reading it is one that will consume this package once we release a new package version. The value should start with the same number as the unconditioned property.
+    iii. Another conditioned property, with the same condition as the previous one, but additionally checking for the condition `'IsPackable' == 'true'`. The value should have the minor version number bumped by one, and should represent the value of the future package to publish.
+  B. `VersionPrefix` must have two property values:
+    i. One is unconditioned, and should match the last _stable_ version we released of this package (you chan check on nuget.org). Avoid preview and rc versions.
+    ii. The other one is conditioned to `'IsPackable' == 'true'`. This property value is what will be used in the next version we release of this package. It needs to bump the minor version to the next value. For example, if the unconditioned `VersionPrefix` is 5.1.0 (where 5 is the major version, 1 is the minor version, and 0 is the patch version), we need to bump the minor version of this property to 2: 5.2.0.
+  C. The `PackageValidationBaselineVersion` value should match the same value as the unconditioned `VersionPrefix`. This property represents the package version that ApiCompat should use to compare the next package version with, to ensure the APIs are fully compatible.
+8. Add the csprojs to the base sln file.
+9. Delete dead source code. For example, code protected by preprocessor directives that are not relevant anymore due to the specified framework being out of support.
+10. Build the whole repo using the base `build.cmd|sh` script.
+11. Turn `<IsPackable>` to `true`, then run `dotnet pack` to see if APICompat / PackageValidation complain, in which case you'll have to address the issues. When done, set it back to `false`.
+12. Squash all the _new_ commits introduced by you in this repo, excluding the migrated commit history.
+13. Submit the PR and tag @dotnet/area-infrastructure-libraries for review.
 
 
 ## How to produce stable package versions
