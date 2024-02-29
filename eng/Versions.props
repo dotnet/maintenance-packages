@@ -1,0 +1,13 @@
+<Project>
+  <PropertyGroup>
+    <PreReleaseVersionLabel>prerelease</PreReleaseVersionLabel>
+    <!-- Opt-out repo features -->
+    <UseVSTestRunner>true</UseVSTestRunner>
+    <UsingToolXliff>false</UsingToolXliff>
+  </PropertyGroup>
+  <PropertyGroup>
+    <!-- Arcade dependencies -->
+    <MicrosoftDotNetRemoteExecutorVersion>8.0.0-beta.24113.2</MicrosoftDotNetRemoteExecutorVersion>
+    <MicrosoftDotNetXUnitExtensionsVersion>8.0.0-beta.24113.2</MicrosoftDotNetXUnitExtensionsVersion>
+  </PropertyGroup>
+</Project>
