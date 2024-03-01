@@ -18,9 +18,9 @@ namespace System.Json
             _value = value;
         }
 
-        public JsonPrimitive(byte value)
+        public JsonPrimitive(byte renamedValue)
         {
-            _value = value;
+            _value = renamedValue;
         }
 
         public JsonPrimitive(char value)

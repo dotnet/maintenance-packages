@@ -57,28 +57,28 @@ namespace System
         /// at 'start' index and ending at 'end' index (exclusive).
         /// </summary>
         /// <param name="array">The target array.</param>
-        /// <param name="start">The index at which to begin the memory.</param>
+        /// <param name="renamedStart">The index at which to begin the memory.</param>
         /// <param name="length">The number of items in the memory.</param>
         /// <remarks>Returns default when <paramref name="array"/> is null.</remarks>
         /// <exception cref="System.ArrayTypeMismatchException">Thrown when <paramref name="array"/> is covariant and array's type is not exactly T[].</exception>
         /// <exception cref="System.ArgumentOutOfRangeException">
-        /// Thrown when the specified <paramref name="start"/> or end index is not in the range (&lt;0 or &gt;=Length).
+        /// Thrown when the specified <paramref name="renamedStart"/> or end index is not in the range (&lt;0 or &gt;=Length).
         /// </exception>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public ReadOnlyMemory(T[] array, int start, int length)
+        public ReadOnlyMemory(T[] array, int renamedStart, int length)
         {
             if (array == null)
             {
-                if (start != 0 || length != 0)
+                if (renamedStart != 0 || length != 0)
                     ThrowHelper.ThrowArgumentOutOfRangeException();
                 this = default;
                 return; // returns default
             }
-            if ((uint)start > (uint)array.Length || (uint)length > (uint)(array.Length - start))
+            if ((uint)renamedStart > (uint)array.Length || (uint)length > (uint)(array.Length - renamedStart))
                 ThrowHelper.ThrowArgumentOutOfRangeException();
 
             _object = array;
-            _index = start;
+            _index = renamedStart;
             _length = length;
         }
 

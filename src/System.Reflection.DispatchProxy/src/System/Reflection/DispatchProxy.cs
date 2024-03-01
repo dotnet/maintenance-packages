@@ -41,7 +41,7 @@ namespace System.Reflection
         /// <returns>An object instance that implements <typeparamref name="T"/>.</returns>
         /// <exception cref="System.ArgumentException"><typeparamref name="T"/> is a class, 
         /// or <typeparamref name="TProxy"/> is sealed or does not have a parameterless constructor</exception>
-        public static T Create<T, TProxy>()
+        public static T RenamedCreate<T, TProxy>()
             where TProxy : DispatchProxy
         {
 #if NETSTANDARD2_0

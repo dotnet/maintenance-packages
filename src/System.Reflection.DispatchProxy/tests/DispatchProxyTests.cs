@@ -15,7 +15,7 @@ namespace DispatchProxyTests
         [Fact]
         public static void Create_Proxy_Derives_From_DispatchProxy_BaseType()
         {
-            TestType_IHelloService proxy = DispatchProxy.Create<TestType_IHelloService, TestDispatchProxy>();
+            TestType_IHelloService proxy = DispatchProxy.RenamedCreate<TestType_IHelloService, TestDispatchProxy>();
 
             Assert.NotNull(proxy);
             Assert.IsAssignableFrom<TestDispatchProxy>(proxy);
@@ -24,7 +24,7 @@ namespace DispatchProxyTests
         [Fact]
         public static void Create_Proxy_Implements_All_Interfaces()
         {
-            TestType_IHelloAndGoodbyeService proxy = DispatchProxy.Create<TestType_IHelloAndGoodbyeService, TestDispatchProxy>();
+            TestType_IHelloAndGoodbyeService proxy = DispatchProxy.RenamedCreate<TestType_IHelloAndGoodbyeService, TestDispatchProxy>();
 
             Assert.NotNull(proxy);
             Type[] implementedInterfaces = typeof(TestType_IHelloAndGoodbyeService).GetTypeInfo().ImplementedInterfaces.ToArray();
@@ -37,22 +37,22 @@ namespace DispatchProxyTests
         [Fact]
         public static void Create_Proxy_Internal_Interface()
         {
-            TestType_InternalInterfaceService proxy = DispatchProxy.Create<TestType_InternalInterfaceService, TestDispatchProxy>();
+            TestType_InternalInterfaceService proxy = DispatchProxy.RenamedCreate<TestType_InternalInterfaceService, TestDispatchProxy>();
             Assert.NotNull(proxy);
         }
 
         [Fact]
         public static void Create_Proxy_Implements_Internal_Interfaces()
         {
-            TestType_InternalInterfaceService proxy = DispatchProxy.Create<TestType_PublicInterfaceService_Implements_Internal, TestDispatchProxy>();
+            TestType_InternalInterfaceService proxy = DispatchProxy.RenamedCreate<TestType_PublicInterfaceService_Implements_Internal, TestDispatchProxy>();
             Assert.NotNull(proxy);
         }
 
         [Fact]
         public static void Create_Same_Proxy_Type_And_Base_Type_Reuses_Same_Generated_Type()
         {
-            TestType_IHelloService proxy1 = DispatchProxy.Create<TestType_IHelloService, TestDispatchProxy>();
-            TestType_IHelloService proxy2 = DispatchProxy.Create<TestType_IHelloService, TestDispatchProxy>();
+            TestType_IHelloService proxy1 = DispatchProxy.RenamedCreate<TestType_IHelloService, TestDispatchProxy>();
+            TestType_IHelloService proxy2 = DispatchProxy.RenamedCreate<TestType_IHelloService, TestDispatchProxy>();
 
             Assert.NotNull(proxy1);
             Assert.NotNull(proxy2);
@@ -62,8 +62,8 @@ namespace DispatchProxyTests
         [Fact]
         public static void Create_Proxy_Instances_Of_Same_Proxy_And_Base_Type_Are_Unique()
         {
-            TestType_IHelloService proxy1 = DispatchProxy.Create<TestType_IHelloService, TestDispatchProxy>();
-            TestType_IHelloService proxy2 = DispatchProxy.Create<TestType_IHelloService, TestDispatchProxy>();
+            TestType_IHelloService proxy1 = DispatchProxy.RenamedCreate<TestType_IHelloService, TestDispatchProxy>();
+            TestType_IHelloService proxy2 = DispatchProxy.RenamedCreate<TestType_IHelloService, TestDispatchProxy>();
 
             Assert.NotNull(proxy1);
             Assert.NotNull(proxy2);
@@ -75,8 +75,8 @@ namespace DispatchProxyTests
         [Fact]
         public static void Create_Same_Proxy_Type_With_Different_BaseType_Uses_Different_Generated_Type()
         {
-            TestType_IHelloService proxy1 = DispatchProxy.Create<TestType_IHelloService, TestDispatchProxy>();
-            TestType_IHelloService proxy2 = DispatchProxy.Create<TestType_IHelloService, TestDispatchProxy2>();
+            TestType_IHelloService proxy1 = DispatchProxy.RenamedCreate<TestType_IHelloService, TestDispatchProxy>();
+            TestType_IHelloService proxy2 = DispatchProxy.RenamedCreate<TestType_IHelloService, TestDispatchProxy2>();
 
             Assert.NotNull(proxy1);
             Assert.NotNull(proxy2);
@@ -87,8 +87,8 @@ namespace DispatchProxyTests
         [Fact]
         public static void Created_Proxy_With_Different_Proxy_Type_Use_Different_Generated_Type()
         {
-            TestType_IHelloService proxy1 = DispatchProxy.Create<TestType_IHelloService, TestDispatchProxy>();
-            TestType_IGoodbyeService proxy2 = DispatchProxy.Create<TestType_IGoodbyeService, TestDispatchProxy>();
+            TestType_IHelloService proxy1 = DispatchProxy.RenamedCreate<TestType_IHelloService, TestDispatchProxy>();
+            TestType_IGoodbyeService proxy2 = DispatchProxy.RenamedCreate<TestType_IGoodbyeService, TestDispatchProxy>();
 
             Assert.NotNull(proxy1);
             Assert.NotNull(proxy2);
@@ -99,25 +99,25 @@ namespace DispatchProxyTests
         [Fact]
         public static void Create_Using_Concrete_Proxy_Type_Throws_ArgumentException()
         {
-            AssertExtensions.Throws<ArgumentException>("T", () => DispatchProxy.Create<TestType_ConcreteClass, TestDispatchProxy>());
+            AssertExtensions.Throws<ArgumentException>("T", () => DispatchProxy.RenamedCreate<TestType_ConcreteClass, TestDispatchProxy>());
         }
 
         [Fact]
         public static void Create_Using_Sealed_BaseType_Throws_ArgumentException()
         {
-            AssertExtensions.Throws<ArgumentException>("TProxy", () => DispatchProxy.Create<TestType_IHelloService, Sealed_TestDispatchProxy>());
+            AssertExtensions.Throws<ArgumentException>("TProxy", () => DispatchProxy.RenamedCreate<TestType_IHelloService, Sealed_TestDispatchProxy>());
         }
 
         [Fact]
         public static void Create_Using_Abstract_BaseType_Throws_ArgumentException()
         {
-            AssertExtensions.Throws<ArgumentException>("TProxy", () => DispatchProxy.Create<TestType_IHelloService, Abstract_TestDispatchProxy>());
+            AssertExtensions.Throws<ArgumentException>("TProxy", () => DispatchProxy.RenamedCreate<TestType_IHelloService, Abstract_TestDispatchProxy>());
         }
 
         [Fact]
         public static void Create_Using_BaseType_Without_Default_Ctor_Throws_ArgumentException()
         {
-            AssertExtensions.Throws<ArgumentException>("TProxy", () => DispatchProxy.Create<TestType_IHelloService, NoDefaultCtor_TestDispatchProxy>());
+            AssertExtensions.Throws<ArgumentException>("TProxy", () => DispatchProxy.RenamedCreate<TestType_IHelloService, NoDefaultCtor_TestDispatchProxy>());
         }
 
         [Fact]
@@ -153,7 +153,7 @@ namespace DispatchProxyTests
                 return "success";
             };
 
-            TestType_IHelloService proxy = DispatchProxy.Create<TestType_IHelloService, TestDispatchProxy>();
+            TestType_IHelloService proxy = DispatchProxy.RenamedCreate<TestType_IHelloService, TestDispatchProxy>();
             Assert.NotNull(proxy);
 
             TestDispatchProxy dispatchProxy = proxy as TestDispatchProxy;
@@ -174,7 +174,7 @@ namespace DispatchProxyTests
         {
             MethodInfo invokedMethod = null;
 
-            TestType_IHelloService proxy = DispatchProxy.Create<TestType_IHelloService, TestDispatchProxy>();
+            TestType_IHelloService proxy = DispatchProxy.RenamedCreate<TestType_IHelloService, TestDispatchProxy>();
             ((TestDispatchProxy)proxy).CallOnInvoke = (method, args) =>
             {
                 invokedMethod = method;
@@ -192,7 +192,7 @@ namespace DispatchProxyTests
         {
             object[] actualArgs = null;
 
-            TestType_IHelloService proxy = DispatchProxy.Create<TestType_IHelloService, TestDispatchProxy>();
+            TestType_IHelloService proxy = DispatchProxy.RenamedCreate<TestType_IHelloService, TestDispatchProxy>();
             ((TestDispatchProxy)proxy).CallOnInvoke = (method, args) =>
             {
                 actualArgs = args;
@@ -216,7 +216,7 @@ namespace DispatchProxyTests
         [Fact]
         public static void Invoke_Returns_Correct_Value()
         {
-            TestType_IHelloService proxy = DispatchProxy.Create<TestType_IHelloService, TestDispatchProxy>();
+            TestType_IHelloService proxy = DispatchProxy.RenamedCreate<TestType_IHelloService, TestDispatchProxy>();
             ((TestDispatchProxy)proxy).CallOnInvoke = (method, args) =>
             {
                 return "testReturn";
@@ -233,7 +233,7 @@ namespace DispatchProxyTests
             object[] invokedArgs = null;
             object[] expectedArgs = new object[] { (int)42, "testString", (double)5.0 };
 
-            TestType_IMultipleParameterService proxy = DispatchProxy.Create<TestType_IMultipleParameterService, TestDispatchProxy>();
+            TestType_IMultipleParameterService proxy = DispatchProxy.RenamedCreate<TestType_IMultipleParameterService, TestDispatchProxy>();
             ((TestDispatchProxy)proxy).CallOnInvoke = (method, args) =>
             {
                 invokedArgs = args;
@@ -261,7 +261,7 @@ namespace DispatchProxyTests
             object[] invokedArgs = null;
             object[] expectedArgs = new object[] { 42, "testString", 5.0 };
 
-            TestType_IMultipleParameterService proxy = DispatchProxy.Create<TestType_IMultipleParameterService, TestDispatchProxy>();
+            TestType_IMultipleParameterService proxy = DispatchProxy.RenamedCreate<TestType_IMultipleParameterService, TestDispatchProxy>();
             ((TestDispatchProxy)proxy).CallOnInvoke = (method, args) =>
             {
                 invokedArgs = args;
@@ -293,7 +293,7 @@ namespace DispatchProxyTests
         {
             MethodInfo invokedMethod = null;
 
-            TestType_IOneWay proxy = DispatchProxy.Create<TestType_IOneWay, TestDispatchProxy>();
+            TestType_IOneWay proxy = DispatchProxy.RenamedCreate<TestType_IOneWay, TestDispatchProxy>();
             ((TestDispatchProxy)proxy).CallOnInvoke = (method, args) =>
             {
                 invokedMethod = method;
@@ -311,7 +311,7 @@ namespace DispatchProxyTests
         {
             List<MethodInfo> invokedMethods = new List<MethodInfo>();
 
-            TestType_IHelloService1And2 proxy = DispatchProxy.Create<TestType_IHelloService1And2, TestDispatchProxy>();
+            TestType_IHelloService1And2 proxy = DispatchProxy.RenamedCreate<TestType_IHelloService1And2, TestDispatchProxy>();
             ((TestDispatchProxy)proxy).CallOnInvoke = (method, args) =>
             {
                 invokedMethods.Add(method);
@@ -336,7 +336,7 @@ namespace DispatchProxyTests
             Exception actualException = null;
             InvalidOperationException expectedException = new InvalidOperationException("testException");
 
-            TestType_IHelloService proxy = DispatchProxy.Create<TestType_IHelloService, TestDispatchProxy>();
+            TestType_IHelloService proxy = DispatchProxy.RenamedCreate<TestType_IHelloService, TestDispatchProxy>();
             ((TestDispatchProxy)proxy).CallOnInvoke = (method, args) =>
             {
                 throw expectedException;
@@ -359,7 +359,7 @@ namespace DispatchProxyTests
         {
             List<MethodInfo> invokedMethods = new List<MethodInfo>();
 
-            TestType_IPropertyService proxy = DispatchProxy.Create<TestType_IPropertyService, TestDispatchProxy>();
+            TestType_IPropertyService proxy = DispatchProxy.RenamedCreate<TestType_IPropertyService, TestDispatchProxy>();
             ((TestDispatchProxy)proxy).CallOnInvoke = (method, args) =>
             {
                 invokedMethods.Add(method);
@@ -390,7 +390,7 @@ namespace DispatchProxyTests
         [Fact]
         public static void Proxy_Declares_Interface_Properties()
         {
-            TestType_IPropertyService proxy = DispatchProxy.Create<TestType_IPropertyService, TestDispatchProxy>();
+            TestType_IPropertyService proxy = DispatchProxy.RenamedCreate<TestType_IPropertyService, TestDispatchProxy>();
             PropertyInfo propertyInfo = proxy.GetType().GetTypeInfo().GetDeclaredProperty("ReadWrite");
             Assert.NotNull(propertyInfo);
         }
@@ -398,7 +398,7 @@ namespace DispatchProxyTests
         [Fact]
         public static void Proxy_Declares_Interface_Events()
         {
-            TestType_IEventService proxy = DispatchProxy.Create<TestType_IEventService, TestDispatchProxy>();
+            TestType_IEventService proxy = DispatchProxy.RenamedCreate<TestType_IEventService, TestDispatchProxy>();
             EventInfo eventInfo = proxy.GetType().GetTypeInfo().GetDeclaredEvent("AddRemove");
             Assert.NotNull(eventInfo);
         }
@@ -409,7 +409,7 @@ namespace DispatchProxyTests
         {
             List<MethodInfo> invokedMethods = new List<MethodInfo>();
 
-            TestType_IIndexerService proxy = DispatchProxy.Create<TestType_IIndexerService, TestDispatchProxy>();
+            TestType_IIndexerService proxy = DispatchProxy.RenamedCreate<TestType_IIndexerService, TestDispatchProxy>();
             ((TestDispatchProxy)proxy).CallOnInvoke = (method, args) =>
             {
                 invokedMethods.Add(method);
@@ -439,14 +439,14 @@ namespace DispatchProxyTests
         [Fact]
         public static void Proxy_Declares_Interface_Indexers()
         {
-            TestType_IIndexerService proxy = DispatchProxy.Create<TestType_IIndexerService, TestDispatchProxy>();
+            TestType_IIndexerService proxy = DispatchProxy.RenamedCreate<TestType_IIndexerService, TestDispatchProxy>();
             PropertyInfo propertyInfo = proxy.GetType().GetTypeInfo().GetDeclaredProperty("Item");
             Assert.NotNull(propertyInfo);
         }
 
         static void testGenericMethodRoundTrip<T>(T testValue)
         {
-            var proxy = DispatchProxy.Create<TypeType_GenericMethod, TestDispatchProxy>();
+            var proxy = DispatchProxy.RenamedCreate<TypeType_GenericMethod, TestDispatchProxy>();
             ((TestDispatchProxy)proxy).CallOnInvoke = (mi, a) =>
             {
                 Assert.True(mi.IsGenericMethod);
@@ -487,7 +487,7 @@ namespace DispatchProxyTests
 
         private static void testRefOutInInvocation(Action<TestType_IOut_Ref> invocation, string expected)
         {
-            var proxy = DispatchProxy.Create<TestType_IOut_Ref, TestDispatchProxy>();
+            var proxy = DispatchProxy.RenamedCreate<TestType_IOut_Ref, TestDispatchProxy>();
 
             string result = "Failed";
 

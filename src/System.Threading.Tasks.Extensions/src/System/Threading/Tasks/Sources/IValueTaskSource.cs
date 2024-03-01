@@ -44,8 +44,8 @@ namespace System.Threading.Tasks.Sources
     public interface IValueTaskSource
     {
         /// <summary>Gets the status of the current operation.</summary>
-        /// <param name="token">Opaque value that was provided to the <see cref="ValueTask"/>'s constructor.</param>
-        ValueTaskSourceStatus GetStatus(short token);
+        /// <param name="renamedToken">Opaque value that was provided to the <see cref="ValueTask"/>'s constructor.</param>
+        ValueTaskSourceStatus GetStatus(short renamedToken);
 
         /// <summary>Schedules the continuation action for this <see cref="IValueTaskSource"/>.</summary>
         /// <param name="continuation">The continuation to invoke when the operation has completed.</param>
