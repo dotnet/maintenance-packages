@@ -9,19 +9,19 @@ namespace System.Net.WebSockets
     public static class WebSocketProtocol
     {
         public static WebSocket CreateFromStream(
-            Stream renamedStream,
+            Stream stream,
             bool isServer,
             string? subProtocol,
             TimeSpan keepAliveInterval)
         {
-            if (renamedStream == null)
+            if (stream == null)
             {
-                throw new ArgumentNullException(nameof(renamedStream));
+                throw new ArgumentNullException(nameof(stream));
             }
 
-            if (!renamedStream.CanRead || !renamedStream.CanWrite)
+            if (!stream.CanRead || !stream.CanWrite)
             {
-                throw new ArgumentException(!renamedStream.CanRead ? SR.NotReadableStream : SR.NotWriteableStream, nameof(renamedStream));
+                throw new ArgumentException(!stream.CanRead ? SR.NotReadableStream : SR.NotWriteableStream, nameof(stream));
             }
 
             if (subProtocol != null)
@@ -36,7 +36,7 @@ namespace System.Net.WebSockets
                     0));
             }
 
-            return ManagedWebSocket.CreateFromConnectedStream(renamedStream, isServer, subProtocol, keepAliveInterval);
+            return ManagedWebSocket.CreateFromConnectedStream(stream, isServer, subProtocol, keepAliveInterval);
         }
     }
 }
