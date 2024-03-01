@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>$(NetFrameworkMinimum);netstandard2.0</TargetFrameworks>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <StrongNameKeyId>Microsoft</StrongNameKeyId>
+    <IsPackable>false</IsPackable>
+    <VersionPrefix>4.7.1</VersionPrefix>
+    <VersionPrefix Condition="'$(IsPackable)' == 'true'">4.8.0</VersionPrefix>
+    <AssemblyVersion>4.0.6.0</AssemblyVersion><!-- NO-INCREMENT: This version is frozen for .NET Standard and .NETCoreApp because the assembly ships inbox. -->
+    <AssemblyVersion Condition="$([MSBuild]::GetTargetFrameworkIdentifier('$(TargetFramework)')) == '.NETFramework'">4.0.6.0</AssemblyVersion>
+    <AssemblyVersion Condition="'$(IsPackable)' == 'true' and $([MSBuild]::GetTargetFrameworkIdentifier('$(TargetFramework)')) == '.NETFramework'">4.0.7.0</AssemblyVersion>
+    <PackageValidationBaseLineVersion>4.7.1</PackageValidationBaseLineVersion>
+  </PropertyGroup>
+
+  <ItemGroup Condition="$(TargetFramework) == 'netstandard2.0'">
+    <Compile Remove="System\Reflection\DispatchProxyGenerator.cs" />
+    <Compile Remove="System\Reflection\Emit\IgnoreAccessChecksToAttributeBuilder.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Condition="$(TargetFramework) == 'netstandard2.0'" Include="System.Reflection.Emit" />
+  </ItemGroup>
+
+</Project>
