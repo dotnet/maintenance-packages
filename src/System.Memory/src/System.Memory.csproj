@@ -21,7 +21,7 @@
 
   <ItemGroup Condition="'$(IsPlaceholderTargetFramework)' != 'true'">
     <ProjectReference Include="..\..\System.Buffers\src\System.Buffers.csproj" />
-    <PackageReference Include="System.Numerics.Vectors" />
+    <ProjectReference Include="..\..\System.Numerics.Vectors\src\System.Numerics.Vectors.csproj" />
     <PackageReference Include="System.Runtime.CompilerServices.Unsafe" />
   </ItemGroup>
 
