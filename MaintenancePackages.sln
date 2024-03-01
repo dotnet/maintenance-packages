@@ -72,6 +72,16 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "System.Net.WebSockets.WebSo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "System.Net.WebSockets.WebSocketProtocol.Tests", "src\System.Net.WebSockets.WebSocketProtocol\tests\System.Net.WebSockets.WebSocketProtocol.Tests.csproj", "{19343810-5098-4307-BB8C-50AD95892719}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "System.Xml.XPath.XmlDocument", "System.Xml.XPath.XmlDocument", "{9B53BEF6-8264-475D-8177-2351FB4C043A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{3DDCF8CC-558A-488C-A6B1-13909A87EC81}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{1AB00F17-A78F-480F-96B7-C5DFEE6BFF30}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "System.Xml.XPath.XmlDocument.Tests", "src\System.Xml.XPath.XmlDocument\tests\System.Xml.XPath.XmlDocument.Tests.csproj", "{88B2A601-B65D-47A4-A706-54899EDC796D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "System.Xml.XPath.XmlDocument", "src\System.Xml.XPath.XmlDocument\src\System.Xml.XPath.XmlDocument.csproj", "{93C24867-4767-4704-8B76-68268E6362E4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -134,6 +144,14 @@ Global
 		{19343810-5098-4307-BB8C-50AD95892719}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{19343810-5098-4307-BB8C-50AD95892719}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{19343810-5098-4307-BB8C-50AD95892719}.Release|Any CPU.Build.0 = Release|Any CPU
+		{88B2A601-B65D-47A4-A706-54899EDC796D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{88B2A601-B65D-47A4-A706-54899EDC796D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{88B2A601-B65D-47A4-A706-54899EDC796D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{88B2A601-B65D-47A4-A706-54899EDC796D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{93C24867-4767-4704-8B76-68268E6362E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{93C24867-4767-4704-8B76-68268E6362E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{93C24867-4767-4704-8B76-68268E6362E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{93C24867-4767-4704-8B76-68268E6362E4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -167,8 +185,12 @@ Global
 		{0C59C632-1793-4B41-965F-0FB276A68E03} = {5B4ABFB2-D3F1-4244-A0DE-62FF7C96FE6B}
 		{E875A089-9A2C-44D5-A635-126E24FB862D} = {CDAA4F6A-2DA3-4856-8B2F-1C774938386F}
 		{19343810-5098-4307-BB8C-50AD95892719} = {0C59C632-1793-4B41-965F-0FB276A68E03}
+		{3DDCF8CC-558A-488C-A6B1-13909A87EC81} = {9B53BEF6-8264-475D-8177-2351FB4C043A}
+		{1AB00F17-A78F-480F-96B7-C5DFEE6BFF30} = {9B53BEF6-8264-475D-8177-2351FB4C043A}
+		{88B2A601-B65D-47A4-A706-54899EDC796D} = {1AB00F17-A78F-480F-96B7-C5DFEE6BFF30}
+		{93C24867-4767-4704-8B76-68268E6362E4} = {3DDCF8CC-558A-488C-A6B1-13909A87EC81}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {EDA1F1EF-8991-4665-BB90-C0DB04101021}
+		SolutionGuid = {E59E461A-1C5E-432E-9A2B-F6D846D11FB6}
 	EndGlobalSection
 EndGlobal
