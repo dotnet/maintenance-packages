@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>$(NetMinimum);netstandard2.1;netstandard2.0;$(NetFrameworkMinimum)</TargetFrameworks>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <StrongNameKeyId>Open</StrongNameKeyId>
+    <Nullable>enable</Nullable>
+    <IsPackable>false</IsPackable>
+    <VersionPrefix>1.1.1</VersionPrefix>
+    <VersionPrefix Condition="'$(IsPackable)' == 'true'">1.2.0</VersionPrefix>
+    <PackageValidationBaselineVersion>1.1.1</PackageValidationBaselineVersion>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'netstandard2.1'))">
+    <EnableDefaultItems>false</EnableDefaultItems>
+  </PropertyGroup>
+
+  <ItemGroup Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'netstandard2.1'))">
+    <Compile Include="TypeForwards.cs" />
+  </ItemGroup>
+
+  <ItemGroup Condition="!$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'netstandard2.1'))">
+    <Compile Include="$(CommonPath)src\System\LocalAppContextSwitches.Common.cs" Link="Common\System\LocalAppContextSwitches.Common.cs" />
+    <Compile Remove="TypeForwards.cs" />
+  </ItemGroup>
+
+</Project>

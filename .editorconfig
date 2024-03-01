@@ -1,0 +1,95 @@
+# editorconfig.org
+
+# top-most EditorConfig file
+root = true
+
+# Default settings:
+# A newline ending every file
+# Use 4 spaces as indentation
+[*]
+insert_final_newline = true
+indent_style = space
+indent_size = 4
+trim_trailing_whitespace = true
+
+# Xml project files
+[*.{csproj,vbproj,vcxproj,vcxproj.filters,proj,nativeproj,locproj}]
+indent_size = 2
+
+[*.{csproj,vbproj,proj,nativeproj,locproj}]
+charset = utf-8
+
+# Xml files
+[*.{xml,resx,ruleset}]
+indent_size = 2
+
+# Xml config files
+[*.{props,targets,config,nuspec}]
+indent_size = 2
+
+# YAML config files
+[*.{yml}]
+indent_size = 2
+
+# Shell scripts
+[*.sh]
+end_of_line = lf
+[*.{cmd,bat}]
+end_of_line = crlf
+
+##########################################
+# Analyzer configuration for all C# files.
+##########################################
+[*.cs]
+
+# IDE2000: Allow multiple blank lines
+dotnet_style_allow_multiple_blank_lines_experimental = false
+
+# IDE2001: Embedded statements must be on their own line
+csharp_style_allow_embedded_statements_on_same_line_experimental = false
+
+# IDE2002: Consecutive braces must not have blank line between them
+csharp_style_allow_blank_lines_between_consecutive_braces_experimental = false
+
+# IDE2003: Blank line required between block and subsequent statement
+dotnet_style_allow_statement_immediately_after_block_experimental = false
+
+# IDE2004: Blank line not allowed after constructor initializer colon
+csharp_style_allow_blank_line_after_colon_in_constructor_initializer_experimental = false
+
+# IDE0073: The file header is missing or not located at the top of the file
+file_header_template = Licensed to the .NET Foundation under one or more agreements.\nThe .NET Foundation licenses this file to you under the MIT license.
+dotnet_diagnostic.IDE0073.severity = error
+
+# CA1010: Generic interface should also be implemented
+dotnet_diagnostic.CA1010.severity = none
+
+# CA1305: Specify IFormatProvider
+dotnet_diagnostic.CA1305.severity = none
+
+# CA1710: Identifiers should have correct suffix
+dotnet_diagnostic.CA1710.severity = none
+
+# CA1720: Identifier contains type name
+dotnet_diagnostic.CA1720.severity = none
+
+# CA1725: Parameter names should match base declaration
+dotnet_diagnostic.CA1725.severity = none
+
+
+###############################################
+# Analyzer configuration for all test C# files.
+###############################################
+[src/*/tests/**.cs]
+
+# CA1310: Specify StringComparison for correctness
+dotnet_diagnostic.CA1310.severity = none
+
+# CA1707: Identifiers should not contain underscores
+dotnet_diagnostic.CA1707.severity = none
+
+# CA1822: Mark members as static
+dotnet_diagnostic.CA1822.severity = none
+
+# CA2201: Do not raise reserved exception types
+dotnet_diagnostic.CA2201.severity = none
