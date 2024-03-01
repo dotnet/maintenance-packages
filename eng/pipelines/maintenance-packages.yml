@@ -96,6 +96,45 @@ stages:
               $(_InternalBuildArgs)
             displayName: $(_BuildJobDisplayName)
 
+- stage: pack
+  displayName: Pack
+  jobs:
+  - template: /eng/common/templates/jobs/jobs.yml
+    parameters:
+      artifacts:
+        publish:
+          artifacts: false
+          logs: true
+          manifests: true
+      enableMicrobuild: true
+      enablePublishUsingPipelines: false
+      publishAssetsImmediately: false
+      enablePublishTestResults: false
+      enableSourceIndex: ${{ and(eq(variables._RunAsInternal, True), eq(variables['Build.SourceBranch'], 'refs/heads/main')) }}
+      workspace:
+        clean: all
+      jobs:
+      - ${{ if eq(variables._RunAsPublic, True) }}:
+        - job: linux
+          timeoutInMinutes: 60
+          container: LinuxContainer
+          pool:
+            vmImage: ubuntu-latest
+          strategy:
+            matrix:
+              debug:
+                _BuildConfig: Release
+          preSteps:
+          - checkout: self
+            clean: true
+          steps:
+          - script: eng/common/build.sh
+              -configuration $(_BuildConfig)
+              --restore
+              --pack
+              /p:IsPackable=true
+            displayName: $(_BuildJobDisplayName)
+
 - ${{ if eq(variables._RunAsInternal, True) }}:
   - template: /eng/common/templates/post-build/post-build.yml
     parameters:
