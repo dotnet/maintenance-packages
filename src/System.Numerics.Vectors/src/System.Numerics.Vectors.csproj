@@ -4,7 +4,7 @@
     <TargetFrameworks>netcoreapp2.0;netstandard2.0;$(NetFrameworkMinimum)</TargetFrameworks>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <StrongNameKeyId>Microsoft</StrongNameKeyId>
-    <IsPackable>false</IsPackable>
+    <IsPackable>true</IsPackable>
     <VersionPrefix>4.5.0</VersionPrefix>
     <VersionPrefix Condition="'$(IsPackable)' == 'true'">4.6.0</VersionPrefix>
     <AssemblyVersion>4.1.4.0</AssemblyVersion><!-- NO-INCREMENT: This version is frozen for .NET Standard and .NETCoreApp because the assembly ships inbox. -->
@@ -12,75 +12,60 @@
     <AssemblyVersion Condition="'$(IsPackable)' == 'true' and $([MSBuild]::GetTargetFrameworkIdentifier('$(TargetFramework)')) == '.NETFramework'">4.1.5.0</AssemblyVersion>
     <PackageValidationBaselineVersion>4.5.0</PackageValidationBaselineVersion>
     <IsPlaceholderTargetFramework Condition="$([MSBuild]::GetTargetFrameworkIdentifier('$(TargetFramework)')) == '.NETCoreApp'">true</IsPlaceholderTargetFramework>
-    <EnableDefaultItems>false</EnableDefaultItems>
   </PropertyGroup>
 
-  <!-- On .NET Core, Vector<T> is in System.Private.CoreLib -->
-  <ItemGroup Condition="'$(IsPlaceholderTargetFramework)' != 'true'">
-    <Compile Include="System\Numerics\ConstantHelper.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ConstantHelper.tt</DependentUpon>
-    </Compile>
-    <Compile Include="System\Numerics\Register.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Register.tt</DependentUpon>
-    </Compile>
-    <Compile Include="System\Numerics\Vector.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Vector.tt</DependentUpon>
-    </Compile>
-    <Compile Include="System\Numerics\Vector_Operations.cs" />
-  </ItemGroup>
-
-  <ItemGroup Condition="'$(IsPlaceholderTargetFramework)' != 'true'">
-    <None Include="System\Numerics\GenerationConfig.ttinclude" />
-    <Content Include="System\Numerics\ConstantHelper.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ConstantHelper.cs</LastGenOutput>
-    </Content>
-    <Content Include="System\Numerics\Register.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Register.cs</LastGenOutput>
-    </Content>
-    <Content Include="System\Numerics\Vector.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Vector.cs</LastGenOutput>
-    </Content>
-  </ItemGroup>
-
-  <ItemGroup Condition="'$(IsPlaceholderTargetFramework)' != 'true'">
-    <Compile Include="System\MathF.netstandard.cs" />
-    <Compile Include="System\Numerics\Hashing\HashHelpers.cs" />
-    <Compile Include="System\Runtime\CompilerServices\IntrinsicAttribute.cs" />
-  </ItemGroup>
-
-  <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
-    <Compile Include="System\Numerics\Matrix3x2.cs" />
-    <Compile Include="System\Numerics\Matrix4x4.cs" />
-    <Compile Include="System\Numerics\Plane.cs" />
-    <Compile Include="System\Numerics\Quaternion.cs" />
-    <Compile Include="System\Numerics\Vector2.cs" />
-    <Compile Include="System\Numerics\Vector2_Intrinsics.cs" />
-    <Compile Include="System\Numerics\Vector3.cs" />
-    <Compile Include="System\Numerics\Vector3_Intrinsics.cs" />
-    <Compile Include="System\Numerics\Vector4.cs" />
-    <Compile Include="System\Numerics\Vector4_Intrinsics.cs" />
-  </ItemGroup>
-
-  <ItemGroup Condition="'$(TargetFramework)' == '$(NetFrameworkMinimum)'">
-    <Compile Include="System.Numerics.Vectors.Forwards.cs" />
+  <ItemGroup>
+    <Compile Update="System\Numerics\ConstantHelper.cs"
+             AutoGen="True"
+             DesignTime="True"
+             DependentUpon="ConstantHelper.tt" />
+    <Compile Update="System\Numerics\Register.cs"
+             AutoGen="True"
+             DesignTime="True"
+             DependentUpon="Register.tt" />
+    <Compile Update="System\Numerics\Vector.cs"
+             AutoGen="True"
+             DesignTime="True"
+             DependentUpon="Vector.tt" />
   </ItemGroup>
 
   <ItemGroup>
-    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+    <None Update="System\Numerics\ConstantHelper.tt"
+          Generator="TextTemplatingFileGenerator"
+          LastGenOutput="ConstantHelper.cs" />
+    <None Update="System\Numerics\Register.tt"
+          Generator="TextTemplatingFileGenerator"
+          LastGenOutput="Register.cs" />
+    <None Update="System\Numerics\Vector.tt"
+          Generator="TextTemplatingFileGenerator"
+          LastGenOutput="Vector.cs" />
   </ItemGroup>
 
-  <ItemGroup Condition="'$(TargetFramework)' == '$(NetFrameworkMinimum)'">
-    <Reference Include="mscorlib" />
+  <!-- Type-foward to API that is inbox on .NET Framework. -->
+  <ItemGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework'">
+    <Compile Remove="System\Numerics\Matrix3x2.cs" />
+    <Compile Remove="System\Numerics\Matrix4x4.cs" />
+    <Compile Remove="System\Numerics\Plane.cs" />
+    <Compile Remove="System\Numerics\Quaternion.cs" />
+    <Compile Remove="System\Numerics\Vector2.cs" />
+    <Compile Remove="System\Numerics\Vector2_Intrinsics.cs" />
+    <Compile Remove="System\Numerics\Vector3.cs" />
+    <Compile Remove="System\Numerics\Vector3_Intrinsics.cs" />
+    <Compile Remove="System\Numerics\Vector4.cs" />
+    <Compile Remove="System\Numerics\Vector4_Intrinsics.cs" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFrameworkIdentifier)' != '.NETFramework'">
+    <Compile Remove="System.Numerics.Vectors.Forwards.cs" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework'">
     <Reference Include="System.Numerics" />
+  </ItemGroup>
+
+  <!-- Needed for the .tt and .ttinclude language integration. -->
+  <ItemGroup>
+    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
   </ItemGroup>
 
 </Project>
