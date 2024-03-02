@@ -15,7 +15,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Condition="'$(TargetFrameworkIdentifier)' != '.NETCoreApp'" Include="System.Runtime.CompilerServices.Unsafe" />
+    <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Condition="'$(IsPlaceholderTargetFramework)' != 'true'" />
   </ItemGroup>
 
 </Project>
