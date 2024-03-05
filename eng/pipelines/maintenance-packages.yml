@@ -111,7 +111,6 @@ stages:
       enablePublishUsingPipelines: false
       publishAssetsImmediately: false
       enablePublishTestResults: false
-      enableSourceIndex: ${{ and(eq(variables._RunAsInternal, True), eq(variables['Build.SourceBranch'], 'refs/heads/main')) }}
       workspace:
         clean: all
       jobs:
