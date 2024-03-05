@@ -120,16 +120,12 @@ stages:
           container: LinuxContainer
           pool:
             vmImage: ubuntu-latest
-          strategy:
-            matrix:
-              debug:
-                _BuildConfig: Release
           preSteps:
           - checkout: self
             clean: true
           steps:
           - script: eng/common/build.sh
-              --configuration $(_BuildConfig)
+              --configuration Release
               --restore
               --pack
               /p:IsPackable=true
