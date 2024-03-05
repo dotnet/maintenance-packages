@@ -127,8 +127,9 @@ stages:
           - script: eng/common/build.sh
               --configuration Release
               --restore
+              --build
               --pack
-              /p:SourceProjectIsPackable=true
+              /p:IsSourceProjectPackable=true
             displayName: $(_BuildJobDisplayName)
 
 - ${{ if eq(variables._RunAsInternal, True) }}:
