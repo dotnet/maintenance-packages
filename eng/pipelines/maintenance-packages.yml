@@ -73,7 +73,7 @@ stages:
             -prepareMachine
             $(_AdditionalBuildArgs)
             $(_InternalBuildArgs)
-          displayName: Restore & Pack
+          displayName: 'Restore and pack'
 
       - ${{ if eq(variables._RunAsPublic, True) }}:
         - job: linux
