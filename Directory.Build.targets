@@ -2,6 +2,7 @@
 
   <Import Project="$(RepositoryEngineeringDir)resources.targets" />
   <Import Project="Sdk.targets" Sdk="Microsoft.DotNet.Arcade.Sdk" />
+
   <Import Project="$(RepositoryEngineeringDir)testing\runsettings.targets" Condition="'$(IsTestProject)' == 'true'" />
   <Import Project="$(RepositoryEngineeringDir)placeholderpackaging.targets" Condition="'$(IsPlaceholderTargetFramework)' == 'true'" />
   <Import Project="$(RepositoryEngineeringDir)packaging.targets" Condition="'$(IsPackable)' == 'true'" />
@@ -28,7 +29,7 @@
 
   <ItemGroup Condition="'$(IsTestProject)' == 'true'">
     <PackageReference Include="Microsoft.DotNet.RemoteExecutor" />
-    <PackageReference Include="Microsoft.DotNet.XunitExtensions" />
+    <PackageReference Include="Microsoft.DotNet.XUnitExtensions" />
   </ItemGroup>
   
 </Project>

@@ -19,7 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Condition="$(TargetFramework) == 'netstandard2.0'" Include="System.Reflection.Emit" />
+    <PackageReference Include="System.Reflection.Emit" Condition="$(TargetFramework) == 'netstandard2.0'" />
   </ItemGroup>
 
 </Project>
