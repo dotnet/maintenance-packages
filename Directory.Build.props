@@ -14,7 +14,6 @@
     <AnalysisMode>Recommended</AnalysisMode>
     <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
     <DotNetUseShippingVersions>true</DotNetUseShippingVersions>
-    <IsSourceProjectPackable>false</IsSourceProjectPackable>
   </PropertyGroup>
 
 </Project>

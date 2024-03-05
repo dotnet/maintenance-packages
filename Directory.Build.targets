@@ -4,6 +4,13 @@
   <Import Project="Sdk.targets" Sdk="Microsoft.DotNet.Arcade.Sdk" />
   <Import Project="$(RepositoryEngineeringDir)testing\runsettings.targets" Condition="'$(IsTestProject)' == 'true'" />
   <Import Project="$(RepositoryEngineeringDir)placeholderpackaging.targets" Condition="'$(IsPlaceholderTargetFramework)' == 'true'" />
+
+  <PropertyGroup Condition="'$(IsTestProject)' != 'true' and '$(IsSourceProjectPackable)' == 'true'">
+    <!-- IsSourceProjectPackable is used in the CI packing leg to enable IsPackable only on source projects.
+         This needs to be evaluated before importing packaging.targets. -->
+    <IsPackable>true</IsPackable>
+  </PropertyGroup>
+
   <Import Project="$(RepositoryEngineeringDir)packaging.targets" Condition="'$(IsPackable)' == 'true'" />
 
   <!-- Default item exclude patterns -->
@@ -17,11 +24,6 @@
     <SkipTests Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework' and '$(OS)' != 'Windows_NT'">true</SkipTests>
     <!-- Unsafe code is required by PlatformDetection. -->
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(IsTestProject)' != 'true' and '$(IsSourceProjectPackable)' == 'true'">
-    <!-- IsSourceProjectPackable is used in the CI packing leg to enable IsPackable only on source projects. -->
-    <IsPackable>true</IsPackable>
   </PropertyGroup>
 
   <ItemGroup Condition="'$(IsTestProject)' == 'true'">

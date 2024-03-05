@@ -73,7 +73,7 @@ stages:
             -prepareMachine
             $(_AdditionalBuildArgs)
             $(_InternalBuildArgs)
-          displayName: $(_BuildJobDisplayName)
+          displayName: Restore & Pack
 
       - ${{ if eq(variables._RunAsPublic, True) }}:
         - job: linux
@@ -96,41 +96,21 @@ stages:
               $(_InternalBuildArgs)
             displayName: $(_BuildJobDisplayName)
 
-- stage: pack
-  displayName: Pack
-  dependsOn: [] # To run in parallel
-  jobs:
-  - template: /eng/common/templates/jobs/jobs.yml
-    parameters:
-      artifacts:
-        publish:
-          artifacts: false
-          logs: true
-          manifests: true
-      enableMicrobuild: true
-      enablePublishUsingPipelines: false
-      publishAssetsImmediately: false
-      enablePublishTestResults: false
-      workspace:
-        clean: all
-      jobs:
-      - ${{ if eq(variables._RunAsPublic, True) }}:
-        - job: linux
-          timeoutInMinutes: 60
-          container: LinuxContainer
-          pool:
-            vmImage: ubuntu-latest
-          preSteps:
-          - checkout: self
-            clean: true
-          steps:
-          - script: eng/common/build.sh
-              --configuration Release
-              --restore
-              --build
-              --pack
-              /p:IsSourceProjectPackable=true
-            displayName: $(_BuildJobDisplayName)
+      - job: pack-linux
+        timeoutInMinutes: 60
+        container: LinuxContainer
+        pool:
+          vmImage: ubuntu-latest
+        preSteps:
+        - checkout: self
+          clean: true
+        steps:
+        - script: eng/common/build.sh
+            --configuration Release
+            --restore
+            --pack
+            /p:IsSourceProjectPackable=true
+          displayName: $(_BuildJobDisplayName)
 
 - ${{ if eq(variables._RunAsInternal, True) }}:
   - template: /eng/common/templates/post-build/post-build.yml
