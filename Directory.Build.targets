@@ -19,6 +19,11 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(IsTestProject)' == 'false' and '$(SourceProjectIsPackable)' == 'true'">
+    <!-- SourceProjectIsPackable is used in the CI packing leg to enable IsPackable only on source projects. -->
+    <IsPackable>true</IsPackable>
+  </PropertyGroup>
+
   <ItemGroup Condition="'$(IsTestProject)' == 'true'">
     <Compile Include="$(CommonPath)tests\TestUtilities\System\AssertExtensions.cs" Link="Common\System\AssertExtensions.cs" />
     <Compile Include="$(CommonPath)tests\TestUtilities\System\PlatformDetection.cs" Link="Common\System\PlatformDetection.cs" />
@@ -30,5 +35,5 @@
     <PackageReference Include="Microsoft.DotNet.RemoteExecutor" />
     <PackageReference Include="Microsoft.DotNet.XunitExtensions" />
   </ItemGroup>
-  
+
 </Project>
