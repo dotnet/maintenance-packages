@@ -19,7 +19,7 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(IsTestProject)' == 'false' and '$(SourceProjectIsPackable)' == 'true'">
+  <PropertyGroup Condition="'$(IsTestProject)' != 'true' and '$(SourceProjectIsPackable)' == 'true'">
     <!-- SourceProjectIsPackable is used in the CI packing leg to enable IsPackable only on source projects. -->
     <IsPackable>true</IsPackable>
   </PropertyGroup>
