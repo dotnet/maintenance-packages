@@ -73,7 +73,7 @@ stages:
             -prepareMachine
             $(_AdditionalBuildArgs)
             $(_InternalBuildArgs)
-          displayName: 'Restore and pack'
+          displayName: $(_BuildJobDisplayName)
 
       - ${{ if eq(variables._RunAsPublic, True) }}:
         - job: linux
@@ -110,7 +110,7 @@ stages:
             --restore
             --pack
             /p:IsSourceProjectPackable=true
-          displayName: $(_BuildJobDisplayName)
+          displayName: 'Restore and pack'
 
 - ${{ if eq(variables._RunAsInternal, True) }}:
   - template: /eng/common/templates/post-build/post-build.yml
