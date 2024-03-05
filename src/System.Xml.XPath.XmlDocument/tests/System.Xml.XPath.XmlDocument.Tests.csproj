@@ -8,7 +8,7 @@
     <ProjectReference Include="..\src\System.Xml.XPath.XmlDocument.csproj" />
   </ItemGroup>
 
-  <ItemGroup Condition="'$(TargetFramework)' == '$(NetFrameworkMinimum)'">
+  <ItemGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework'">
     <PackageReference Include="System.Text.Encoding.CodePages" />
   </ItemGroup>
 

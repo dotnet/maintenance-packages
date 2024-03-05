@@ -1,8 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <!-- Using net48 because some APIs used in the tests are unavailable in net462 -->
-    <TargetFrameworks>$(NetMinimum);net48</TargetFrameworks>
+    <!-- Using NetFrameworkCurrent because some APIs used in the tests are unavailable in net462. -->
+    <TargetFrameworks>$(NetMinimum);$(NetFrameworkCurrent)</TargetFrameworks>
   </PropertyGroup>
 
   <ItemGroup>
