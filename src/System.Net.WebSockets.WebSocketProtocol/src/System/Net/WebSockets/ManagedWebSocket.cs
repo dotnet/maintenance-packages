@@ -328,10 +328,10 @@ namespace System.Net.WebSockets
             return CloseAsyncPrivate(closeStatus, statusDescription, cancellationToken);
         }
 
-        public override Task CloseOutputAsync(WebSocketCloseStatus renamedCloseStatus, string? statusDescription, CancellationToken cancellationToken)
+        public override Task CloseOutputAsync(WebSocketCloseStatus closeStatus, string? statusDescription, CancellationToken cancellationToken)
         {
-            WebSocketValidate.ValidateCloseStatus(renamedCloseStatus, statusDescription);
-            return CloseOutputAsyncCore(renamedCloseStatus, statusDescription, cancellationToken);
+            WebSocketValidate.ValidateCloseStatus(closeStatus, statusDescription);
+            return CloseOutputAsyncCore(closeStatus, statusDescription, cancellationToken);
         }
 
         private async Task CloseOutputAsyncCore(WebSocketCloseStatus closeStatus, string? statusDescription, CancellationToken cancellationToken)
