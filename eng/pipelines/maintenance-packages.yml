@@ -96,7 +96,7 @@ stages:
               $(_InternalBuildArgs)
             displayName: $(_BuildJobDisplayName)
 
-      - job: pack-linux
+      - job: pack_linux
         timeoutInMinutes: 60
         container: LinuxContainer
         pool:
@@ -110,7 +110,7 @@ stages:
             --restore
             --pack
             /p:IsSourceProjectPackable=true
-          displayName: $(_BuildJobDisplayName)
+          displayName: 'Restore and pack'
 
 - ${{ if eq(variables._RunAsInternal, True) }}:
   - template: /eng/common/templates/post-build/post-build.yml
