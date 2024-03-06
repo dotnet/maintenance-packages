@@ -110,7 +110,7 @@ stages:
             --restore
             --pack
             /p:IsSourceProjectPackable=true
-          displayName: 'Restore and pack'
+          displayName: $(_BuildJobDisplayName)
 
 - ${{ if eq(variables._RunAsInternal, True) }}:
   - template: /eng/common/templates/post-build/post-build.yml
