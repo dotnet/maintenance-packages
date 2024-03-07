@@ -33,7 +33,7 @@ resources:
 
 stages:
 - stage: build
-  displayName: Build
+  displayName: CI
   jobs:
   - template: /eng/common/templates/jobs/jobs.yml
     parameters:
@@ -51,7 +51,7 @@ stages:
       workspace:
         clean: all
       jobs:
-      - job: windows
+      - job: build windows
         timeoutInMinutes: 60
         pool:
           ${{ if eq(variables._RunAsPublic, True) }}:
@@ -76,7 +76,7 @@ stages:
           displayName: $(_BuildJobDisplayName)
 
       - ${{ if eq(variables._RunAsPublic, True) }}:
-        - job: linux
+        - job: build linux
           timeoutInMinutes: 60
           container: LinuxContainer
           pool:
@@ -96,17 +96,21 @@ stages:
               $(_InternalBuildArgs)
             displayName: $(_BuildJobDisplayName)
 
-      - job: pack_linux
+      - job: pack linux
         timeoutInMinutes: 60
         container: LinuxContainer
         pool:
           vmImage: ubuntu-latest
+        strategy:
+          matrix:
+            release:
+              _BuildConfig: Release
         preSteps:
         - checkout: self
           clean: true
         steps:
         - script: eng/common/build.sh
-            --configuration Release
+            --configuration $(_BuildConfig)
             --restore
             --pack
             /p:IsSourceProjectPackable=true
