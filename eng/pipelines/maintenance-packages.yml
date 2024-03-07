@@ -51,7 +51,7 @@ stages:
       workspace:
         clean: all
       jobs:
-      - job: build windows
+      - job: build_windows
         timeoutInMinutes: 60
         pool:
           ${{ if eq(variables._RunAsPublic, True) }}:
@@ -76,7 +76,7 @@ stages:
           displayName: $(_BuildJobDisplayName)
 
       - ${{ if eq(variables._RunAsPublic, True) }}:
-        - job: build linux
+        - job: build_linux
           timeoutInMinutes: 60
           container: LinuxContainer
           pool:
@@ -96,7 +96,7 @@ stages:
               $(_InternalBuildArgs)
             displayName: $(_BuildJobDisplayName)
 
-      - job: pack linux
+      - job: pack_linux
         timeoutInMinutes: 60
         container: LinuxContainer
         pool:
