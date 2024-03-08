@@ -8,6 +8,7 @@
     <DocumentationFile>$(MSBuildThisFileDirectory)System.Runtime.CompilerServices.Unsafe.xml</DocumentationFile>
     <IlasmFlags>$(IlasmFlags) -DEBUG=$(DebugOptimization)</IlasmFlags>
     <IsPackable>true</IsPackable>
+    <StrongNameKeyId>Microsoft</StrongNameKeyId>
     <PackageDescription>Provides the System.Runtime.CompilerServices.Unsafe class, which provides generic, low-level functionality for manipulating pointers.
 
 Commonly Used Types:
@@ -67,7 +68,7 @@ $(ExtraMacros)
   .publickeytoken = ($(_coreAssemblyPublicKeyToken) )
   .ver CORE_ASSEMBLY_VERSION
 }
- ]]>      
+ ]]>
       </_VersionFileContents>
     </PropertyGroup>
 
