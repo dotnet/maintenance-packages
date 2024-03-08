@@ -1,0 +1,43 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>$(NetFrameworkMinimum)</TargetFramework>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\src\System\MathF.netstandard.cs"
+             Link="System\MathF.netstandard.cs" />
+    <Compile Include="..\src\System\Numerics\ConstantHelper.cs"
+             DesignTime="True"
+             AutoGen="True"
+             DependentUpon="ConstantHelper.tt" />
+    <Compile Update="GenericVectorTests.cs"
+             DesignTime="True"
+             AutoGen="True"
+             DependentUpon="GenericVectorTests.tt" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <None Include="..\src\System\Numerics\ConstantHelper.tt"
+          Link="ConstantHelper.tt"
+          Generator="TextTemplatingFileGenerator"
+          LastGenOutput="ConstantHelper.cs" />
+    <None Include="..\src\System\Numerics\GenerationConfig.ttinclude"
+          Link="GenerationConfig.ttinclude" />
+    <None Update="GenericVectorTests.tt"
+          Generator="TextTemplatingFileGenerator"
+          LastGenOutput="GenericVectorTests.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <ProjectReference Include="..\src\System.Numerics.Vectors.csproj" />
+  </ItemGroup>
+
+  <!-- Needed for the .tt and .ttinclude language integration. -->
+  <ItemGroup>
+    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+  </ItemGroup>
+
+</Project>

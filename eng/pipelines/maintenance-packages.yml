@@ -33,7 +33,7 @@ resources:
 
 stages:
 - stage: build
-  displayName: Build
+  displayName: CI
   jobs:
   - template: /eng/common/templates/jobs/jobs.yml
     parameters:
@@ -51,7 +51,8 @@ stages:
       workspace:
         clean: all
       jobs:
-      - job: windows
+      - job: build_windows
+        displayName: 'Build Windows'
         timeoutInMinutes: 60
         pool:
           ${{ if eq(variables._RunAsPublic, True) }}:
@@ -76,7 +77,8 @@ stages:
           displayName: $(_BuildJobDisplayName)
 
       - ${{ if eq(variables._RunAsPublic, True) }}:
-        - job: linux
+        - job: build_linux
+          displayName: 'Build Linux'
           timeoutInMinutes: 60
           container: LinuxContainer
           pool:
@@ -95,6 +97,27 @@ stages:
               $(_AdditionalBuildArgs)
               $(_InternalBuildArgs)
             displayName: $(_BuildJobDisplayName)
+
+      - job: pack_linux
+        displayName: 'Pack Linux'
+        timeoutInMinutes: 60
+        container: LinuxContainer
+        pool:
+          vmImage: ubuntu-latest
+        strategy:
+          matrix:
+            release:
+              _BuildConfig: Release
+        preSteps:
+        - checkout: self
+          clean: true
+        steps:
+        - script: eng/common/build.sh
+            --configuration $(_BuildConfig)
+            --restore
+            --pack
+            /p:IsSourceProjectPackable=true
+          displayName: 'Restore and pack'
 
 - ${{ if eq(variables._RunAsInternal, True) }}:
   - template: /eng/common/templates/post-build/post-build.yml

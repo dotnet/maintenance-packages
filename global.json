@@ -5,10 +5,15 @@
     "rollForward": "major"
   },
   "tools": {
-    "dotnet": "8.0.101"
+    "dotnet": "8.0.101",
+    "runtimes": {
+      "dotnet": [
+        "6.0.27"
+      ]
+    }
   },
   "msbuild-sdks": {
-    "Microsoft.DotNet.Arcade.Sdk": "8.0.0-beta.24081.5",
+    "Microsoft.DotNet.Arcade.Sdk": "8.0.0-beta.24151.4",
     "Microsoft.Build.Traversal": "3.4.0"
   }
 }
