@@ -14,24 +14,28 @@
 Commonly Used Types:
 System.Runtime.CompilerServices.Unsafe</PackageDescription>
   </PropertyGroup>
+
   <PropertyGroup Condition="$([MSBuild]::GetTargetFrameworkIdentifier('$(TargetFramework)')) == '.NETCoreApp'">
     <ExtraMacros>#define netcoreapp</ExtraMacros>
     <CoreAssembly>System.Runtime</CoreAssembly>
   </PropertyGroup>
+
   <PropertyGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
     <CoreAssembly>netstandard</CoreAssembly>
   </PropertyGroup>
+
   <PropertyGroup Condition="'$(TargetFramework)' == 'net461'">
     <CoreAssembly>mscorlib</CoreAssembly>
     <ExtraMacros>#define $(TargetFramework)</ExtraMacros>
   </PropertyGroup>
+
   <ItemGroup>
     <Compile Include="System.Runtime.CompilerServices.Unsafe.il" />
   </ItemGroup>
+
   <ItemGroup>
     <!-- mscorlib is passed in as an explicit reference from C# targets but not via the IL SDK. -->
-    <Reference Include="$(CoreAssembly)"
-               Condition="'$(TargetFramework)' != 'netstandard2.0'" />
+    <Reference Include="$(CoreAssembly)" Condition="'$(TargetFramework)' != 'netstandard2.0'" />
   </ItemGroup>
 
   <Target Name="GenerateVersionFile"
@@ -91,4 +95,5 @@ $(ExtraMacros)
       <ILResourceReference Include="@(ResolvedMatchingContract)" />
     </ItemGroup>
   </Target>
+
 </Project>
