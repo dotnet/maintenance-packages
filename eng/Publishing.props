@@ -1,0 +1,6 @@
+<Project>
+  <Target Name="_AddFilePackagesToPublish" AfterTargets="Publish" Condition="'@(PackagesToPublish)' == ''">
+    <!-- Workaround: https://github.com/dotnet/arcade/issues/14594 -->
+    <Message Text="##vso[artifact.upload containerfolder=PackageArtifacts;artifactname=PackageArtifacts]$(MSBuildThisFileDirectory)_._" Importance="high" />
+  </Target>
+</Project>
