@@ -53,12 +53,11 @@ extends:
       jobs:
       - template: /eng/common/templates-official/jobs/jobs.yml@self
         parameters:
-          # log publish is broken, https://github.com/dotnet/dnceng/issues/2133
-          # artifacts:
-          #   publish:
-          #     artifacts: false
-          #     logs: true
-          #     manifests: true
+          artifacts:
+            publish:
+              artifacts: false
+              logs: true
+              manifests: true
           enableMicrobuild: true
           enablePublishUsingPipelines: true
           publishAssetsImmediately: true
