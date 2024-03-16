@@ -16,4 +16,10 @@
     <DotNetUseShippingVersions>true</DotNetUseShippingVersions>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(IsTestProject)' != 'true' and '$(IsSourceProjectPackable)' == 'true'">
+    <!-- IsSourceProjectPackable is used in the CI packing leg to enable IsPackable only on source projects.
+         This needs to be evaluated before importing the Arcade SDK and packaging.targets. -->
+    <IsPackable>true</IsPackable>
+  </PropertyGroup>
+
 </Project>
