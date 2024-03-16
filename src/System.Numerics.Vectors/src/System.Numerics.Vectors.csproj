@@ -4,7 +4,7 @@
     <TargetFrameworks>netcoreapp2.0;netstandard2.0;$(NetFrameworkMinimum)</TargetFrameworks>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <StrongNameKeyId>Microsoft</StrongNameKeyId>
-    <IsPackable>false</IsPackable>
+    <IsPackable Condition="'$(IsPackable)' == ''">false</IsPackable>
     <VersionPrefix>4.5.0</VersionPrefix>
     <VersionPrefix Condition="'$(IsPackable)' == 'true'">4.6.0</VersionPrefix>
     <AssemblyVersion>4.1.4.0</AssemblyVersion><!-- NO-INCREMENT: This version is frozen for .NET Standard and .NETCoreApp because the assembly ships inbox. -->
