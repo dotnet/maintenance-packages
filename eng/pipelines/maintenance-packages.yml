@@ -79,7 +79,7 @@ extends:
               fetchDepth: 0
               clean: true
             steps:
-            - script: eng\common\cibuild.cmd -configuration Release -prepareMachine $(_AdditionalBuildArgs) $(_InternalBuildArgs) /p:IsPackable=true
+            - script: eng\common\cibuild.cmd -configuration Release -prepareMachine $(_AdditionalBuildArgs) $(_InternalBuildArgs)
               displayName: $(_BuildJobDisplayName)
 
     - ${{ if eq(variables._RunAsInternal, True) }}:
