@@ -112,11 +112,12 @@ stages:
         - checkout: self
           clean: true
         steps:
-        - script: eng/common/build.sh
+        - script: eng/common/cibuild.sh
             --configuration $(_BuildConfig)
-            --restore
-            --pack
-            /p:IsSourceProjectPackable=true
+            --prepareMachine
+            /p:IsPackable=true
+            $(_AdditionalBuildArgs)
+            $(_InternalBuildArgs)
           displayName: 'Restore and pack'
 
 - ${{ if eq(variables._RunAsInternal, True) }}:
