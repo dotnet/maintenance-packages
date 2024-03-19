@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.Build.Traversal" InitialTargets="MyMessage">
+<Project Sdk="Microsoft.Build.Traversal">
 
   <ItemGroup>
     <ProjectReference Include="src/**/*.csproj" />
