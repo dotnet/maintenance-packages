@@ -115,11 +115,11 @@ stages:
         - script: eng/common/cibuild.sh
             --configuration $(_BuildConfig)
             --prepareMachine
-            /p:Test=false
+            /p:SkipTests=true
             /p:IsPackable=true
             $(_AdditionalBuildArgs)
             $(_InternalBuildArgs)
-          displayName: 'Restore and pack'
+          displayName: 'Build and pack'
 
 - ${{ if eq(variables._RunAsInternal, True) }}:
   - template: /eng/common/templates/post-build/post-build.yml

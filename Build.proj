@@ -2,7 +2,7 @@
 
   <ItemGroup>
     <ProjectReference Include="src/**/*.csproj" />
-    <ProjectReference Condition="'$(Test)' == 'false'" Remove="src/*/tests/*.csproj" />
+    <ProjectReference Condition="'$(SkipTests)' == 'true'" Remove="src/*/tests/*.csproj" />
   </ItemGroup>
 
 </Project>
