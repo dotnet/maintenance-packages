@@ -1,0 +1,8 @@
+<Project Sdk="Microsoft.Build.Traversal" InitialTargets="MyMessage">
+
+  <ItemGroup>
+    <ProjectReference Include="src/**/*.csproj" />
+    <ProjectReference Condition="'$(Test)' == 'false'" Remove="src/*/tests/*.csproj" />
+  </ItemGroup>
+
+</Project>

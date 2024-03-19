@@ -5,7 +5,7 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <StrongNameKeyId>Open</StrongNameKeyId>
     <Nullable>enable</Nullable>
-    <IsPackable Condition="'$(IsPackable)' == ''">false</IsPackable>
+    <IsPackable>false</IsPackable>
     <VersionPrefix>1.1.1</VersionPrefix>
     <VersionPrefix Condition="'$(IsPackable)' == 'true'">1.2.0</VersionPrefix>
     <PackageValidationBaselineVersion>1.1.1</PackageValidationBaselineVersion>
