@@ -4,5 +4,4 @@
     <ProjectToBuild Include="$(RepoRoot)Build.proj" />
   </ItemGroup>
 
-
 </Project>
