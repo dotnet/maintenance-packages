@@ -19,4 +19,8 @@
       <GeneratePlatformNotSupportedAssemblyMessage Condition="'$(TargetPlatformIdentifier)' != 'windows'">SR.PlatformNotSupported_System_Data_SqlClient</GeneratePlatformNotSupportedAssemblyMessage>
     </PropertyGroup>
 
+    <ItemGroup Condition="'$(TargetPlatformIdentifier)' == 'windows'">
+      <Compile Remove="TemporaryUnixType.cs" />
+    </ItemGroup>
+
   </Project>
