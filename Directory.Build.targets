@@ -1,13 +1,6 @@
 <Project>
 
   <Import Project="$(RepositoryEngineeringDir)resources.targets" />
-
-  <PropertyGroup Condition="'$(IsTestProject)' != 'true' and '$(IsSourceProjectPackable)' == 'true'">
-    <!-- IsSourceProjectPackable is used in the CI packing leg to enable IsPackable only on source projects.
-         This needs to be evaluated before importing the Arcade SDK and packaging.targets. -->
-    <IsPackable>true</IsPackable>
-  </PropertyGroup>
-
   <Import Project="Sdk.targets" Sdk="Microsoft.DotNet.Arcade.Sdk" />
   <Import Project="$(RepositoryEngineeringDir)testing\runsettings.targets" Condition="'$(IsTestProject)' == 'true'" />
   <Import Project="$(RepositoryEngineeringDir)placeholderpackaging.targets" Condition="'$(IsPlaceholderTargetFramework)' == 'true'" />
