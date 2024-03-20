@@ -5,6 +5,7 @@
     <PlaceholderFile>$(MSBuildThisFileDirectory)_._</PlaceholderFile>
     <BeforePack>$(BeforePack);AddNETStandardCompatErrorFileForPackaging</BeforePack>
     <PackageReadmeFile Condition="'$(PackageReadmeFile)' == '' and Exists('PACKAGE.md')">PACKAGE.md</PackageReadmeFile>
+    <TargetsForTfmSpecificContentInPackage>$(TargetsForTfmSpecificContentInPackage);AddRuntimeSpecificFilesToPackage;IncludeProjectReferencesWithPackAttributeInPackage</TargetsForTfmSpecificContentInPackage>
   </PropertyGroup>
 
   <!-- Exclude TFMs that are out-of-support. -->
@@ -87,6 +88,69 @@
             Pack="true"
             Condition="'@(_PackageBuildFile)' == '' or
                        !@(_PackageBuildFile->AnyHaveMetadataValue('PackagePathWithoutFilename', '$(_NETStandardCompatErrorPlaceholderFilePackagePath)'))" />
+    </ItemGroup>
+  </Target>
+
+  <!-- Add runtime specific file into the package if the tfm is RID specific. -->
+  <Target Name="AddRuntimeSpecificFilesToPackage"
+          DependsOnTargets="BuiltProjectOutputGroup;
+                            DocumentationProjectOutputGroup;
+                            SatelliteDllsProjectOutputGroup;
+                            $(TargetsForTfmSpecificBuildOutput)"
+          Condition="'$(PackageUsePlatformTargeting)' != 'true' and
+                     '$(TargetFrameworkIdentifier)' == '.NETCoreApp' and
+                     '$(TargetPlatformIdentifier)' != ''">
+    <PropertyGroup>
+      <RuntimeSymbolPath>$(TargetDir)$(TargetName).pdb</RuntimeSymbolPath>
+      <_packageTargetRuntime>$(TargetPlatformIdentifier.ToLowerInvariant().Replace('windows', 'win'))</_packageTargetRuntime>
+      <_targetFrameworkWithoutSuffix>$(TargetFramework)</_targetFrameworkWithoutSuffix>
+      <_targetFrameworkWithoutSuffix Condition="$(TargetFramework.Contains('-'))">$(TargetFramework.SubString(0, $(TargetFramework.IndexOf('-'))))</_targetFrameworkWithoutSuffix>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <TfmRuntimeSpecificPackageFile Include="@(SatelliteDllsProjectOutputGroupOutput);
+                                              @(BuiltProjectOutputGroupOutput);
+                                              @(DocumentationProjectOutputGroupOutput)" />
+      <TfmSpecificPackageFile Include="@(TfmRuntimeSpecificPackageFile)"
+                              PackagePath="runtimes\$(_packageTargetRuntime)\$(BuildOutputTargetFolder)\$(_targetFrameworkWithoutSuffix)\" />
+      <!-- Create the item and use its metadata separately to avoid MSB4120. See https://aka.ms/msbuild/metadata-self-ref for more info. -->
+      <_RuntimeSymbolPath Include="$(RuntimeSymbolPath)" />
+      <TfmSpecificDebugSymbolsFile Include="@(_RuntimeSymbolPath)"
+                                   TargetPath="/runtimes/$(_packageTargetRuntime)/$(BuildOutputTargetFolder)/$(_targetFrameworkWithoutSuffix)/%(_RuntimeSymbolPath.Filename)%(_RuntimeSymbolPath.Extension)"
+                                   TargetFramework="$(_targetFrameworkWithoutSuffix)"
+                                   Condition="'$(IncludeSymbols)' == 'true' and Exists('%(_RuntimeSymbolPath.Identity)')" />
+    </ItemGroup>
+  </Target>
+
+  <Target Name="IncludeProjectReferencesWithPackAttributeInPackage"
+          Condition="'@(ProjectReference)' != '' and @(ProjectReference->AnyHaveMetadataValue('Pack', 'true'))"
+          DependsOnTargets="BuildOnlySettings;ResolveReferences">
+    <PropertyGroup>
+      <_referringTargetFramework>$(TargetFramework)</_referringTargetFramework>
+      <_referringTargetFramework Condition="'$(PackageUsePlatformTargeting)' != 'true' and $(TargetFramework.Contains('-'))">$(TargetFramework.SubString(0, $(TargetFramework.IndexOf('-'))))</_referringTargetFramework>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <!-- Add ReferenceCopyLocalPaths for ProjectReferences which are flagged as Pack="true" into the package. -->
+      <_projectReferenceCopyLocalPaths Include="@(ReferenceCopyLocalPaths->WithMetadataValue('ReferenceSourceTarget', 'ProjectReference')->WithMetadataValue('Pack', 'true'))" />
+      <TfmSpecificPackageFile Include="@(_projectReferenceCopyLocalPaths)"
+                              PackagePath="$([MSBuild]::ValueOrDefault('%(ReferenceCopyLocalPaths.PackagePath)', '$(BuildOutputTargetFolder)\$(_referringTargetFramework)\'))" />
+      <TfmSpecificDebugSymbolsFile Include="@(TfmSpecificPackageFile->WithMetadataValue('Extension', '.pdb'))"
+                                   TargetPath="/%(TfmSpecificPackageFile.PackagePath)/%(Filename)%(Extension)"
+                                   TargetFramework="$(_referringTargetFramework)"
+                                   Condition="'$(IncludeSymbols)' == 'true'" />
+      <!-- Remove symbol from the non symbol package. -->
+      <TfmSpecificPackageFile Remove="@(TfmSpecificPackageFile->WithMetadataValue('Extension', '.pdb'))" />
+      <!-- If the reference assembly is included, don't put the documentation file next to the lib assembly. -->
+      <TfmSpecificPackageFile Remove="@(_projectReferenceCopyLocalPaths->WithMetadataValue('Extension', '.xml')->WithMetadataValue('IncludeReferenceAssemblyInPackage', 'true'))" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <!-- Include the reference assembly and put the documentation file next to it. -->
+      <_referenceAssemblyPaths Include="@(_projectReferenceCopyLocalPaths->WithMetadataValue('Extension', '.dll')->WithMetadataValue('IncludeReferenceAssemblyInPackage', 'true')->Metadata('ReferenceAssembly'))" />
+      <_referenceAssemblyPaths Include="@(_projectReferenceCopyLocalPaths->WithMetadataValue('Extension', '.xml')->WithMetadataValue('IncludeReferenceAssemblyInPackage', 'true'))" />
+      <TfmSpecificPackageFile Include="@(_referenceAssemblyPaths)"
+                              PackagePath="ref\$(_referringTargetFramework)\" />
     </ItemGroup>
   </Target>
 
