@@ -11,6 +11,7 @@
       <AssemblyVersion Condition="$([MSBuild]::GetTargetFrameworkIdentifier('$(TargetFramework)')) == '.NETFramework'">4.6.1.6</AssemblyVersion>
       <AssemblyVersion Condition="'$(IsPackable)' == 'true' and $([MSBuild]::GetTargetFrameworkIdentifier('$(TargetFramework)')) == '.NETFramework'">4.6.2.0</AssemblyVersion>
       <PackageValidationBaselineVersion>4.8.6</PackageValidationBaselineVersion>
+      <UseTargetFrameworkPackage>true</UseTargetFrameworkPackage>
     </PropertyGroup>
 
     <!-- DesignTimeBuild requires all the TargetFramework Derived Properties to not be present in the first property group. -->

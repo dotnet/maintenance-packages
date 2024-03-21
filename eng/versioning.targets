@@ -1,8 +1,0 @@
-<Project>
-
-  <ItemGroup>
-    <SupportedPlatform Condition="'$(TargetPlatformIdentifier)' != '' and
-                                  '$(TargetPlatformIdentifier)' != 'windows'" Include="unix" />
-  </ItemGroup>
-
-</Project>

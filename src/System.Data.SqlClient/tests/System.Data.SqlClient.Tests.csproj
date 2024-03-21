@@ -2,6 +2,7 @@
 
     <PropertyGroup>
       <TargetFrameworks>$(NetMinimum);$(NetMinimum)-unix;$(NetMinimum)-windows;$(NetFrameworkMinimum)</TargetFrameworks>
+      <UseTargetFrameworkPackage>true</UseTargetFrameworkPackage>
     </PropertyGroup>
 
     <ItemGroup Condition="'$(TargetPlatformIdentifier)' == 'windows'">

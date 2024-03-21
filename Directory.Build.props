@@ -14,9 +14,12 @@
     <AnalysisMode>Recommended</AnalysisMode>
     <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
     <DotNetUseShippingVersions>true</DotNetUseShippingVersions>
-    <RestoreUseStaticGraphEvaluation>true</RestoreUseStaticGraphEvaluation>
     <BeforeTargetFrameworkInferenceTargets>$(RepositoryEngineeringDir)BeforeTargetFrameworkInference.targets</BeforeTargetFrameworkInferenceTargets>
-    <NETCoreAppMaximumVersion>$(MajorVersion).$(MinorVersion)</NETCoreAppMaximumVersion>
   </PropertyGroup>
+
+  <ItemGroup>
+    <SupportedPlatform Condition="'$(TargetPlatformIdentifier)' != '' and
+                                  '$(TargetPlatformIdentifier)' != 'windows'" Include="unix" />
+  </ItemGroup>
 
 </Project>

@@ -11,7 +11,6 @@
   <Import Project="Sdk.targets" Sdk="Microsoft.DotNet.Arcade.Sdk" />
   <Import Project="$(RepositoryEngineeringDir)testing\runsettings.targets" Condition="'$(IsTestProject)' == 'true'" />
   <Import Project="$(RepositoryEngineeringDir)placeholderpackaging.targets" Condition="'$(IsPlaceholderTargetFramework)' == 'true'" />
-  <Import Project="$(RepositoryEngineeringDir)versioning.targets" />
   <Import Project="$(RepositoryEngineeringDir)packaging.targets" Condition="'$(IsPackable)' == 'true'" />
 
   <!-- Default item exclude patterns -->
@@ -39,7 +38,7 @@
     <PackageReference Include="Microsoft.DotNet.XUnitExtensions" />
   </ItemGroup>
 
-  <ItemGroup Condition="'$(UseTargetFrameworkPackage)' != 'false'">
+  <ItemGroup Condition="'$(UseTargetFrameworkPackage)' == 'true'">
     <PackageReference Include="Microsoft.DotNet.Build.Tasks.TargetFramework" Version="$(MicrosoftDotNetBuildTasksTargetFrameworkVersion)" PrivateAssets="all" IsImplicitlyDefined="true" />
   </ItemGroup>
 
