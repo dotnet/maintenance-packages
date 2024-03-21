@@ -19,4 +19,8 @@
     <TargetPlatformVersion>1.0</TargetPlatformVersion>
   </PropertyGroup>
 
+  <ItemGroup>
+    <SupportedPlatform Include="$(_targetPlatformIdentifier)" />
+  </ItemGroup>
+
 </Project>

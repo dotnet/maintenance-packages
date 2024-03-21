@@ -17,9 +17,4 @@
     <BeforeTargetFrameworkInferenceTargets>$(RepositoryEngineeringDir)BeforeTargetFrameworkInference.targets</BeforeTargetFrameworkInferenceTargets>
   </PropertyGroup>
 
-  <ItemGroup>
-    <SupportedPlatform Condition="'$(TargetPlatformIdentifier)' != '' and
-                                  '$(TargetPlatformIdentifier)' != 'windows'" Include="unix" />
-  </ItemGroup>
-
 </Project>
