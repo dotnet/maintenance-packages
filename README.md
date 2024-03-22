@@ -4,6 +4,11 @@
 
 This project hosts different packages from the .NET Platform whose original home/branch is not building any longer. The main purpose of it is to be able to have a servicing vehicle for them which uses the latest toolset.
 
+## Package support policy
+
+This repo follows the [.NET Release policies](https://github.com/dotnet/core/blob/main/release-policies.md) document for release, servicing and support rules.
+For additional, specific rules that belong to this repo, please consult [Package support policy for maintenance-packages](package-support-policy.md).
+
 ## Project FAQ
 
 - How do I know if a particular package belongs on this repo?
