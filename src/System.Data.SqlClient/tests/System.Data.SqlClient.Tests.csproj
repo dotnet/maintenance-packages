@@ -5,10 +5,6 @@
       <UseTargetFrameworkPackage>true</UseTargetFrameworkPackage>
     </PropertyGroup>
 
-    <ItemGroup Condition="'$(TargetPlatformIdentifier)' == 'windows'">
-      <Compile Remove="TempUnixTests.cs" />
-    </ItemGroup>
-
     <ItemGroup>
       <ProjectReference Include="..\src\System.Data.SqlClient.csproj" />
     </ItemGroup>
