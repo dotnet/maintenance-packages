@@ -1,0 +1,127 @@
+trigger:
+  batch: true
+  branches:
+    include:
+    - main
+    - release/*
+
+pr:
+  branches:
+    include:
+    - main
+    - release/*
+
+variables:
+- template: /eng/pipelines/common-variables.yml
+- template: /eng/common/templates/variables/pool-providers.yml
+
+- ${{ if eq(variables['_RunAsPublic'], 'true') }}:
+  - name: _AdditionalBuildArgs
+    value: ''
+  - name: _BuildJobDisplayName
+    value: 'Build and Test'
+- ${{ else }}:
+  - name: _AdditionalBuildArgs
+    value: '/p:Test=false'
+  - name: _BuildJobDisplayName
+    value: 'Build, Sign and Publish'
+
+resources:
+  containers:
+  - container: LinuxContainer
+    image: mcr.microsoft.com/dotnet-buildtools/prereqs:cbl-mariner-2.0-fpm
+
+stages:
+- stage: build
+  displayName: CI
+  jobs:
+  - template: /eng/common/templates/jobs/jobs.yml
+    parameters:
+      artifacts:
+        publish:
+          artifacts: false
+          logs: true
+          manifests: true
+      enableMicrobuild: true
+      enablePublishUsingPipelines: true
+      publishAssetsImmediately: true
+      enablePublishTestResults: true
+      testResultsFormat: vstest
+      enableSourceIndex: ${{ and(eq(variables._RunAsInternal, True), eq(variables['Build.SourceBranch'], 'refs/heads/main')) }}
+      workspace:
+        clean: all
+      jobs:
+      - job: build_windows
+        displayName: 'Build Windows'
+        timeoutInMinutes: 60
+        pool:
+          ${{ if eq(variables._RunAsPublic, True) }}:
+            vmImage: windows-latest
+          ${{ if eq(variables._RunAsInternal, True) }}:
+            name: $(DncEngInternalBuildPool)
+            demands: ImageOverride -equals 1es-windows-2022
+        strategy:
+          matrix:
+            release:
+              _BuildConfig: Release
+        preSteps:
+        - checkout: self
+          fetchDepth: 0
+          clean: true
+        steps:
+        - script: eng\common\cibuild.cmd
+            -configuration $(_BuildConfig)
+            -prepareMachine
+            $(_AdditionalBuildArgs)
+            $(_InternalBuildArgs)
+          displayName: $(_BuildJobDisplayName)
+
+      - ${{ if eq(variables._RunAsPublic, True) }}:
+        - job: build_linux
+          displayName: 'Build Linux'
+          timeoutInMinutes: 60
+          container: LinuxContainer
+          pool:
+            vmImage: ubuntu-latest
+          strategy:
+            matrix:
+              debug:
+                _BuildConfig: Debug
+          preSteps:
+          - checkout: self
+            clean: true
+          steps:
+          - script: eng/common/cibuild.sh
+              --configuration $(_BuildConfig)
+              --prepareMachine
+              $(_AdditionalBuildArgs)
+              $(_InternalBuildArgs)
+            displayName: $(_BuildJobDisplayName)
+
+      - job: pack_linux
+        displayName: 'Pack Linux'
+        timeoutInMinutes: 60
+        container: LinuxContainer
+        pool:
+          vmImage: ubuntu-latest
+        strategy:
+          matrix:
+            release:
+              _BuildConfig: Release
+        preSteps:
+        - checkout: self
+          clean: true
+        steps:
+        - script: eng/common/cibuild.sh
+            --configuration $(_BuildConfig)
+            --prepareMachine
+            /p:SkipTests=true
+            /p:IsPackable=true
+            $(_AdditionalBuildArgs)
+            $(_InternalBuildArgs)
+          displayName: 'Build and pack'
+
+- ${{ if eq(variables._RunAsInternal, True) }}:
+  - template: /eng/common/templates/post-build/post-build.yml
+    parameters:
+      publishAssetsImmediately: true
