@@ -1,37 +1,29 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.IL">
+
   <PropertyGroup>
-    <TargetFrameworks>$(NetCoreAppCurrent);netcoreapp3.1;netstandard2.0;net461</TargetFrameworks>
+    <TargetFrameworks>$(NetFrameworkMinimum);netstandard2.0</TargetFrameworks>
+    <StrongNameKeyId>Microsoft</StrongNameKeyId>
+    <IsPackable>true</IsPackable>
     <!-- Make sure that the DebuggableAttribute is set properly. -->
     <DebugOptimization>IMPL</DebugOptimization>
     <DebugOptimization Condition="'$(Configuration)' == 'Release'">OPT</DebugOptimization>
     <CoreCompileDependsOn>$(CoreCompileDependsOn);GenerateVersionFile</CoreCompileDependsOn>
     <DocumentationFile>$(MSBuildThisFileDirectory)System.Runtime.CompilerServices.Unsafe.xml</DocumentationFile>
     <IlasmFlags>$(IlasmFlags) -DEBUG=$(DebugOptimization)</IlasmFlags>
-    <IsPackable>true</IsPackable>
-    <StrongNameKeyId>Microsoft</StrongNameKeyId>
     <PackageDescription>Provides the System.Runtime.CompilerServices.Unsafe class, which provides generic, low-level functionality for manipulating pointers.
 
 Commonly Used Types:
 System.Runtime.CompilerServices.Unsafe</PackageDescription>
   </PropertyGroup>
 
-  <PropertyGroup Condition="$([MSBuild]::GetTargetFrameworkIdentifier('$(TargetFramework)')) == '.NETCoreApp'">
-    <ExtraMacros>#define netcoreapp</ExtraMacros>
-    <CoreAssembly>System.Runtime</CoreAssembly>
-  </PropertyGroup>
-
   <PropertyGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
     <CoreAssembly>netstandard</CoreAssembly>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(TargetFramework)' == 'net461'">
+  <PropertyGroup Condition="'$(TargetFramework)' == '$(NetFrameworkMinimum)'">
     <CoreAssembly>mscorlib</CoreAssembly>
     <ExtraMacros>#define $(TargetFramework)</ExtraMacros>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Compile Include="System.Runtime.CompilerServices.Unsafe.il" />
-  </ItemGroup>
 
   <ItemGroup>
     <!-- mscorlib is passed in as an explicit reference from C# targets but not via the IL SDK. -->
