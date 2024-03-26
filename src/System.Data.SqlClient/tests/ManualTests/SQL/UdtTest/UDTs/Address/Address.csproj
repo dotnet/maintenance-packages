@@ -1,0 +1,6 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <ProjectGuid>{D1392B54-998A-4F27-BC17-4CE149117BCC}</ProjectGuid>
+    <TargetFramework>$(NetFrameworkMinimum)</TargetFramework>
+  </PropertyGroup>
+</Project>
