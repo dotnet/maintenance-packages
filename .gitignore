@@ -190,3 +190,6 @@ Session.vim
 
 # VS debug support files
 launchSettings.json
+
+# Live Unit Testing config file
+*.lutconfig
