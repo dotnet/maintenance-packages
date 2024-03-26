@@ -9,7 +9,7 @@ namespace System
 {
     public static class AssertExtensions
     {
-        private static bool IsNetFramework => RuntimeInformation.FrameworkDescription.StartsWith(".NET Framework");
+        private static bool IsNetFramework => RuntimeInformation.FrameworkDescription.StartsWith(".NET Framework", StringComparison.OrdinalIgnoreCase);
 
         public static void Throws<T>(Action action, string expectedMessage)
             where T : Exception
