@@ -35,4 +35,14 @@
     <PackageReference Include="Microsoft.DotNet.Build.Tasks.TargetFramework" PrivateAssets="all" />
   </ItemGroup>
 
+  <!-- This workaround prevents the execution of the RunTests target even when SkipTests is set to true.
+  It can be removed after this bug is fixed: https://github.com/dotnet/arcade/pull/14665 -->
+  <Target Name="_SetSkipTests" AfterTargets="_OuterGetTestsToRun">
+
+    <PropertyGroup>
+      <SkipTests Condition="'@(TestToRun)' == ''">true</SkipTests>
+    </PropertyGroup>
+
+  </Target>
+
 </Project>
