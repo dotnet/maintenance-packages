@@ -19,6 +19,9 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
 
+  <!-- The VSTest target is not bound by any conditions, needs to be overriden when we want to skip tests. -->
+  <Import Project="$(RepositoryEngineeringDir)testing\skiptests.targets" Condition="'$(IsTestProject)' == 'true' and '$(SkipTests)' == 'true'" />
+
   <ItemGroup Condition="'$(IsTestProject)' == 'true'">
     <Compile Include="$(CommonPath)tests\TestUtilities\System\AssertExtensions.cs" Link="Common\System\AssertExtensions.cs" />
     <Compile Include="$(CommonPath)tests\TestUtilities\System\PlatformDetection.cs" Link="Common\System\PlatformDetection.cs" />
