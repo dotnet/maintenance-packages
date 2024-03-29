@@ -10,7 +10,6 @@ Additionally, you can find out which target frameworks are currently in-support 
 
 - .NET: https://dotnet.microsoft.com/en-us/platform/support/policy
 - .NET Framework: https://dotnet.microsoft.com/en-us/learn/dotnet/what-is-dotnet-framework
-- .NET Standard: https://learn.microsoft.com/en-us/dotnet/standard/net-standard
 
 Keep in mind that the minimum .NET Standard version supported by a package depends on which minimum .NET and .NET Framework versions are supported by the package. Packages and projects targeting .NET Standard are expected to be compatible between each other by following the same rules specified by our .NET Standard policy.
 
@@ -91,7 +90,6 @@ These packages contain no code.
 | Microsoft.NETCore.Platforms.Future | 3.1                  |
 | Microsoft.NETCore.Targets          | 5.0                  |
 | Microsoft.NETCore.Platforms        | 7.0                  |
-| Microsoft.Windows.Compatibility    | 8.0                  |
 
 ### PlatformNotSupportedException
 
@@ -253,109 +251,6 @@ These packages are an unsupported OOB version of a component that became in-box:
 
 | Package                                                      | Last shipped release |
 |--------------------------------------------------------------|----------------------|
-| Microsoft.Bcl.AsyncInterfaces                                | 8.0                  |
-| Microsoft.Bcl.Cryptography                                   | 8.0                  |
-| Microsoft.DotNet.ILCompiler                                  | 8.0                  |
-| Microsoft.Extensions.Caching.Abstractions                    | 8.0                  |
-| Microsoft.Extensions.Caching.Memory                          | 8.0                  |
-| Microsoft.Extensions.Configuration                           | 8.0                  |
-| Microsoft.Extensions.Configuration.Abstractions              | 8.0                  |
-| Microsoft.Extensions.Configuration.Binder                    | 8.0                  |
-| Microsoft.Extensions.Configuration.CommandLine               | 8.0                  |
-| Microsoft.Extensions.Configuration.EnvironmentVariables      | 8.0                  |
-| Microsoft.Extensions.Configuration.FileExtensions            | 8.0                  |
-| Microsoft.Extensions.Configuration.Ini                       | 8.0                  |
-| Microsoft.Extensions.Configuration.Json                      | 8.0                  |
-| Microsoft.Extensions.Configuration.UserSecrets               | 8.0                  |
-| Microsoft.Extensions.Configuration.Xml                       | 8.0                  |
-| Microsoft.Extensions.DependencyInjection                     | 8.0                  |
-| Microsoft.Extensions.DependencyInjection.Abstractions        | 8.0                  |
-| Microsoft.Extensions.DependencyInjection.Specification.Tests | 8.0                  |
-| Microsoft.Extensions.DependencyModel                         | 8.0                  |
-| Microsoft.Extensions.FileProviders.Abstractions              | 8.0                  |
-| Microsoft.Extensions.FileProviders.Composite                 | 8.0                  |
-| Microsoft.Extensions.FileProviders.Physical                  | 8.0                  |
-| Microsoft.Extensions.FileSystemGlobbing                      | 8.0                  |
-| Microsoft.Extensions.Hosting                                 | 8.0                  |
-| Microsoft.Extensions.Hosting.Abstractions                    | 8.0                  |
-| Microsoft.Extensions.Hosting.Systemd                         | 8.0                  |
-| Microsoft.Extensions.Hosting.WindowsServices                 | 8.0                  |
-| Microsoft.Extensions.Http                                    | 8.0                  |
-| Microsoft.Extensions.Logging                                 | 8.0                  |
-| Microsoft.Extensions.Logging.Abstractions                    | 8.0                  |
-| Microsoft.Extensions.Logging.Configuration                   | 8.0                  |
-| Microsoft.Extensions.Logging.Console                         | 8.0                  |
-| Microsoft.Extensions.Logging.Debug                           | 8.0                  |
-| Microsoft.Extensions.Logging.EventLog                        | 8.0                  |
-| Microsoft.Extensions.Logging.EventSource                     | 8.0                  |
-| Microsoft.Extensions.Logging.TraceSource                     | 8.0                  |
-| Microsoft.Extensions.Options                                 | 8.0                  |
-| Microsoft.Extensions.Options.ConfigurationExtensions         | 8.0                  |
-| Microsoft.Extensions.Options.DataAnnotations                 | 8.0                  |
-| Microsoft.Extensions.Primitives                              | 8.0                  |
-| Microsoft.ILVerification                                     | 8.0                  |
-| Microsoft.NET.ILLink                                         | 8.0                  |
-| Microsoft.NET.ILLink.Tasks                                   | 8.0                  |
-| Microsoft.NET.Sdk.IL                                         | 8.0                  |
-| Microsoft.NET.WebAssembly.Threading                          | 8.0                  |
-| Microsoft.NETCore.ILAsm                                      | 8.0                  |
-| Microsoft.NETCore.ILDAsm                                     | 8.0                  |
-| Microsoft.Win32.Registry.AccessControl                       | 8.0                  |
-| Microsoft.Win32.SystemEvents                                 | 8.0                  |
-| Microsoft.XmlSerializer.Generator                            | 8.0                  |
-| System.CodeDom                                               | 8.0                  |
-| System.Collections.Immutable                                 | 8.0                  |
-| System.ComponentModel.Composition                            | 8.0                  |
-| System.ComponentModel.Composition.Registration               | 8.0                  |
-| System.Composition                                           | 8.0                  |
-| System.Composition.AttributedModel                           | 8.0                  |
-| System.Composition.Convention                                | 8.0                  |
-| System.Composition.Hosting                                   | 8.0                  |
-| System.Composition.Runtime                                   | 8.0                  |
-| System.Composition.TypedParts                                | 8.0                  |
-| System.Configuration.ConfigurationManager                    | 8.0                  |
-| System.Data.Odbc                                             | 8.0                  |
-| System.Data.OleDb                                            | 8.0                  |
-| System.Diagnostics.DiagnosticSource                          | 8.0                  |
-| System.Diagnostics.EventLog                                  | 8.0                  |
-| System.Diagnostics.PerformanceCounter                        | 8.0                  |
-| System.DirectoryServices                                     | 8.0                  |
-| System.DirectoryServices.AccountManagement                   | 8.0                  |
-| System.DirectoryServices.Protocols                           | 8.0                  |
-| System.Drawing.Common                                        | 8.0                  |
-| System.Formats.Asn1                                          | 8.0                  |
-| System.Formats.Cbor                                          | 8.0                  |
-| System.IO.Hashing                                            | 8.0                  |
-| System.IO.Packaging                                          | 8.0                  |
-| System.IO.Pipelines                                          | 8.0                  |
-| System.IO.Ports                                              | 8.0                  |
-| System.Management                                            | 8.0                  |
-| System.Memory.Data                                           | 8.0                  |
-| System.Net.Http.Json                                         | 8.0                  |
-| System.Net.Http.WinHttpHandler                               | 8.0                  |
-| System.Numerics.Tensors                                      | 8.0                  |
-| System.Reflection.Context                                    | 8.0                  |
-| System.Reflection.Metadata                                   | 8.0                  |
-| System.Reflection.MetadataLoadContext                        | 8.0                  |
-| System.Resources.Extensions                                  | 8.0                  |
-| System.Runtime.Caching                                       | 8.0                  |
-| System.Runtime.Serialization.Schema                          | 8.0                  |
-| System.Security.Cryptography.Cose                            | 8.0                  |
-| System.Security.Cryptography.Pkcs                            | 8.0                  |
-| System.Security.Cryptography.ProtectedData                   | 8.0                  |
-| System.Security.Cryptography.Xml                             | 8.0                  |
-| System.Security.Permissions                                  | 8.0                  |
-| System.ServiceModel.Syndication                              | 8.0                  |
-| System.ServiceProcess.ServiceController                      | 8.0                  |
-| System.Speech                                                | 8.0                  |
-| System.Text.Encoding.CodePages                               | 8.0                  |
-| System.Text.Encodings.Web                                    | 8.0                  |
-| System.Text.Json                                             | 8.0                  |
-| System.Threading.AccessControl                               | 8.0                  |
-| System.Threading.Channels                                    | 8.0                  |
-| System.Threading.RateLimiting                                | 8.0                  |
-| System.Threading.Tasks.Dataflow                              | 8.0                  |
-| System.Windows.Extensions                                    | 8.0                  |
 | System.Security.AccessControl                                | 6.0                  |
 | Microsoft.Diagnostics.Tracing.EventSource.Redist             | 6.0                  |
 | Microsoft.IO.Redist                                          | 6.0                  |
