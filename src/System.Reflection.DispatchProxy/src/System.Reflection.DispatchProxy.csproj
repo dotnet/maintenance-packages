@@ -11,16 +11,25 @@
     <AssemblyVersion Condition="$([MSBuild]::GetTargetFrameworkIdentifier('$(TargetFramework)')) == '.NETFramework'">4.0.6.0</AssemblyVersion>
     <AssemblyVersion Condition="'$(IsPackable)' == 'true' and $([MSBuild]::GetTargetFrameworkIdentifier('$(TargetFramework)')) == '.NETFramework'">4.0.7.0</AssemblyVersion>
     <PackageValidationBaseLineVersion>4.7.1</PackageValidationBaseLineVersion>
-    <IsPlaceholderTargetFramework Condition="'$(TargetFramework)' == 'netstandard2.1' or $([MSBuild]::GetTargetFrameworkIdentifier('$(TargetFramework)')) == '.NETCoreApp'">true</IsPlaceholderTargetFramework>
+    <IsPlaceholderTargetFramework Condition="$([MSBuild]::GetTargetFrameworkIdentifier('$(TargetFramework)')) == '.NETCoreApp'">true</IsPlaceholderTargetFramework>
+    <EnableDefaultItems>false</EnableDefaultItems>
   </PropertyGroup>
 
-  <ItemGroup Condition="$(TargetFramework) == 'netstandard2.0'">
-    <Compile Remove="System\Reflection\DispatchProxyGenerator.cs" />
-    <Compile Remove="System\Reflection\Emit\IgnoreAccessChecksToAttributeBuilder.cs" />
+  <ItemGroup Condition="'$(TargetFramework)' != 'netstandard2.1'">
+    <Compile Include="System\Reflection\DispatchProxy.cs" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' != 'netstandard2.0'">
+    <Compile Include="System\Reflection\DispatchProxyGenerator.cs" />
+    <Compile Include="System\Reflection\Emit\IgnoreAccessChecksToAttributeBuilder.cs" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.1'">
+    <Compile Include="System.Reflection.DispatchProxy.Forwards.cs" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="System.Reflection.Emit" Condition="$(TargetFramework) == 'netstandard2.0'" />
+    <PackageReference Include="System.Reflection.Emit" Condition="'$(TargetFramework)' == 'netstandard2.0'" />
   </ItemGroup>
 
 </Project>
