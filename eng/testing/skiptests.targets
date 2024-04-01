@@ -1,0 +1,9 @@
+<Project>
+
+  <!-- The VSTest target is not bound by any conditions like SkipTests:
+  https://github.com/microsoft/vstest/blob/1c07d46672669b0f7e4a367d66ab9ef9ed6cdb4b/src/Microsoft.TestPlatform.Build/Microsoft.TestPlatform.targets#L30
+  This workaround prevents the execution of tests when we shouldn't, like when the TargetFramework is $(NetFrameworkMinimum) and the OS is Unix.
+  This can be removed if microsoft/vstest adds a condition to that target. -->
+  <Target Name="VSTest" />
+
+</Project>

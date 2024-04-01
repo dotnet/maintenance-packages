@@ -6,6 +6,7 @@ syntax: glob
 # note: there is no trailing slash so if these are symlinks (which are seen as files,
 #       instead of directories), git will still ignore them.
 .dotnet
+.mono
 .packages
 .tools
 
