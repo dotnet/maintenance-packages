@@ -4,12 +4,12 @@
     <TargetFrameworks>$(NetFrameworkMinimum);netstandard2.0;netstandard2.1;netcoreapp3.1</TargetFrameworks>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <StrongNameKeyId>Microsoft</StrongNameKeyId>
-    <IsPackable>false</IsPackable>
+    <IsPackable>true</IsPackable>
     <VersionPrefix>4.7.1</VersionPrefix>
     <VersionPrefix Condition="'$(IsPackable)' == 'true'">4.8.0</VersionPrefix>
-    <AssemblyVersion>4.0.6.0</AssemblyVersion><!-- NO-INCREMENT: This version is frozen for .NET Standard and .NETCoreApp because the assembly ships inbox. -->
+    <AssemblyVersion>4.0.5.0</AssemblyVersion><!-- NO-INCREMENT: This version is frozen for .NET Standard and .NETCoreApp because the assembly ships inbox. -->
     <AssemblyVersion Condition="$([MSBuild]::GetTargetFrameworkIdentifier('$(TargetFramework)')) == '.NETFramework'">4.0.6.0</AssemblyVersion>
-    <AssemblyVersion Condition="'$(IsPackable)' == 'true' and $([MSBuild]::GetTargetFrameworkIdentifier('$(TargetFramework)')) == '.NETFramework'">4.0.7.0</AssemblyVersion>
+    <AssemblyVersion Condition="'$(IsPackable)' == 'true' and $([MSBuild]::GetTargetFrameworkIdentifier('$(TargetFramework)')) == '.NETFramework'">4.0.6.0</AssemblyVersion>
     <PackageValidationBaseLineVersion>4.7.1</PackageValidationBaseLineVersion>
     <IsPlaceholderTargetFramework Condition="'$(TargetFramework)' == 'netstandard2.1' or $([MSBuild]::GetTargetFrameworkIdentifier('$(TargetFramework)')) == '.NETCoreApp'">true</IsPlaceholderTargetFramework>
   </PropertyGroup>
