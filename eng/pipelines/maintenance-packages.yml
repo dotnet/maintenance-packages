@@ -7,9 +7,9 @@ trigger:
 
 variables:
 - name: LinuxImage
-  value: 1es-ubuntu-2204-pt
+  value: 1es-ubuntu-2204
 - name: WindowsImage
-  value: 1es-windows-2022-pt
+  value: 1es-windows-2022
 - template: /eng/pipelines/common-variables.yml@self
 - template: /eng/common/templates-official/variables/pool-providers.yml@self
 
