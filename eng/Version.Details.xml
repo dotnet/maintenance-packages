@@ -3,21 +3,21 @@
   <ProductDependencies>
   </ProductDependencies>
   <ToolsetDependencies>
-    <Dependency Name="Microsoft.DotNet.Arcade.Sdk" Version="8.0.0-beta.24264.1">
+    <Dependency Name="Microsoft.DotNet.Arcade.Sdk" Version="8.0.0-beta.24324.1">
       <Uri>https://github.com/dotnet/arcade</Uri>
-      <Sha>1814df258a66473d388b8884ac95bd1c8a2585a9</Sha>
+      <Sha>748cd976bf8b0f69b809e569943635ab8be36dc8</Sha>
     </Dependency>
-    <Dependency Name="Microsoft.DotNet.RemoteExecutor" Version="8.0.0-beta.24264.1">
+    <Dependency Name="Microsoft.DotNet.RemoteExecutor" Version="8.0.0-beta.24324.1">
       <Uri>https://github.com/dotnet/arcade</Uri>
-      <Sha>1814df258a66473d388b8884ac95bd1c8a2585a9</Sha>
+      <Sha>748cd976bf8b0f69b809e569943635ab8be36dc8</Sha>
     </Dependency>
-    <Dependency Name="Microsoft.DotNet.XUnitExtensions" Version="8.0.0-beta.24264.1">
+    <Dependency Name="Microsoft.DotNet.XUnitExtensions" Version="8.0.0-beta.24324.1">
       <Uri>https://github.com/dotnet/arcade</Uri>
-      <Sha>1814df258a66473d388b8884ac95bd1c8a2585a9</Sha>
+      <Sha>748cd976bf8b0f69b809e569943635ab8be36dc8</Sha>
     </Dependency>
-    <Dependency Name="Microsoft.DotNet.Build.Tasks.TargetFramework" Version="8.0.0-beta.24264.1">
+    <Dependency Name="Microsoft.DotNet.Build.Tasks.TargetFramework" Version="8.0.0-beta.24324.1">
       <Uri>https://github.com/dotnet/arcade</Uri>
-      <Sha>1814df258a66473d388b8884ac95bd1c8a2585a9</Sha>
+      <Sha>748cd976bf8b0f69b809e569943635ab8be36dc8</Sha>
     </Dependency>
   </ToolsetDependencies>
 </Dependencies>
