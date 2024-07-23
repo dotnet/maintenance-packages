@@ -5,23 +5,33 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <StrongNameKeyId>Open</StrongNameKeyId>
     <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <!-- Floating package information -->
+  <PropertyGroup>
     <IsPackable>false</IsPackable>
     <VersionPrefix>1.1.1</VersionPrefix>
     <VersionPrefix Condition="'$(IsPackable)' == 'true'">1.2.0</VersionPrefix>
     <PackageValidationBaselineVersion>1.1.1</PackageValidationBaselineVersion>
   </PropertyGroup>
 
-  <PropertyGroup Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'netstandard2.1'))">
-    <EnableDefaultItems>false</EnableDefaultItems>
-  </PropertyGroup>
+  <Choose>
+    <When Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'netstandard2.1'))">
+      <PropertyGroup>
+        <EnableDefaultItems>false</EnableDefaultItems>
+      </PropertyGroup>
 
-  <ItemGroup Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'netstandard2.1'))">
-    <Compile Include="TypeForwards.cs" />
-  </ItemGroup>
+      <ItemGroup>
+        <Compile Include="TypeForwards.cs" />
+      </ItemGroup>
+    </When>
 
-  <ItemGroup Condition="!$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'netstandard2.1'))">
-    <Compile Include="$(CommonPath)src\System\LocalAppContextSwitches.Common.cs" Link="Common\System\LocalAppContextSwitches.Common.cs" />
-    <Compile Remove="TypeForwards.cs" />
-  </ItemGroup>
+    <Otherwise>
+      <ItemGroup>
+        <Compile Include="$(CommonPath)src\System\LocalAppContextSwitches.Common.cs" Link="Common\System\LocalAppContextSwitches.Common.cs" />
+        <Compile Remove="TypeForwards.cs" />
+      </ItemGroup>
+    </Otherwise>
+  </Choose>
 
 </Project>

@@ -4,14 +4,18 @@
     <TargetFrameworks>netcoreapp2.0;netstandard2.0;$(NetFrameworkMinimum)</TargetFrameworks>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <StrongNameKeyId>Microsoft</StrongNameKeyId>
+    <AssemblyVersion>4.1.4.0</AssemblyVersion><!-- NO-INCREMENT: This version is frozen for .NET Standard and .NETCoreApp because the assembly ships inbox. -->
+    <IsPlaceholderTargetFramework Condition="$([MSBuild]::GetTargetFrameworkIdentifier('$(TargetFramework)')) == '.NETCoreApp'">true</IsPlaceholderTargetFramework>
+  </PropertyGroup>
+
+  <!-- Floating package information -->
+  <PropertyGroup>
     <IsPackable>false</IsPackable>
     <VersionPrefix>4.5.0</VersionPrefix>
     <VersionPrefix Condition="'$(IsPackable)' == 'true'">4.6.0</VersionPrefix>
-    <AssemblyVersion>4.1.4.0</AssemblyVersion><!-- NO-INCREMENT: This version is frozen for .NET Standard and .NETCoreApp because the assembly ships inbox. -->
     <AssemblyVersion Condition="$([MSBuild]::GetTargetFrameworkIdentifier('$(TargetFramework)')) == '.NETFramework'">4.1.4.0</AssemblyVersion>
     <AssemblyVersion Condition="'$(IsPackable)' == 'true' and $([MSBuild]::GetTargetFrameworkIdentifier('$(TargetFramework)')) == '.NETFramework'">4.1.5.0</AssemblyVersion>
     <PackageValidationBaselineVersion>4.5.0</PackageValidationBaselineVersion>
-    <IsPlaceholderTargetFramework Condition="$([MSBuild]::GetTargetFrameworkIdentifier('$(TargetFramework)')) == '.NETCoreApp'">true</IsPlaceholderTargetFramework>
   </PropertyGroup>
 
   <ItemGroup>

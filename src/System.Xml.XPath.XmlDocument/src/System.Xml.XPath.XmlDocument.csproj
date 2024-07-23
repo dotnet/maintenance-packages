@@ -4,6 +4,10 @@
     <TargetFrameworks>$(NetMinimum);netstandard2.0;$(NetFrameworkMinimum)</TargetFrameworks>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <StrongNameKeyId>Microsoft</StrongNameKeyId>
+  </PropertyGroup>
+
+  <!-- Floating package information -->
+  <PropertyGroup>
     <IsPackable>false</IsPackable>
     <VersionPrefix>4.3.0</VersionPrefix>
     <VersionPrefix Condition="'$(IsPackable)' == 'true'">4.4.0</VersionPrefix>
