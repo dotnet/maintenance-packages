@@ -6,7 +6,7 @@
     <StrongNameKeyId>Microsoft</StrongNameKeyId>
   </PropertyGroup>
 
-  <!-- Floating package information -->
+  <!-- Package servicing properties -->
   <PropertyGroup>
     <IsPackable>false</IsPackable>
     <VersionPrefix>4.3.0</VersionPrefix>

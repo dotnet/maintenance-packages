@@ -9,7 +9,7 @@
     <IsPlaceholderTargetFramework Condition="$([MSBuild]::GetTargetFrameworkIdentifier('$(TargetFramework)')) == '.NETCoreApp'">true</IsPlaceholderTargetFramework>
   </PropertyGroup>
 
-  <!-- Floating package information -->
+  <!-- Package servicing properties -->
   <PropertyGroup>
     <IsPackable>false</IsPackable>
     <VersionPrefix>4.5.5</VersionPrefix>

@@ -7,7 +7,7 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <!-- Floating package information -->
+  <!-- Package servicing properties -->
   <PropertyGroup>
     <IsPackable>false</IsPackable>
     <VersionPrefix>1.1.1</VersionPrefix>

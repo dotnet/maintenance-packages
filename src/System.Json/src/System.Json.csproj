@@ -5,7 +5,7 @@
     <StrongNameKeyId>MicrosoftShared</StrongNameKeyId>
   </PropertyGroup>
 
-  <!-- Floating package information -->
+  <!-- Package servicing properties -->
   <PropertyGroup>
     <IsPackable>false</IsPackable>
     <VersionPrefix>4.7.1</VersionPrefix>

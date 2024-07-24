@@ -13,7 +13,7 @@
       <GeneratePlatformNotSupportedAssemblyMessage Condition="'$(TargetPlatformIdentifier)' != 'windows'">SR.PlatformNotSupported_System_Data_SqlClient</GeneratePlatformNotSupportedAssemblyMessage>
     </PropertyGroup>
 
-    <!-- Floating package information -->
+    <!-- Package servicing properties -->
     <PropertyGroup>
       <IsPackable>false</IsPackable>
       <VersionPrefix>4.8.6</VersionPrefix>
