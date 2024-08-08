@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <!-- Using NetFrameworkCurrent because some APIs used in the tests are unavailable in net462. -->
+    <TargetFrameworks>$(NetMinimum);$(NetFrameworkCurrent)</TargetFrameworks>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\src\System.Net.WebSockets.WebSocketProtocol.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,75 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>netcoreapp2.0;netstandard2.0;$(NetFrameworkMinimum)</TargetFrameworks>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <StrongNameKeyId>Microsoft</StrongNameKeyId>
+    <AssemblyVersion>4.1.4.0</AssemblyVersion><!-- NO-INCREMENT: This version is frozen for .NET Standard and .NETCoreApp because the assembly ships inbox. -->
+    <IsPlaceholderTargetFramework Condition="$([MSBuild]::GetTargetFrameworkIdentifier('$(TargetFramework)')) == '.NETCoreApp'">true</IsPlaceholderTargetFramework>
+  </PropertyGroup>
+
+  <!-- Package servicing properties -->
+  <PropertyGroup>
+    <IsPackable>false</IsPackable>
+    <VersionPrefix>4.5.0</VersionPrefix>
+    <VersionPrefix Condition="'$(IsPackable)' == 'true'">4.6.0</VersionPrefix>
+    <AssemblyVersion Condition="$([MSBuild]::GetTargetFrameworkIdentifier('$(TargetFramework)')) == '.NETFramework'">4.1.4.0</AssemblyVersion>
+    <AssemblyVersion Condition="'$(IsPackable)' == 'true' and $([MSBuild]::GetTargetFrameworkIdentifier('$(TargetFramework)')) == '.NETFramework'">4.1.5.0</AssemblyVersion>
+    <PackageValidationBaselineVersion>4.5.0</PackageValidationBaselineVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Update="System\Numerics\ConstantHelper.cs"
+             AutoGen="True"
+             DesignTime="True"
+             DependentUpon="ConstantHelper.tt" />
+    <Compile Update="System\Numerics\Register.cs"
+             AutoGen="True"
+             DesignTime="True"
+             DependentUpon="Register.tt" />
+    <Compile Update="System\Numerics\Vector.cs"
+             AutoGen="True"
+             DesignTime="True"
+             DependentUpon="Vector.tt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="System\Numerics\ConstantHelper.tt"
+          Generator="TextTemplatingFileGenerator"
+          LastGenOutput="ConstantHelper.cs" />
+    <None Update="System\Numerics\Register.tt"
+          Generator="TextTemplatingFileGenerator"
+          LastGenOutput="Register.cs" />
+    <None Update="System\Numerics\Vector.tt"
+          Generator="TextTemplatingFileGenerator"
+          LastGenOutput="Vector.cs" />
+  </ItemGroup>
+
+  <!-- Type-foward to API that is inbox on .NET Framework. -->
+  <ItemGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework'">
+    <Compile Remove="System\Numerics\Matrix3x2.cs" />
+    <Compile Remove="System\Numerics\Matrix4x4.cs" />
+    <Compile Remove="System\Numerics\Plane.cs" />
+    <Compile Remove="System\Numerics\Quaternion.cs" />
+    <Compile Remove="System\Numerics\Vector2.cs" />
+    <Compile Remove="System\Numerics\Vector2_Intrinsics.cs" />
+    <Compile Remove="System\Numerics\Vector3.cs" />
+    <Compile Remove="System\Numerics\Vector3_Intrinsics.cs" />
+    <Compile Remove="System\Numerics\Vector4.cs" />
+    <Compile Remove="System\Numerics\Vector4_Intrinsics.cs" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFrameworkIdentifier)' != '.NETFramework'">
+    <Compile Remove="System.Numerics.Vectors.Forwards.cs" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework'">
+    <Reference Include="System.Numerics" />
+  </ItemGroup>
+
+  <!-- Needed for the .tt and .ttinclude language integration. -->
+  <ItemGroup>
+    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+  </ItemGroup>
+
+</Project>

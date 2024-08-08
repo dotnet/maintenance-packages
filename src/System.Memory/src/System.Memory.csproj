@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0;$(NetFrameworkMinimum);netcoreapp2.1</TargetFrameworks>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <StrongNameKeyId>Open</StrongNameKeyId>
+    <Nullable>disable</Nullable>
+    <AssemblyVersion>4.0.1.2</AssemblyVersion><!-- NO-INCREMENT: This version is frozen for .NET Standard and .NETCoreApp because the assembly ships inbox. -->
+    <IsPlaceholderTargetFramework Condition="$([MSBuild]::GetTargetFrameworkIdentifier('$(TargetFramework)')) == '.NETCoreApp'">true</IsPlaceholderTargetFramework>
+  </PropertyGroup>
+
+  <!-- Package servicing properties -->
+  <PropertyGroup>
+    <IsPackable>false</IsPackable>
+    <VersionPrefix>4.5.5</VersionPrefix>
+    <VersionPrefix Condition="'$(IsPackable)' == 'true'">4.6.0</VersionPrefix>
+    <AssemblyVersion Condition="$([MSBuild]::GetTargetFrameworkIdentifier('$(TargetFramework)')) == '.NETFramework'">4.0.1.2</AssemblyVersion>
+    <AssemblyVersion Condition="'$(IsPackable)' == 'true' and $([MSBuild]::GetTargetFrameworkIdentifier('$(TargetFramework)')) == '.NETFramework'">4.0.2.0</AssemblyVersion>
+    <PackageValidationBaselineVersion>4.5.5</PackageValidationBaselineVersion>
+  </PropertyGroup>
+
+  <ItemGroup Condition="'$(IsPlaceholderTargetFramework)' != 'true'">
+    <Compile Include="$(CommonPath)src\System\Numerics\Hashing\HashHelpers.cs" Link="Common\System\Numerics\Hashing\HashHelpers.cs" />
+
+    <ProjectReference Include="..\..\System.Buffers\src\System.Buffers.csproj" />
+    <ProjectReference Include="..\..\System.Numerics.Vectors\src\System.Numerics.Vectors.csproj" />
+    <PackageReference Include="System.Runtime.CompilerServices.Unsafe" />
+  </ItemGroup>
+
+</Project>

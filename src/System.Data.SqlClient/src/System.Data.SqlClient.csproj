@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+      <TargetFrameworks>$(NetMinimum);$(NetMinimum)-unix;$(NetMinimum)-windows;netstandard2.0;$(NetFrameworkMinimum)</TargetFrameworks>
+      <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+      <StrongNameKeyId>Microsoft</StrongNameKeyId>
+      <AssemblyVersion>4.6.1.6</AssemblyVersion> <!-- NO-INCREMENT: This version is frozen for .NET Standard and .NETCoreApp because the assembly ships inbox. -->
+    </PropertyGroup>
+
+    <!-- DesignTimeBuild requires all the TargetFramework Derived Properties to not be present in the first property group. -->
+    <PropertyGroup>
+      <TargetPlatformIdentifier>$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)'))</TargetPlatformIdentifier>
+      <GeneratePlatformNotSupportedAssemblyMessage Condition="'$(TargetPlatformIdentifier)' != 'windows'">SR.PlatformNotSupported_System_Data_SqlClient</GeneratePlatformNotSupportedAssemblyMessage>
+    </PropertyGroup>
+
+    <!-- Package servicing properties -->
+    <PropertyGroup>
+      <IsPackable>false</IsPackable>
+      <VersionPrefix>4.8.6</VersionPrefix>
+      <VersionPrefix Condition="'$(IsPackable)' == 'true'">4.9.0</VersionPrefix>
+      <AssemblyVersion Condition="$([MSBuild]::GetTargetFrameworkIdentifier('$(TargetFramework)')) == '.NETFramework'">4.6.1.6</AssemblyVersion>
+      <AssemblyVersion Condition="'$(IsPackable)' == 'true' and $([MSBuild]::GetTargetFrameworkIdentifier('$(TargetFramework)')) == '.NETFramework'">4.6.2.0</AssemblyVersion>
+      <PackageValidationBaselineVersion>4.8.6</PackageValidationBaselineVersion>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Microsoft.DotNet.Build.Tasks.TargetFramework" PrivateAssets="all" />
+    </ItemGroup>
+
+  </Project>

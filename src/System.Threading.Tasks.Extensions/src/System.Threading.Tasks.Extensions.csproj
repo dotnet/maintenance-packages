@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>$(NetFrameworkMinimum);netstandard2.0;netcoreapp2.1</TargetFrameworks>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <StrongNameKeyId>Open</StrongNameKeyId>
+    <AssemblyVersion>4.2.0.1</AssemblyVersion> <!-- NO-INCREMENT: This version is frozen for .NET Standard and .NETCoreApp because the assembly ships inbox. -->
+    <IsPlaceholderTargetFramework Condition="$([MSBuild]::GetTargetFrameworkIdentifier('$(TargetFramework)')) == '.NETCoreApp'">true</IsPlaceholderTargetFramework>
+  </PropertyGroup>
+
+  <!-- Package servicing properties -->
+  <PropertyGroup>
+    <IsPackable>false</IsPackable>
+    <VersionPrefix>4.5.4</VersionPrefix>
+    <VersionPrefix Condition="'$(IsPackable)' == 'true'">4.6.0</VersionPrefix>
+    <AssemblyVersion Condition="$([MSBuild]::GetTargetFrameworkIdentifier('$(TargetFramework)')) == '.NETFramework'">4.2.0.1</AssemblyVersion>
+    <AssemblyVersion Condition="'$(IsPackable)' == 'true' and $([MSBuild]::GetTargetFrameworkIdentifier('$(TargetFramework)')) == '.NETFramework'">4.2.1.0</AssemblyVersion>
+    <PackageValidationBaselineVersion>4.5.4</PackageValidationBaselineVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Condition="'$(IsPlaceholderTargetFramework)' != 'true'" />
+  </ItemGroup>
+
+</Project>

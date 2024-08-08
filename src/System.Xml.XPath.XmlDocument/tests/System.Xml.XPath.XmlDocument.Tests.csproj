@@ -1,0 +1,62 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>$(NetFrameworkMinimum);$(NetMinimum)</TargetFrameworks>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\src\System.Xml.XPath.XmlDocument.csproj" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework'">
+    <PackageReference Include="System.Text.Encoding.CodePages" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="TestData\91893.xml" />
+    <EmbeddedResource Include="TestData\books.xml" />
+    <EmbeddedResource Include="TestData\books_2.xml" />
+    <EmbeddedResource Include="TestData\bookstore.xml" />
+    <EmbeddedResource Include="TestData\data.xml" />
+    <EmbeddedResource Include="TestData\data1.xml" />
+    <EmbeddedResource Include="TestData\data4.xml" />
+    <EmbeddedResource Include="TestData\dummy.xml" />
+    <EmbeddedResource Include="TestData\id4.xml" />
+    <EmbeddedResource Include="TestData\JPN_problem_chars_1.xml" />
+    <EmbeddedResource Include="TestData\JPN_problem_chars_2.xml" />
+    <EmbeddedResource Include="TestData\KOR_problem_chars_b.xml" />
+    <EmbeddedResource Include="TestData\lang.xml" />
+    <EmbeddedResource Include="TestData\name.xml" />
+    <EmbeddedResource Include="TestData\name2.xml" />
+    <EmbeddedResource Include="TestData\name4.xml" />
+    <EmbeddedResource Include="TestData\namespaces.xml" />
+    <EmbeddedResource Include="TestData\ns_default.xml" />
+    <EmbeddedResource Include="TestData\ns_prefixes.xml" />
+    <EmbeddedResource Include="TestData\numbers.xml" />
+    <EmbeddedResource Include="TestData\Russian_problem_chars.xml" />
+    <EmbeddedResource Include="TestData\Single_byte_problem_chars_b.xml" />
+    <EmbeddedResource Include="TestData\space.xml" />
+    <EmbeddedResource Include="TestData\Surrogates_1.xml" />
+    <EmbeddedResource Include="TestData\t114730.xml" />
+    <EmbeddedResource Include="TestData\t98598.xml" />
+    <EmbeddedResource Include="TestData\test1.xml" />
+    <EmbeddedResource Include="TestData\test63682.xml" />
+    <EmbeddedResource Include="TestData\test63733.xml" />
+    <EmbeddedResource Include="TestData\test66246.xml" />
+    <EmbeddedResource Include="TestData\Thai_risky_chars.xml" />
+    <EmbeddedResource Include="TestData\turkish.xml" />
+    <EmbeddedResource Include="TestData\xp001.xml" />
+    <EmbeddedResource Include="TestData\xp002.xml" />
+    <EmbeddedResource Include="TestData\xp003.xml" />
+    <EmbeddedResource Include="TestData\xp004.xml" />
+    <EmbeddedResource Include="TestData\xp005.xml" />
+    <EmbeddedResource Include="TestData\xp006.xml" />
+    <EmbeddedResource Include="TestData\xp008.xml" />
+    <EmbeddedResource Include="TestData\xp012.xml" />
+    <EmbeddedResource Include="TestData\xpC001.xml" />
+    <EmbeddedResource Include="TestData\XQL_Orders_j1.xml" />
+    <EmbeddedResource Include="TestData\XQL_Orders_j3.xml" />
+    <EmbeddedResource Include="TestData\xql_orders-flat-200a.xml" />
+  </ItemGroup>
+
+</Project>
