@@ -10,8 +10,8 @@
   <!-- Package servicing properties -->
   <PropertyGroup>
     <IsPackable>false</IsPackable>
-    <VersionPrefix>1.1.1</VersionPrefix>
-    <VersionPrefix Condition="'$(IsPackable)' == 'true'">1.2.0</VersionPrefix>
+    <VersionPrefix>6.0.0</VersionPrefix>
+    <VersionPrefix Condition="'$(IsPackable)' == 'true'">6.1.0</VersionPrefix>
     <PackageValidationBaselineVersion>1.1.1</PackageValidationBaselineVersion>
   </PropertyGroup>
 
