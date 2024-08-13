@@ -19,6 +19,9 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
 
+  <!-- The VSTest target is not bound by any conditions, needs to be overriden when we want to skip tests. -->
+  <Import Project="$(RepositoryEngineeringDir)testing\skiptests.targets" Condition="'$(IsTestProject)' == 'true' and '$(SkipTests)' == 'true'" />
+
   <ItemGroup Condition="'$(IsTestProject)' == 'true'">
     <Compile Include="$(CommonPath)tests\TestUtilities\System\AssertExtensions.cs" Link="Common\System\AssertExtensions.cs" />
     <Compile Include="$(CommonPath)tests\TestUtilities\System\PlatformDetection.cs" Link="Common\System\PlatformDetection.cs" />
@@ -29,10 +32,6 @@
   <ItemGroup Condition="'$(IsTestProject)' == 'true'">
     <PackageReference Include="Microsoft.DotNet.RemoteExecutor" />
     <PackageReference Include="Microsoft.DotNet.XUnitExtensions" />
-  </ItemGroup>
-
-  <ItemGroup Condition="'$(UseTargetFrameworkPackage)' == 'true'">
-    <PackageReference Include="Microsoft.DotNet.Build.Tasks.TargetFramework" PrivateAssets="all" />
   </ItemGroup>
 
 </Project>

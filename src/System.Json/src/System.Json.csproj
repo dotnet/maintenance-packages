@@ -3,6 +3,10 @@
   <PropertyGroup>
     <TargetFrameworks>$(NetMinimum);netstandard2.0;$(NetFrameworkMinimum)</TargetFrameworks>
     <StrongNameKeyId>MicrosoftShared</StrongNameKeyId>
+  </PropertyGroup>
+
+  <!-- Package servicing properties -->
+  <PropertyGroup>
     <IsPackable>false</IsPackable>
     <VersionPrefix>4.7.1</VersionPrefix>
     <VersionPrefix Condition="'$(IsPackable)' == 'true'">4.8.0</VersionPrefix>

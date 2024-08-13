@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.Build.Traversal">
 
   <ItemGroup>
-    <ProjectReference Include="src/**/*.csproj" />
+    <ProjectReference Include="src/*/src/*.*proj" />
     <ProjectReference Condition="'$(SkipTests)' == 'true'" Remove="src/*/tests/*.csproj" />
   </ItemGroup>
 
