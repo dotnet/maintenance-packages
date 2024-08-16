@@ -9,9 +9,4 @@
     <VersionPrefix Condition="'$(IsPackable)' == 'true'">4.4.0</VersionPrefix>
     <PackageValidationBaselineVersion>4.3.0</PackageValidationBaselineVersion>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Compile Include="$(CommonPath)src\System\NotImplemented.cs" />
-  </ItemGroup>
-
 </Project>
