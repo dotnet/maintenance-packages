@@ -8,8 +8,4 @@
     <ProjectReference Include="..\src\System.Xml.XPath.XmlDocument.csproj" />
   </ItemGroup>
 
-  <ItemGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework'">
-    <PackageReference Include="System.Text.Encoding.CodePages" />
-  </ItemGroup>
-
 </Project>
