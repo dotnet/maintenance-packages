@@ -1,17 +1,9 @@
 <Project>
 
   <Import Project="$(RepositoryEngineeringDir)resources.targets" />
-
-  <PropertyGroup Condition="'$(IsTestProject)' != 'true' and '$(IsSourceProjectPackable)' == 'true'">
-    <!-- IsSourceProjectPackable is used in the CI packing leg to enable IsPackable only on source projects.
-         This needs to be evaluated before importing the Arcade SDK and packaging.targets. -->
-    <IsPackable>true</IsPackable>
-  </PropertyGroup>
-
   <Import Project="Sdk.targets" Sdk="Microsoft.DotNet.Arcade.Sdk" />
   <Import Project="$(RepositoryEngineeringDir)testing\runsettings.targets" Condition="'$(IsTestProject)' == 'true'" />
   <Import Project="$(RepositoryEngineeringDir)placeholderpackaging.targets" Condition="'$(IsPlaceholderTargetFramework)' == 'true'" />
-
   <Import Project="$(RepositoryEngineeringDir)packaging.targets" Condition="'$(IsPackable)' == 'true'" />
 
   <!-- Default item exclude patterns -->
@@ -26,6 +18,9 @@
     <!-- Unsafe code is required by PlatformDetection. -->
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
+
+  <!-- The VSTest target is not bound by any conditions, needs to be overriden when we want to skip tests. -->
+  <Import Project="$(RepositoryEngineeringDir)testing\skiptests.targets" Condition="'$(IsTestProject)' == 'true' and '$(SkipTests)' == 'true'" />
 
   <ItemGroup Condition="'$(IsTestProject)' == 'true'">
     <Compile Include="$(CommonPath)tests\TestUtilities\System\AssertExtensions.cs" Link="Common\System\AssertExtensions.cs" />

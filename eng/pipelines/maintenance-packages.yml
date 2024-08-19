@@ -7,9 +7,9 @@ trigger:
 
 variables:
 - name: LinuxImage
-  value: 1es-ubuntu-2204-pt
+  value: 1es-ubuntu-2204
 - name: WindowsImage
-  value: 1es-windows-2022-pt
+  value: 1es-windows-2022
 - template: /eng/pipelines/common-variables.yml@self
 - template: /eng/common/templates-official/variables/pool-providers.yml@self
 
@@ -45,7 +45,7 @@ extends:
       image: $(WindowsImage)
       os: windows
     containers:
-      LinuxContainer: 
+      LinuxContainer:
         image: mcr.microsoft.com/dotnet-buildtools/prereqs:cbl-mariner-2.0-fpm
     stages:
     - stage: build
@@ -79,39 +79,12 @@ extends:
               fetchDepth: 0
               clean: true
             steps:
-            - script: eng\common\cibuild.cmd -configuration Release -prepareMachine $(_AdditionalBuildArgs) $(_InternalBuildArgs)
+            - script: eng\common\cibuild.cmd
+                -configuration Release
+                -prepareMachine
+                $(_AdditionalBuildArgs)
+                $(_InternalBuildArgs)
               displayName: $(_BuildJobDisplayName)
-
-          - ${{ if eq(variables._RunAsPublic, True) }}:
-            - job: build_linux
-              displayName: 'Build Linux'
-              timeoutInMinutes: 60
-              container: LinuxContainer
-              pool:
-                name: $(DncEngInternalBuildPool)
-                image: $(LinuxImage)
-                os: linux
-              preSteps:
-              - checkout: self
-                clean: true
-              steps:
-              - script: eng/common/cibuild.sh --configuration Debug --prepareMachine $(_AdditionalBuildArgs) $(_InternalBuildArgs)
-                displayName: $(_BuildJobDisplayName)
-
-          - job: pack_linux
-            displayName: 'Pack Linux'
-            timeoutInMinutes: 60
-            container: LinuxContainer
-            pool:
-              name: $(DncEngInternalBuildPool)
-              image: $(LinuxImage)
-              os: linux
-            preSteps:
-            - checkout: self
-              clean: true
-            steps:
-            - script: eng/common/build.sh --configuration Release --restore --pack /p:IsSourceProjectPackable=true
-              displayName: 'Restore and pack'
 
     - ${{ if eq(variables._RunAsInternal, True) }}:
       - template: /eng/common/templates-official/post-build/post-build.yml@self

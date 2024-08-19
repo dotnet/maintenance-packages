@@ -5,15 +5,20 @@
   <PropertyGroup>
     <Copyright>$(CopyrightNetFoundation)</Copyright>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <!-- SDK sets product to assembly but we want it to be our product name -->
+    <Product>Microsoft%AE .NET</Product>
     <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
-    <DebugType>embedded</DebugType>
+    <!-- Always pass portable to override arcade sdk which uses embedded for local builds -->
+    <DebugType>portable</DebugType>
     <DebugSymbols>true</DebugSymbols>
+    <IncludeSymbols>true</IncludeSymbols>
     <LangVersion>Latest</LangVersion>
     <CommonPath>$([MSBuild]::NormalizeDirectory('$(RepoRoot)', 'src', 'Common'))</CommonPath>
     <EnableNETAnalyzers>true</EnableNETAnalyzers>
     <AnalysisMode>Recommended</AnalysisMode>
     <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
     <DotNetUseShippingVersions>true</DotNetUseShippingVersions>
+    <BeforeTargetFrameworkInferenceTargets>$(RepositoryEngineeringDir)BeforeTargetFrameworkInference.targets</BeforeTargetFrameworkInferenceTargets>
   </PropertyGroup>
 
 </Project>

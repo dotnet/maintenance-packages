@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>$(NetMinimum);$(NetMinimum)-unix;$(NetMinimum)-windows;$(NetFrameworkMinimum)</TargetFrameworks>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\src\System.Data.SqlClient.csproj" />
+    <PackageReference Include="Microsoft.DotNet.Build.Tasks.TargetFramework" PrivateAssets="all" />
+  </ItemGroup>
+
+</Project>

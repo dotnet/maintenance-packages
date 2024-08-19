@@ -1,11 +1,11 @@
 {
   "sdk": {
-    "version": "8.0.101",
+    "version": "8.0.108",
     "allowPrerelease": true,
     "rollForward": "major"
   },
   "tools": {
-    "dotnet": "8.0.101",
+    "dotnet": "8.0.108",
     "runtimes": {
       "dotnet": [
         "6.0.27"
@@ -13,7 +13,8 @@
     }
   },
   "msbuild-sdks": {
-    "Microsoft.DotNet.Arcade.Sdk": "8.0.0-beta.24165.4",
-    "Microsoft.Build.Traversal": "3.4.0"
+    "Microsoft.DotNet.Arcade.Sdk": "8.0.0-beta.24413.2",
+    "Microsoft.Build.Traversal": "3.4.0",
+    "Microsoft.NET.Sdk.IL": "8.0.0"
   }
 }
