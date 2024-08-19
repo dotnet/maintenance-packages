@@ -19,7 +19,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Condition="'$(IsPlaceholderTargetFramework)' != 'true'" />
+    <ProjectReference Include="..\..\System.Runtime.CompilerServices.Unsafe\src\System.Runtime.CompilerServices.Unsafe.csproj" Condition="'$(IsPlaceholderTargetFramework)' != 'true'" />
   </ItemGroup>
 
 </Project>
