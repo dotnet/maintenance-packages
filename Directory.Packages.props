@@ -15,6 +15,9 @@
 
   <!-- These versions are not updated by dependency flow as they aren't produced live anymore. -->
   <ItemGroup>
+    <PackageVersion Include="Microsoft.SqlServer.Server" Version="1.0.0" />
+    <PackageVersion Include="System.Buffers" Version="4.5.1" />
+    <PackageVersion Include="System.Diagnostics.DiagnosticSource" Version="8.0.0" />
     <PackageVersion Include="System.Reflection.Emit" Version="4.7.0" />
     <PackageVersion Include="System.Runtime.CompilerServices.Unsafe" Version="6.0.0" />
     <PackageVersion Include="System.Text.Encoding.CodePages" Version="8.0.0" />

@@ -1,6 +1,12 @@
 <Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <ProjectGuid>{6C88F00F-9597-43AD-9E5F-9B344DA3B16F}</ProjectGuid>
-    <TargetFramework>$(NetFrameworkMinimum)</TargetFramework>
+    <TargetFramework>$(NetMinimum)</TargetFramework>
+    <NoWarn>$(NoWarn);CA2208;</NoWarn>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.SqlServer.Server" />
+  </ItemGroup>
+
 </Project>

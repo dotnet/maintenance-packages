@@ -3,14 +3,13 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Runtime.InteropServices;
 
-namespace DPStressHarness
+internal partial class Interop
 {
-    [AttributeUsage(AttributeTargets.Method, Inherited = true, AllowMultiple = false)]
-    public class TestCleanupAttribute : Attribute
+    internal partial class Kernel32
     {
-        public TestCleanupAttribute()
-        {
-        }
+        [DllImport(Libraries.Kernel32, SetLastError = true)]
+        internal static extern bool CloseHandle(IntPtr handle);
     }
 }
