@@ -1,0 +1,42 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>$(NetFrameworkMinimum)</TargetFramework>
+    <RootNamespace>Microsoft.SqlServer.TDS.Servers</RootNamespace>
+    <AssemblyName>Microsoft.SqlServer.TDS.Servers</AssemblyName>
+    <ClsCompliant>false</ClsCompliant>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+  </PropertyGroup>
+
+  <!--
+  <ItemGroup>
+    <Compile Include="ApplicationIntentFilterType.cs" />
+    <Compile Include="AuthenticatingTDSServer.cs" />
+    <Compile Include="AuthenticatingTDSServerArguments.cs" />
+    <Compile Include="DateFormatString.cs" />
+    <Compile Include="FederatedAuthenticationNegativeTDSServer.cs" />
+    <Compile Include="FederatedAuthenticationNegativeTDSServerArguments.cs" />
+    <Compile Include="FederatedAuthenticationNegativeTDSScenarioType.cs" />
+    <Compile Include="GenericTDSServer.cs" />
+    <Compile Include="GenericTDSServerSession.cs" />
+    <Compile Include="QueryEngine.cs" />
+    <Compile Include="RoutingTDSServer.cs" />
+    <Compile Include="RoutingTDSServerArguments.cs" />
+    <Compile Include="ServerNameFilterType.cs" />
+    <Compile Include="TDSServerArguments.cs" />
+    <None Include="TdsServerCertificate.pfx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TDS.EndPoint\TDS.EndPoint.csproj">
+      <Name>TDS.EndPoint</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TDS\TDS.csproj">
+      <Name>TDS</Name>
+    </ProjectReference>
+  </ItemGroup>
+  -->
+
+</Project>

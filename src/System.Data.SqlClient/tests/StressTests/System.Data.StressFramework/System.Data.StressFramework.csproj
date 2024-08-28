@@ -1,0 +1,36 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>$(NetFrameworkMinimum)</TargetFramework>
+    <RootNamespace>Stress.Data</RootNamespace>
+  </PropertyGroup>
+
+  <!--
+  <ItemGroup>
+    <ProjectReference Include="..\System.Data.StressRunner\System.Data.StressRunner.csproj" />
+    <Compile Include="AsyncUtils.cs" />
+    <Compile Include="DataSource.cs" />
+    <Compile Include="DataStressConnection.cs" />
+    <Compile Include="DataStressErrors.cs" />
+    <Compile Include="DataStressFactory.cs" />
+    <Compile Include="DataStressReader.cs" />
+    <Compile Include="DataStressSettings.cs" />
+    <Compile Include="DataTestGroup.cs" />
+    <Compile Include="Extensions.cs" />
+    <Compile Include="StressConfigReader.cs" />
+    <Compile Include="TrackedRandom.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="StressTest.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  -->
+
+  <PropertyGroup Condition=" '$(TargetsWindows)' != 'true' ">
+    <DefineConstants>$(DefineConstants);PROJECTK</DefineConstants>
+  </PropertyGroup>
+  <!--Import the targets-->
+
+</Project>
