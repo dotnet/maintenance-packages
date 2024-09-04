@@ -1,4 +1,4 @@
-Microsoft Visual Studio Solution File, Format Version 12.00
+﻿Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
@@ -112,6 +112,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "System.Runtime.CompilerServ
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "System.Runtime.CompilerServices.Unsafe", "src\System.Runtime.CompilerServices.Unsafe\src\System.Runtime.CompilerServices.Unsafe.ilproj", "{CF99D9B6-B784-4FF5-AE08-19662FAE7D91}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Microsoft.IO.Redist", "Microsoft.IO.Redist", "{A376FF60-3E89-40F1-BD79-652C4DD6EE89}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{0E5B076B-8969-4738-9E5A-0D83061570DD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.IO.Redist", "src\Microsoft.IO.Redist\src\Microsoft.IO.Redist.csproj", "{C45866E3-904C-4707-985A-ED3A3E650FF2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -206,6 +212,10 @@ Global
 		{CF99D9B6-B784-4FF5-AE08-19662FAE7D91}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CF99D9B6-B784-4FF5-AE08-19662FAE7D91}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CF99D9B6-B784-4FF5-AE08-19662FAE7D91}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C45866E3-904C-4707-985A-ED3A3E650FF2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C45866E3-904C-4707-985A-ED3A3E650FF2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C45866E3-904C-4707-985A-ED3A3E650FF2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C45866E3-904C-4707-985A-ED3A3E650FF2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -255,6 +265,8 @@ Global
 		{981189F1-3DF3-44ED-BB11-20822008F85D} = {C8D70D0B-A9D9-4386-A9A2-CFC3C2FDEBDF}
 		{968B2C10-1F18-4A12-8E22-833E4195C2D1} = {981189F1-3DF3-44ED-BB11-20822008F85D}
 		{CF99D9B6-B784-4FF5-AE08-19662FAE7D91} = {18188B46-A3A3-4026-8D4C-59BF50EC1BB2}
+		{0E5B076B-8969-4738-9E5A-0D83061570DD} = {A376FF60-3E89-40F1-BD79-652C4DD6EE89}
+		{C45866E3-904C-4707-985A-ED3A3E650FF2} = {0E5B076B-8969-4738-9E5A-0D83061570DD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {588483EB-F59C-4D9E-A1C7-C85D719CA1B0}
