@@ -95,7 +95,7 @@ $(ExtraMacros)
   </Target>
 
   <ItemGroup Condition="'$(IsPlaceholderTargetFramework)' != 'true'">
-    <ProjectReference Include="..\ver\System.Runtime.CompilerServices.Unsafe.Versioning.csproj"
+    <ProjectReference Include="..\ver\Versioning.csproj"
                       PrivateAssets="All"
                       ReferenceOutputAssembly="false"
                       OutputItemType="ILResourceReference" />
