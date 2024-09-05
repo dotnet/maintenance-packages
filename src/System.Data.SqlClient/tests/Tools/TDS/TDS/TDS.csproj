@@ -1,0 +1,10 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>$(NetFrameworkMinimum)</TargetFramework>
+    <RootNamespace>Microsoft.SqlServer.TDS</RootNamespace>
+    <AssemblyName>Microsoft.SqlServer.TDS</AssemblyName>
+    <ClsCompliant>false</ClsCompliant>
+  </PropertyGroup>
+
+</Project>
