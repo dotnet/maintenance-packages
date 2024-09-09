@@ -21,4 +21,8 @@
     <BeforeTargetFrameworkInferenceTargets>$(RepositoryEngineeringDir)BeforeTargetFrameworkInference.targets</BeforeTargetFrameworkInferenceTargets>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageVersion Include="runtime.native.System.Data.SqlClient.sni" Version="4.4.0" />
+  </ItemGroup>
+
 </Project>

@@ -3,9 +3,6 @@
   <ItemGroup>
     <ProjectReference Include="src/*/src/*.*proj" />
     <ProjectReference Include="src/*/tests/*.csproj" Condition="'$(SkipTests)' != 'true'" />
-    <!-- Remove the System.Data.SqlClient temporary ProjectReference removals when the project is fully migrated. -->
-    <ProjectReference Remove="src/System.Data.SqlClient/src/*.*proj" />
-    <ProjectReference Remove="src/System.Data.SqlClient/tests/**/*.*proj" />
   </ItemGroup>
 
 </Project>

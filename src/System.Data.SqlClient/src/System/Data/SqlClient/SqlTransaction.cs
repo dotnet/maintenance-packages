@@ -215,7 +215,11 @@ namespace System.Data.SqlClient
             }
         }
 
+#if NET6_0_OR_GREATER
+        public override void Rollback(string transactionName)
+#else
         public void Rollback(string transactionName)
+#endif
         {
             Exception e = null;
             Guid operationId = s_diagnosticListener.WriteTransactionRollbackBefore(_isolationLevel, _connection, transactionName);
@@ -253,7 +257,11 @@ namespace System.Data.SqlClient
             }
         }
 
+#if NET6_0_OR_GREATER
+        public override void Save(string savePointName)
+#else
         public void Save(string savePointName)
+#endif
         {
             ZombieCheck();
 

@@ -140,7 +140,6 @@ namespace System.Data.SqlClient.Tests
         }
 
         [Fact]
-        [SkipOnTargetFramework(~TargetFrameworkMonikers.Uap)]
         public static void LocalDBNotSupportedOnUapTest()
         {
             SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder(@"server=(localdb)\MSSQLLocalDB")
@@ -176,10 +175,7 @@ namespace System.Data.SqlClient.Tests
             TException ex = Assert.Throws<TException>(connectAction);
 
             // Some exception messages are different between Framework and Core
-            if(!PlatformDetection.IsFullFramework)
-            {
-                Assert.Contains(expectedExceptionMessage, ex.Message);
-            }
+            Assert.Contains(expectedExceptionMessage, ex.Message);
             Assert.True(exVerifier(ex), "FAILED Exception verifier failed on the exception.");
 
             return ex;

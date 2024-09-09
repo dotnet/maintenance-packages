@@ -4,10 +4,21 @@
     <TargetFrameworks>$(NetMinimum);$(NetMinimum)-unix;$(NetMinimum)-windows;netstandard2.0;$(NetFrameworkMinimum)</TargetFrameworks>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <StrongNameKeyId>Microsoft</StrongNameKeyId>
-    <AssemblyVersion>4.6.1.6</AssemblyVersion> <!-- NO-INCREMENT: This version is frozen for .NET Standard and .NETCoreApp because the assembly ships inbox. -->
+    <AssemblyVersion>4.6.1.6</AssemblyVersion>
+    <!-- NO-INCREMENT: This version is frozen for .NET Standard and .NETCoreApp because the assembly ships inbox. -->
     <UseTargetFrameworkPackage>true</UseTargetFrameworkPackage>
-    <NoWarn>$(NoWarn);CS1573;nullable</NoWarn>
-    <EnableDefaultCompileItems>false</EnableDefaultCompileItems><!-- TODO: Remove this line -->
+    <TargetGroup Condition="$([MSBuild]::GetTargetFrameworkIdentifier('$(TargetFramework)')) == '.NETFramework'">netfx</TargetGroup>
+    <TargetGroup Condition="$([MSBuild]::GetTargetFrameworkIdentifier('$(TargetFramework)')) == '.NETCoreApp'">netcoreapp</TargetGroup>
+    <TargetGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">netstandard</TargetGroup>
+    <IsPartialFacadeAssembly Condition="'$(TargetGroup)' == 'netfx'">true</IsPartialFacadeAssembly>
+    <NoWarn>$(NoWarn);CA1001;CA1068;CA1069;CA1309;CA1310;CA1419;CA1711;CA1805;CA1806;CA1816;CA1822;CA1830;CA1834;CA1835;CA1836;CA1840;CA1844;CA2016;CA2101;CA2200;CA2201;CA2208;CA2219;CA2249;CA2251;CA5366;</NoWarn>
+    <NoWarn>$(NoWarn);CS0168;CS0649;</NoWarn>
+    <NoWarn>$(NoWarn);IDE0073;SYSLIB0004;nullable;</NoWarn>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <DefineConstants Condition="'$(TargetGroup)' == 'netstandard'">$(DefineConstants);netstandard</DefineConstants>
+    <DefineConstants Condition="'$(TargetGroup)' == 'netcoreapp'">$(DefineConstants);netcoreapp</DefineConstants>
+    <DefineConstants Condition="'$(TargetGroup)' == 'netcoreapp'">$(DefineConstants);FEATURE_TCPKEEPALIVE</DefineConstants>
+    <DefineConstants Condition="'$(TargetGroup)' == 'netstandard'">$(DefineConstants);INTERNAL_NULLABLE_ATTRIBUTES</DefineConstants>
   </PropertyGroup>
 
   <!-- DesignTimeBuild requires all the TargetFramework Derived Properties to not be present in the first property group. -->
@@ -30,7 +41,6 @@
     <PackageReference Include="Microsoft.DotNet.Build.Tasks.TargetFramework" PrivateAssets="all" />
   </ItemGroup>
 
-  <!--
   <ItemGroup Condition="'$(TargetGroup)' != 'netcoreapp'">
     <Compile Include="$(CommonPath)src\CoreLib\System\Diagnostics\CodeAnalysis\NullableAttributes.cs">
       <Link>Common\CoreLib\System\Diagnostics\CodeAnalysis\NullableAttributes.cs</Link>
@@ -240,12 +250,12 @@
     <Compile Include="System\Data\SqlClient\SqlCredential.cs" />
   </ItemGroup>
 
-  // SqlFileStream Unix Netcoreapp only
+  <!-- SqlFileStream Unix Netcoreapp only -->
   <ItemGroup Condition="'$(TargetGroup)' == 'netcoreapp' AND '$(TargetsUnix)' == 'true'">
     <Compile Include="System\Data\SqlClient\SqlFileStream.Unsupported.cs" />
   </ItemGroup>
 
-  // SqlFileStream Windows Netcoreapp only
+  <!-- SqlFileStream Windows Netcoreapp only -->
   <ItemGroup Condition="'$(TargetGroup)' == 'netcoreapp' AND '$(TargetsWindows)' == 'true'">
     <Compile Include="$(CommonPath)src\CoreLib\Interop\Windows\Kernel32\Interop.FileTypes.cs">
       <Link>Common\CoreLib\Interop\Windows\Kernel32\Interop.FileTypes.cs</Link>
@@ -315,17 +325,28 @@
     <Compile Include="System\Data\SqlClient\TdsParser.NetStandard.cs" />
   </ItemGroup>
 
-  // Manage the SNI toggle for Windows netstandard and UWP
+  <!-- Manage the SNI toggle for Windows netstandard and UWP -->
   <ItemGroup Condition="('$(TargetGroup)' == 'netstandard' OR '$(TargetGroup)' == 'netcoreapp') AND '$(TargetsWindows)' == 'true'">
-    // Manage the SNI toggle for Windows netstandard and UWP
+    <!-- Manage the SNI toggle for Windows netstandard and UWP -->
     <Compile Include="System\Data\SqlClient\SNI\SNITcpHandle.Windows.cs" />
     <Compile Include="System\Data\SqlClient\TdsParserStateObjectFactory.Windows.cs" />
     <Compile Include="System\Data\SqlClient\PacketHandle.Windows.cs" />
     <Compile Include="System\Data\SqlClient\SessionHandle.Windows.cs" />
     <AdditionalFiles Include="$(MSBuildProjectDirectory)/*.analyzerdata.windows" />
   </ItemGroup>
+<!-- 
+  <ItemGroup Condition="'$(IsUAPAssembly)' == 'true'">
+    <Compile Include="System\Data\SqlClient\SNI\SNITcpHandle.Windows.cs" />
+    <Compile Include="System\Data\SqlClient\TdsParserStateObjectFactory.Managed.cs" />
+    <Compile Include="System\Data\SqlClient\LocalDBAPI.uap.cs" />
+    <Compile Include="System\Data\SqlClient\SNI\LocalDB.uap.cs" />
+    <Compile Include="System\Data\ProviderBase\DbConnectionPoolIdentity.Unix.cs" />
+    <Compile Include="System\Data\SqlClient\TdsParser.Unix.cs" />
+    <Compile Include="System\Data\SqlClient\PacketHandle.Unix.cs" />
+    <Compile Include="System\Data\SqlClient\SessionHandle.Unix.cs" />
+  </ItemGroup> -->
 
-  // Assets needed on Windows but should be avoided on UAP to avoid sni.dll
+  <!-- Assets needed on Windows but should be avoided on UAP to avoid sni.dll -->
   <ItemGroup Condition=" '$(TargetsWindows)' == 'true' And '$(IsPartialFacadeAssembly)' != 'true'">
     <Compile Include="System\Data\SqlClient\TdsParserStateObjectNative.cs" />
     <Compile Include="Interop\SNINativeMethodWrapper.Windows.cs" />
@@ -352,7 +373,7 @@
     </Compile>
   </ItemGroup>
 
-  // Windows dependencies for Integrated Authentication for MANAGED_SNI build
+  <!-- Windows dependencies for Integrated Authentication for MANAGED_SNI build -->
   <ItemGroup Condition=" '$(TargetsWindows)' == 'true' And '$(IsPartialFacadeAssembly)' != 'true' ">
     <Compile Include="$(CommonPath)src\System\Net\Security\SecurityBufferType.Windows.cs">
       <Link>Common\System\Net\Security\SecurityBufferType.Windows.cs</Link>
@@ -455,8 +476,9 @@
     </Compile>
   </ItemGroup>
 
-  // Common (Windows and Unix) dependencies for MANAGED_SNI build
+  <!-- Common (Windows and Unix) dependencies for MANAGED_SNI build -->
   <ItemGroup Condition="'$(IsPartialFacadeAssembly)' != 'true' AND '$(OSGroup)' != 'AnyOS'">
+    <!--Reference Include="System.Memory" /-->
     <Compile Include="$(CommonPath)src\System\Net\ContextFlagsPal.cs">
       <Link>Common\System\Net\ContextFlagsPal.cs</Link>
     </Compile>
@@ -540,7 +562,7 @@
     <Reference Include="System.Data" />
     <Compile Include="System.Data.TypeForwards.cs" />
   </ItemGroup>
-
+  
   <ItemGroup>
     <EmbeddedResource Include="Resources\System.Data.SqlClient.SqlMetaData.xml">
       <LogicalName>System.Data.SqlClient.SqlMetaData.xml</LogicalName>
@@ -553,7 +575,10 @@
     <PackageReference Include="System.Text.Encoding.CodePages" />
   </ItemGroup>
 
-  <Import Project=".\GenerateThisAssemblyCs.targets" Condition="'$(IsPartialFacadeAssembly)' != 'true'" />
-  -->
+  <!--ItemGroup>
+    <PackageReference Include="Microsoft.SqlServer.Server" />
+  </ItemGroup-->
 
-  </Project>
+  <Import Project=".\GenerateThisAssemblyCs.targets" Condition="'$(IsPartialFacadeAssembly)' != 'true'" />
+
+</Project>

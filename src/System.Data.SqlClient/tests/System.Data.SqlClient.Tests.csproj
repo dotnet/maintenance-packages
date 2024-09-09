@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>$(NetMinimum);$(NetMinimum)-unix;$(NetMinimum)-windows;$(NetFrameworkMinimum)</TargetFrameworks>
+    <TargetFrameworks>$(NetMinimum);$(NetMinimum)-unix;$(NetMinimum)-windows</TargetFrameworks>
   </PropertyGroup>
 
   <ItemGroup>
