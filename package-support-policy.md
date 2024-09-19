@@ -9,7 +9,7 @@ Our packages support any target framework versions that are currently in-support
 Additionally, you can find out which target frameworks are currently in-support by visiting the following pages:
 
 - .NET: https://dotnet.microsoft.com/en-us/platform/support/policy
-- .NET Framework: https://dotnet.microsoft.com/en-us/learn/dotnet/what-is-dotnet-framework
+- .NET Framework: https://learn.microsoft.com/en-us/lifecycle/products/microsoft-net-framework
 
 Keep in mind that the minimum .NET Standard version supported by a package depends on which minimum .NET and .NET Framework versions are supported by the package. Packages and projects targeting .NET Standard are expected to be compatible between each other by following the same rules specified by our .NET Standard policy.
 
