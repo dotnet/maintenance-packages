@@ -33,7 +33,7 @@ These are packages that originally had their source code hosted in branches that
 
 ## End of support
 
-A package will be supported for as long as it targets frameworks that are still supported. For example: [System.Numerics.Vectors](https://www.nuget.org/packages/System.Json#supportedframeworks-body-tab). Of all the included target frameworks in the package, .NET Standard 2.0 is still in support at the moment of writing this document. As long as there are frameworks compatible with .NET Standard 2.0, the package will remain in support.
+A package will be supported for as long as it targets frameworks that are still supported. For example: [System.Numerics.Vectors](https://www.nuget.org/packages/System.Json#supportedframeworks-body-tab) will is supported because it provides an implementation on .NET Framework 4.6.2, which is still in support.
 
 ## Reporting issues
 
