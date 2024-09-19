@@ -61,6 +61,17 @@ This project hosts different packages from the .NET Platform that are still unde
       -AssemblyFileOrDirectoryRelativeDirectoryPath src/libraries \
       -DestinationRepoPath D:/maintenance-packages
     ```
+    
+    d. Migrating a package from .NET 6.0:
+    ```powershell
+      .\eng\Migrate-Package.ps1 \
+      -OriginRepoPath D:/runtime \
+      -OriginRemote upstream \
+      -OriginBranch v6.0.36 \
+      -AssemblyFileOrDirectoryToMigrate System.Migratable.Assembly \
+      -AssemblyFileOrDirectoryRelativeDirectoryPath src/libraries \
+      -DestinationRepoPath D:/maintenance-packages
+    ```
 
 Note to maintainers: You'll most likely have to port from the internal repo. Please consult with the @dotnet/area-infrastructure-libraries members for guidance on choosing the correct repo of origin and branch name.
 
