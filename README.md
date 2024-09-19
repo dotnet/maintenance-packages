@@ -3,8 +3,7 @@
 
 ## Description
 
-This project hosts different packages from the .NET Platform that are still under support but whose original home/branch is not building any longer. The main purpose of it is to be able to have a servicing vehicle for them using the latest toolset.
-
+This repo contains packages that are in maintenance and primary updated for servicing, as opposed to new features. They were previously hosted in repos or branches that are no longer active.
 
 ## Project FAQ
 
