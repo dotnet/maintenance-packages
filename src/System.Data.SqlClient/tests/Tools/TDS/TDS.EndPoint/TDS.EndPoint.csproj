@@ -49,7 +49,7 @@
     <Compile Include="SSPI\SSPIContext.Windows.cs" />
     <Compile Include="SSPI\SecurityWrapper.cs" />
   </ItemGroup>
-  <ItemGroup Condition="'$(TargetPlatformIdentifier)' == 'unix'">
+  <ItemGroup Condition="'$(TargetPlatformIdentifier)' != 'windows'">
     <Compile Include="SSPI\SSPIContext.Unix.cs" />
   </ItemGroup>
   <ItemGroup>
