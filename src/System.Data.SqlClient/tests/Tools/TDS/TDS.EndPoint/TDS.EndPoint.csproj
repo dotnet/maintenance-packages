@@ -42,14 +42,14 @@
     <Compile Include="TDSServerEndPointConnection.cs" />
     <Compile Include="TDSServerParser.cs" />
   </ItemGroup>
-  <ItemGroup Condition="'$(TargetPlatformIdentifier)' == 'windows'">
+  <ItemGroup Condition="'$(OS)' == 'Windows_NT'">
     <Compile Include="$(CommonPath)src\Interop\Windows\Interop.Libraries.cs">
       <Link>Common\Interop\Windows\Interop.Libraries.cs</Link>
     </Compile>
     <Compile Include="SSPI\SSPIContext.Windows.cs" />
     <Compile Include="SSPI\SecurityWrapper.cs" />
   </ItemGroup>
-  <ItemGroup Condition="'$(TargetPlatformIdentifier)' != 'windows'">
+  <ItemGroup Condition="'$(OS)' != 'Windows_NT'">
     <Compile Include="SSPI\SSPIContext.Unix.cs" />
   </ItemGroup>
   <ItemGroup>
