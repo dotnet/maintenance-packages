@@ -6,6 +6,7 @@ using System.Collections;
 using System.IO;
 using System.Reflection;
 using System.Text;
+using Microsoft.Samples.SqlServer;
 
 namespace System.Data.SqlClient.ManualTesting.Tests
 {
