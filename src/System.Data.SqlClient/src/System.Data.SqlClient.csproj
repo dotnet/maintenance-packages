@@ -21,7 +21,6 @@
 
   <!-- DesignTimeBuild requires all the TargetFramework Derived Properties to not be present in the first property group. -->
   <PropertyGroup>
-    <TargetPlatformIdentifier>$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)'))</TargetPlatformIdentifier>
     <GeneratePlatformNotSupportedAssemblyMessage Condition="'$(TargetPlatformIdentifier)' != 'windows'">SR.PlatformNotSupported_System_Data_SqlClient</GeneratePlatformNotSupportedAssemblyMessage>
   </PropertyGroup>
 
@@ -249,12 +248,12 @@
   </ItemGroup>
 
   <!-- SqlFileStream Unix Netcoreapp only -->
-  <ItemGroup Condition="'$(TargetGroup)' == 'netcoreapp' AND '$(TargetsUnix)' == 'true'">
+  <ItemGroup Condition="'$(TargetGroup)' == 'netcoreapp' AND '$(TargetPlatformIdentifier)' == 'unix'">
     <Compile Include="System\Data\SqlClient\SqlFileStream.Unsupported.cs" />
   </ItemGroup>
 
   <!-- SqlFileStream Windows Netcoreapp only -->
-  <ItemGroup Condition="'$(TargetGroup)' == 'netcoreapp' AND '$(TargetsWindows)' == 'true'">
+  <ItemGroup Condition="'$(TargetGroup)' == 'netcoreapp' AND '$(TargetPlatformIdentifier)' == 'windows'">
     <Compile Include="$(CommonPath)src\CoreLib\Interop\Windows\Kernel32\Interop.FileTypes.cs">
       <Link>Common\CoreLib\Interop\Windows\Kernel32\Interop.FileTypes.cs</Link>
     </Compile>
@@ -309,7 +308,7 @@
     <Compile Include="System\Data\SqlClient\SqlFileStream.Windows.cs" />
   </ItemGroup>
 
-  <ItemGroup Condition="'$(IsPartialFacadeAssembly)' != 'true' AND '$(OSGroup)' != 'AnyOS' AND '$(TargetGroup)' == 'netcoreapp'">
+  <ItemGroup Condition="'$(IsPartialFacadeAssembly)' != 'true' and '$(TargetGroup)' == 'netcoreapp'">
     <Compile Include="System\Data\Common\DbConnectionStringCommon.NetCoreApp.cs" />
     <Compile Include="System\Data\ProviderBase\DbConnectionPool.NetCoreApp.cs" />
     <Compile Include="System\Data\SqlClient\SqlConnectionString.NetCoreApp.cs" />
@@ -318,13 +317,13 @@
     <Compile Include="System\Data\SqlClient\TdsParser.NetCoreApp.cs" />
   </ItemGroup>
 
-  <ItemGroup Condition="'$(IsPartialFacadeAssembly)' != 'true' AND '$(OSGroup)' != 'AnyOS' AND '$(TargetGroup)' != 'netcoreapp'">
+  <ItemGroup Condition="'$(IsPartialFacadeAssembly)' != 'true' and '$(TargetGroup)' != 'netcoreapp'">
     <Compile Include="System\Data\SqlClient\SqlDelegatedTransaction.NetStandard.cs" />
     <Compile Include="System\Data\SqlClient\TdsParser.NetStandard.cs" />
   </ItemGroup>
 
   <!-- Manage the SNI toggle for Windows netstandard and UWP -->
-  <ItemGroup Condition="('$(TargetGroup)' == 'netstandard' OR '$(TargetGroup)' == 'netcoreapp') AND '$(TargetsWindows)' == 'true'">
+  <ItemGroup Condition="('$(TargetGroup)' == 'netstandard' OR '$(TargetGroup)' == 'netcoreapp') AND '$(TargetPlatformIdentifier)' == 'windows'">
     <!-- Manage the SNI toggle for Windows netstandard and UWP -->
     <Compile Include="System\Data\SqlClient\SNI\SNITcpHandle.Windows.cs" />
     <Compile Include="System\Data\SqlClient\TdsParserStateObjectFactory.Windows.cs" />
@@ -332,20 +331,9 @@
     <Compile Include="System\Data\SqlClient\SessionHandle.Windows.cs" />
     <AdditionalFiles Include="$(MSBuildProjectDirectory)/*.analyzerdata.windows" />
   </ItemGroup>
-<!-- 
-  <ItemGroup Condition="'$(IsUAPAssembly)' == 'true'">
-    <Compile Include="System\Data\SqlClient\SNI\SNITcpHandle.Windows.cs" />
-    <Compile Include="System\Data\SqlClient\TdsParserStateObjectFactory.Managed.cs" />
-    <Compile Include="System\Data\SqlClient\LocalDBAPI.uap.cs" />
-    <Compile Include="System\Data\SqlClient\SNI\LocalDB.uap.cs" />
-    <Compile Include="System\Data\ProviderBase\DbConnectionPoolIdentity.Unix.cs" />
-    <Compile Include="System\Data\SqlClient\TdsParser.Unix.cs" />
-    <Compile Include="System\Data\SqlClient\PacketHandle.Unix.cs" />
-    <Compile Include="System\Data\SqlClient\SessionHandle.Unix.cs" />
-  </ItemGroup> -->
 
   <!-- Assets needed on Windows but should be avoided on UAP to avoid sni.dll -->
-  <ItemGroup Condition=" '$(TargetsWindows)' == 'true' And '$(IsPartialFacadeAssembly)' != 'true'">
+  <ItemGroup Condition=" '$(TargetPlatformIdentifier)' == 'windows' And '$(IsPartialFacadeAssembly)' != 'true'">
     <Compile Include="System\Data\SqlClient\TdsParserStateObjectNative.cs" />
     <Compile Include="Interop\SNINativeMethodWrapper.Windows.cs" />
     <Compile Include="System\Data\SqlClient\TdsParserSafeHandles.cs" />
@@ -356,9 +344,6 @@
     <Compile Include="$(CommonPath)src\Interop\Windows\Kernel32\Interop.LoadLibraryEx.cs">
       <Link>Common\Interop\Windows\Kernel32\Interop.LoadLibraryEx.cs</Link>
     </Compile>
-  </ItemGroup>
-
-  <ItemGroup Condition=" '$(TargetsWindows)' == 'true' And '$(IsPartialFacadeAssembly)' != 'true'">
     <Compile Include="System\Data\SqlClient\LocalDBAPI.Common.cs" />
     <Compile Include="$(CommonPath)src\Interop\Windows\Kernel32\Interop.FreeLibrary.cs">
       <Link>Common\Interop\Windows\Kernel32\Interop.FreeLibrary.cs</Link>
@@ -369,10 +354,6 @@
     <Compile Include="$(CommonPath)src\CoreLib\Microsoft\Win32\SafeHandles\SafeLibraryHandle.cs">
       <Link>Common\CoreLib\Microsoft\Win32\SafeHandles\SafeLibraryHandle.cs</Link>
     </Compile>
-  </ItemGroup>
-
-  <!-- Windows dependencies for Integrated Authentication for MANAGED_SNI build -->
-  <ItemGroup Condition=" '$(TargetsWindows)' == 'true' And '$(IsPartialFacadeAssembly)' != 'true' ">
     <Compile Include="$(CommonPath)src\System\Net\Security\SecurityBufferType.Windows.cs">
       <Link>Common\System\Net\Security\SecurityBufferType.Windows.cs</Link>
     </Compile>
@@ -467,7 +448,7 @@
   </ItemGroup>
 
   <!-- Common (Windows and Unix) dependencies for MANAGED_SNI build -->
-  <ItemGroup Condition="'$(IsPartialFacadeAssembly)' != 'true' AND '$(OSGroup)' != 'AnyOS'">
+  <ItemGroup Condition="'$(IsPartialFacadeAssembly)' != 'true'">
     <!--Reference Include="System.Memory" /-->
     <Compile Include="$(CommonPath)src\System\Net\ContextFlagsPal.cs">
       <Link>Common\System\Net\ContextFlagsPal.cs</Link>
@@ -495,7 +476,7 @@
     </Compile>
   </ItemGroup>
 
-  <ItemGroup Condition=" '$(TargetsWindows)' != 'true' And '$(IsPartialFacadeAssembly)' != 'true' AND '$(OSGroup)' != 'AnyOS'">
+  <ItemGroup Condition=" '$(TargetPlatformIdentifier)' != 'windows' And '$(IsPartialFacadeAssembly)' != 'true'">
     <Compile Include="System\Data\ProviderBase\DbConnectionPoolIdentity.Unix.cs" />
     <Compile Include="Interop\SNINativeMethodWrapper.Unix.cs" />
     <Compile Include="$(CommonPath)src\System\Net\Security\NegotiateStreamPal.Unix.cs">
@@ -559,7 +540,7 @@
     </EmbeddedResource>
   </ItemGroup>
 
-  <ItemGroup Condition="'$(IsPartialFacadeAssembly)' != 'true' AND '$(OSGroup)' != 'AnyOS'">
+  <ItemGroup Condition="'$(IsPartialFacadeAssembly)' != 'true'">
     <PackageReference Include="System.Buffers" />
     <PackageReference Include="System.Diagnostics.DiagnosticSource" />
     <PackageReference Include="System.Text.Encoding.CodePages" />
