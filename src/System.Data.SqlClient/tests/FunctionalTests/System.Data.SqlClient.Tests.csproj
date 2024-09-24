@@ -1,12 +1,14 @@
 <Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
     <IncludeRemoteExecutor>true</IncludeRemoteExecutor>
-    <TargetFramework>$(NetMinimum)-windows</TargetFramework>
+    <TargetFrameworks>$(NetMinimum)-unix;$(NetMinimum)-windows</TargetFrameworks>
     <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
     <NoWarn>$(NoWarn);CA1001;CA1068;CA1069;CA1309;CA1310;CA1419;CA1711;CA1805;CA1806;CA1816;CA1822;CA1830;CA1834;CA1835;CA1836;CA1840;CA1844;CA2016;CA2101;CA2200;CA2201;CA2208;CA2219;CA2249;CA2251;CA5366;</NoWarn>
     <NoWarn>$(NoWarn);CS0168;CS0649;</NoWarn>
     <NoWarn>$(NoWarn);IDE0073;SYSLIB0004;nullable;</NoWarn>
   </PropertyGroup>
+
   <ItemGroup>
     <Compile Include="AADAccessTokenTest.cs" />
     <Compile Include="CloneTests.cs" />
@@ -32,6 +34,7 @@
     <Compile Include="..\ManualTests\DataCommon\DataTestUtility.cs" />
     <Compile Include="SqlFacetAttributeTest.cs" />
   </ItemGroup>
+
   <ItemGroup>
     <ProjectReference Include="..\..\src\System.Data.SqlClient.csproj" />
     <ProjectReference Include="..\ManualTests\SQL\UdtTest\UDTs\Address\Address.csproj">
@@ -47,7 +50,9 @@
       <Name>TDS</Name>
     </ProjectReference>
   </ItemGroup>
+
   <ItemGroup>
     <PackageReference Include="runtime.native.System.Data.SqlClient.sni" />
   </ItemGroup>
+
 </Project>

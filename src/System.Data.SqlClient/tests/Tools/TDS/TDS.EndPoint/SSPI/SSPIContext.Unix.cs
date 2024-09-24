@@ -12,7 +12,7 @@ namespace Microsoft.SqlServer.TDS.EndPoint.SSPI
     /// <summary>
     /// SSPI context
     /// </summary>
-    public class SSPIContext : IDisposable
+    public partial class SSPIContext : IDisposable
     {
         /// <summary>
         /// FInalizer
