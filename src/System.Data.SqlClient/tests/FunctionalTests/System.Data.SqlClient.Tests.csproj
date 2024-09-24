@@ -30,14 +30,11 @@
     <Compile Include="SqlConnectionBasicTests.cs" />
     <Compile Include="TestTdsServer.cs" />
     <Compile Include="..\ManualTests\DataCommon\DataTestUtility.cs" />
-  </ItemGroup>
-  <ItemGroup Condition="'$(TargetsNetCoreApp)' == 'true'">
     <Compile Include="SqlFacetAttributeTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\src\System.Data.SqlClient.csproj" />
     <ProjectReference Include="..\ManualTests\SQL\UdtTest\UDTs\Address\Address.csproj">
-      <Project>{d1392b54-998a-4f27-bc17-4ce149117bcc}</Project>
       <Name>Address</Name>
     </ProjectReference>
     <ProjectReference Include="..\Tools\TDS\TDS.Servers\TDS.Servers.csproj">

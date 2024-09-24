@@ -11,9 +11,7 @@
     <TargetGroup Condition="$([MSBuild]::GetTargetFrameworkIdentifier('$(TargetFramework)')) == '.NETCoreApp'">netcoreapp</TargetGroup>
     <TargetGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">netstandard</TargetGroup>
     <IsPartialFacadeAssembly Condition="'$(TargetGroup)' == 'netfx'">true</IsPartialFacadeAssembly>
-    <NoWarn>$(NoWarn);CA1001;CA1068;CA1069;CA1309;CA1310;CA1419;CA1711;CA1805;CA1806;CA1816;CA1822;CA1830;CA1834;CA1835;CA1836;CA1840;CA1844;CA2016;CA2101;CA2200;CA2201;CA2208;CA2219;CA2249;CA2251;CA5366;</NoWarn>
-    <NoWarn>$(NoWarn);CS0168;CS0649;</NoWarn>
-    <NoWarn>$(NoWarn);IDE0073;SYSLIB0004;nullable;</NoWarn>
+    <NoWarn>$(NoWarn);CA1001;CA1068;CA1069;CA1309;CA1310;CA1419;CA1711;CA1805;CA1806;CA1816;CA1822;CA1830;CA1834;CA1835;CA1836;CA1840;CA1844;CA2016;CA2101;CA2200;CA2201;CA2208;CA2219;CA2249;CA2251;CA5366;CS0168;CS0649;IDE0073;SYSLIB0004;nullable;</NoWarn>
     <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
     <DefineConstants Condition="'$(TargetGroup)' == 'netstandard'">$(DefineConstants);netstandard</DefineConstants>
     <DefineConstants Condition="'$(TargetGroup)' == 'netcoreapp'">$(DefineConstants);netcoreapp</DefineConstants>
@@ -417,18 +415,10 @@
     <Compile Include="$(CommonPath)src\System\Net\Security\NetEventSource.Security.Windows.cs">
       <Link>Common\System\Net\Security\NetEventSource.Security.Windows.cs</Link>
     </Compile>
-    <Compile Include="$(CommonPath)src\CoreLib\Interop\Windows\Kernel32\Interop.CloseHandle.cs">
-      <Link>Common\CoreLib\Interop\Windows\Kernel32\Interop.CloseHandle.cs</Link>
-    </Compile>
-    <Compile Include="$(CommonPath)src\Interop\Windows\SspiCli\GlobalSSPI.cs">
-      <Link>Common\Interop\Windows\SspiCli\GlobalSSPI.cs</Link>
-    </Compile>
-    <Compile Include="$(CommonPath)src\Interop\Windows\SspiCli\SSPIInterface.cs">
-      <Link>Common\Interop\Windows\SspiCli\SSPIInterface.cs</Link>
-    </Compile>
-    <Compile Include="$(CommonPath)src\Interop\Windows\SspiCli\SecurityPackageInfoClass.cs">
-      <Link>Common\Interop\Windows\SspiCli\SecurityPackageInfoClass.cs</Link>
-    </Compile>
+    <Compile Include="src\Common\Interop\Windows\Kernel32\Interop.CloseHandle.cs" />
+    <Compile Include="src\Common\Interop\Windows\SspiCli\GlobalSSPI.cs" />
+    <Compile Include="src\Common\Interop\Windows\SspiCli\SSPIInterface.cs" />
+    <Compile Include="src\Common\Interop\Windows\SspiCli\SecurityPackageInfoClass.cs" />
     <Compile Include="$(CommonPath)src\Interop\Windows\SspiCli\SecurityPackageInfo.cs">
       <Link>Common\Interop\Windows\SspiCli\SecurityPackageInfo.cs</Link>
     </Compile>
