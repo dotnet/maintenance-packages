@@ -227,6 +227,7 @@ namespace System.Data.SqlClient.ManualTesting.Tests
                     ((IDisposable)_output).Dispose();
                 }
                 _output = null;
+                base.Dispose(disposing);
             }
 
             public override void Flush()
