@@ -4,6 +4,10 @@
     {
       "placeholder": "PLACEHOLDER",
       "_justification": "This is the password used for the TdsServerCertificate.pfx file in the project. It is used for testing purposes only."
+    },
+    {
+      "file": "\\src\\System.Data.SqlClient\\tests\\Tools\\TDS\\TDS.Servers\\TdsServerCertificate.pfx",
+      "_justification": "Certificate file used in TDS unit tests required to start the mock server."
     }
   ]
 }
