@@ -83,7 +83,7 @@ namespace System.Data.SqlClient.ManualTesting.Tests
         }
 
         [ConditionalFact(typeof(DataTestUtility),nameof(DataTestUtility.AreConnStringsSetup))]
-        public static void TestUdtSqlDataReaderGetSqlBytes()
+        public static void TestUdtSqlDataReaderGetSqlBytes1()
         {
             TestUdtSqlDataReaderGetSqlBytes(CommandBehavior.Default);
         }
@@ -126,7 +126,7 @@ namespace System.Data.SqlClient.ManualTesting.Tests
         }
 
         [ConditionalFact(typeof(DataTestUtility),nameof(DataTestUtility.AreConnStringsSetup))]
-        public static void TestUdtSqlDataReaderGetBytes()
+        public static void TestUdtSqlDataReaderGetBytes1()
         {
             TestUdtSqlDataReaderGetBytes(CommandBehavior.Default);
         }
@@ -182,7 +182,7 @@ namespace System.Data.SqlClient.ManualTesting.Tests
         }
 
         [ConditionalFact(typeof(DataTestUtility),nameof(DataTestUtility.AreConnStringsSetup))]
-        public static void TestUdtSqlDataReaderGetStream()
+        public static void TestUdtSqlDataReaderGetStream2()
         {
             TestUdtSqlDataReaderGetStream(CommandBehavior.Default);
         }

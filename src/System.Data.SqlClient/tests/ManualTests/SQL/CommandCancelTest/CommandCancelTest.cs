@@ -100,19 +100,19 @@ namespace System.Data.SqlClient.ManualTesting.Tests
         }
 
         [ConditionalFact(typeof(DataTestUtility),nameof(DataTestUtility.AreConnStringsSetup))]
-        public static void TimeoutCancel()
+        public static void TimeoutCancel1()
         {
             TimeoutCancel(s_connStr);
         }
 
         [ConditionalFact(typeof(DataTestUtility),nameof(DataTestUtility.AreConnStringsSetup))]
-        public static void CancelAndDisposePreparedCommand()
+        public static void CancelAndDisposePreparedCommand1()
         {
             CancelAndDisposePreparedCommand(s_connStr);
         }
 
         [ConditionalFact(typeof(DataTestUtility),nameof(DataTestUtility.AreConnStringsSetup))]
-        public static void TimeOutDuringRead()
+        public static void TimeOutDuringRead1()
         {
             TimeOutDuringRead(s_connStr);
         }

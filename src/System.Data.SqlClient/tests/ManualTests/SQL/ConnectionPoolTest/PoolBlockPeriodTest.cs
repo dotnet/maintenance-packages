@@ -32,7 +32,9 @@ namespace System.Data.SqlClient.ManualTesting.Tests
         [InlineData("Azure with Auto Policy must Disable Blocking", new object[] { AzureEndpointSample, PoolBlockingPeriod.Auto })]
         [InlineData("Azure with Always Policy must Enable Blocking", new object[] { AzureEndpointSample, PoolBlockingPeriod.AlwaysBlock })]
         [InlineData("Azure with Never Policy must Disable Blocking", new object[] { AzureEndpointSample, PoolBlockingPeriod.NeverBlock })]
+#pragma warning disable xUnit1026 // Theory methods should use all of their parameters
         public void TestAzureBlockingPeriod(string description, object[] Params)
+#pragma warning restore xUnit1026 // Theory methods should use all of their parameters
         {
             string serverName = Params[0] as string;
             PoolBlockingPeriod? policy = null;
@@ -52,7 +54,9 @@ namespace System.Data.SqlClient.ManualTesting.Tests
         [InlineData("NonAzure with Never Policy must Disable Blocking", new object[] { NonExistentServer, PoolBlockingPeriod.NeverBlock })]
         [InlineData("NonAzure (which contains azure endpoint - nonexistent.WINDOWS.net) with Default Policy must Enable Blocking", new object[] { "nonexistent.windows.net" })]
         [InlineData("NonAzure (which contains azure endpoint - nonexistent.database.windows.net.else) with Default Policy must Enable Blocking", new object[] { "nonexistent.database.windows.net.else" })]
+#pragma warning disable xUnit1026 // Theory methods should use all of their parameters
         public void TestNonAzureBlockingPeriod(string description, object[] Params)
+#pragma warning restore xUnit1026 // Theory methods should use all of their parameters
         {
             string serverName = Params[0] as string;
             PoolBlockingPeriod? policy = null;
@@ -73,7 +77,9 @@ namespace System.Data.SqlClient.ManualTesting.Tests
         [InlineData("Test policy with Always (PascalCase)", "AlwaysBlock")]
         [InlineData("Test policy with Never (lowercase)", "neverblock")]
         [InlineData("Test policy with Never (PascalCase)", "NeverBlock")]
+#pragma warning disable xUnit1026 // Theory methods should use all of their parameters
         public void TestSetPolicyWithVariations(string description, string policyString)
+#pragma warning restore xUnit1026 // Theory methods should use all of their parameters
         {
             PoolBlockingPeriod? policy = null;
             if (policyString.ToLower().Contains("auto"))

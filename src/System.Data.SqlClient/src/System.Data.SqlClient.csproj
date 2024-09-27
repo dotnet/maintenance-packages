@@ -396,10 +396,10 @@
     <Compile Include="$(CommonPath)src\System\Net\Security\NetEventSource.Security.Windows.cs">
       <Link>Common\System\Net\Security\NetEventSource.Security.Windows.cs</Link>
     </Compile>
-    <Compile Include="src\Common\Interop\Windows\Kernel32\Interop.CloseHandle.cs" />
-    <Compile Include="src\Common\Interop\Windows\SspiCli\GlobalSSPI.cs" />
-    <Compile Include="src\Common\Interop\Windows\SspiCli\SSPIInterface.cs" />
-    <Compile Include="src\Common\Interop\Windows\SspiCli\SecurityPackageInfoClass.cs" />
+    <Compile Include="Common\Interop\Windows\Kernel32\Interop.CloseHandle.cs" />
+    <Compile Include="Common\Interop\Windows\SspiCli\GlobalSSPI.cs" />
+    <Compile Include="Common\Interop\Windows\SspiCli\SSPIInterface.cs" />
+    <Compile Include="Common\Interop\Windows\SspiCli\SecurityPackageInfoClass.cs" />
     <Compile Include="$(CommonPath)src\Interop\Windows\SspiCli\SecurityPackageInfo.cs">
       <Link>Common\Interop\Windows\SspiCli\SecurityPackageInfo.cs</Link>
     </Compile>
