@@ -55,6 +55,9 @@ extends:
     - stage: build
       displayName: CI
       jobs:
+
+      # Official rolling build (main) - runs tests, does not pack
+
       - template: /eng/common/templates-official/jobs/jobs.yml@self
         parameters:
           artifacts:
@@ -72,7 +75,7 @@ extends:
             clean: all
           jobs:
           - job: build_windows
-            displayName: 'Build Windows'
+            displayName: 'Build and test Windows'
             timeoutInMinutes: 60
             pool:
               name: $(DncEngInternalBuildPool)
@@ -86,6 +89,45 @@ extends:
             - script: eng\common\cibuild.cmd
                 -configuration Release
                 -prepareMachine
+                $(_AdditionalBuildArgs)
+                $(_InternalBuildArgs)
+              displayName: $(_BuildJobDisplayName)
+
+      # Official rolling build (internal/main) - does not run tests, packs
+
+      - template: /eng/common/templates-official/jobs/jobs.yml@self
+        parameters:
+          artifacts:
+            publish:
+              artifacts: false
+              logs: true
+              manifests: true
+          enableMicrobuild: true
+          enablePublishUsingPipelines: true
+          publishAssetsImmediately: true
+          enablePublishTestResults: true
+          testResultsFormat: vstest
+          enableSourceIndex: ${{ and(eq(variables._RunAsInternal, True), eq(variables['Build.SourceBranch'], 'refs/heads/internal/main')) }}
+          workspace:
+            clean: all
+          jobs:
+          - job: build_windows
+            displayName: 'Build and pack Windows'
+            timeoutInMinutes: 60
+            pool:
+              name: $(DncEngInternalBuildPool)
+              image: $(WindowsImage)
+              os: windows
+            preSteps:
+            - checkout: self
+              fetchDepth: 0
+              clean: true
+            steps:
+            - script: eng\common\cibuild.cmd
+                -configuration Release
+                -prepareMachine
+                /p:SkipTests=true
+                /p:IsPackable=true
                 $(_AdditionalBuildArgs)
                 $(_InternalBuildArgs)
               displayName: $(_BuildJobDisplayName)
