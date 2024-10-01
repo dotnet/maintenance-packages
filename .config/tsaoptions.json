@@ -1,0 +1,11 @@
+{
+    "instanceUrl": "https://devdiv.visualstudio.com/",
+    "template": "TFSDEVDIV",
+    "projectName": "DEVDIV",
+    "areaPath": "DevDiv\\NET Libraries",
+    "iterationPath": "DevDiv",
+    "notificationAliases": [ "runtimerepo-infra@microsoft.com" ],
+    "repositoryName": "maintenance-packages",
+    "codebaseName": "maintenance-packages",
+    "serviceTreeId": "1dc8dedc-8f5f-4b94-b182-ec3bdfb207b0"
+}
