@@ -56,7 +56,7 @@ extends:
       displayName: CI
       jobs:
 
-      # Official rolling build (main) - runs tests, does not pack
+      # Official rolling build (main) - runs tests
 
       - ${{ if and(eq(variables._RunAsInternal, True), ne(variables['Build.SourceBranch'], 'refs/heads/internal/main')) }}:
         - template: /eng/common/templates-official/jobs/jobs.yml@self
@@ -94,7 +94,7 @@ extends:
                   $(_InternalBuildArgs)
                 displayName: $(_BuildJobDisplayName)
 
-      # Official rolling build (internal/main) - does not run tests, packs
+      # Official rolling build (internal/main) - does not run tests
 
       - ${{ if and(eq(variables._RunAsInternal, True), eq(variables['Build.SourceBranch'], 'refs/heads/internal/main')) }}:
         - template: /eng/common/templates-official/jobs/jobs.yml@self
@@ -129,7 +129,6 @@ extends:
                   -configuration Release
                   -prepareMachine
                   /p:SkipTests=true
-                  /p:IsPackable=true
                   $(_AdditionalBuildArgs)
                   $(_InternalBuildArgs)
                 displayName: $(_BuildJobDisplayName)
