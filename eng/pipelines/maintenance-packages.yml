@@ -58,7 +58,7 @@ extends:
 
       # Official rolling build (main) - runs tests, does not pack
 
-      - ${{ if and(eq(variables._RunAsInternal, True), eq(variables['Build.SourceBranch'], 'refs/heads/main')) }}:
+      - ${{ if and(eq(variables._RunAsInternal, True), ne(variables['Build.SourceBranch'], 'refs/heads/internal/main')) }}:
         - template: /eng/common/templates-official/jobs/jobs.yml@self
           parameters:
             artifacts:
