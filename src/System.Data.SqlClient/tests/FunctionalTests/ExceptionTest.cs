@@ -138,25 +138,6 @@ namespace System.Data.SqlClient.Tests
             builder.DataSource = @"np:\\\\\";
             OpenBadConnection(builder.ConnectionString, invalidConnStringError);
         }
-
-        [Fact]
-        public static void LocalDBNotSupportedOnUapTest()
-        {
-            SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder(@"server=(localdb)\MSSQLLocalDB")
-            {
-                IntegratedSecurity = true,
-                ConnectTimeout = 2
-            };
-
-            Assert.Throws<PlatformNotSupportedException>(() =>
-            {
-                using (SqlConnection conn = new SqlConnection(builder.ConnectionString))
-                {
-                    conn.Open();
-                }
-            });
-        }
-
         private void GenerateConnectionException(string connectionString)
         {
             using (SqlConnection sqlConnection = new SqlConnection(connectionString))

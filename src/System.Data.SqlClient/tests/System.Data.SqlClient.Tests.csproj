@@ -2,10 +2,11 @@
 
   <PropertyGroup>
     <TargetFrameworks>$(NetMinimum)-unix;$(NetMinimum)-windows</TargetFrameworks>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\System.Data.SqlClient.csproj" />
+    <ProjectReference Include="FunctionalTests\System.Data.SqlClient.FunctionalTesting.Tests.csproj" />
     <PackageReference Include="Microsoft.DotNet.Build.Tasks.TargetFramework" PrivateAssets="all" />
   </ItemGroup>
 
