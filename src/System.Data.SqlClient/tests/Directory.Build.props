@@ -1,7 +1,0 @@
-<Project>
-
-  <ItemGroup>
-    <ProjectReference Include="**\*.csproj" />
-  </ItemGroup>
-
-</Project>

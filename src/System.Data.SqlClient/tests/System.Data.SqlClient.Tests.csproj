@@ -1,0 +1,58 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <IncludeRemoteExecutor>true</IncludeRemoteExecutor>
+    <TargetFrameworks>$(NetMinimum)-unix;$(NetMinimum)-windows</TargetFrameworks>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <NoWarn>$(NoWarn);CA1001;CA1068;CA1069;CA1309;CA1310;CA1419;CA1711;CA1805;CA1806;CA1816;CA1822;CA1830;CA1834;CA1835;CA1836;CA1840;CA1844;CA2016;CA2101;CA2200;CA2201;CA2208;CA2219;CA2241;CA2249;CA2251;CA5366;</NoWarn>
+    <NoWarn>$(NoWarn);CS0168;CS0649;</NoWarn>
+    <NoWarn>$(NoWarn);IDE0073;SYSLIB0004;nullable;</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="FunctionalTests\AADAccessTokenTest.cs" />
+    <Compile Include="FunctionalTests\CloneTests.cs" />
+    <Compile Include="FunctionalTests\BaseProviderAsyncTest\BaseProviderAsyncTest.cs" />
+    <Compile Include="FunctionalTests\BaseProviderAsyncTest\MockCommand.cs" />
+    <Compile Include="FunctionalTests\BaseProviderAsyncTest\MockConnection.cs" />
+    <Compile Include="FunctionalTests\BaseProviderAsyncTest\MockDataReader.cs" />
+    <Compile Include="FunctionalTests\SqlCredentialTest.cs" />
+    <Compile Include="FunctionalTests\DiagnosticTest.cs" />
+    <Compile Include="FunctionalTests\AmbientTransactionFailureTest.cs" />
+    <Compile Include="FunctionalTests\ExceptionTest.cs" />
+    <Compile Include="FunctionalTests\FakeDiagnosticListenerObserver.cs" />
+    <Compile Include="FunctionalTests\SqlBulkCopyColumnMappingCollectionTest.cs" />
+    <Compile Include="FunctionalTests\SqlDataRecordTest.cs" />
+    <Compile Include="FunctionalTests\SqlMetaDataTest.cs" />
+    <Compile Include="FunctionalTests\SqlParameterTest.cs" />
+    <Compile Include="FunctionalTests\SqlClientFactoryTest.cs" />
+    <Compile Include="FunctionalTests\SqlConnectionTest.RetrieveStatistics.cs" />
+    <Compile Include="FunctionalTests\SqlErrorCollectionTest.cs" />
+    <Compile Include="FunctionalTests\TcpDefaultForAzureTest.cs" />
+    <Compile Include="FunctionalTests\SqlConnectionBasicTests.cs" />
+    <Compile Include="FunctionalTests\TestTdsServer.cs" />
+    <Compile Include="FunctionalTests\SqlFacetAttributeTest.cs" />
+    <Compile Include="ManualTests\DataCommon\DataTestUtility.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\src\System.Data.SqlClient.csproj" />
+    <ProjectReference Include="ManualTests\SQL\UdtTest\UDTs\Address\Address.csproj">
+      <Name>Address</Name>
+    </ProjectReference>
+    <ProjectReference Include="Tools\TDS\TDS.Servers\TDS.Servers.csproj">
+      <Name>TDS.Servers</Name>
+    </ProjectReference>
+    <ProjectReference Include="Tools\TDS\TDS.EndPoint\TDS.EndPoint.csproj">
+      <Name>TDS.EndPoint</Name>
+    </ProjectReference>
+    <ProjectReference Include="Tools\TDS\TDS\TDS.csproj">
+      <Name>TDS</Name>
+    </ProjectReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="runtime.native.System.Data.SqlClient.sni" />
+  </ItemGroup>
+
+</Project>
