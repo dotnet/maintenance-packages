@@ -7,7 +7,7 @@
 
   <!-- Package servicing properties -->
   <PropertyGroup>
-    <IsPackable>false</IsPackable>
+    <IsPackable>true</IsPackable>
     <VersionPrefix>4.7.1</VersionPrefix>
     <VersionPrefix Condition="'$(IsPackable)' == 'true'">4.8.0</VersionPrefix>
     <AssemblyVersion>2.0.8.0</AssemblyVersion>
