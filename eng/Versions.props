@@ -1,14 +1,15 @@
 <Project>
   <PropertyGroup>
-    <PreReleaseVersionLabel>prerelease</PreReleaseVersionLabel>
+    <PreReleaseVersionLabel>preview</PreReleaseVersionLabel>
+    <PreReleaseVersionIteration>1</PreReleaseVersionIteration>
     <!-- Opt-out repo features -->
     <UseVSTestRunner>true</UseVSTestRunner>
     <UsingToolXliff>false</UsingToolXliff>
   </PropertyGroup>
   <PropertyGroup>
     <!-- Arcade dependencies -->
-    <MicrosoftDotNetRemoteExecutorVersion>8.0.0-beta.24426.2</MicrosoftDotNetRemoteExecutorVersion>
-    <MicrosoftDotNetXUnitExtensionsVersion>8.0.0-beta.24426.2</MicrosoftDotNetXUnitExtensionsVersion>
-    <MicrosoftDotNetBuildTasksTargetFrameworkVersion>8.0.0-beta.24426.2</MicrosoftDotNetBuildTasksTargetFrameworkVersion>
+    <MicrosoftDotNetRemoteExecutorVersion>8.0.0-beta.24475.3</MicrosoftDotNetRemoteExecutorVersion>
+    <MicrosoftDotNetXUnitExtensionsVersion>8.0.0-beta.24475.3</MicrosoftDotNetXUnitExtensionsVersion>
+    <MicrosoftDotNetBuildTasksTargetFrameworkVersion>8.0.0-beta.24475.3</MicrosoftDotNetBuildTasksTargetFrameworkVersion>
   </PropertyGroup>
 </Project>

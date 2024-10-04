@@ -4,6 +4,8 @@ trigger:
     include:
     - main
     - release/*
+    - internal/main
+    - internal/release/*
 
 variables:
 - name: LinuxImage
@@ -40,6 +42,10 @@ extends:
       binskim:
         enabled: true
         scanOutputDirectoryOnly: true
+      policheck:
+        enabled: true
+      tsa:
+        enabled: true
     pool:
       name: $(DncEngInternalBuildPool)
       image: $(WindowsImage)
@@ -61,14 +67,12 @@ extends:
           enableMicrobuild: true
           enablePublishUsingPipelines: true
           publishAssetsImmediately: true
-          enablePublishTestResults: true
-          testResultsFormat: vstest
-          enableSourceIndex: ${{ and(eq(variables._RunAsInternal, True), eq(variables['Build.SourceBranch'], 'refs/heads/main')) }}
+          enableSourceIndex: ${{ and(eq(variables._RunAsInternal, True), eq(variables['Build.SourceBranch'], 'refs/heads/internal/main')) }}
           workspace:
             clean: all
           jobs:
-          - job: build_windows
-            displayName: 'Build Windows'
+          - job: build_and_pack_windows
+            displayName: 'Build and pack Windows'
             timeoutInMinutes: 60
             pool:
               name: $(DncEngInternalBuildPool)
@@ -82,6 +86,7 @@ extends:
             - script: eng\common\cibuild.cmd
                 -configuration Release
                 -prepareMachine
+                /p:SkipTests=true
                 $(_AdditionalBuildArgs)
                 $(_InternalBuildArgs)
               displayName: $(_BuildJobDisplayName)

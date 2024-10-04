@@ -1452,8 +1452,7 @@ namespace System.Data.ProviderBase
                 // Calling PrePush prevents the object from being reclaimed
                 // once we leave the lock, because it sets _pooledCount such
                 // that it won't appear to be out of the pool.  What that
-                // means, is that we're now responsible for this connection:
-                // it won't get reclaimed if we drop the ball somewhere.
+                // means, is that we're now responsible for this connection.
                 obj.PrePush(owningObject);
             }
 
