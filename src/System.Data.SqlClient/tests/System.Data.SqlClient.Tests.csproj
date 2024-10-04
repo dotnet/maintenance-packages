@@ -3,14 +3,6 @@
   <PropertyGroup>
     <TargetFrameworks>$(NetMinimum)-windows;$(NetMinimum)-unix</TargetFrameworks>
   </PropertyGroup>
-    
-  <PropertyGroup Condition="'$(OS)' == 'Windows_NT'">
-    <TargetFrameworks>$(NetMinimum)-windows</TargetFrameworks>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(OS)' != 'Windows_NT'">
-    <TargetFrameworks>$(NetMinimum)-unix</TargetFrameworks>
-  </PropertyGroup>
 
   <PropertyGroup>
     <IncludeRemoteExecutor>true</IncludeRemoteExecutor>
