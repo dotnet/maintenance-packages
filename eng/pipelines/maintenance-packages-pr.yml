@@ -4,6 +4,8 @@ trigger:
     include:
     - main
     - release/*
+    - internal/main
+    - internal/release/*
 
 pr:
   branches:
