@@ -67,8 +67,6 @@ extends:
           enableMicrobuild: true
           enablePublishUsingPipelines: true
           publishAssetsImmediately: true
-          enablePublishTestResults: true
-          testResultsFormat: vstest
           enableSourceIndex: ${{ and(eq(variables._RunAsInternal, True), eq(variables['Build.SourceBranch'], 'refs/heads/internal/main')) }}
           workspace:
             clean: all
