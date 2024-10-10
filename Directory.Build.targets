@@ -15,6 +15,9 @@
   <PropertyGroup Condition="'$(IsTestProject)' == 'true'">
     <!-- Don't run .NET Framework only tests on non Windows. -->
     <SkipTests Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework' and '$(OS)' != 'Windows_NT'">true</SkipTests>
+    <!-- Make sure the target platform identifier matches the OS for running tests. -->
+    <SkipTests Condition="'$(TargetPlatformIdentifier)' == 'windows' and '$(OS)' != 'Windows_NT'">true</SkipTests>
+    <SkipTests Condition="'$(TargetPlatformIdentifier)' == 'unix' and '$(OS)' == 'Windows_NT'">true</SkipTests>
     <!-- Unsafe code is required by PlatformDetection. -->
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
