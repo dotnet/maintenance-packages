@@ -17,9 +17,8 @@ System.Runtime.CompilerServices.Unsafe</PackageDescription>
   </PropertyGroup>
 
   <!-- Package servicing properties -->
-  <!-- VersionPrefix is defined in the parent folder's Directory.Build.props -->
+  <!-- VersionPrefix and IsPackable are defined in the parent folder's Directory.Build.props -->
   <PropertyGroup>
-    <IsPackable>true</IsPackable>
     <AssemblyVersion Condition="$([MSBuild]::GetTargetFrameworkIdentifier('$(TargetFramework)')) == '.NETFramework'">6.0.0.0</AssemblyVersion>
     <AssemblyVersion Condition="'$(IsPackable)' == 'true' and $([MSBuild]::GetTargetFrameworkIdentifier('$(TargetFramework)')) == '.NETFramework'">6.0.1.0</AssemblyVersion>
     <PackageValidationBaselineVersion>4.7.1</PackageValidationBaselineVersion>
