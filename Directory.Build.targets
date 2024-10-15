@@ -44,4 +44,22 @@
     <PackageReference Include="Microsoft.DotNet.XUnitExtensions" />
   </ItemGroup>
 
+  <ItemGroup Condition="'$(IsTestProject)' != 'true' and '$(ExcludeFromAssemblyMetadata)' != 'true'" >
+    <AssemblyAttribute Include="System.Reflection.AssemblyDefaultAliasAttribute">
+      <_Parameter1>$(AssemblyName)</_Parameter1>
+    </AssemblyAttribute>
+    <AssemblyAttribute Include="System.Reflection.AssemblyDescriptionAttribute">
+      <_Parameter1>$(AssemblyName)</_Parameter1>
+    </AssemblyAttribute>
+    <AssemblyMetadata Include="PreferInbox">
+      <Value>True</Value>
+    </AssemblyMetadata>
+    <AssemblyMetadata Include="Serviceable">
+      <Value>True</Value>
+    </AssemblyMetadata>
+    <AssemblyMetadata Include=".NETFrameworkAssembly">
+      <Value></Value>
+    </AssemblyMetadata>
+  </ItemGroup>
+
 </Project>
