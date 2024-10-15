@@ -761,7 +761,6 @@ namespace System.Numerics
         /// </summary>
         /// <param name="value">The source vector</param>
         /// <returns>The reinterpreted vector.</returns>
-        [CLSCompliant(false)]
         [MethodImplAttribute(MethodImplOptions.AggressiveInlining)]
         public static Vector<SByte> AsVectorSByte<T>(Vector<T> value) where T : struct
         {
@@ -773,7 +772,6 @@ namespace System.Numerics
         /// </summary>
         /// <param name="value">The source vector</param>
         /// <returns>The reinterpreted vector.</returns>
-        [CLSCompliant(false)]
         [MethodImplAttribute(MethodImplOptions.AggressiveInlining)]
         public static Vector<UInt16> AsVectorUInt16<T>(Vector<T> value) where T : struct
         {
@@ -796,7 +794,6 @@ namespace System.Numerics
         /// </summary>
         /// <param name="value">The source vector</param>
         /// <returns>The reinterpreted vector.</returns>
-        [CLSCompliant(false)]
         [MethodImplAttribute(MethodImplOptions.AggressiveInlining)]
         public static Vector<UInt32> AsVectorUInt32<T>(Vector<T> value) where T : struct
         {
@@ -819,7 +816,6 @@ namespace System.Numerics
         /// </summary>
         /// <param name="value">The source vector</param>
         /// <returns>The reinterpreted vector.</returns>
-        [CLSCompliant(false)]
         [MethodImplAttribute(MethodImplOptions.AggressiveInlining)]
         public static Vector<UInt64> AsVectorUInt64<T>(Vector<T> value) where T : struct
         {
