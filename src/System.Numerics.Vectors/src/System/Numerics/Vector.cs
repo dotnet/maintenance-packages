@@ -2829,6 +2829,7 @@ namespace System.Numerics
         /// </summary>
         /// <param name="value">The source vector</param>
         /// <returns>The reinterpreted vector.</returns>
+        [CLSCompliant(false)]
         [Intrinsic]
         public static explicit operator Vector<SByte>(Vector<T> value)
         {
@@ -2840,6 +2841,7 @@ namespace System.Numerics
         /// </summary>
         /// <param name="value">The source vector</param>
         /// <returns>The reinterpreted vector.</returns>
+        [CLSCompliant(false)]
         [Intrinsic]
         public static explicit operator Vector<UInt16>(Vector<T> value)
         {
@@ -2862,6 +2864,7 @@ namespace System.Numerics
         /// </summary>
         /// <param name="value">The source vector</param>
         /// <returns>The reinterpreted vector.</returns>
+        [CLSCompliant(false)]
         [Intrinsic]
         public static explicit operator Vector<UInt32>(Vector<T> value)
         {
@@ -2884,6 +2887,7 @@ namespace System.Numerics
         /// </summary>
         /// <param name="value">The source vector</param>
         /// <returns>The reinterpreted vector.</returns>
+        [CLSCompliant(false)]
         [Intrinsic]
         public static explicit operator Vector<UInt64>(Vector<T> value)
         {
@@ -4995,6 +4999,7 @@ namespace System.Numerics
         /// <param name="low">The first output vector, whose elements will contain the widened elements from lower indices in the source vector.</param>
         /// <param name="high">The second output vector, whose elements will contain the widened elements from higher indices in the source vector.</param>
         /// </summary>
+        [CLSCompliant(false)]
         [Intrinsic]
         public static unsafe void Widen(Vector<Byte> source, out Vector<UInt16> low, out Vector<UInt16> high)
         {
@@ -5020,6 +5025,7 @@ namespace System.Numerics
         /// <param name="low">The first output vector, whose elements will contain the widened elements from lower indices in the source vector.</param>
         /// <param name="high">The second output vector, whose elements will contain the widened elements from higher indices in the source vector.</param>
         /// </summary>
+        [CLSCompliant(false)]
         [Intrinsic]
         public static unsafe void Widen(Vector<UInt16> source, out Vector<UInt32> low, out Vector<UInt32> high)
         {
@@ -5045,6 +5051,7 @@ namespace System.Numerics
         /// <param name="low">The first output vector, whose elements will contain the widened elements from lower indices in the source vector.</param>
         /// <param name="high">The second output vector, whose elements will contain the widened elements from higher indices in the source vector.</param>
         /// </summary>
+        [CLSCompliant(false)]
         [Intrinsic]
         public static unsafe void Widen(Vector<UInt32> source, out Vector<UInt64> low, out Vector<UInt64> high)
         {
@@ -5070,6 +5077,7 @@ namespace System.Numerics
         /// <param name="low">The first output vector, whose elements will contain the widened elements from lower indices in the source vector.</param>
         /// <param name="high">The second output vector, whose elements will contain the widened elements from higher indices in the source vector.</param>
         /// </summary>
+        [CLSCompliant(false)]
         [Intrinsic]
         public static unsafe void Widen(Vector<SByte> source, out Vector<Int16> low, out Vector<Int16> high)
         {
@@ -5170,6 +5178,7 @@ namespace System.Numerics
         /// <param name="high">The second source vector, whose elements become the higher-index elements of the return value.</param>
         /// <returns>A Vector{Byte} containing elements narrowed from the source vectors.</returns>
         /// </summary>
+        [CLSCompliant(false)]
         [Intrinsic]
         public static unsafe Vector<Byte> Narrow(Vector<UInt16> low, Vector<UInt16> high)
         {
@@ -5196,6 +5205,7 @@ namespace System.Numerics
         /// <param name="high">The second source vector, whose elements become the higher-index elements of the return value.</param>
         /// <returns>A Vector{UInt16} containing elements narrowed from the source vectors.</returns>
         /// </summary>
+        [CLSCompliant(false)]
         [Intrinsic]
         public static unsafe Vector<UInt16> Narrow(Vector<UInt32> low, Vector<UInt32> high)
         {
@@ -5222,6 +5232,7 @@ namespace System.Numerics
         /// <param name="high">The second source vector, whose elements become the higher-index elements of the return value.</param>
         /// <returns>A Vector{UInt32} containing elements narrowed from the source vectors.</returns>
         /// </summary>
+        [CLSCompliant(false)]
         [Intrinsic]
         public static unsafe Vector<UInt32> Narrow(Vector<UInt64> low, Vector<UInt64> high)
         {
@@ -5248,6 +5259,7 @@ namespace System.Numerics
         /// <param name="high">The second source vector, whose elements become the higher-index elements of the return value.</param>
         /// <returns>A Vector{SByte} containing elements narrowed from the source vectors.</returns>
         /// </summary>
+        [CLSCompliant(false)]
         [Intrinsic]
         public static unsafe Vector<SByte> Narrow(Vector<Int16> low, Vector<Int16> high)
         {
@@ -5375,6 +5387,7 @@ namespace System.Numerics
         /// </summary>
         /// <param name="value">The source vector.</param>
         /// <returns>The converted vector.</returns>
+        [CLSCompliant(false)]
         [Intrinsic]
         public static unsafe Vector<Single> ConvertToSingle(Vector<UInt32> value)
         {
@@ -5417,6 +5430,7 @@ namespace System.Numerics
         /// </summary>
         /// <param name="value">The source vector.</param>
         /// <returns>The converted vector.</returns>
+        [CLSCompliant(false)]
         [Intrinsic]
         public static unsafe Vector<Double> ConvertToDouble(Vector<UInt64> value)
         {
@@ -5459,6 +5473,7 @@ namespace System.Numerics
         /// </summary>
         /// <param name="value">The source vector.</param>
         /// <returns>The converted vector.</returns>
+        [CLSCompliant(false)]
         [Intrinsic]
         public static unsafe Vector<UInt32> ConvertToUInt32(Vector<Single> value)
         {
@@ -5501,6 +5516,7 @@ namespace System.Numerics
         /// </summary>
         /// <param name="value">The source vector.</param>
         /// <returns>The converted vector.</returns>
+        [CLSCompliant(false)]
         [Intrinsic]
         public static unsafe Vector<UInt64> ConvertToUInt64(Vector<Double> value)
         {
