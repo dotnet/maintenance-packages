@@ -38,14 +38,14 @@ namespace System.Threading.Tasks
     {
         /// <summary>A task canceled using `new CancellationToken(true)`.</summary>
         private static readonly Task s_canceledTask =
-#if NETSTANDARD_2_0
+#if NETSTANDARD2_0
             Task.Delay(Timeout.Infinite, new CancellationToken(canceled: true));
 #else
             Task.FromCanceled(new CancellationToken(canceled: true));
 #endif
         /// <summary>A successfully completed task.</summary>
         internal static Task CompletedTask
-#if NETSTANDARD_2_0
+#if NETSTANDARD2_0
             { get; } = Task.Delay(0);
 #else
             => Task.CompletedTask;
