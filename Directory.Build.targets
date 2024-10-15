@@ -12,6 +12,16 @@
     <DefaultExcludesInProjectFolder Condition="'$(TargetFrameworkIdentifier)' != '.NETFramework'">$(DefaultExcludesInProjectFolder);**/*.netframework$(DefaultLanguageSourceExtension)</DefaultExcludesInProjectFolder>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <IsSourceProject Condition="'$(IsSourceProject)' == '' and
+                                '$(IsTestProject)' != 'true' and
+                                '$(UsingMicrosoftTraversalSdk)' != 'true'">true</IsSourceProject>
+    <CLSCompliant Condition="'$(CLSCompliant)' == '' and
+                             ('$(IsTestProject)' == 'true' or
+                              '$(ExcludeFromAssemblyMetadata)' == 'true')">false</CLSCompliant>
+    <CLSCompliant Condition="'$(CLSCompliant)' == '' and '$(IsSourceProject)' == 'true'">true</CLSCompliant>
+  </PropertyGroup>
+
   <PropertyGroup Condition="'$(IsTestProject)' == 'true'">
     <!-- Don't run .NET Framework only tests on non Windows. -->
     <SkipTests Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework' and '$(OS)' != 'Windows_NT'">true</SkipTests>
