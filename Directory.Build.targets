@@ -51,6 +51,10 @@
     <AssemblyAttribute Include="System.Reflection.AssemblyDescriptionAttribute">
       <_Parameter1>$(AssemblyName)</_Parameter1>
     </AssemblyAttribute>
+    <AssemblyAttribute Include="System.Runtime.InteropServices.DefaultDllImportSearchPathsAttribute">
+      <_Parameter1>System.Runtime.InteropServices.DllImportSearchPath.AssemblyDirectory | System.Runtime.InteropServices.DllImportSearchPath.System32</_Parameter1>    
+      <_Parameter1_IsLiteral>true</_Parameter1_IsLiteral>    
+    </AssemblyAttribute>  
     <AssemblyMetadata Include="PreferInbox">
       <Value>True</Value>
     </AssemblyMetadata>
