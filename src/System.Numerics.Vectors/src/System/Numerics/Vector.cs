@@ -11,7 +11,6 @@ using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Text;
 
-[assembly: CLSCompliant(false)]
 namespace System.Numerics
 {
     /* Note: The following patterns are used throughout the code here and are described here

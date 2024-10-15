@@ -16,9 +16,6 @@
     <IsSourceProject Condition="'$(IsSourceProject)' == '' and
                                 '$(IsTestProject)' != 'true' and
                                 '$(UsingMicrosoftTraversalSdk)' != 'true'">true</IsSourceProject>
-    <CLSCompliant Condition="'$(CLSCompliant)' == '' and
-                             ('$(IsTestProject)' == 'true' or
-                              '$(ExcludeFromAssemblyMetadata)' == 'true')">false</CLSCompliant>
     <CLSCompliant Condition="'$(CLSCompliant)' == '' and '$(IsSourceProject)' == 'true'">true</CLSCompliant>
   </PropertyGroup>
 
@@ -44,14 +41,17 @@
     <PackageReference Include="Microsoft.DotNet.XUnitExtensions" />
   </ItemGroup>
 
-  <ItemGroup Condition="'$(IsTestProject)' != 'true' and '$(ExcludeFromAssemblyMetadata)' != 'true'" >
+  <ItemGroup Condition="'$(IsSourceProject)' == 'true'">
+    <AssemblyAttribute Include="System.CLSCompliantAttribute" Condition="'$(CLSCompliant)' == 'true'">
+      <_Parameter1>true</_Parameter1>
+    </AssemblyAttribute>
     <AssemblyAttribute Include="System.Reflection.AssemblyDefaultAliasAttribute">
       <_Parameter1>$(AssemblyName)</_Parameter1>
     </AssemblyAttribute>
     <AssemblyAttribute Include="System.Reflection.AssemblyDescriptionAttribute">
       <_Parameter1>$(AssemblyName)</_Parameter1>
     </AssemblyAttribute>
-    <AssemblyAttribute Include="System.Runtime.InteropServices.DefaultDllImportSearchPathsAttribute">
+    <AssemblyAttribute Condition="'$(MSBuildProjectExtension)' == '.csproj'" Include="System.Runtime.InteropServices.DefaultDllImportSearchPathsAttribute">
       <_Parameter1>System.Runtime.InteropServices.DllImportSearchPath.AssemblyDirectory | System.Runtime.InteropServices.DllImportSearchPath.System32</_Parameter1>    
       <_Parameter1_IsLiteral>true</_Parameter1_IsLiteral>    
     </AssemblyAttribute>  
