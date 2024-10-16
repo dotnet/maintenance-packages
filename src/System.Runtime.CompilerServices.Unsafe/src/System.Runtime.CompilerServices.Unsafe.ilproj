@@ -18,8 +18,10 @@ Commonly Used Types:
 System.Runtime.CompilerServices.Unsafe</PackageDescription>
   </PropertyGroup>
 
+  <!-- VersionPrefix and IsPackable are defined in the parent folder's Versioning.props file. -->
+  <Import Project="..\Versioning.props" />
+
   <!-- Package servicing properties -->
-  <!-- VersionPrefix and IsPackable are defined in the parent folder's Directory.Build.props -->
   <PropertyGroup>
     <AssemblyVersion Condition="$([MSBuild]::GetTargetFrameworkIdentifier('$(TargetFramework)')) == '.NETFramework'">6.0.0.0</AssemblyVersion>
     <AssemblyVersion Condition="'$(IsPackable)' == 'true' and $([MSBuild]::GetTargetFrameworkIdentifier('$(TargetFramework)')) == '.NETFramework'">6.0.1.0</AssemblyVersion>

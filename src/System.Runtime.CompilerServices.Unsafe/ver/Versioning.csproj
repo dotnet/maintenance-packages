@@ -6,4 +6,6 @@
     <IsSourceProject>false</IsSourceProject>
   </PropertyGroup>
 
+  <Import Project="..\Versioning.props" />
+
 </Project>
