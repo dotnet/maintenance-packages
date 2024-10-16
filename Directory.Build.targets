@@ -61,9 +61,6 @@
     <AssemblyMetadata Include="Serviceable">
       <Value>True</Value>
     </AssemblyMetadata>
-    <AssemblyMetadata Include=".NETFrameworkAssembly">
-      <Value></Value>
-    </AssemblyMetadata>
   </ItemGroup>
 
 </Project>
