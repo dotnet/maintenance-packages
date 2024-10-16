@@ -5,4 +5,6 @@
     <AssemblyName>System.Runtime.CompilerServices.Unsafe</AssemblyName>
   </PropertyGroup>
 
+  <Import Project="..\Versioning.props" />
+
 </Project>

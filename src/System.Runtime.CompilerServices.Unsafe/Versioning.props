@@ -1,7 +1,5 @@
 <Project>
 
-  <Import Project="$([MSBuild]::GetPathOfFileAbove(Directory.Build.props, $(MSBuildThisFileDirectory)..))" />
-
   <PropertyGroup>
     <IsPackable>true</IsPackable>
     <VersionPrefix>6.0.0</VersionPrefix>
