@@ -52,7 +52,7 @@ namespace Microsoft.SqlServer.TDS.FeatureExtAck
             }
             else if (signature != null && signature.Length != s_signatureDataLength)
             {
-                throw new ArgumentOutOfRangeException("signature");
+                throw new ArgumentOutOfRangeException(nameof(signature));
             }
 
             // Save nonce

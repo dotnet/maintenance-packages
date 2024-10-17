@@ -43,7 +43,7 @@ namespace System.Data.SqlClient.ManualTesting.Tests
         // data value and server consts
         private string _connStr;
 
-        [ActiveIssue(27858, TestPlatforms.AnyUnix)]
+        [ActiveIssue("27858", TestPlatforms.AnyUnix)]
         [ConditionalFact(typeof(DataTestUtility), nameof(DataTestUtility.AreConnStringsSetup))]
         public void TestMain()
         {
@@ -227,6 +227,7 @@ namespace System.Data.SqlClient.ManualTesting.Tests
                     ((IDisposable)_output).Dispose();
                 }
                 _output = null;
+                base.Dispose(disposing);
             }
 
             public override void Flush()

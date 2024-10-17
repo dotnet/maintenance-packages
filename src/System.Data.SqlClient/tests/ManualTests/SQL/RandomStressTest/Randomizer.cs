@@ -96,17 +96,17 @@ namespace System.Data.SqlClient.ManualTesting.Tests
         /// creates a new randomizer from seed
         /// Target Randomizer implementation must have an explicit c-tor that accepts seed only!
         /// </summary>
-        public static RandomizerType Create<RandomizerType>(int seed)
-            where RandomizerType : Randomizer, new()
+        public static TRandomizerType Create<TRandomizerType>(int seed)
+            where TRandomizerType : Randomizer, new()
         {
-            if (typeof(RandomizerType) == typeof(Randomizer))
+            if (typeof(TRandomizerType) == typeof(Randomizer))
             {
                 // optimization for Randomizer itself to avoid reflection call
-                return (RandomizerType)new Randomizer(seed);
+                return (TRandomizerType)new Randomizer(seed);
             }
             else
             {
-                return (RandomizerType)Activator.CreateInstance(typeof(RandomizerType), new object[] { seed });
+                return (TRandomizerType)Activator.CreateInstance(typeof(TRandomizerType), new object[] { seed });
             }
         }
 
@@ -114,17 +114,17 @@ namespace System.Data.SqlClient.ManualTesting.Tests
         /// Recreates randomizer from the state, state must not be empty!
         /// Target Randomizer implementation must have an explicit c-tor that accepts state only and calls into base c-tor(state)!
         /// </summary>
-        public static RandomizerType Create<RandomizerType>(State state)
-            where RandomizerType : Randomizer, new()
+        public static TRandomizerType Create<TRandomizerType>(State state)
+            where TRandomizerType : Randomizer, new()
         {
-            if (typeof(RandomizerType) == typeof(Randomizer))
+            if (typeof(TRandomizerType) == typeof(Randomizer))
             {
                 // optimization for Randomizer itself to avoid redundant construction
-                return (RandomizerType)new Randomizer(state);
+                return (TRandomizerType)new Randomizer(state);
             }
             else
             {
-                return (RandomizerType)Activator.CreateInstance(typeof(RandomizerType), new object[] { state });
+                return (TRandomizerType)Activator.CreateInstance(typeof(TRandomizerType), new object[] { state });
             }
         }
 
