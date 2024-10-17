@@ -5,7 +5,8 @@
     <DefineConstants>$(DefineConstants);MS_IO_REDIST</DefineConstants>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <StrongNameKeyId>Open</StrongNameKeyId>
-    <ClsCompliant>false</ClsCompliant>
+    <CLSCompliant>false</CLSCompliant>
+    <SetIsTrimmable>true</SetIsTrimmable>
     <Nullable>annotations</Nullable>
     <IncludePlatformAttributes>true</IncludePlatformAttributes>
     <DocumentationFile>$(MSBuildThisFileDirectory)Microsoft.IO.Redist.xml</DocumentationFile>

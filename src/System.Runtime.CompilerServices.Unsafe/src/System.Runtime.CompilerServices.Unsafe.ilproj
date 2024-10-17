@@ -4,6 +4,7 @@
     <TargetFrameworks>$(NetFrameworkMinimum);netstandard2.0;net7.0</TargetFrameworks>
     <StrongNameKeyId>Microsoft</StrongNameKeyId>
     <AssemblyVersion>6.0.0.0</AssemblyVersion> <!-- NO-INCREMENT: This version is frozen for .NET Standard and .NETCoreApp because the assembly ships inbox. -->
+    <SetIsTrimmable>true</SetIsTrimmable>
     <!-- Make sure that the DebuggableAttribute is set properly. -->
     <DebugOptimization>IMPL</DebugOptimization>
     <DebugOptimization Condition="'$(Configuration)' == 'Release'">OPT</DebugOptimization>
@@ -101,4 +102,5 @@ $(ExtraMacros)
                       ReferenceOutputAssembly="false"
                       OutputItemType="ILResourceReference" />
   </ItemGroup>
+
 </Project>

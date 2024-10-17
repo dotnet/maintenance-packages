@@ -4,7 +4,6 @@
 using System;
 using System.Runtime.InteropServices;
 
-[assembly: CLSCompliant(true)]
 namespace System.Buffers
 {
     /// <summary>
