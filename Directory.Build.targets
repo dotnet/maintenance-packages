@@ -52,8 +52,8 @@
     <AssemblyAttribute Include="System.Reflection.AssemblyDefaultAliasAttribute">
       <_Parameter1>$(AssemblyName)</_Parameter1>
     </AssemblyAttribute>
-    <AssemblyAttribute Include="System.Reflection.AssemblyDescriptionAttribute">
-      <_Parameter1>$(PackageDescription)</_Parameter1>
+    <AssemblyAttribute Include="System.Resources.NeutralResourcesLanguage" Condition="'@(EmbeddedResource)' != ''">
+      <_Parameter1>en-US</_Parameter1>
     </AssemblyAttribute>
     <AssemblyAttribute Include="System.Runtime.InteropServices.DefaultDllImportSearchPathsAttribute" Condition="'$(MSBuildProjectExtension)' == '.csproj'">
       <_Parameter1>System.Runtime.InteropServices.DllImportSearchPath.AssemblyDirectory | System.Runtime.InteropServices.DllImportSearchPath.System32</_Parameter1>
