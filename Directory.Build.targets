@@ -53,9 +53,6 @@
     <AssemblyAttribute Include="System.CLSCompliantAttribute" Condition="'$(CLSCompliant)' == 'true'">
       <_Parameter1>true</_Parameter1>
     </AssemblyAttribute>
-    <AssemblyAttribute Include="System.Reflection.AssemblyConfigurationAttribute">
-      <_Parameter1>$(Configuration)</_Parameter1>
-    </AssemblyAttribute>
     <AssemblyAttribute Include="System.Reflection.AssemblyDefaultAliasAttribute">
       <_Parameter1>$(AssemblyName)</_Parameter1>
     </AssemblyAttribute>
