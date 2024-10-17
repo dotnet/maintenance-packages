@@ -6,8 +6,11 @@
   <Import Project="$(RepositoryEngineeringDir)placeholderpackaging.targets" Condition="'$(IsPlaceholderTargetFramework)' == 'true'" />
   <Import Project="$(RepositoryEngineeringDir)packaging.targets" Condition="'$(IsPackable)' == 'true'" />
 
-  <!-- Default item exclude patterns -->
   <PropertyGroup>
+    <!-- Libraries have never generated these attributes so don't let the SDK generate them. -->
+    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
+    <GenerateNeutralResourcesLanguageAttribute>false</GenerateNeutralResourcesLanguageAttribute>
+    <!-- Default item exclude patterns -->
     <DefaultExcludesInProjectFolder Condition="'$(TargetFrameworkIdentifier)' != '.NETCoreApp'">$(DefaultExcludesInProjectFolder);**/*.net$(DefaultLanguageSourceExtension)</DefaultExcludesInProjectFolder>
     <DefaultExcludesInProjectFolder Condition="'$(TargetFrameworkIdentifier)' != '.NETFramework'">$(DefaultExcludesInProjectFolder);**/*.netframework$(DefaultLanguageSourceExtension)</DefaultExcludesInProjectFolder>
   </PropertyGroup>
@@ -49,6 +52,9 @@
   <ItemGroup Condition="'$(IsSourceProject)' == 'true'">
     <AssemblyAttribute Include="System.CLSCompliantAttribute" Condition="'$(CLSCompliant)' == 'true'">
       <_Parameter1>true</_Parameter1>
+    </AssemblyAttribute>
+    <AssemblyAttribute Include="System.Reflection.AssemblyConfigurationAttribute">
+      <_Parameter1>$(Configuration)</_Parameter1>
     </AssemblyAttribute>
     <AssemblyAttribute Include="System.Reflection.AssemblyDefaultAliasAttribute">
       <_Parameter1>$(AssemblyName)</_Parameter1>
