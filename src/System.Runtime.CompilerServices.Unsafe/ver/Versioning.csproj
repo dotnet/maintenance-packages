@@ -3,6 +3,9 @@
   <PropertyGroup>
     <TargetFrameworks>$(NetFrameworkMinimum);netstandard2.0</TargetFrameworks>
     <AssemblyName>System.Runtime.CompilerServices.Unsafe</AssemblyName>
+    <IsSourceProject>false</IsSourceProject>
   </PropertyGroup>
+
+  <Import Project="..\Versioning.props" />
 
 </Project>

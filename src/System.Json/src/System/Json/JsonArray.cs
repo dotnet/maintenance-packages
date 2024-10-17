@@ -6,7 +6,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 
-[assembly: CLSCompliant(true)]
 namespace System.Json
 {
     public class JsonArray : JsonValue, IList<JsonValue>

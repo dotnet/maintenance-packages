@@ -4,6 +4,7 @@
     <TargetFrameworks>$(NetFrameworkMinimum);netstandard2.0;net7.0</TargetFrameworks>
     <StrongNameKeyId>Microsoft</StrongNameKeyId>
     <AssemblyVersion>6.0.0.0</AssemblyVersion> <!-- NO-INCREMENT: This version is frozen for .NET Standard and .NETCoreApp because the assembly ships inbox. -->
+    <SetIsTrimmable>true</SetIsTrimmable>
     <!-- Make sure that the DebuggableAttribute is set properly. -->
     <DebugOptimization>IMPL</DebugOptimization>
     <DebugOptimization Condition="'$(Configuration)' == 'Release'">OPT</DebugOptimization>
@@ -16,8 +17,10 @@ Commonly Used Types:
 System.Runtime.CompilerServices.Unsafe</PackageDescription>
   </PropertyGroup>
 
+  <!-- VersionPrefix and IsPackable are defined in the parent folder's Versioning.props file. -->
+  <Import Project="..\Versioning.props" />
+
   <!-- Package servicing properties -->
-  <!-- VersionPrefix and IsPackable are defined in the parent folder's Directory.Build.props -->
   <PropertyGroup>
     <AssemblyVersion Condition="$([MSBuild]::GetTargetFrameworkIdentifier('$(TargetFramework)')) == '.NETFramework'">6.0.0.0</AssemblyVersion>
     <AssemblyVersion Condition="'$(IsPackable)' == 'true' and $([MSBuild]::GetTargetFrameworkIdentifier('$(TargetFramework)')) == '.NETFramework'">6.0.1.0</AssemblyVersion>
@@ -99,4 +102,5 @@ $(ExtraMacros)
                       ReferenceOutputAssembly="false"
                       OutputItemType="ILResourceReference" />
   </ItemGroup>
+
 </Project>
