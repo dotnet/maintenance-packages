@@ -16,7 +16,7 @@
     <IsSourceProject Condition="'$(IsSourceProject)' == '' and
                                 '$(IsTestProject)' != 'true' and
                                 '$(UsingMicrosoftTraversalSdk)' != 'true'">true</IsSourceProject>
-    <CLSCompliant Condition="'$(CLSCompliant)' == '' and '$(IsSourceProject)' == 'true'">true</CLSCompliant>
+    <CLSCompliant Condition="'$(CLSCompliant)' == '' and '$(IsSourceProject)' == 'true' and '$(MSBuildProjectExtension)' != '.ilproj'">true</CLSCompliant>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(IsTestProject)' == 'true'">
@@ -24,6 +24,10 @@
     <SkipTests Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework' and '$(OS)' != 'Windows_NT'">true</SkipTests>
     <!-- Unsafe code is required by PlatformDetection. -->
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  
+  <PropertyGroup Condition="'$(IsSourceProject)' == 'true'">
+    <PackageDescription Condition="'$(PackageDescription)' == ''">$(AssemblyName)</PackageDescription>
   </PropertyGroup>
 
   <!-- The VSTest target is not bound by any conditions, needs to be overriden when we want to skip tests. -->
@@ -49,12 +53,15 @@
       <_Parameter1>$(AssemblyName)</_Parameter1>
     </AssemblyAttribute>
     <AssemblyAttribute Include="System.Reflection.AssemblyDescriptionAttribute">
-      <_Parameter1>$(AssemblyName)</_Parameter1>
+      <_Parameter1>$(PackageDescription)</_Parameter1>
     </AssemblyAttribute>
-    <AssemblyAttribute Condition="'$(MSBuildProjectExtension)' == '.csproj'" Include="System.Runtime.InteropServices.DefaultDllImportSearchPathsAttribute">
-      <_Parameter1>System.Runtime.InteropServices.DllImportSearchPath.AssemblyDirectory | System.Runtime.InteropServices.DllImportSearchPath.System32</_Parameter1>    
-      <_Parameter1_IsLiteral>true</_Parameter1_IsLiteral>    
-    </AssemblyAttribute>  
+    <AssemblyAttribute Include="System.Runtime.InteropServices.DefaultDllImportSearchPathsAttribute" Condition="'$(MSBuildProjectExtension)' == '.csproj'">
+      <_Parameter1>System.Runtime.InteropServices.DllImportSearchPath.AssemblyDirectory | System.Runtime.InteropServices.DllImportSearchPath.System32</_Parameter1>
+      <_Parameter1_IsLiteral>true</_Parameter1_IsLiteral>
+    </AssemblyAttribute>
+    <AssemblyMetadata Include="IsTrimmable" Condition="'$(SetIsTrimmable)' == 'true'">
+      <Value>True</Value>
+    </AssemblyMetadata>
     <AssemblyMetadata Include="PreferInbox">
       <Value>True</Value>
     </AssemblyMetadata>

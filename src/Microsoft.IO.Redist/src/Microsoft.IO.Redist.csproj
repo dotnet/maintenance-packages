@@ -6,6 +6,7 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <StrongNameKeyId>Open</StrongNameKeyId>
     <CLSCompliant>false</CLSCompliant>
+    <SetIsTrimmable>true</SetIsTrimmable>
     <Nullable>annotations</Nullable>
     <IncludePlatformAttributes>true</IncludePlatformAttributes>
     <DocumentationFile>$(MSBuildThisFileDirectory)Microsoft.IO.Redist.xml</DocumentationFile>
