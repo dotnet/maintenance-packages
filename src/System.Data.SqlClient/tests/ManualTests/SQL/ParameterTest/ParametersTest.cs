@@ -85,7 +85,7 @@ namespace System.Data.SqlClient.ManualTesting.Tests
             opc.RemoveAt(0);
 
             new SqlCommand().Parameters.Clear();
-            new SqlCommand().Parameters.CopyTo(new object[0], 0);
+            new SqlCommand().Parameters.CopyTo(Array.Empty<object>(), 0);
             Assert.False(new SqlCommand().Parameters.GetEnumerator().MoveNext(), "FAILED: Expected MoveNext to be false");
 
             DataTestUtility.AssertThrowsWrapper<InvalidCastException>(() => new SqlCommand().Parameters.Add(0), "The SqlParameterCollection only accepts non-null SqlParameter type objects, not Int32 objects.");
@@ -138,7 +138,7 @@ namespace System.Data.SqlClient.ManualTesting.Tests
                 var cmd = new SqlCommand("select @input", conn);
                 cmd.Parameters.AddWithValue("@input", MyEnum.B);
                 object value = cmd.ExecuteScalar();
-                Assert.Equal((MyEnum)value, MyEnum.B);
+                Assert.Equal(MyEnum.B, (MyEnum)value);
             }
         }
 
@@ -159,7 +159,7 @@ namespace System.Data.SqlClient.ManualTesting.Tests
 
                 cmd.ExecuteNonQuery();
 
-                Assert.Equal((MyEnum)outputParam.Value, MyEnum.B);
+                Assert.Equal(MyEnum.B, (MyEnum)outputParam.Value);
             }
         }
 
@@ -172,7 +172,7 @@ namespace System.Data.SqlClient.ManualTesting.Tests
                 var cmd = new SqlCommand("select @foo", conn);
                 cmd.Parameters.AddWithValue("@foo", new SqlDecimal(0.5));
                 var result = (decimal)cmd.ExecuteScalar();
-                Assert.Equal(result, (decimal)0.5);
+                Assert.Equal((decimal)0.5, result);
             }
         }
 

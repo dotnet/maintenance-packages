@@ -141,21 +141,21 @@ namespace System.Data.SqlClient.ManualTesting.Tests
                             using (SqlDataReader rdr = cmd.ExecuteReader())
                             {
                                 rdr.Read();
-                                Assert.Equal(rdr.FieldCount, 1);
-                                Assert.Equal(rdr.GetName(0), COLUMN_NAME_2);
+                                Assert.Equal(1, rdr.FieldCount);
+                                Assert.Equal(COLUMN_NAME_2, rdr.GetName(0));
                             }
                             break;
 
                         case ReaderVerificationType.ChangeDatabase:
                             con.ChangeDatabase(CHANGE_DATABASE_NAME);
-                            Assert.Equal(con.Database, CHANGE_DATABASE_NAME);
+                            Assert.Equal(CHANGE_DATABASE_NAME, con.Database);
                             break;
 
                         case ReaderVerificationType.BeginTransaction:
                             cmd.Transaction = con.BeginTransaction();
                             cmd.CommandText = "select @@trancount";
                             int tranCount = (int)cmd.ExecuteScalar();
-                            Assert.Equal(tranCount, 1);
+                            Assert.Equal(1, tranCount);
                             break;
                     }
                 }
@@ -221,7 +221,7 @@ namespace System.Data.SqlClient.ManualTesting.Tests
                 {
                     cmd.CommandText = "select @@trancount";
                     int tranCount = (int)cmd.ExecuteScalar();
-                    Assert.Equal(tranCount, 0);
+                    Assert.Equal(0, tranCount);
                 }
             }
         }
