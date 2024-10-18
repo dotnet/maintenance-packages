@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>System.Json</name>
+    </assembly>
+    <members>
+        <member name="P:System.SR.ArgumentException_ExtraCharacters">
+            <summary>Extra characters in JSON input.</summary>
+        </member>
+        <member name="P:System.SR.ArgumentException_IncompleteInput">
+            <summary>Incomplete JSON input.</summary>
+        </member>
+        <member name="P:System.SR.ArgumentException_UnexpectedCharacter">
+            <summary>Unexpected character '{0}'.</summary>
+        </member>
+        <member name="P:System.SR.ArgumentException_ArrayMustEndWithBracket">
+            <summary>JSON array must end with ']'.</summary>
+        </member>
+        <member name="P:System.SR.ArgumentException_LeadingZeros">
+            <summary>Leading zeros are not allowed.</summary>
+        </member>
+        <member name="P:System.SR.ArgumentException_NoDigitFound">
+            <summary>Invalid JSON numeric literal; no digit found.</summary>
+        </member>
+        <member name="P:System.SR.ArgumentException_ExtraDot">
+            <summary>Invalid JSON numeric literal; extra dot.</summary>
+        </member>
+        <member name="P:System.SR.ArgumentException_IncompleteExponent">
+            <summary>Invalid JSON numeric literal; incomplete exponent.</summary>
+        </member>
+        <member name="P:System.SR.ArgumentException_InvalidLiteralFormat">
+            <summary>Invalid JSON string literal format.</summary>
+        </member>
+        <member name="P:System.SR.ArgumentException_StringNotClosed">
+            <summary>JSON string is not closed.</summary>
+        </member>
+        <member name="P:System.SR.ArgumentException_IncompleteEscapeSequence">
+            <summary>Invalid JSON string literal; incomplete escape sequence.</summary>
+        </member>
+        <member name="P:System.SR.ArgumentException_IncompleteEscapeLiteral">
+            <summary>Incomplete unicode character escape literal.</summary>
+        </member>
+        <member name="P:System.SR.ArgumentException_UnexpectedEscapeCharacter">
+            <summary>Invalid JSON string literal; unexpected escape character.</summary>
+        </member>
+        <member name="P:System.SR.ArgumentException_ExpectedXButGotY">
+            <summary>Expected '{0}', got '{1}'.</summary>
+        </member>
+        <member name="P:System.SR.ArgumentException_ExpectedXDiferedAtY">
+            <summary>Expected '{0}', differed at {1}.</summary>
+        </member>
+        <member name="P:System.SR.ArgumentException_MessageAt">
+            <summary>{0} At line {1}, column {2}.</summary>
+        </member>
+        <member name="P:System.SR.NotImplemented_GetFormattedString">
+            <summary>GetFormattedString from value type {0}.</summary>
+        </member>
+    </members>
+</doc>

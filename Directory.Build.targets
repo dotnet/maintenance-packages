@@ -30,6 +30,7 @@
   </PropertyGroup>
   
   <PropertyGroup Condition="'$(IsSourceProject)' == 'true'">
+    <DocumentationFile>$(MSBuildProjectDirectory)\$(AssemblyName).xml</DocumentationFile>
     <Description Condition="'$(Description)' == ''">$(AssemblyName)</Description>
     <PackageDescription Condition="'$(PackageDescription)' == ''">$(AssemblyName)</PackageDescription>
   </PropertyGroup>
@@ -50,6 +51,9 @@
   </ItemGroup>
 
   <ItemGroup Condition="'$(IsSourceProject)' == 'true'">
+    <None Include="$(AssemblyName).xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <AssemblyAttribute Include="System.CLSCompliantAttribute" Condition="'$(CLSCompliant)' == 'true'">
       <_Parameter1>true</_Parameter1>
     </AssemblyAttribute>

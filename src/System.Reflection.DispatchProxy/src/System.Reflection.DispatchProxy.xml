@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>System.Reflection.DispatchProxy</name>
+    </assembly>
+    <members>
+        <member name="P:System.SR.BaseType_Cannot_Be_Sealed">
+            <summary>The base type '{0}' cannot be sealed.</summary>
+        </member>
+        <member name="P:System.SR.BaseType_Must_Have_Default_Ctor">
+            <summary>The base type '{0}' must have a public parameterless constructor.</summary>
+        </member>
+        <member name="P:System.SR.InterfaceType_Must_Be_Interface">
+            <summary>The type '{0}' must be an interface, not a class.</summary>
+        </member>
+        <member name="P:System.SR.BaseType_Cannot_Be_Abstract">
+            <summary>The base type '{0}' cannot be abstract.</summary>
+        </member>
+        <member name="P:System.SR.PlatformNotSupported_ReflectionDispatchProxy">
+            <summary>This operation is not supported on .NET Standard as Reflection.Emit is not available.</summary>
+        </member>
+    </members>
+</doc>
