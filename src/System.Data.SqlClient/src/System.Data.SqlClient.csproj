@@ -4,8 +4,7 @@
     <TargetFrameworks>$(NetMinimum);$(NetMinimum)-unix;$(NetMinimum)-windows;netstandard2.0;$(NetFrameworkMinimum)</TargetFrameworks>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <StrongNameKeyId>Microsoft</StrongNameKeyId>
-    <AssemblyVersion>4.6.1.6</AssemblyVersion>
-    <!-- NO-INCREMENT: This version is frozen for .NET Standard and .NETCoreApp because the assembly ships inbox. -->
+    <AssemblyVersion>4.6.1.6</AssemblyVersion><!-- NO-INCREMENT: This version is frozen for .NET Standard and .NETCoreApp because the assembly ships inbox. -->
     <UseTargetFrameworkPackage>true</UseTargetFrameworkPackage>
     <TargetGroup Condition="$([MSBuild]::GetTargetFrameworkIdentifier('$(TargetFramework)')) == '.NETFramework'">netfx</TargetGroup>
     <TargetGroup Condition="$([MSBuild]::GetTargetFrameworkIdentifier('$(TargetFramework)')) == '.NETCoreApp'">netcoreapp</TargetGroup>
@@ -29,8 +28,8 @@
     <IsPackable>false</IsPackable>
     <VersionPrefix>4.8.6</VersionPrefix>
     <VersionPrefix Condition="'$(IsPackable)' == 'true'">4.9.0</VersionPrefix>
-    <AssemblyVersion Condition="$([MSBuild]::GetTargetFrameworkIdentifier('$(TargetFramework)')) == '.NETFramework'">4.6.1.6</AssemblyVersion>
-    <AssemblyVersion Condition="'$(IsPackable)' == 'true' and $([MSBuild]::GetTargetFrameworkIdentifier('$(TargetFramework)')) == '.NETFramework'">4.6.2.0</AssemblyVersion>
+    <AssemblyVersion Condition="'$(TargetGroup)' == 'netfx'">4.6.1.6</AssemblyVersion>
+    <AssemblyVersion Condition="'$(IsPackable)' == 'true' and '$(TargetGroup)' == 'netfx'">4.6.2.0</AssemblyVersion>
     <PackageValidationBaselineVersion>4.8.6</PackageValidationBaselineVersion>
   </PropertyGroup>
 
@@ -44,11 +43,11 @@
     </Compile>
   </ItemGroup>
 
-  <ItemGroup Condition="'$(TargetGroup)' == 'netstandard' OR '$(TargetGroup)' == 'netcoreapp'">
+  <ItemGroup Condition="'$(TargetGroup)' == 'netstandard' or '$(TargetGroup)' == 'netcoreapp'">
     <Compile Include="System.Data.SqlClient.TypeForwards.cs" />
   </ItemGroup>
 
-  <ItemGroup Condition="'$(IsPartialFacadeAssembly)' != 'true' AND '$(TargetGroup)' == 'netcoreapp'">
+  <ItemGroup Condition="'$(IsPartialFacadeAssembly)' != 'true' and '$(TargetGroup)' == 'netcoreapp'">
     <Compile Include="System\Data\SqlClient\PoolBlockingPeriod.cs" />
     <Compile Include="Microsoft\SqlServer\Server\SqlFacetAttribute.cs" />
   </ItemGroup>
@@ -247,13 +246,12 @@
     <Compile Include="System\Data\SqlClient\SqlCredential.cs" />
   </ItemGroup>
 
-  <!-- SqlFileStream Unix Netcoreapp only -->
-  <ItemGroup Condition="'$(TargetGroup)' == 'netcoreapp' AND '$(TargetPlatformIdentifier)' == 'unix'">
+  <ItemGroup Condition="'$(TargetGroup)' == 'netcoreapp' and '$(TargetPlatformIdentifier)' != 'windows'">
     <Compile Include="System\Data\SqlClient\SqlFileStream.Unsupported.cs" />
   </ItemGroup>
 
-  <!-- SqlFileStream Windows Netcoreapp only -->
-  <ItemGroup Condition="'$(TargetGroup)' == 'netcoreapp' AND '$(TargetPlatformIdentifier)' == 'windows'">
+  <ItemGroup Condition="'$(TargetGroup)' == 'netcoreapp' and '$(TargetPlatformIdentifier)' == 'windows'">
+    <Compile Include="System\Data\SqlClient\SqlFileStream.Windows.cs" />
     <Compile Include="$(CommonPath)src\CoreLib\Interop\Windows\Kernel32\Interop.FileTypes.cs">
       <Link>Common\CoreLib\Interop\Windows\Kernel32\Interop.FileTypes.cs</Link>
     </Compile>
@@ -305,7 +303,6 @@
     <Compile Include="$(CommonPath)src\Interop\Windows\NtDll\Interop.RtlNtStatusToDosError.cs">
       <Link>Common\Interop\Windows\Interop.RtlNtStatusToDosError.cs</Link>
     </Compile>
-    <Compile Include="System\Data\SqlClient\SqlFileStream.Windows.cs" />
   </ItemGroup>
 
   <ItemGroup Condition="'$(IsPartialFacadeAssembly)' != 'true' and '$(TargetGroup)' == 'netcoreapp'">
@@ -323,7 +320,7 @@
   </ItemGroup>
 
   <!-- Manage the SNI toggle for Windows netstandard and UWP -->
-  <ItemGroup Condition="('$(TargetGroup)' == 'netstandard' OR '$(TargetGroup)' == 'netcoreapp') AND '$(TargetPlatformIdentifier)' == 'windows'">
+  <ItemGroup Condition="('$(TargetGroup)' == 'netstandard' or '$(TargetGroup)' == 'netcoreapp') and '$(TargetPlatformIdentifier)' == 'windows'">
     <!-- Manage the SNI toggle for Windows netstandard and UWP -->
     <Compile Include="System\Data\SqlClient\SNI\SNITcpHandle.Windows.cs" />
     <Compile Include="System\Data\SqlClient\TdsParserStateObjectFactory.Windows.cs" />
