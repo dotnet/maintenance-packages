@@ -9,7 +9,6 @@
     <SetIsTrimmable>true</SetIsTrimmable>
     <Nullable>annotations</Nullable>
     <IncludePlatformAttributes>true</IncludePlatformAttributes>
-    <DocumentationFile>$(MSBuildThisFileDirectory)Microsoft.IO.Redist.xml</DocumentationFile>
   </PropertyGroup>
 
   <!-- Package servicing properties -->
