@@ -562,6 +562,7 @@ namespace Microsoft.SqlServer.TDS.Servers
         /// Complete the Federated Login
         /// </summary>
         /// <param name="session">Server session</param>
+        /// <param name="ticket"></param>
         /// <returns>Federated Login message collection</returns>
         protected virtual TDSMessageCollection OnFederatedAuthenticationCompleted(ITDSServerSession session, byte[] ticket)
         {

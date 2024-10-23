@@ -525,6 +525,7 @@ namespace System.Data.SqlClient
         /// Assert that the supplied object is an instance of a SQL User-Defined Type (UDT).
         /// </summary>
         /// <param name="sqlValue">Object instance to be tested.</param>
+        /// <param name="failedAssertMessage">Failed assert message</param>
         /// <remarks>
         /// This method is only compiled with debug builds, and it a helper method for the GetComValueFromSqlVariant method defined in this class.
         ///

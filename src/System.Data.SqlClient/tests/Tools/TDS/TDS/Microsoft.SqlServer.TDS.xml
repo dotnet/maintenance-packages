@@ -1,0 +1,4009 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Microsoft.SqlServer.TDS</name>
+    </assembly>
+    <members>
+        <member name="T:Microsoft.SqlServer.TDS.AllHeaders.TDSAllHeadersToken">
+            <summary>
+            Token that handles ALL_HEADERS rule
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.AllHeaders.TDSAllHeadersToken.Headers">
+            <summary>
+            Collection of individual headers
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.AllHeaders.TDSAllHeadersToken.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.AllHeaders.TDSAllHeadersToken.Inflate(System.IO.Stream)">
+            <summary>
+            Inflate the token
+            NOTE: This operation is not continuable and assumes that the entire token is available in the stream
+            </summary>
+            <param name="source">Stream to inflate the token from</param>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.AllHeaders.TDSAllHeadersToken.Deflate(System.IO.Stream)">
+            <summary>
+            Deflate the token
+            </summary>
+            <param name="destination">Stream to deflate token to</param>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.AllHeaders.TDSHeaderType">
+            <summary>
+            Type of the individual header
+            </summary>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.AllHeaders.TDSQueryNotificationsHeader">
+            <summary>
+            Represents Query Notifications header of ALL_HEADERS token
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.AllHeaders.TDSQueryNotificationsHeader.NotifyID">
+            <summary>
+            User specified value when subscribing to the query notification
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.AllHeaders.TDSQueryNotificationsHeader.SerciceBrokerDeployment">
+            <summary>
+            Service Broker Deployment
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.AllHeaders.TDSQueryNotificationsHeader.Timeout">
+            <summary>
+            Notification timeout
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.AllHeaders.TDSQueryNotificationsHeader.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.AllHeaders.TDSQueryNotificationsHeader.Inflate(System.IO.Stream)">
+            <summary>
+            Inflate the token
+            NOTE: This operation is not continuable and assumes that the entire token is available in the stream
+            </summary>
+            <param name="source">Stream to inflate the token from</param>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.AllHeaders.TDSQueryNotificationsHeader.Deflate(System.IO.Stream)">
+            <summary>
+            Deflate the token
+            </summary>
+            <param name="destination">Stream to deflate token to</param>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.AllHeaders.TDSTraceHeader">
+            <summary>
+            Represents correlate activity ID trace header of ALL_HEADERS token
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.AllHeaders.TDSTraceHeader.ActivityID">
+            <summary>
+            Identifier of the client activity
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.AllHeaders.TDSTraceHeader.SequenceNumber">
+            <summary>
+            Sequential number of the operation
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.AllHeaders.TDSTraceHeader.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.AllHeaders.TDSTraceHeader.Inflate(System.IO.Stream)">
+            <summary>
+            Inflate the token
+            NOTE: This operation is not continuable and assumes that the entire token is available in the stream
+            </summary>
+            <param name="source">Stream to inflate the token from</param>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.AllHeaders.TDSTraceHeader.Deflate(System.IO.Stream)">
+            <summary>
+            Deflate the token
+            </summary>
+            <param name="destination">Stream to deflate token to</param>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.AllHeaders.TDSTransactionDescriptorHeader">
+            <summary>
+            Represents Transaction Descriptor header of ALL_HEADERS token
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.AllHeaders.TDSTransactionDescriptorHeader.TransactionDescriptor">
+            <summary>
+            Identifier of the transaction
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.AllHeaders.TDSTransactionDescriptorHeader.OutstandingRequestCount">
+            <summary>
+            Outstanding request count
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.AllHeaders.TDSTransactionDescriptorHeader.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.AllHeaders.TDSTransactionDescriptorHeader.#ctor(System.UInt64)">
+            <summary>
+            Initialization constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.AllHeaders.TDSTransactionDescriptorHeader.#ctor(System.UInt64,System.UInt32)">
+            <summary>
+            Initialization constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.AllHeaders.TDSTransactionDescriptorHeader.Inflate(System.IO.Stream)">
+            <summary>
+            Inflate the token
+            NOTE: This operation is not continuable and assumes that the entire token is available in the stream
+            </summary>
+            <param name="source">Stream to inflate the token from</param>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.AllHeaders.TDSTransactionDescriptorHeader.Deflate(System.IO.Stream)">
+            <summary>
+            Deflate the token
+            </summary>
+            <param name="destination">Stream to deflate token to</param>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.AutoTDSStream">
+            <summary>
+            Stream that wraps TDS stream with automatic dispatch
+            </summary>
+        </member>
+        <member name="F:Microsoft.SqlServer.TDS.AutoTDSStream._closeInnerStream">
+            <summary>
+            Indicates whether inner stream should be closed when TDS stream is closed
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.AutoTDSStream.InnerTDSStream">
+            <summary>
+            Inner TDS stream
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.AutoTDSStream.OutgoingMessageType">
+            <summary>
+            Type of the message being sent to the other party
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.AutoTDSStream.CanRead">
+            <summary>
+            Indicates whether stream can be read
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.AutoTDSStream.CanSeek">
+            <summary>
+            Indicates whether the stream can be positioned
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.AutoTDSStream.CanWrite">
+            <summary>
+            Indicates whether the stream can be written
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.AutoTDSStream.Length">
+            <summary>
+            Return the length of the stream
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.AutoTDSStream.Position">
+            <summary>
+            Return position in the stream
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.AutoTDSStream.#ctor(Microsoft.SqlServer.TDS.TDSStream)">
+            <summary>
+            Initialization constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.AutoTDSStream.#ctor(Microsoft.SqlServer.TDS.TDSStream,System.Boolean)">
+            <summary>
+            Initialization constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.AutoTDSStream.Close">
+            <summary>
+            Close the stream
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.AutoTDSStream.Flush">
+            <summary>
+            Flush the data into the underlying stream
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.AutoTDSStream.Read(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Read the data from the stream
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.AutoTDSStream.Seek(System.Int64,System.IO.SeekOrigin)">
+            <summary>
+            Seek position in the stream
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.AutoTDSStream.SetLength(System.Int64)">
+            <summary>
+            Set stream length
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.AutoTDSStream.Write(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Write data into the stream
+            </summary>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.ColInfo.TDSColInfoToken">
+            <summary>
+            Result set metadata description "COLINFO" token
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.ColInfo.TDSColInfoToken.Columns">
+            <summary>
+            A collection of columns for which metadata is available
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.ColInfo.TDSColInfoToken.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.ColInfo.TDSColInfoToken.Inflate(System.IO.Stream)">
+            <summary>
+            Inflate the token
+            NOTE: This operation is not continuable and assumes that the entire token is available in the stream
+            </summary>
+            <param name="source">Stream to inflate the token from</param>
+            <returns>TRUE if inflation is complete</returns>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.ColInfo.TDSColInfoToken.Deflate(System.IO.Stream)">
+            <summary>
+            Deflate the token
+            </summary>
+            <param name="destination">Stream to deflate token to</param>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.ColInfo.TDSColumnProperty">
+            <summary>
+            Information about a single column
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.ColInfo.TDSColumnProperty.InflationSize">
+            <summary>
+            Number of bytes processed from the stream during inflation
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.ColInfo.TDSColumnProperty.Number">
+            <summary>
+            Number of the column in the result
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.ColInfo.TDSColumnProperty.TableNumber">
+            <summary>
+            Number of the table
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.ColInfo.TDSColumnProperty.Status">
+            <summary>
+            Status
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.ColInfo.TDSColumnProperty.Name">
+            <summary>
+            Name of the column
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.ColInfo.TDSColumnProperty.Inflate(System.IO.Stream)">
+            <summary>
+            Inflate the token
+            NOTE: This operation is not continuable and assumes that the entire token is available in the stream
+            </summary>
+            <param name="source">Stream to inflate the token from</param>
+            <returns>TRUE if inflation is complete</returns>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.ColInfo.TDSColumnProperty.Deflate(System.IO.Stream)">
+            <summary>
+            Deflate the token
+            </summary>
+            <param name="destination">Stream to deflate token to</param>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.ColInfo.TDSColumnStatus">
+            <summary>
+            Status of the column
+            </summary>
+        </member>
+        <member name="F:Microsoft.SqlServer.TDS.ColInfo.TDSColumnStatus.Expression">
+            <summary>
+            The column was the result of an expression
+            </summary>
+        </member>
+        <member name="F:Microsoft.SqlServer.TDS.ColInfo.TDSColumnStatus.Key">
+            <summary>
+            The column is part of a key for the associated table
+            </summary>
+        </member>
+        <member name="F:Microsoft.SqlServer.TDS.ColInfo.TDSColumnStatus.Hidden">
+            <summary>
+            The column was not requested, but was added because it was part of a key for the associated table
+            </summary>
+        </member>
+        <member name="F:Microsoft.SqlServer.TDS.ColInfo.TDSColumnStatus.DifferentName">
+            <summary>
+            the column name is different than the requested column name in the case of a column alias
+            </summary>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.ColMetadata.TDSColMetadataToken">
+            <summary>
+            Result set metadata description "COLMETADATA" token
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.ColMetadata.TDSColMetadataToken.Columns">
+            <summary>
+            A collection of columns for which metadata is available
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.ColMetadata.TDSColMetadataToken.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.ColMetadata.TDSColMetadataToken.Inflate(System.IO.Stream)">
+            <summary>
+            Inflate the token
+            NOTE: This operation is not continuable and assumes that the entire token is available in the stream
+            </summary>
+            <param name="source">Stream to inflate the token from</param>
+            <returns>TRUE if inflation is complete</returns>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.ColMetadata.TDSColMetadataToken.Deflate(System.IO.Stream)">
+            <summary>
+            Deflate the token
+            </summary>
+            <param name="destination">Stream to deflate token to</param>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.ColMetadata.TDSColumnData">
+            <summary>
+            Class that describes metadata of a single column
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.ColMetadata.TDSColumnData.UserType">
+            <summary>
+            User type ID of the data type of the column
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.ColMetadata.TDSColumnData.DataType">
+            <summary>
+            Type of the data
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.ColMetadata.TDSColumnData.DataTypeSpecific">
+            <summary>
+            Information specific to the data type
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.ColMetadata.TDSColumnData.Flags">
+            <summary>
+            Column metadata flags
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.ColMetadata.TDSColumnData.TableName">
+            <summary>
+            Fully qualified base table name for the column
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.ColMetadata.TDSColumnData.Name">
+            <summary>
+            Name of the column
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.ColMetadata.TDSColumnData.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.ColMetadata.TDSColumnData.Inflate(System.IO.Stream)">
+            <summary>
+            Inflate the token
+            </summary>
+            <param name="source">Stream to inflate the token from</param>
+            <returns>TRUE if inflation is complete</returns>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.ColMetadata.TDSColumnData.Deflate(System.IO.Stream)">
+            <summary>
+            Deflate the token
+            </summary>
+            <param name="destination">Stream to deflate token to</param>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.ColMetadata.TDSColumnDataCollation">
+            <summary>
+            Collation associated with TDS column
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.ColMetadata.TDSColumnDataCollation.WCID">
+            <summary>
+            I have no clue what this stands for
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.ColMetadata.TDSColumnDataCollation.SortID">
+            <summary>
+            Sort identifier
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.ColMetadata.TDSColumnDataCollation.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.ColMetadata.TDSColumnDataCollation.#ctor(System.UInt32)">
+            <summary>
+            Initialization constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.ColMetadata.TDSColumnDataCollation.#ctor(System.UInt32,System.Byte)">
+            <summary>
+            Initialization constructor
+            </summary>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.ColMetadata.TDSColumnDataFlags">
+            <summary>
+            Column data flags
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.ColMetadata.TDSColumnDataFlags.IsCaseSensitive">
+            <summary>
+            Indicates that the column is case-sensitive
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.ColMetadata.TDSColumnDataFlags.IsNullable">
+            <summary>
+            Indicates that the column is nullable
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.ColMetadata.TDSColumnDataFlags.Updatable">
+            <summary>
+            Indicates that the column updatability
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.ColMetadata.TDSColumnDataFlags.IsIdentity">
+            <summary>
+            Indicates that the column is identity
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.ColMetadata.TDSColumnDataFlags.IsComputed">
+            <summary>
+            Indicates that the column is computed
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.ColMetadata.TDSColumnDataFlags.ReservedODBC">
+            <summary>
+            Reserved by ODS gateway supporting ODBC
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.ColMetadata.TDSColumnDataFlags.IsFixedLengthCLR">
+            <summary>
+            Indicates that the column is a fixed length CLR type
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.ColMetadata.TDSColumnDataFlags.IsDefault">
+            <summary>
+            Indicates that all values in the column are default used for TVP
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.ColMetadata.TDSColumnDataFlags.IsSparseColumnSet">
+            <summary>
+            Indicates that the column sparse
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.ColMetadata.TDSColumnDataFlags.IsHidden">
+            <summary>
+            Indicates that the column is part of the hidden key
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.ColMetadata.TDSColumnDataFlags.IsKey">
+            <summary>
+            Indicates that the column is part of the primary key
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.ColMetadata.TDSColumnDataFlags.IsNullableUnknown">
+            <summary>
+            Indicates that the column nullability is unknown
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.ColMetadata.TDSColumnDataFlags.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.ColMetadata.TDSColumnDataFlags.#ctor(System.UInt16)">
+            <summary>
+            Initialization constructor
+            </summary>
+            <param name="flags">Flags to parse</param>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.ColMetadata.TDSColumnDataFlags.ToUShort">
+            <summary>
+            Serialize flags back into a value
+            </summary>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.ColMetadata.TDSColumnDataUpdatableFlag">
+            <summary>
+            Indicates type of updatability of the column
+            </summary>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.ColMetadata.TDSDecimalColumnSpecific">
+            <summary>
+            Metadata associated with decimal/numeric column
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.ColMetadata.TDSDecimalColumnSpecific.Length">
+            <summary>
+            Length of the data
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.ColMetadata.TDSDecimalColumnSpecific.Precision">
+            <summary>
+            Precision of the data
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.ColMetadata.TDSDecimalColumnSpecific.Scale">
+            <summary>
+            Scale of the data
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.ColMetadata.TDSDecimalColumnSpecific.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.ColMetadata.TDSDecimalColumnSpecific.#ctor(System.Byte)">
+            <summary>
+            Initialization constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.ColMetadata.TDSDecimalColumnSpecific.#ctor(System.Byte,System.Byte)">
+            <summary>
+            Initialization constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.ColMetadata.TDSDecimalColumnSpecific.#ctor(System.Byte,System.Byte,System.Byte)">
+            <summary>
+            Initialization constructor
+            </summary>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.ColMetadata.TDSShilohVarCharColumnSpecific">
+            <summary>
+            Metadata associated with Shiloh variable character column
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.ColMetadata.TDSShilohVarCharColumnSpecific.Length">
+            <summary>
+            Length of the data
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.ColMetadata.TDSShilohVarCharColumnSpecific.Collation">
+            <summary>
+            Collation
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.ColMetadata.TDSShilohVarCharColumnSpecific.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.ColMetadata.TDSShilohVarCharColumnSpecific.#ctor(System.UInt16)">
+            <summary>
+            Initialization constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.ColMetadata.TDSShilohVarCharColumnSpecific.#ctor(System.UInt16,Microsoft.SqlServer.TDS.ColMetadata.TDSColumnDataCollation)">
+            <summary>
+            Initialization constructor
+            </summary>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.DateFormatType">
+            <summary>
+            Format of the date
+            </summary>
+        </member>
+        <member name="F:Microsoft.SqlServer.TDS.DateFormatType.YearMonthDay">
+            <summary>
+            y/m/d
+            </summary>
+        </member>
+        <member name="F:Microsoft.SqlServer.TDS.DateFormatType.YearDayMonth">
+            <summary>
+            y/d/m
+            </summary>
+        </member>
+        <member name="F:Microsoft.SqlServer.TDS.DateFormatType.MonthDayYear">
+            <summary>
+            m/d/y
+            </summary>
+        </member>
+        <member name="F:Microsoft.SqlServer.TDS.DateFormatType.MonthYearDay">
+            <summary>
+            m/y/d
+            </summary>
+        </member>
+        <member name="F:Microsoft.SqlServer.TDS.DateFormatType.DayMonthYear">
+            <summary>
+            d/m/y
+            </summary>
+        </member>
+        <member name="F:Microsoft.SqlServer.TDS.DateFormatType.DayYearMonth">
+            <summary>
+            d/y/m
+            </summary>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.Done.TDSDoneInProcToken">
+            <summary>
+            Completion packet "DONEINPROC" token
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.Done.TDSDoneInProcToken.Status">
+            <summary>
+            Status of the completion
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.Done.TDSDoneInProcToken.Command">
+            <summary>
+            Token for which completion is indicated
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.Done.TDSDoneInProcToken.RowCount">
+            <summary>
+            Amount of rows returned
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.Done.TDSDoneInProcToken.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.Done.TDSDoneInProcToken.#ctor(Microsoft.SqlServer.TDS.Done.TDSDoneTokenStatusType)">
+            <summary>
+            Initialization constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.Done.TDSDoneInProcToken.#ctor(Microsoft.SqlServer.TDS.Done.TDSDoneTokenStatusType,Microsoft.SqlServer.TDS.Done.TDSDoneTokenCommandType)">
+            <summary>
+            Initialization constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.Done.TDSDoneInProcToken.#ctor(Microsoft.SqlServer.TDS.Done.TDSDoneTokenStatusType,Microsoft.SqlServer.TDS.Done.TDSDoneTokenCommandType,System.UInt64)">
+            <summary>
+            Initialization constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.Done.TDSDoneInProcToken.Inflate(System.IO.Stream)">
+            <summary>
+            Inflate the token
+            NOTE: This operation is not continuable and assumes that the entire token is available in the stream
+            </summary>
+            <param name="source">Stream to inflate the token from</param>
+            <returns>TRUE if inflation is complete</returns>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.Done.TDSDoneInProcToken.Deflate(System.IO.Stream)">
+            <summary>
+            Deflate the token
+            </summary>
+            <param name="destination">Stream to deflate token to</param>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.Done.TDSDoneProcedureToken">
+            <summary>
+            Completion packet "DONEPROC" token
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.Done.TDSDoneProcedureToken.Status">
+            <summary>
+            Status of the completion
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.Done.TDSDoneProcedureToken.Command">
+            <summary>
+            Token for which completion is indicated
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.Done.TDSDoneProcedureToken.RowCount">
+            <summary>
+            Amount of rows returned
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.Done.TDSDoneProcedureToken.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.Done.TDSDoneProcedureToken.#ctor(Microsoft.SqlServer.TDS.Done.TDSDoneTokenStatusType)">
+            <summary>
+            Initialization constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.Done.TDSDoneProcedureToken.#ctor(Microsoft.SqlServer.TDS.Done.TDSDoneTokenStatusType,Microsoft.SqlServer.TDS.Done.TDSDoneTokenCommandType)">
+            <summary>
+            Initialization constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.Done.TDSDoneProcedureToken.#ctor(Microsoft.SqlServer.TDS.Done.TDSDoneTokenStatusType,Microsoft.SqlServer.TDS.Done.TDSDoneTokenCommandType,System.UInt64)">
+            <summary>
+            Initialization constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.Done.TDSDoneProcedureToken.Inflate(System.IO.Stream)">
+            <summary>
+            Inflate the token
+            NOTE: This operation is not continuable and assumes that the entire token is available in the stream
+            </summary>
+            <param name="source">Stream to inflate the token from</param>
+            <returns>TRUE if inflation is complete</returns>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.Done.TDSDoneProcedureToken.Deflate(System.IO.Stream)">
+            <summary>
+            Deflate the token
+            </summary>
+            <param name="destination">Stream to deflate token to</param>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.Done.TDSDoneToken">
+            <summary>
+            Completion packet "DONE" token
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.Done.TDSDoneToken.Status">
+            <summary>
+            Status of the completion
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.Done.TDSDoneToken.Command">
+            <summary>
+            Token for which completion is indicated
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.Done.TDSDoneToken.RowCount">
+            <summary>
+            Amount of rows returned
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.Done.TDSDoneToken.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.Done.TDSDoneToken.#ctor(Microsoft.SqlServer.TDS.Done.TDSDoneTokenStatusType)">
+            <summary>
+            Initialization constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.Done.TDSDoneToken.#ctor(Microsoft.SqlServer.TDS.Done.TDSDoneTokenStatusType,Microsoft.SqlServer.TDS.Done.TDSDoneTokenCommandType)">
+            <summary>
+            Initialization constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.Done.TDSDoneToken.#ctor(Microsoft.SqlServer.TDS.Done.TDSDoneTokenStatusType,Microsoft.SqlServer.TDS.Done.TDSDoneTokenCommandType,System.UInt64)">
+            <summary>
+            Initialization constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.Done.TDSDoneToken.Inflate(System.IO.Stream)">
+            <summary>
+            Inflate the token
+            NOTE: This operation is not continuable and assumes that the entire token is available in the stream
+            </summary>
+            <param name="source">Stream to inflate the token from</param>
+            <returns>TRUE if inflation is complete</returns>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.Done.TDSDoneToken.Deflate(System.IO.Stream)">
+            <summary>
+            Deflate the token
+            </summary>
+            <param name="destination">Stream to deflate token to</param>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.Done.TDSDoneTokenCommandType">
+            <summary>
+            Command completion of which a DONE token reports
+            </summary>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.Done.TDSDoneTokenStatusType">
+            <summary>
+            Status of the token
+            </summary>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.EnvChange.TDSEnvChangeToken">
+            <summary>
+            Environment change token "ENVCHANGE"
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.EnvChange.TDSEnvChangeToken.Type">
+            <summary>
+            Type of the token
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.EnvChange.TDSEnvChangeToken.OldValue">
+            <summary>
+            Old value of the token (optional)
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.EnvChange.TDSEnvChangeToken.NewValue">
+            <summary>
+            New value of the token
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.EnvChange.TDSEnvChangeToken.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.EnvChange.TDSEnvChangeToken.#ctor(Microsoft.SqlServer.TDS.EnvChange.TDSEnvChangeTokenType)">
+            <summary>
+            Initialization constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.EnvChange.TDSEnvChangeToken.#ctor(Microsoft.SqlServer.TDS.EnvChange.TDSEnvChangeTokenType,System.Object)">
+            <summary>
+            Initialization constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.EnvChange.TDSEnvChangeToken.#ctor(Microsoft.SqlServer.TDS.EnvChange.TDSEnvChangeTokenType,System.Object,System.Object)">
+            <summary>
+            Initialization constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.EnvChange.TDSEnvChangeToken.Inflate(System.IO.Stream)">
+            <summary>
+            Inflate the token
+            NOTE: This operation is not continuable and assumes that the entire token is available in the stream
+            </summary>
+            <param name="source">Stream to inflate the token from</param>
+            <returns>TRUE if inflation is complete</returns>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.EnvChange.TDSEnvChangeToken.Deflate(System.IO.Stream)">
+            <summary>
+            Deflate the token
+            </summary>
+            <param name="destination">Stream to deflate token to</param>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.EnvChange.TDSEnvChangeTokenType">
+            <summary>
+            Type of TDS EnvChagne token
+            </summary>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.EnvChange.TDSRoutingEnvChangeTokenValue">
+            <summary>
+            Token value that represents routing information
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.EnvChange.TDSRoutingEnvChangeTokenValue.Protocol">
+            <summary>
+            Protocol to use when connecting to the target server
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.EnvChange.TDSRoutingEnvChangeTokenValue.ProtocolProperty">
+            <summary>
+            Protocol details
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.EnvChange.TDSRoutingEnvChangeTokenValue.AlternateServer">
+            <summary>
+            Location of the target server
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.EnvChange.TDSRoutingEnvChangeTokenValue.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.EnvChange.TDSRoutingEnvChangeTokenValue.#ctor(Microsoft.SqlServer.TDS.EnvChange.TDSRoutingEnvChangeTokenValueType)">
+            <summary>
+            Initialization constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.EnvChange.TDSRoutingEnvChangeTokenValue.#ctor(Microsoft.SqlServer.TDS.EnvChange.TDSRoutingEnvChangeTokenValueType,System.Object)">
+            <summary>
+            Initialization constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.EnvChange.TDSRoutingEnvChangeTokenValue.#ctor(Microsoft.SqlServer.TDS.EnvChange.TDSRoutingEnvChangeTokenValueType,System.Object,System.String)">
+            <summary>
+            Initialization constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.EnvChange.TDSRoutingEnvChangeTokenValue.Inflate(System.IO.Stream)">
+            <summary>
+            Inflate the token
+            </summary>
+            <param name="source">Stream to inflate the token from</param>
+            <returns>TRUE if inflation is complete</returns>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.EnvChange.TDSRoutingEnvChangeTokenValue.Deflate(System.IO.Stream)">
+            <summary>
+            Deflate the token
+            </summary>
+            <param name="destination">Stream to deflate token to</param>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.EnvChange.TDSRoutingEnvChangeTokenValue.ToString">
+            <summary>
+            Override string representation method
+            </summary>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.EnvChange.TDSRoutingEnvChangeTokenValueType">
+            <summary>
+            Routing protocol
+            </summary>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.Error.TDSErrorToken">
+            <summary>
+            Environment change token "ERROR"
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.Error.TDSErrorToken.Number">
+            <summary>
+            Error number
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.Error.TDSErrorToken.State">
+            <summary>
+            Error state
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.Error.TDSErrorToken.Class">
+            <summary>
+            Error class
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.Error.TDSErrorToken.Message">
+            <summary>
+            Description of the error
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.Error.TDSErrorToken.ServerName">
+            <summary>
+            Name of the server generated an error
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.Error.TDSErrorToken.ProcedureName">
+            <summary>
+            Procedure that produced an error
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.Error.TDSErrorToken.Line">
+            <summary>
+            Line number at which an error occurred
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.Error.TDSErrorToken.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.Error.TDSErrorToken.#ctor(System.UInt32)">
+            <summary>
+            Initialization constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.Error.TDSErrorToken.#ctor(System.UInt32,System.Byte)">
+            <summary>
+            Initialization constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.Error.TDSErrorToken.#ctor(System.UInt32,System.Byte,System.Byte)">
+            <summary>
+            Initialization constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.Error.TDSErrorToken.#ctor(System.UInt32,System.Byte,System.Byte,System.String)">
+            <summary>
+            Initialization constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.Error.TDSErrorToken.#ctor(System.UInt32,System.Byte,System.Byte,System.String,System.String)">
+            <summary>
+            Initialization constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.Error.TDSErrorToken.#ctor(System.UInt32,System.Byte,System.Byte,System.String,System.String,System.String)">
+            <summary>
+            Initialization constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.Error.TDSErrorToken.#ctor(System.UInt32,System.Byte,System.Byte,System.String,System.String,System.String,System.UInt32)">
+            <summary>
+            Initialization constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.Error.TDSErrorToken.#ctor(System.IO.Stream)">
+            <summary>
+            Inflating constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.Error.TDSErrorToken.Inflate(System.IO.Stream)">
+            <summary>
+            Inflate the token
+            NOTE: This operation is not continuable and assumes that the entire token is available in the stream
+            </summary>
+            <param name="source">Stream to inflate the token from</param>
+            <returns>TRUE if inflation is complete</returns>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.Error.TDSErrorToken.Deflate(System.IO.Stream)">
+            <summary>
+            Deflate the token
+            </summary>
+            <param name="destination">Stream to deflate token to</param>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.FeatureExtAck.TDSFeatureExtAckFederatedAuthenticationOption">
+            <summary>
+            Acknowledgement for federated authentication
+            </summary>
+        </member>
+        <member name="F:Microsoft.SqlServer.TDS.FeatureExtAck.TDSFeatureExtAckFederatedAuthenticationOption.s_nonceDataLength">
+            <summary>
+            Fixed Length of Nonce
+            </summary>
+        </member>
+        <member name="F:Microsoft.SqlServer.TDS.FeatureExtAck.TDSFeatureExtAckFederatedAuthenticationOption.s_signatureDataLength">
+            <summary>
+            Fixed Length of Signature
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.FeatureExtAck.TDSFeatureExtAckFederatedAuthenticationOption.ClientNonce">
+            <summary>
+            Signed nonce
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.FeatureExtAck.TDSFeatureExtAckFederatedAuthenticationOption.Signature">
+            <summary>
+            The HMAC-SHA-256 [RFC6234] of the server-specified nonce
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.FeatureExtAck.TDSFeatureExtAckFederatedAuthenticationOption.#ctor(System.Byte[],System.Byte[])">
+            <summary>
+            Initialization constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.FeatureExtAck.TDSFeatureExtAckFederatedAuthenticationOption.#ctor(System.IO.Stream)">
+            <summary>
+            Inflation constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.FeatureExtAck.TDSFeatureExtAckFederatedAuthenticationOption.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.FeatureExtAck.TDSFeatureExtAckFederatedAuthenticationOption.Deflate(System.IO.Stream)">
+            <summary>
+            Deflate state into the stream
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.FeatureExtAck.TDSFeatureExtAckFederatedAuthenticationOption.Inflate(System.IO.Stream)">
+            <summary>
+            Inflate from stream
+            </summary>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.FeatureExtAck.TDSFeatureExtAckGenericOption">
+            <summary>
+            A single option of the feature extension acknowledgement block
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.FeatureExtAck.TDSFeatureExtAckGenericOption.FeatureAckDataLen">
+            <summary>
+            FeatureAck data length.
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.FeatureExtAck.TDSFeatureExtAckGenericOption.FeatureAckData">
+            <summary>
+            FeatureAck Data.
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.FeatureExtAck.TDSFeatureExtAckGenericOption.#ctor">
+            <summary>
+            Initialization Constructor.
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.FeatureExtAck.TDSFeatureExtAckGenericOption.#ctor(Microsoft.SqlServer.TDS.TDSFeatureID)">
+            <summary>
+            Initialization constructor
+            </summary>
+            <param name="type">type of the FeatureExtAckToken.</param>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.FeatureExtAck.TDSFeatureExtAckGenericOption.#ctor(Microsoft.SqlServer.TDS.TDSFeatureID,System.UInt32)">
+            <summary>
+            Initialization constructor
+            </summary>
+            <param name="type">type of the FeatureExtAckToken.</param>
+            <param name="featureAckDataLen">Length of the data.</param>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.FeatureExtAck.TDSFeatureExtAckGenericOption.#ctor(Microsoft.SqlServer.TDS.TDSFeatureID,System.UInt32,System.Byte[])">
+            <summary>
+            Initialization constructor
+            </summary>
+            <param name="type">type of the FeatureExtAckToken.</param>
+            <param name="featureAckDataLen">Length of the data.</param>
+            <param name="data">Data of the FeatureAck token.</param>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.FeatureExtAck.TDSFeatureExtAckGenericOption.#ctor(System.IO.Stream)">
+            <summary>
+            Inflating constructor.
+            </summary>
+            <param name="source"></param>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.FeatureExtAck.TDSFeatureExtAckGenericOption.#ctor(Microsoft.SqlServer.TDS.TDSFeatureID,System.IO.Stream)">
+            <summary>
+            Inflating constructor
+            </summary>
+            <param name="featureID"></param>
+            <param name="source"></param>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.FeatureExtAck.TDSFeatureExtAckGenericOption.Inflate(System.IO.Stream)">
+            <summary>
+            Inflate the token
+            NOTE: This operation is not continuable and assumes that the entire token is available in the stream
+            </summary>
+            <param name="source">Stream to inflate the token from.</param>
+            <returns>True in case of success, false otherwise.</returns>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.FeatureExtAck.TDSFeatureExtAckGenericOption.Deflate(System.IO.Stream)">
+            <summary>
+            Deflate the token.
+            </summary>
+            <param name="destination">Stream the token to deflate to.</param>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.FeatureExtAck.TDSFeatureExtAckOption">
+            <summary>
+            A single option of the feature extension acknowledgement block
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.FeatureExtAck.TDSFeatureExtAckOption.FeatureID">
+            <summary>
+            Feature identifier
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.FeatureExtAck.TDSFeatureExtAckOption.#ctor">
+            <summary>
+            Initialization Constructor.
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.FeatureExtAck.TDSFeatureExtAckOption.Inflate(System.IO.Stream)">
+            <summary>
+            Inflate the token
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.FeatureExtAck.TDSFeatureExtAckOption.Deflate(System.IO.Stream)">
+            <summary>
+            Deflate the token.
+            </summary>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.FeatureExtAck.TDSFeatureExtAckSessionStateOption">
+            <summary>
+            Acknowledgement for session state recovery
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.FeatureExtAck.TDSFeatureExtAckSessionStateOption.Options">
+            <summary>
+            Options that carry session state
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.FeatureExtAck.TDSFeatureExtAckSessionStateOption.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.FeatureExtAck.TDSFeatureExtAckSessionStateOption.#ctor(System.Collections.Generic.IList{Microsoft.SqlServer.TDS.SessionState.TDSSessionStateOption})">
+            <summary>
+            Initialization constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.FeatureExtAck.TDSFeatureExtAckSessionStateOption.#ctor(System.IO.Stream)">
+            <summary>
+            Inflation constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.FeatureExtAck.TDSFeatureExtAckSessionStateOption.Deflate(System.IO.Stream)">
+            <summary>
+            Deflate state into the stream
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.FeatureExtAck.TDSFeatureExtAckSessionStateOption.Inflate(System.IO.Stream)">
+            <summary>
+            Inflate from stream
+            </summary>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.FeatureExtAck.TDSFeatureExtAckToken">
+            <summary>
+            FeatureAck token definition.
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.FeatureExtAck.TDSFeatureExtAckToken.Options">
+            <summary>
+            Collection of feature extension acknowledged options
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.FeatureExtAck.TDSFeatureExtAckToken.#ctor">
+            <summary>
+            Default Constructor.
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.FeatureExtAck.TDSFeatureExtAckToken.#ctor(Microsoft.SqlServer.TDS.FeatureExtAck.TDSFeatureExtAckOption[])">
+            <summary>
+            Initialization constructor.
+            </summary>
+            <param name="options"></param>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.FeatureExtAck.TDSFeatureExtAckToken.#ctor(System.IO.Stream)">
+            <summary>
+            Inflating constructor.
+            </summary>
+            <param name="source"></param>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.FeatureExtAck.TDSFeatureExtAckToken.Inflate(System.IO.Stream)">
+            <summary>
+            Inflate the token
+            NOTE: This operation is not continuable and assumes that the entire token is available in the stream
+            </summary>
+            <param name="source">Stream to inflate the token from.</param>
+            <returns>True in case of success, false otherwise.</returns>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.FeatureExtAck.TDSFeatureExtAckToken.Deflate(System.IO.Stream)">
+            <summary>
+            Deflate the token.
+            </summary>
+            <param name="destination">Stream the token to deflate to.</param>
+        </member>
+        <member name="F:Microsoft.SqlServer.TDS.Authentication.TDSFedAuthInfoId.STSURL">
+            <summary>
+            STS URL as Token Endpoint
+            </summary>
+        </member>
+        <member name="F:Microsoft.SqlServer.TDS.Authentication.TDSFedAuthInfoId.SPN">
+            <summary>
+            Service Principal Name
+            </summary>
+        </member>
+        <member name="F:Microsoft.SqlServer.TDS.Authentication.TDSFedAuthInfoId.Invalid">
+            <summary>
+            Invalid InfoId
+            </summary>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.Authentication.TDSFedAuthInfoOption">
+            <summary>
+            A single option of the feature extension acknowledgement block
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.Authentication.TDSFedAuthInfoOption.FedAuthInfoId">
+            <summary>
+            FedAuth Info Identifier.
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.Authentication.TDSFedAuthInfoOption.#ctor">
+            <summary>
+            Initialization Constructor.
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.Authentication.TDSFedAuthInfoOption.Inflate(System.IO.Stream)">
+            <summary>
+            Inflate the token
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.Authentication.TDSFedAuthInfoOption.Deflate(System.IO.Stream)">
+            <summary>
+            Deflate the token.
+            </summary>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.Authentication.TDSFedAuthInfoOptionSPN">
+            <summary>
+            TDS FedAuth Info Option for SPN
+            </summary>
+        </member>
+        <member name="F:Microsoft.SqlServer.TDS.Authentication.TDSFedAuthInfoOptionSPN._fedAuthInfoId">
+            <summary>
+            FedAuth Information ID
+            </summary>
+        </member>
+        <member name="F:Microsoft.SqlServer.TDS.Authentication.TDSFedAuthInfoOptionSPN._infoDataLength">
+            <summary>
+            Information Data Length
+            </summary>
+        </member>
+        <member name="F:Microsoft.SqlServer.TDS.Authentication.TDSFedAuthInfoOptionSPN._spn">
+            <summary>
+            STS URL
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.Authentication.TDSFedAuthInfoOptionSPN.SPN">
+            <summary>
+            Return the SPN as a unicode string.
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.Authentication.TDSFedAuthInfoOptionSPN.FedAuthInfoId">
+            <summary>
+            Return the FedAuthInfo Id.
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.Authentication.TDSFedAuthInfoOptionSPN.#ctor">
+            <summary>
+            Default public constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.Authentication.TDSFedAuthInfoOptionSPN.#ctor(System.UInt32)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="infoDataLength">Info Data Length</param>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.Authentication.TDSFedAuthInfoOptionSPN.#ctor(System.String)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="spn">SPN string</param>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.Authentication.TDSFedAuthInfoOptionSPN.Inflate(System.IO.Stream)">
+            <summary>
+            Inflate the data from the stream, when receiving this token.
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.Authentication.TDSFedAuthInfoOptionSPN.Deflate(System.IO.Stream)">
+            <summary>
+            Deflate the data to the stream, when writing this token.
+            </summary>
+            <param name="source"></param>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.Authentication.TDSFedAuthInfoOptionSTSURL">
+            <summary>
+            TDS FedAuth Info Option for STS URL
+            </summary>
+        </member>
+        <member name="F:Microsoft.SqlServer.TDS.Authentication.TDSFedAuthInfoOptionSTSURL._fedAuthInfoId">
+            <summary>
+            FedAuth Information ID
+            </summary>
+        </member>
+        <member name="F:Microsoft.SqlServer.TDS.Authentication.TDSFedAuthInfoOptionSTSURL._infoDataLength">
+            <summary>
+            Information Data Length
+            </summary>
+        </member>
+        <member name="F:Microsoft.SqlServer.TDS.Authentication.TDSFedAuthInfoOptionSTSURL._stsUrl">
+            <summary>
+            STS URL
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.Authentication.TDSFedAuthInfoOptionSTSURL.FedAuthInfoId">
+            <summary>
+            Return the FedAuthInfo Id.
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.Authentication.TDSFedAuthInfoOptionSTSURL.STSURL">
+            <summary>
+            Return the STSURL as a unicode string.
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.Authentication.TDSFedAuthInfoOptionSTSURL.#ctor">
+            <summary>
+            Default public constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.Authentication.TDSFedAuthInfoOptionSTSURL.#ctor(System.UInt32)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="infoDataLength">Info Data Length</param>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.Authentication.TDSFedAuthInfoOptionSTSURL.#ctor(System.String)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="stsurl">STSURL string</param>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.Authentication.TDSFedAuthInfoOptionSTSURL.Inflate(System.IO.Stream)">
+            <summary>
+            Inflate the data from the stream, when receiving this token.
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.Authentication.TDSFedAuthInfoOptionSTSURL.Deflate(System.IO.Stream)">
+            <summary>
+            Deflate the data to the stream, when writing this token.
+            </summary>
+            <param name="source"></param>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.Authentication.TDSFedAuthInfoToken">
+            <summary>
+            FeatureAck token definition.
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.Authentication.TDSFedAuthInfoToken.Options">
+            <summary>
+            Collection of fedauth info options
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.Authentication.TDSFedAuthInfoToken.#ctor">
+            <summary>
+            Default Constructor.
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.Authentication.TDSFedAuthInfoToken.#ctor(System.IO.Stream)">
+            <summary>
+            Inflating constructor.
+            </summary>
+            <param name="source"></param>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.Authentication.TDSFedAuthInfoToken.Inflate(System.IO.Stream)">
+            <summary>
+            Inflate the token
+            NOTE: This operation is not continuable and assumes that the entire token is available in the stream
+            </summary>
+            <param name="source">Stream to inflate the token from.</param>
+            <returns>True in case of success, false otherwise.</returns>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.Authentication.TDSFedAuthInfoToken.Deflate(System.IO.Stream)">
+            <summary>
+            Deflate the token.
+            </summary>
+            <param name="destination">Stream the token to deflate to.</param>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.Authentication.TDSFedAuthToken">
+            <summary>
+            FedAuthToken Message definition.
+            </summary>
+        </member>
+        <member name="F:Microsoft.SqlServer.TDS.Authentication.TDSFedAuthToken._token">
+            <summary>
+            Federated Authentication Token
+            </summary>
+        </member>
+        <member name="F:Microsoft.SqlServer.TDS.Authentication.TDSFedAuthToken._nonce">
+            <summary>
+            Nonce
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.Authentication.TDSFedAuthToken.#ctor">
+            <summary>
+            Default Constructor.
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.Authentication.TDSFedAuthToken.#ctor(System.Byte[],System.Byte[])">
+            <summary>
+            Initialization constructor.
+            </summary>
+            <param name="token">Token</param>
+            <param name="nonce"></param>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.Authentication.TDSFedAuthToken.#ctor(System.IO.Stream)">
+            <summary>
+            Inflating constructor.
+            </summary>
+            <param name="source"></param>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.Authentication.TDSFedAuthToken.Inflate(System.IO.Stream)">
+            <summary>
+            Inflate the token
+            NOTE: This operation is not continuable and assumes that the entire token is available in the stream
+            </summary>
+            <param name="source">Stream to inflate the token from.</param>
+            <returns>True in case of success, false otherwise.</returns>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.Authentication.TDSFedAuthToken.Deflate(System.IO.Stream)">
+            <summary>
+            Deflate the token.
+            </summary>
+            <param name="destination">Stream the token to deflate to.</param>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.IDeflatable">
+            <summary>
+            Interface that enables object deflation
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.IDeflatable.Deflate(System.IO.Stream)">
+            <summary>
+            Deflate the object into a byte stream
+            </summary>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.IInflatable">
+            <summary>
+            Interface that enables partial, sequential and continuable object inflation
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.IInflatable.Inflate(System.IO.Stream)">
+            <summary>
+            Inflate the object using the next available chunk of byte stream
+            </summary>
+            <param name="source"></param>
+            <returns>TRUE if object is completely inflated, FALSE otherwise</returns>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.Info.TDSInfoToken">
+            <summary>
+            Environment change token "INFO"
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.Info.TDSInfoToken.Number">
+            <summary>
+            Number
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.Info.TDSInfoToken.State">
+            <summary>
+            State
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.Info.TDSInfoToken.Class">
+            <summary>
+            Class
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.Info.TDSInfoToken.Message">
+            <summary>
+            Description
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.Info.TDSInfoToken.ServerName">
+            <summary>
+            Name of the server generated the message
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.Info.TDSInfoToken.ProcedureName">
+            <summary>
+            Procedure that produced the message
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.Info.TDSInfoToken.Line">
+            <summary>
+            Line number at which the message was produced
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.Info.TDSInfoToken.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.Info.TDSInfoToken.#ctor(System.UInt32)">
+            <summary>
+            Initialization constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.Info.TDSInfoToken.#ctor(System.UInt32,System.Byte)">
+            <summary>
+            Initialization constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.Info.TDSInfoToken.#ctor(System.UInt32,System.Byte,System.Byte)">
+            <summary>
+            Initialization constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.Info.TDSInfoToken.#ctor(System.UInt32,System.Byte,System.Byte,System.String)">
+            <summary>
+            Initialization constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.Info.TDSInfoToken.#ctor(System.UInt32,System.Byte,System.Byte,System.String,System.String)">
+            <summary>
+            Initialization constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.Info.TDSInfoToken.#ctor(System.UInt32,System.Byte,System.Byte,System.String,System.String,System.String)">
+            <summary>
+            Initialization constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.Info.TDSInfoToken.#ctor(System.UInt32,System.Byte,System.Byte,System.String,System.String,System.String,System.UInt32)">
+            <summary>
+            Initialization constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.Info.TDSInfoToken.#ctor(System.IO.Stream)">
+            <summary>
+            Inflating constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.Info.TDSInfoToken.Inflate(System.IO.Stream)">
+            <summary>
+            Inflate the token
+            NOTE: This operation is not continuable and assumes that the entire token is available in the stream
+            </summary>
+            <param name="source">Stream to inflate the token from</param>
+            <returns>TRUE if inflation is complete</returns>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.Info.TDSInfoToken.Deflate(System.IO.Stream)">
+            <summary>
+            Deflate the token
+            </summary>
+            <param name="destination">Stream to deflate token to</param>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.LanguageString">
+            <summary>
+            Class that contains language names and can convert between enumeration and strings
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.LanguageString.ToEnum(System.String)">
+            <summary>
+            Convert a language to enumeration
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.LanguageString.ToString(Microsoft.SqlServer.TDS.LanguageType)">
+            <summary>
+            Convert enumeration to string
+            </summary>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.LanguageType">
+            <summary>
+            Language of the server
+            </summary>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.Login7.TDSLogin7FeatureOptionsToken">
+            <summary>
+            Feature extension data delivered in the login packet
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.Login7.TDSLogin7FeatureOptionsToken.InflationSize">
+            <summary>
+            Property used internally by inflation/deflation routine to tell caller how much data was read/written to the stream
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.Login7.TDSLogin7FeatureOptionsToken.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.Login7.TDSLogin7FeatureOptionsToken.Inflate(System.IO.Stream)">
+            <summary>
+            Inflate an object instance from the stream
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.Login7.TDSLogin7FeatureOptionsToken.Deflate(System.IO.Stream)">
+            <summary>
+            Serialize object into the stream
+            </summary>
+            <param name="destination"></param>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.Login7.TDSLogin7FeatureOptionToken">
+            <summary>
+            Class that defines a feature option which is delivered in the login packet FeatureExt block
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.Login7.TDSLogin7FeatureOptionToken.InflationSize">
+            <summary>
+            Size of the data read during inflation operation. It is needed to properly parse the option stream.
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.Login7.TDSLogin7FeatureOptionToken.FeatureID">
+            <summary>
+            Feature type
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.Login7.TDSLogin7FeatureOptionToken.Inflate(System.IO.Stream)">
+            <summary>
+            Inflate the Feature option
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.Login7.TDSLogin7FeatureOptionToken.Deflate(System.IO.Stream)">
+            <summary>
+            Deflate the token
+            </summary>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.Login7.TDSFedAuthLibraryType">
+            <summary>
+            The Federated authentication library type.
+            </summary>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.Login7.TDSLogin7FedAuthOptionToken">
+            <summary>
+            Feature option token definition.
+            </summary>
+        </member>
+        <member name="F:Microsoft.SqlServer.TDS.Login7.TDSLogin7FedAuthOptionToken.s_nonceDataLength">
+            <summary>
+            Nonce's length
+            </summary>
+        </member>
+        <member name="F:Microsoft.SqlServer.TDS.Login7.TDSLogin7FedAuthOptionToken.s_signatureDataLength">
+            <summary>
+            Signature's length
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.Login7.TDSLogin7FedAuthOptionToken.FeatureID">
+            <summary>
+            Feature type
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.Login7.TDSLogin7FedAuthOptionToken.Length">
+            <summary>
+            Federated Authentication option length
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.Login7.TDSLogin7FedAuthOptionToken.Library">
+            <summary>
+            Federated authentication library.
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.Login7.TDSLogin7FedAuthOptionToken.Echo">
+            <summary>
+            FedAuthEcho: The intention of this flag is for the client to echo the server’s FEDAUTHREQUIRED prelogin option.
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.Login7.TDSLogin7FedAuthOptionToken.IsRequestingAuthenticationInfo">
+            <summary>
+            Whether this protocol is requesting further information from server to perform authentication.
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.Login7.TDSLogin7FedAuthOptionToken.Token">
+            <summary>
+            Federated authentication token generated by the specified federated authentication library.
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.Login7.TDSLogin7FedAuthOptionToken.Nonce">
+            <summary>
+            The nonce provided by the server during prelogin exchange
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.Login7.TDSLogin7FedAuthOptionToken.ChannelBingingToken">
+            <summary>
+            Channel binding token associated with the underlying SSL stream.
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.Login7.TDSLogin7FedAuthOptionToken.Signature">
+            <summary>
+            The HMAC-SHA-256 [RFC6234] of the server-specified nonce
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.Login7.TDSLogin7FedAuthOptionToken.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.Login7.TDSLogin7FedAuthOptionToken.#ctor(Microsoft.SqlServer.TDS.PreLogin.TdsPreLoginFedAuthRequiredOption,Microsoft.SqlServer.TDS.Login7.TDSFedAuthLibraryType,System.Byte[],System.Byte[],System.Byte[],System.Boolean,System.Boolean,Microsoft.SqlServer.TDS.Login7.TDSFedAuthADALWorkflow)">
+            <summary>
+            Initialization Constructor.
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.Login7.TDSLogin7FedAuthOptionToken.#ctor(System.IO.Stream)">
+            <summary>
+            Inflating constructor
+            </summary>		
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.Login7.TDSLogin7FedAuthOptionToken.Inflate(System.IO.Stream)">
+            <summary>
+            Inflate the token
+            </summary>
+            <param name="source">Stream to inflate the token from</param>
+            <returns>TRUE if inflation is complete</returns>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.Login7.TDSLogin7FedAuthOptionToken.Deflate(System.IO.Stream)">
+            <summary>
+            Deflate the token
+            </summary>
+            <param name="destination">Stream to deflate token to</param>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.Login7.TDSLogin7FedAuthOptionToken.ReadIDCRLLogin(System.IO.Stream,System.UInt32)">
+            <summary>
+            Read the stream for IDCRL based login
+            </summary>
+            <param name="source">source</param>
+            <param name="optionDataLength">option data length</param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.Login7.TDSLogin7FedAuthOptionToken.ReadSecurityTokenLogin(System.IO.Stream,System.UInt32)">
+            <summary>
+            Read the stream for SecurityToken based login
+            </summary>
+            <param name="source">source</param>
+            <param name="optionDataLength">option data length</param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.Login7.TDSLogin7FedAuthOptionToken._GenerateRandomBytes(System.Int32)">
+            <summary>
+            Generates random bytes
+            </summary>
+            <param name="count">The number of bytes to be generated.</param>
+            <returns>Generated random bytes.</returns>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.Login7.TDSLogin7GenericOptionToken">
+            <summary>
+            Option token that can contain any data and doesn't have specialized inflation/deflation logic
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.Login7.TDSLogin7GenericOptionToken.Data">
+            <summary>
+            Data that the token is carrying
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.Login7.TDSLogin7GenericOptionToken.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.Login7.TDSLogin7GenericOptionToken.#ctor(Microsoft.SqlServer.TDS.TDSFeatureID)">
+            <summary>
+            Initialization constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.Login7.TDSLogin7GenericOptionToken.#ctor(Microsoft.SqlServer.TDS.TDSFeatureID,System.Byte[])">
+            <summary>
+            Initialization constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.Login7.TDSLogin7GenericOptionToken.#ctor(System.IO.Stream)">
+            <summary>
+            Inflating constructor
+            </summary>		
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.Login7.TDSLogin7GenericOptionToken.Inflate(System.IO.Stream)">
+            <summary>
+            Inflate the Feature option
+            </summary>
+            <param name="source">Stream to inflate the token from</param>
+            <returns>TRUE if inflation is complete</returns>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.Login7.TDSLogin7GenericOptionToken.Deflate(System.IO.Stream)">
+            <summary>
+            Deflate the token
+            </summary>
+            <param name="destination">Stream the token to deflate to.</param>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.Login7.TDSLogin7SessionRecoveryOptionToken">
+            <summary>
+            Token that is sent in the login packet for session recovery
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.Login7.TDSLogin7SessionRecoveryOptionToken.FeatureID">
+            <summary>
+            Feature type
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.Login7.TDSLogin7SessionRecoveryOptionToken.Initial">
+            <summary>
+            Initial state
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.Login7.TDSLogin7SessionRecoveryOptionToken.Current">
+            <summary>
+            Current state
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.Login7.TDSLogin7SessionRecoveryOptionToken.#ctor">
+            <summary>
+            Initialization Constructor.
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.Login7.TDSLogin7SessionRecoveryOptionToken.#ctor(System.IO.Stream)">
+            <summary>
+            Inflating constructor
+            </summary>		
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.Login7.TDSLogin7SessionRecoveryOptionToken.Inflate(System.IO.Stream)">
+            <summary>
+            Inflate the token
+            </summary>
+            <param name="source">Stream to inflate the token from</param>
+            <returns>TRUE if inflation is complete</returns>        
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.Login7.TDSLogin7SessionRecoveryOptionToken.Deflate(System.IO.Stream)">
+            <summary>
+            Deflate the token
+            </summary>
+            <param name="destination">Stream to deflate token to</param>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.Login7.TDSLogin7Token">
+            <summary>
+            Login 7 request packet
+            </summary>
+        </member>
+        <member name="F:Microsoft.SqlServer.TDS.Login7.TDSLogin7Token.FixedPacketLength">
+            <summary>
+            Length of the fixed portion of the packet
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.Login7.TDSLogin7Token.TDSVersion">
+            <summary>
+            Version of the TDS protocol
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.Login7.TDSLogin7Token.PacketSize">
+            <summary>
+            Size of the TDS packet requested by the client
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.Login7.TDSLogin7Token.ClientProgramVersion">
+            <summary>
+            Version of the client application
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.Login7.TDSLogin7Token.ClientPID">
+            <summary>
+            Client application process identifier
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.Login7.TDSLogin7Token.ConnectionID">
+            <summary>
+            Connection identifier
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.Login7.TDSLogin7Token.OptionalFlags1">
+            <summary>
+            First byte of optional flags
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.Login7.TDSLogin7Token.OptionalFlags2">
+            <summary>
+            Second byte of optional flags
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.Login7.TDSLogin7Token.OptionalFlags3">
+            <summary>
+            Third byte of optional flags
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.Login7.TDSLogin7Token.TypeFlags">
+            <summary>
+            Type flags
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.Login7.TDSLogin7Token.ClientTimeZone">
+            <summary>
+            Time zone of the client
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.Login7.TDSLogin7Token.ClientLCID">
+            <summary>
+            Client locale identifier
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.Login7.TDSLogin7Token.HostName">
+            <summary>
+            Client host name
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.Login7.TDSLogin7Token.UserID">
+            <summary>
+            User ID
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.Login7.TDSLogin7Token.Password">
+            <summary>
+            Password
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.Login7.TDSLogin7Token.ApplicationName">
+            <summary>
+            Application name
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.Login7.TDSLogin7Token.ServerName">
+            <summary>
+            Server name
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.Login7.TDSLogin7Token.LibraryName">
+            <summary>
+            Client library name
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.Login7.TDSLogin7Token.Language">
+            <summary>
+            User language
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.Login7.TDSLogin7Token.Database">
+            <summary>
+            User database
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.Login7.TDSLogin7Token.ClientID">
+            <summary>
+            Unique client identifier
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.Login7.TDSLogin7Token.AttachDatabaseFile">
+            <summary>
+            Attach database file
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.Login7.TDSLogin7Token.ChangePassword">
+            <summary>
+            Change password
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.Login7.TDSLogin7Token.SSPI">
+            <summary>
+            SSPI authentication blob
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.Login7.TDSLogin7Token.FeatureExt">
+            <summary>
+            Feature extension in the login7.
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.Login7.TDSLogin7Token.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.Login7.TDSLogin7Token.#ctor(System.IO.Stream)">
+            <summary>
+            Inflating constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.Login7.TDSLogin7Token.Inflate(System.IO.Stream)">
+            <summary>
+            Inflate the token
+            NOTE: This operation is not continuable and assumes that the entire token is available in the stream
+            </summary>
+            <param name="source">Stream to inflate the token from</param>
+            <returns>TRUE if inflation is complete</returns>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.Login7.TDSLogin7Token.Deflate(System.IO.Stream)">
+            <summary>
+            Deflate the token
+            </summary>
+            <param name="destination">Stream to deflate token to</param>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.Login7.TDSLogin7TokenOffsetProperty">
+            <summary>
+            Helper class that takes care of setting property value
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.Login7.TDSLogin7TokenOffsetProperty.Property">
+            <summary>
+            Property which value is being set
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.Login7.TDSLogin7TokenOffsetProperty.Position">
+            <summary>
+            Position of the value in the data stream
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.Login7.TDSLogin7TokenOffsetProperty.Length">
+            <summary>
+            Length of the property value in the data stream
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.Login7.TDSLogin7TokenOffsetProperty.IsOffsetOffset">
+            <summary>
+            This property is used to distinguish between "value" position in the stream and "offset of the value" position
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.Login7.TDSLogin7TokenOffsetProperty.#ctor(System.Reflection.PropertyInfo,System.UInt16,System.UInt16)">
+            <summary>
+            Initialization constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.Login7.TDSLogin7TokenOffsetProperty.#ctor(System.Reflection.PropertyInfo,System.UInt16,System.UInt16,System.Boolean)">
+            <summary>
+            Initialization constructor
+            </summary>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.Login7.TDSLogin7OptionalFlags1Order">
+            <summary>
+            Flags that indicate fByteOrder bit of LOGIN 7 options
+            </summary>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.Login7.TDSLogin7OptionalFlags1Char">
+            <summary>
+            Flags that indicate fChar bit of LOGIN 7 options
+            </summary>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.Login7.TDSLogin7OptionalFlags1Float">
+            <summary>
+            Flags that indicate fFloat bit of LOGIN 7 options
+            </summary>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.Login7.TDSLogin7OptionalFlags1DumpLoad">
+            <summary>
+            Flags that indicate fDumpLoad bit of LOGIN 7 options
+            </summary>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.Login7.TDSLogin7OptionalFlags1UseDB">
+            <summary>
+            Flags that indicate fUseDB bit of LOGIN 7 options
+            </summary>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.Login7.TDSLogin7OptionalFlags1Database">
+            <summary>
+            Flags that indicate fDatabase bit of LOGIN 7 options
+            </summary>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.Login7.TDSLogin7OptionalFlags1Language">
+            <summary>
+            Flags that indicate fSetLang bit of LOGIN 7 options
+            </summary>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.Login7.TDSLogin7TokenOptionalFlags1">
+            <summary>
+            Structure of the optional flags 1
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.Login7.TDSLogin7TokenOptionalFlags1.Order">
+            <summary>
+            Order
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.Login7.TDSLogin7TokenOptionalFlags1.CharacterSet">
+            <summary>
+            Character set
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.Login7.TDSLogin7TokenOptionalFlags1.FloatingPoint">
+            <summary>
+            Floating point standard
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.Login7.TDSLogin7TokenOptionalFlags1.DumpLoad">
+            <summary>
+            Dump load
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.Login7.TDSLogin7TokenOptionalFlags1.UseDB">
+            <summary>
+            Use database notifications
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.Login7.TDSLogin7TokenOptionalFlags1.Database">
+            <summary>
+            Database
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.Login7.TDSLogin7TokenOptionalFlags1.Language">
+            <summary>
+            Language
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.Login7.TDSLogin7TokenOptionalFlags1.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.Login7.TDSLogin7TokenOptionalFlags1.#ctor(System.Byte)">
+            <summary>
+            Initialization constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.Login7.TDSLogin7TokenOptionalFlags1.ToByte">
+            <summary>
+            Assemble bits into a byte
+            </summary>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.Login7.TDSLogin7OptionalFlags2Language">
+            <summary>
+            Flags that indicate fLanguage bit of LOGIN 7 options
+            </summary>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.Login7.TDSLogin7OptionalFlags2Odbc">
+            <summary>
+            Flags that indicate fODBC bit of LOGIN 7 options
+            </summary>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.Login7.TDSLogin7OptionalFlags2UserType">
+            <summary>
+            Flags that indicate fUserType bit of LOGIN 7 options
+            </summary>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.Login7.TDSLogin7OptionalFlags2IntSecurity">
+            <summary>
+            Flags that indicate fIntSecurity bit of LOGIN 7 options
+            </summary>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.Login7.TDSLogin7TokenOptionalFlags2">
+            <summary>
+            Structure of the optional flags 1
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.Login7.TDSLogin7TokenOptionalFlags2.Language">
+            <summary>
+            Set if the change to initial language must succeed if the connect is to succeed
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.Login7.TDSLogin7TokenOptionalFlags2.Odbc">
+            <summary>
+            Set if the client is the ODBC driver.
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.Login7.TDSLogin7TokenOptionalFlags2.UserType">
+            <summary>
+            The type of user connecting to the server
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.Login7.TDSLogin7TokenOptionalFlags2.IntegratedSecurity">
+            <summary>
+            The type of security required by the client
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.Login7.TDSLogin7TokenOptionalFlags2.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.Login7.TDSLogin7TokenOptionalFlags2.#ctor(System.Byte)">
+            <summary>
+            Initialization constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.Login7.TDSLogin7TokenOptionalFlags2.ToByte">
+            <summary>
+            Assemble bits into a byte
+            </summary>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.Login7.TDSLogin7OptionalFlags3ChangePassword">
+            <summary>
+            Flags that indicate fChangePassword bit of LOGIN 7 options
+            </summary>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.Login7.TDSLogin7OptionalFlags3Collation">
+            <summary>
+            Flags that indicate fUnknownCollationHandling bit of LOGIN 7 options
+            </summary>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.Login7.TDSLogin7TokenOptionalFlags3">
+            <summary>
+            Structure of the optional flags 1
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.Login7.TDSLogin7TokenOptionalFlags3.ChangePassword">
+            <summary>
+            Password change request
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.Login7.TDSLogin7TokenOptionalFlags3.IsUserInstance">
+            <summary>
+            Client is requesting separate process to be spawned as user instance
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.Login7.TDSLogin7TokenOptionalFlags3.SendYukonBinaryXML">
+            <summary>
+            Send Yukon binary XML.
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.Login7.TDSLogin7TokenOptionalFlags3.UnknownCollation">
+            <summary>
+            Unknown collection handling
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.Login7.TDSLogin7TokenOptionalFlags3.ExtensionFlag">
+            <summary>
+            Feature extension flag.
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.Login7.TDSLogin7TokenOptionalFlags3.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.Login7.TDSLogin7TokenOptionalFlags3.#ctor(System.Byte)">
+            <summary>
+            Initialization constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.Login7.TDSLogin7TokenOptionalFlags3.ToByte">
+            <summary>
+            Assemble bits into a byte
+            </summary>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.Login7.TDSLogin7TypeFlagsSQL">
+            <summary>
+            Flags that indicate fSQLType bit of LOGIN 7 options
+            </summary>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.Login7.TDSLogin7TypeFlagsOleDb">
+            <summary>
+            Flags that indicate fOLEDB bit of LOGIN 7 options
+            </summary>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.Login7.TDSLogin7TypeFlagsReadOnlyIntent">
+            <summary>
+            Flags that indicate fReadOnlyIntent bit of LOGIN 7 options
+            </summary>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.Login7.TDSLogin7TokenTypeFlags">
+            <summary>
+            Structure of the flags 3
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.Login7.TDSLogin7TokenTypeFlags.SQL">
+            <summary>
+            The type of SQL the client sends to the server
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.Login7.TDSLogin7TokenTypeFlags.OleDb">
+            <summary>
+            Set if the client is the OLEDB driver
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.Login7.TDSLogin7TokenTypeFlags.ReadOnlyIntent">
+            <summary>
+            Application intent
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.Login7.TDSLogin7TokenTypeFlags.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.Login7.TDSLogin7TokenTypeFlags.#ctor(System.Byte)">
+            <summary>
+            Initialization constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.Login7.TDSLogin7TokenTypeFlags.ToByte">
+            <summary>
+            Assemble bits into a byte
+            </summary>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.LoginAck.TDSLoginAckToken">
+            <summary>
+            Login acknowledgement packet
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.LoginAck.TDSLoginAckToken.TDSVersion">
+            <summary>
+            TDS Version used by the server
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.LoginAck.TDSLoginAckToken.Interface">
+            <summary>
+            The type of interface with which the server will accept client requests
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.LoginAck.TDSLoginAckToken.ServerName">
+            <summary>
+            Name of the server (e.g. "Microsoft SQL Server")
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.LoginAck.TDSLoginAckToken.ServerVersion">
+            <summary>
+            Server version
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.LoginAck.TDSLoginAckToken.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.LoginAck.TDSLoginAckToken.#ctor(System.Version)">
+            <summary>
+            Initialization constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.LoginAck.TDSLoginAckToken.#ctor(System.Version,System.Version)">
+            <summary>
+            Initialization constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.LoginAck.TDSLoginAckToken.#ctor(System.Version,System.Version,Microsoft.SqlServer.TDS.Login7.TDSLogin7TypeFlagsSQL)">
+            <summary>
+            Initialization constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.LoginAck.TDSLoginAckToken.#ctor(System.Version,System.Version,Microsoft.SqlServer.TDS.Login7.TDSLogin7TypeFlagsSQL,System.String)">
+            <summary>
+            Initialization constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.LoginAck.TDSLoginAckToken.Inflate(System.IO.Stream)">
+            <summary>
+            Inflate the token
+            NOTE: This operation is not continuable and assumes that the entire token is available in the stream
+            </summary>
+            <param name="source">Stream to inflate the token from</param>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.LoginAck.TDSLoginAckToken.Deflate(System.IO.Stream)">
+            <summary>
+            Deflate the token
+            </summary>
+            <param name="destination">Stream to deflate token to</param>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.Order.TDSOrderToken">
+            <summary>
+            Completion packet "ORDER" token
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.Order.TDSOrderToken.Number">
+            <summary>
+            Column number
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.Order.TDSOrderToken.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.Order.TDSOrderToken.#ctor(System.UInt16)">
+            <summary>
+            Initialization constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.Order.TDSOrderToken.Inflate(System.IO.Stream)">
+            <summary>
+            Inflate the token
+            NOTE: This operation is not continuable and assumes that the entire token is available in the stream
+            </summary>
+            <param name="source">Stream to inflate the token from</param>
+            <returns>TRUE if inflation is complete</returns>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.Order.TDSOrderToken.Deflate(System.IO.Stream)">
+            <summary>
+            Deflate the token
+            </summary>
+            <param name="destination">Stream to deflate token to</param>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.PreLogin.TdsPreLoginFedAuthRequiredOption">
+            <summary>
+            FedAuthRequired option in the prelogin packet.
+            </summary>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.PreLogin.TDSPreLoginToken">
+            <summary>
+            Pre-login packet
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.PreLogin.TDSPreLoginToken.Version">
+            <summary>
+            Version of the sender
+            Version: 4 bytes unsigned
+            Build: 2 bytes unsigned
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.PreLogin.TDSPreLoginToken.SubBuild">
+            <summary>
+            Sub-build number of the sender.
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.PreLogin.TDSPreLoginToken.Encryption">
+            <summary>
+            Type of encryption
+            1 byte
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.PreLogin.TDSPreLoginToken.ThreadID">
+            <summary>
+            Thread identifier of the sender
+            4 bytes unsigned
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.PreLogin.TDSPreLoginToken.IsMARS">
+            <summary>
+            Indicates whether MARS is enabled on connection
+            1 byte
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.PreLogin.TDSPreLoginToken.ClientTraceID">
+            <summary>
+            Client Application trace ID
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.PreLogin.TDSPreLoginToken.ActivityID">
+            <summary>
+            Client application activity ID, used for debugging purposes.
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.PreLogin.TDSPreLoginToken.Nonce">
+            <summary>
+            Nonce to be encrypted using session key from federated authentication key 
+            from federated handshake.
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.PreLogin.TDSPreLoginToken.FedAuthRequired">
+            <summary>
+            Federated Authentication required for the pre-login.
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.PreLogin.TDSPreLoginToken.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.PreLogin.TDSPreLoginToken.#ctor(System.Version)">
+            <summary>
+            Initialization constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.PreLogin.TDSPreLoginToken.#ctor(System.Version,Microsoft.SqlServer.TDS.PreLogin.TDSPreLoginTokenEncryptionType)">
+            <summary>
+            Initialization constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.PreLogin.TDSPreLoginToken.#ctor(System.Version,Microsoft.SqlServer.TDS.PreLogin.TDSPreLoginTokenEncryptionType,System.Boolean)">
+            <summary>
+            Initialization constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.PreLogin.TDSPreLoginToken.#ctor(System.Version,Microsoft.SqlServer.TDS.PreLogin.TDSPreLoginTokenEncryptionType,System.Boolean,System.UInt32)">
+            <summary>
+            Initialization constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.PreLogin.TDSPreLoginToken.#ctor(System.Version,Microsoft.SqlServer.TDS.PreLogin.TDSPreLoginTokenEncryptionType,System.Boolean,System.UInt32,Microsoft.SqlServer.TDS.PreLogin.TdsPreLoginFedAuthRequiredOption)">
+            <summary>
+            Initialization constructor
+            </summary>		
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.PreLogin.TDSPreLoginToken.#ctor(System.IO.Stream)">
+            <summary>
+            Inflating constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.PreLogin.TDSPreLoginToken.Inflate(System.IO.Stream)">
+            <summary>
+            Inflate the token
+            NOTE: This operation is not continuable and assumes that the entire token is available in the stream
+            </summary>
+            <param name="source">Stream to inflate the token from</param>
+            <returns>TRUE if inflation is complete</returns>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.PreLogin.TDSPreLoginToken.Deflate(System.IO.Stream)">
+            <summary>
+            Deflate the token
+            </summary>
+            <param name="destination">Stream to deflate token to</param>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.PreLogin.TDSPreLoginTokenEncryptionType">
+            <summary>
+            Type of encryption specified in the pre-login packet
+            </summary>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.PreLogin.TDSPreLoginTokenOption">
+            <summary>
+            Token of the pre-login packet
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.PreLogin.TDSPreLoginTokenOption.Type">
+            <summary>
+            Token type
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.PreLogin.TDSPreLoginTokenOption.TokenLength">
+            <summary>
+            The size of the token declaration
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.PreLogin.TDSPreLoginTokenOption.Position">
+            <summary>
+            Position of the token in the data buffer
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.PreLogin.TDSPreLoginTokenOption.Length">
+            <summary>
+            Token data
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.PreLogin.TDSPreLoginTokenOption.#ctor">
+            <summary>
+            Default
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.PreLogin.TDSPreLoginTokenOption.#ctor(Microsoft.SqlServer.TDS.PreLogin.TDSPreLoginTokenOptionType)">
+            <summary>
+            Initialization constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.PreLogin.TDSPreLoginTokenOption.#ctor(Microsoft.SqlServer.TDS.PreLogin.TDSPreLoginTokenOptionType,System.UInt16)">
+            <summary>
+            Initialization constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.PreLogin.TDSPreLoginTokenOption.Inflate(System.IO.Stream)">
+            <summary>
+            Inflate the option
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.PreLogin.TDSPreLoginTokenOption.Deflate(System.IO.Stream)">
+            <summary>
+            Deflate the option
+            </summary>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.PreLogin.TDSPreLoginTokenOptionType">
+            <summary>
+            Types of the tokens in TDS prelogin packet
+            </summary>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.ReturnStatus.TDSReturnStatusToken">
+            <summary>
+            Completion packet "RETURNSTATUS" token
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.ReturnStatus.TDSReturnStatusToken.Value">
+            <summary>
+            Value of the status
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.ReturnStatus.TDSReturnStatusToken.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.ReturnStatus.TDSReturnStatusToken.#ctor(System.Int32)">
+            <summary>
+            Initialization constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.ReturnStatus.TDSReturnStatusToken.Inflate(System.IO.Stream)">
+            <summary>
+            Inflate the token
+            NOTE: This operation is not continuable and assumes that the entire token is available in the stream
+            </summary>
+            <param name="source">Stream to inflate the token from</param>
+            <returns>TRUE if inflation is complete</returns>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.ReturnStatus.TDSReturnStatusToken.Deflate(System.IO.Stream)">
+            <summary>
+            Deflate the token
+            </summary>
+            <param name="destination">Stream to deflate token to</param>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.Row.TDSNBCRowToken">
+            <summary>
+            Token that corresponds to the row of data with null-byte compression
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.Row.TDSNBCRowToken.#ctor(Microsoft.SqlServer.TDS.ColMetadata.TDSColMetadataToken)">
+            <summary>
+            Initialization constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.Row.TDSNBCRowToken.Inflate(System.IO.Stream)">
+            <summary>
+            Inflate the token
+            NOTE: This operation is not continuable and assumes that the entire token is available in the stream
+            </summary>
+            <param name="source">Stream to inflate the token from</param>
+            <returns>TRUE if inflation is complete</returns>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.Row.TDSNBCRowToken.Deflate(System.IO.Stream)">
+            <summary>
+            Deflate the token
+            </summary>
+            <param name="destination">Stream to deflate token to</param>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.Row.TDSRowToken">
+            <summary>
+            Token that corresponds to the row of data
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.Row.TDSRowToken.#ctor(Microsoft.SqlServer.TDS.ColMetadata.TDSColMetadataToken)">
+            <summary>
+            Initialization constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.Row.TDSRowToken.Inflate(System.IO.Stream)">
+            <summary>
+            Inflate the token
+            NOTE: This operation is not continuable and assumes that the entire token is available in the stream
+            </summary>
+            <param name="source">Stream to inflate the token from</param>
+            <returns>TRUE if inflation is complete</returns>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.Row.TDSRowToken.Deflate(System.IO.Stream)">
+            <summary>
+            Deflate the token
+            </summary>
+            <param name="destination">Stream to deflate token to</param>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.Row.TDSRowTokenBase">
+            <summary>
+            Base class for token that corresponds to the row of data
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.Row.TDSRowTokenBase.Metadata">
+            <summary>
+            Metadata associated with the row
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.Row.TDSRowTokenBase.Data">
+            <summary>
+            Values
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.Row.TDSRowTokenBase.#ctor(Microsoft.SqlServer.TDS.ColMetadata.TDSColMetadataToken)">
+            <summary>
+            Initialization constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.Row.TDSRowTokenBase.InflateColumn(System.IO.Stream,Microsoft.SqlServer.TDS.ColMetadata.TDSColumnData)">
+            <summary>
+            Inflate a particular column from the stream
+            </summary>
+            <param name="source">Stream to inflate the column from</param>
+            <param name="column">Metadata about the column</param>
+            <returns>TRUE if inflation is complete</returns>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.Row.TDSRowTokenBase.DeflateColumn(System.IO.Stream,Microsoft.SqlServer.TDS.ColMetadata.TDSColumnData,System.Object)">
+            <summary>
+            Deflate the column into the stream
+            </summary>
+            <param name="destination">Stream to deflate token to</param>
+            <param name="column">Column metadata</param>
+            <param name="data">Column value</param>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.SessionState.TDSSessionRecoveryData">
+            <summary>
+            Container for session recovery data
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.SessionState.TDSSessionRecoveryData.InflationSize">
+            <summary>
+            Size of the data read during inflation operation. It is needed to properly parse the option stream.
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.SessionState.TDSSessionRecoveryData.Database">
+            <summary>
+            Database into which the user is logged in
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.SessionState.TDSSessionRecoveryData.Collation">
+            <summary>
+            Collation of the database
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.SessionState.TDSSessionRecoveryData.Language">
+            <summary>
+            Language of the session
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.SessionState.TDSSessionRecoveryData.Options">
+            <summary>
+            Options that carry session state
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.SessionState.TDSSessionRecoveryData.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.SessionState.TDSSessionRecoveryData.#ctor(System.IO.Stream)">
+            <summary>
+            Inflation constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.SessionState.TDSSessionRecoveryData.Deflate(System.IO.Stream)">
+            <summary>
+            Deflate state into the stream
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.SessionState.TDSSessionRecoveryData.Inflate(System.IO.Stream)">
+            <summary>
+            Inflate from stream
+            </summary>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.SessionState.TDSSessionStateContextInfoOption">
+            <summary>
+            Session state for the context information
+            </summary>
+        </member>
+        <member name="F:Microsoft.SqlServer.TDS.SessionState.TDSSessionStateContextInfoOption.ID">
+            <summary>
+            Identifier of the session state option
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.SessionState.TDSSessionStateContextInfoOption.Value">
+            <summary>
+            Context information
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.SessionState.TDSSessionStateContextInfoOption.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.SessionState.TDSSessionStateContextInfoOption.Deflate(System.IO.Stream)">
+            <summary>
+            Deflate state into the stream
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.SessionState.TDSSessionStateContextInfoOption.Inflate(System.IO.Stream)">
+            <summary>
+            Inflate from stream
+            </summary>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.SessionState.TDSSessionStateDateFirstDateFormatOption">
+            <summary>
+            Session state for the first date of the week
+            </summary>
+        </member>
+        <member name="F:Microsoft.SqlServer.TDS.SessionState.TDSSessionStateDateFirstDateFormatOption.ID">
+            <summary>
+            Identifier of the session state option
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.SessionState.TDSSessionStateDateFirstDateFormatOption.DateFirst">
+            <summary>
+            First day of the week
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.SessionState.TDSSessionStateDateFirstDateFormatOption.DateFormat">
+            <summary>
+            First day of the week
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.SessionState.TDSSessionStateDateFirstDateFormatOption.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.SessionState.TDSSessionStateDateFirstDateFormatOption.Deflate(System.IO.Stream)">
+            <summary>
+            Deflate state into the stream
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.SessionState.TDSSessionStateDateFirstDateFormatOption.Inflate(System.IO.Stream)">
+            <summary>
+            Inflate from stream
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.SessionState.TDSSessionStateDateFirstDateFormatOption._ToEnum(System.Byte)">
+            <summary>
+            Convert a wire representation to enum
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.SessionState.TDSSessionStateDateFirstDateFormatOption._ToValue(Microsoft.SqlServer.TDS.DateFormatType)">
+            <summary>
+            Convert enum to wire format
+            </summary>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.SessionState.TDSSessionStateDeadlockPriorityOption">
+            <summary>
+            Session state for the deadlock priority
+            </summary>
+        </member>
+        <member name="F:Microsoft.SqlServer.TDS.SessionState.TDSSessionStateDeadlockPriorityOption.ID">
+            <summary>
+            Identifier of the session state option
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.SessionState.TDSSessionStateDeadlockPriorityOption.Value">
+            <summary>
+            Deadlock priority value
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.SessionState.TDSSessionStateDeadlockPriorityOption.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.SessionState.TDSSessionStateDeadlockPriorityOption.Deflate(System.IO.Stream)">
+            <summary>
+            Deflate state into the stream
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.SessionState.TDSSessionStateDeadlockPriorityOption.Inflate(System.IO.Stream)">
+            <summary>
+            Inflate from stream
+            </summary>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.SessionState.TDSSessionStateGenericOption">
+            <summary>
+            Generic session state option
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.SessionState.TDSSessionStateGenericOption.Value">
+            <summary>
+            State option value
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.SessionState.TDSSessionStateGenericOption.#ctor(System.Byte)">
+            <summary>
+            Initialization constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.SessionState.TDSSessionStateGenericOption.#ctor(System.Byte,System.Byte[])">
+            <summary>
+            Initialization constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.SessionState.TDSSessionStateGenericOption.Deflate(System.IO.Stream)">
+            <summary>
+            Deflate state into the stream
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.SessionState.TDSSessionStateGenericOption.Inflate(System.IO.Stream)">
+            <summary>
+            Inflate from stream
+            </summary>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.SessionState.TDSSessionStateISOFipsOption">
+            <summary>
+            Session state for the transaction isolation level and FIPS 127-2 compliance flags
+            </summary>
+        </member>
+        <member name="F:Microsoft.SqlServer.TDS.SessionState.TDSSessionStateISOFipsOption.ID">
+            <summary>
+            Identifier of the session state option
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.SessionState.TDSSessionStateISOFipsOption.TransactionIsolationLevel">
+            <summary>
+            Transaction isolation level
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.SessionState.TDSSessionStateISOFipsOption.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.SessionState.TDSSessionStateISOFipsOption.Deflate(System.IO.Stream)">
+            <summary>
+            Deflate state into the stream
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.SessionState.TDSSessionStateISOFipsOption.Inflate(System.IO.Stream)">
+            <summary>
+            Inflate from stream
+            </summary>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.SessionState.TDSSessionStateLockTimeoutOption">
+            <summary>
+            Session state for the lock timeout
+            </summary>
+        </member>
+        <member name="F:Microsoft.SqlServer.TDS.SessionState.TDSSessionStateLockTimeoutOption.ID">
+            <summary>
+            Identifier of the session state option
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.SessionState.TDSSessionStateLockTimeoutOption.Value">
+            <summary>
+            Lock timeout value
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.SessionState.TDSSessionStateLockTimeoutOption.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.SessionState.TDSSessionStateLockTimeoutOption.Deflate(System.IO.Stream)">
+            <summary>
+            Deflate state into the stream
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.SessionState.TDSSessionStateLockTimeoutOption.Inflate(System.IO.Stream)">
+            <summary>
+            Inflate from stream
+            </summary>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.SessionState.TDSSessionStateOption">
+            <summary>
+            A single option of the session state
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.SessionState.TDSSessionStateOption.InflationSize">
+            <summary>
+            Property that tells the caller how much of the data from the stream was read by inflation logic
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.SessionState.TDSSessionStateOption.StateID">
+            <summary>
+            Identifier of the state option
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.SessionState.TDSSessionStateOption.#ctor(System.Byte)">
+            <summary>
+            Initialization constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.SessionState.TDSSessionStateOption.Deflate(System.IO.Stream)">
+            <summary>
+            Deflate state into the stream
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.SessionState.TDSSessionStateOption.Inflate(System.IO.Stream)">
+            <summary>
+            Inflate from stream
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.SessionState.TDSSessionStateOption.InflateValue(System.IO.Stream)">
+            <summary>
+            Read the raw data but don't interpret it
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.SessionState.TDSSessionStateOption.DeflateValue(System.IO.Stream,System.Byte[])">
+            <summary>
+            Write raw data
+            </summary>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.SessionState.TDSSessionStateTextSizeOption">
+            <summary>
+            Session state for the text size
+            </summary>
+        </member>
+        <member name="F:Microsoft.SqlServer.TDS.SessionState.TDSSessionStateTextSizeOption.ID">
+            <summary>
+            Identifier of the session state option
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.SessionState.TDSSessionStateTextSizeOption.Value">
+            <summary>
+            Text size value
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.SessionState.TDSSessionStateTextSizeOption.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.SessionState.TDSSessionStateTextSizeOption.Deflate(System.IO.Stream)">
+            <summary>
+            Deflate state into the stream
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.SessionState.TDSSessionStateTextSizeOption.Inflate(System.IO.Stream)">
+            <summary>
+            Inflate from stream
+            </summary>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.SessionState.TDSSessionStateToken">
+            <summary>
+            Token that contains session state
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.SessionState.TDSSessionStateToken.IsRecoverable">
+            <summary>
+            Indicates that session is recoverable
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.SessionState.TDSSessionStateToken.SequenceNumber">
+            <summary>
+            Sequential number of the state
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.SessionState.TDSSessionStateToken.Options">
+            <summary>
+            State options
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.SessionState.TDSSessionStateToken.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.SessionState.TDSSessionStateToken.Inflate(System.IO.Stream)">
+            <summary>
+            Inflate the token
+            </summary>
+            <param name="source">Stream to inflate the token from</param>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.SessionState.TDSSessionStateToken.Deflate(System.IO.Stream)">
+            <summary>
+            Deflate the token
+            </summary>
+            <param name="destination">Stream to deflate token to</param>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.SessionState.TDSSessionStateUserOptionsOption">
+            <summary>
+            Session state of the user options
+            </summary>
+        </member>
+        <member name="F:Microsoft.SqlServer.TDS.SessionState.TDSSessionStateUserOptionsOption.OPT_ANSI_WARNINGS">
+            <summary>
+            Bit that corresponds to ansi warnings flag
+            </summary>
+        </member>
+        <member name="F:Microsoft.SqlServer.TDS.SessionState.TDSSessionStateUserOptionsOption.OPT_ANSI_NULLS">
+            <summary>
+            Bit that corresponds to ansi nulls flag
+            </summary>
+        </member>
+        <member name="F:Microsoft.SqlServer.TDS.SessionState.TDSSessionStateUserOptionsOption.OPT_CURSOR_COMMIT_CLOSE">
+            <summary>
+            Bit that corresponds to cursor close on commit flag
+            </summary>
+        </member>
+        <member name="F:Microsoft.SqlServer.TDS.SessionState.TDSSessionStateUserOptionsOption.OPT_QUOTEDIDENT">
+            <summary>
+            Bit that corresponds to quoted identifier flag
+            </summary>
+        </member>
+        <member name="F:Microsoft.SqlServer.TDS.SessionState.TDSSessionStateUserOptionsOption.OPT_CATNULL">
+            <summary>
+            Bit that corresponds to concatenation of nulls flag
+            </summary>
+        </member>
+        <member name="F:Microsoft.SqlServer.TDS.SessionState.TDSSessionStateUserOptionsOption.OPT_ANSINULLDFLTON">
+            <summary>
+            Bit that corresponds to default position of ansi nulls flag
+            </summary>
+        </member>
+        <member name="F:Microsoft.SqlServer.TDS.SessionState.TDSSessionStateUserOptionsOption.OPT_ANSI_PADDING">
+            <summary>
+            Bit that corresponds to ansi padding flag
+            </summary>
+        </member>
+        <member name="F:Microsoft.SqlServer.TDS.SessionState.TDSSessionStateUserOptionsOption.OPT_ARITHABORT">
+            <summary>
+            Bit that corresponds to arithmetic abort flag
+            </summary>
+        </member>
+        <member name="F:Microsoft.SqlServer.TDS.SessionState.TDSSessionStateUserOptionsOption.OPT_NUMEABORT">
+            <summary>
+            Bit that corresponds to abort truncation of numeric scale
+            </summary>
+        </member>
+        <member name="F:Microsoft.SqlServer.TDS.SessionState.TDSSessionStateUserOptionsOption.OPT_XACTABORT">
+            <summary>
+            Bit that corresponds to transaction abort flag
+            </summary>
+        </member>
+        <member name="F:Microsoft.SqlServer.TDS.SessionState.TDSSessionStateUserOptionsOption.OPT_NOCOUNT">
+            <summary>
+            Bit that corresponds to no count flag
+            </summary>
+        </member>
+        <member name="F:Microsoft.SqlServer.TDS.SessionState.TDSSessionStateUserOptionsOption.OPT_ARITHIGN">
+            <summary>
+            Bit that corresponds to arithmetic ignore flag
+            </summary>
+        </member>
+        <member name="F:Microsoft.SqlServer.TDS.SessionState.TDSSessionStateUserOptionsOption.OPT2_IMPLICIT_XACT">
+            <summary>
+            Bit that corresponds to implicit transactions flag
+            </summary>
+        </member>
+        <member name="F:Microsoft.SqlServer.TDS.SessionState.TDSSessionStateUserOptionsOption.ID">
+            <summary>
+            Identifier of the session state option
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.SessionState.TDSSessionStateUserOptionsOption.AnsiNullDefaultOn">
+            <summary>
+            Affects the nullability of new columns when the nullability of the column is not specified in the CREATE TABLE and ALTER TABLE statements.
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.SessionState.TDSSessionStateUserOptionsOption.AnsiNulls">
+            <summary>
+            Controls null behavior in T-SQL
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.SessionState.TDSSessionStateUserOptionsOption.AnsiPadding">
+            <summary>
+            Impacts character column behavior (char, varchar, binary, and varbinary)
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.SessionState.TDSSessionStateUserOptionsOption.AnsiWarnings">
+            <summary>
+            Controls certain warning messages required for ansi compliance
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.SessionState.TDSSessionStateUserOptionsOption.ArithAbort">
+            <summary>
+            Terminates a query when an overflow or divide-by-zero error occurs during query execution
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.SessionState.TDSSessionStateUserOptionsOption.ArithIgnore">
+            <summary>
+            Controls whether error messages are returned from overflow or divide-by-zero errors during a query
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.SessionState.TDSSessionStateUserOptionsOption.ConcatNullYieldsNull">
+            <summary>
+            Controls whether concatenation results are treated as null or empty string values
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.SessionState.TDSSessionStateUserOptionsOption.CursorCloseOnCommit">
+            <summary>
+            Controls whether the server will close cursors when you commit a transaction
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.SessionState.TDSSessionStateUserOptionsOption.ImplicitTransactions">
+            <summary>
+            Sets implicit transaction mode for the connection
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.SessionState.TDSSessionStateUserOptionsOption.NoCount">
+            <summary>
+            Controls the emitting of Done w/count tokens from Transact-SQL.
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.SessionState.TDSSessionStateUserOptionsOption.NumericRoundAbort">
+            <summary>
+            Generates an error when a loss of precision occurs in an expression
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.SessionState.TDSSessionStateUserOptionsOption.QuotedIdentifier">
+            <summary>
+            Causes SQL Server to follow the ISO rules regarding quotation mark delimiting identifiers and literal strings
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.SessionState.TDSSessionStateUserOptionsOption.TransactionAbortOnError">
+            <summary>
+            Specifies whether SQL Server automatically rolls back the current transaction when a Transact-SQL statement raises a run-time error
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.SessionState.TDSSessionStateUserOptionsOption.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.SessionState.TDSSessionStateUserOptionsOption.Deflate(System.IO.Stream)">
+            <summary>
+            Deflate state into the stream
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.SessionState.TDSSessionStateUserOptionsOption.Inflate(System.IO.Stream)">
+            <summary>
+            Inflate from stream
+            </summary>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.SQLBatch.TDSSQLBatchToken">
+            <summary>
+            Login acknowledgement packet
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.SQLBatch.TDSSQLBatchToken.AllHeaders">
+            <summary>
+            All headers definition
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.SQLBatch.TDSSQLBatchToken.Text">
+            <summary>
+            Query text
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.SQLBatch.TDSSQLBatchToken.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.SQLBatch.TDSSQLBatchToken.#ctor(System.IO.Stream)">
+            <summary>
+            Inflating constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.SQLBatch.TDSSQLBatchToken.Inflate(System.IO.Stream)">
+            <summary>
+            Inflate the token
+            NOTE: This operation is not continuable and assumes that the entire token is available in the stream
+            </summary>
+            <param name="source">Stream to inflate the token from</param>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.SQLBatch.TDSSQLBatchToken.Deflate(System.IO.Stream)">
+            <summary>
+            Deflate the token
+            </summary>
+            <param name="destination">Stream to deflate token to</param>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.SSPI.TDSSSPIClientToken">
+            <summary>
+            Token that carries client's SSPI payload during login sequence 
+            </summary>
+        </member>
+        <member name="F:Microsoft.SqlServer.TDS.SSPI.TDSSSPIClientToken._length">
+            <summary>
+            Data length
+            </summary>
+        </member>
+        <member name="F:Microsoft.SqlServer.TDS.SSPI.TDSSSPIClientToken._inflationOffset">
+            <summary>
+            Current offset at which inflation occurs
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.SSPI.TDSSSPIClientToken.Payload">
+            <summary>
+            SSPI payload
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.SSPI.TDSSSPIClientToken.#ctor(System.IO.Stream,System.Int32)">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.SSPI.TDSSSPIClientToken.#ctor(System.Byte[])">
+            <summary>
+            Initialization constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.SSPI.TDSSSPIClientToken.Inflate(System.IO.Stream)">
+            <summary>
+            Inflate the token
+            </summary>
+            <param name="source">Stream to inflate the token from</param>
+            <returns>TRUE if inflation is complete</returns>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.SSPI.TDSSSPIClientToken.Deflate(System.IO.Stream)">
+            <summary>
+            Deflate the token
+            </summary>
+            <param name="destination">Stream to deflate token to</param>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.SSPI.TDSSSPIToken">
+            <summary>
+            Token that carries SSPI payload during login sequence
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.SSPI.TDSSSPIToken.Payload">
+            <summary>
+            SSPI payload
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.SSPI.TDSSSPIToken.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.SSPI.TDSSSPIToken.#ctor(System.Byte[])">
+            <summary>
+            Initialization constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.SSPI.TDSSSPIToken.Inflate(System.IO.Stream)">
+            <summary>
+            Inflate the token
+            </summary>
+            <param name="source">Stream to inflate the token from</param>
+            <returns>TRUE if inflation is complete</returns>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.SSPI.TDSSSPIToken.Deflate(System.IO.Stream)">
+            <summary>
+            Deflate the token
+            </summary>
+            <param name="destination">Stream to deflate token to</param>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.TDSClientState">
+            <summary>
+            State of the client TDS parser
+            </summary>
+        </member>
+        <member name="F:Microsoft.SqlServer.TDS.TDSClientState.PreLoginSent">
+            <summary>
+            Sent Initial PRELOGIN Packet State
+            </summary>
+        </member>
+        <member name="F:Microsoft.SqlServer.TDS.TDSClientState.SSLNegotiationSent">
+            <summary>
+            Sent TLS/SSL Negotiation Packet State
+            </summary>
+        </member>
+        <member name="F:Microsoft.SqlServer.TDS.TDSClientState.CompleteLogin7Sent">
+            <summary>
+            Sent LOGIN7 Record with Complete Authentication Token state
+            </summary>
+        </member>
+        <member name="F:Microsoft.SqlServer.TDS.TDSClientState.Login7SPNEGOSent">
+            <summary>
+            Sent LOGIN7 Record with SPNEGO Packet State
+            </summary>
+        </member>
+        <member name="F:Microsoft.SqlServer.TDS.TDSClientState.Login7FederatedAuthenticationInformationRequestSent">
+            <summary>
+            Sent LOGIN7 Record with Authentication information request.
+            </summary>
+        </member>
+        <member name="F:Microsoft.SqlServer.TDS.TDSClientState.LoggedIn">
+            <summary>
+            Logged In State
+            </summary>
+        </member>
+        <member name="F:Microsoft.SqlServer.TDS.TDSClientState.RequestSent">
+            <summary>
+            Sent Client Request State
+            </summary>
+        </member>
+        <member name="F:Microsoft.SqlServer.TDS.TDSClientState.AttentionSent">
+            <summary>
+            Sent Attention State
+            </summary>
+        </member>
+        <member name="F:Microsoft.SqlServer.TDS.TDSClientState.ReConnect">
+            <summary>
+            Indicates that a connection was re-routed to a different SQL Server and transport needs to be re-established
+            </summary>
+        </member>
+        <member name="F:Microsoft.SqlServer.TDS.TDSClientState.LogoutSent">
+            <summary>
+            Sent a final notification to the TDS Server
+            </summary>
+        </member>
+        <member name="F:Microsoft.SqlServer.TDS.TDSClientState.Final">
+            <summary>
+            Final State
+            </summary>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.TDSDataType">
+            <summary>
+            Data types used by TDS server
+            </summary>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.TDSEncryptionType">
+            <summary>
+            Types of encryption TDS clients and servers supports
+            </summary>
+        </member>
+        <member name="F:Microsoft.SqlServer.TDS.TDSEncryptionType.Off">
+            <summary>
+            No transport encryption
+            </summary>
+        </member>
+        <member name="F:Microsoft.SqlServer.TDS.TDSEncryptionType.LoginOnly">
+            <summary>
+            Encryption of the login packet only
+            </summary>
+        </member>
+        <member name="F:Microsoft.SqlServer.TDS.TDSEncryptionType.Full">
+            <summary>
+            Encryption of the entire session
+            </summary>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.TDSFeatureID">
+            <summary>
+            TDS feature identifier
+            </summary>
+        </member>
+        <member name="F:Microsoft.SqlServer.TDS.TDSFeatureID.SessionRecovery">
+            <summary>
+            Session recovery (connection resiliency)
+            </summary>
+        </member>
+        <member name="F:Microsoft.SqlServer.TDS.TDSFeatureID.FederatedAuthentication">
+            <summary>
+            Federated authentication
+            </summary>
+        </member>
+        <member name="F:Microsoft.SqlServer.TDS.TDSFeatureID.Terminator">
+            <summary>
+            End of the list
+            </summary>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.TDSMessage">
+            <summary>
+            A single message that consists of a collection of TDS packets and represents a semantically complete and indivisible unit of information
+            </summary>
+        </member>
+        <member name="F:Microsoft.SqlServer.TDS.TDSMessage._dataStream">
+            <summary>
+            Internal stream that contains the data
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.TDSMessage.MessageType">
+            <summary>
+            Type of the content being delivered
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.TDSMessage.PacketStatuses">
+            <summary>
+            Collection of packet statuses
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.TDSMessage.IsResetConnectionRequestSet">
+            <summary>
+            Check if we have seen Reset Connection request
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.TDSMessage.IsResetConnectionSkipTransactionRequestSet">
+            <summary>
+            Check if we have seen Reset Connection Skip Transaction request
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.TDSMessage.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.TDSMessage.#ctor(Microsoft.SqlServer.TDS.TDSMessageType)">
+            <summary>
+            Initialization constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.TDSMessage.#ctor(Microsoft.SqlServer.TDS.TDSMessageType,Microsoft.SqlServer.TDS.TDSPacketToken[])">
+            <summary>
+            Initialization constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.TDSMessage.InflateClientRequest(Microsoft.SqlServer.TDS.TDSStream)">
+            <summary>
+            Inflate the message from protocol-aware stream on the server
+            </summary>
+            <param name="stream">Source to inflate the message</param>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.TDSMessage.InflateServerResponse(Microsoft.SqlServer.TDS.TDSClientState,Microsoft.SqlServer.TDS.TDSStream)">
+            <summary>
+            Inflate the message from protocol-aware stream on the client side
+            </summary>
+            <param name="clientState">State of the client parser</param>
+            <param name="stream">Source to inflate the message</param>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.TDSMessage.Deflate(Microsoft.SqlServer.TDS.TDSStream)">
+            <summary>
+            Protocol-aware deflation routine
+            </summary>
+            <param name="stream">Destination to deflate the message</param>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.TDSMessage._InflateDataStream(Microsoft.SqlServer.TDS.TDSStream)">
+            <summary>
+            Inflates the stream of data in this message
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.TDSMessage._InflateServerTokens(Microsoft.SqlServer.TDS.TDSClientState)">
+            <summary>
+            Traverse the input stream and inflate tokens that server sends to the client
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.TDSMessage._InflateClientTokens">
+            <summary>
+            Traverse the input stream and inflate tokens that client sends to the server
+            </summary>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.TDSMessageCollection">
+            <summary>
+            Collection of TDS messages
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.TDSMessageCollection.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.TDSMessageCollection.#ctor(Microsoft.SqlServer.TDS.TDSMessage[])">
+            <summary>
+            Initialization constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.TDSMessageCollection.Deflate(Microsoft.SqlServer.TDS.TDSStream)">
+            <summary>
+            Protocol-aware deflation routine
+            </summary>
+            <param name="stream">Destination to deflate the message</param>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.TDSMessageType">
+            <summary>
+            Type of TDS packet
+            </summary>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.TDSPacketHeader">
+            <summary>
+            TDS packet header
+            </summary>
+        </member>
+        <member name="F:Microsoft.SqlServer.TDS.TDSPacketHeader.Size">
+            <summary>
+            Size of the packet header in bytes
+            </summary>
+        </member>
+        <member name="F:Microsoft.SqlServer.TDS.TDSPacketHeader._data">
+            <summary>
+            Packet header data
+            </summary>
+        </member>
+        <member name="F:Microsoft.SqlServer.TDS.TDSPacketHeader._inflationOffset">
+            <summary>
+            The last offset where inflation operation was interrupted
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.TDSPacketHeader.Type">
+            <summary>
+            Type of the packet
+            1 byte unsigned
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.TDSPacketHeader.Status">
+            <summary>
+            Status of the packet
+            1 byte unsigned
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.TDSPacketHeader.Length">
+            <summary>
+            Size of the packet including header
+            2 byte unsigned short
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.TDSPacketHeader.SPID">
+            <summary>
+            Process ID that sent this packet
+            2 byte big-endian
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.TDSPacketHeader.PacketID">
+            <summary>
+            Identifier of the packet
+            1 byte unsigned char
+            Incremented by 1 modulo 256
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.TDSPacketHeader.Window">
+            <summary>
+            Window (not used)
+            1 byte
+            Should always be set to 0x00
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.TDSPacketHeader.#ctor(System.Byte[])">
+            <summary>
+            Initialization constructor
+            </summary>
+            <param name="buffer">Buffer which contains or will contain a packet header</param>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.TDSPacketHeader.#ctor(System.Byte[],Microsoft.SqlServer.TDS.TDSMessageType)">
+            <summary>
+            Initialization constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.TDSPacketHeader.#ctor(System.Byte[],Microsoft.SqlServer.TDS.TDSMessageType,Microsoft.SqlServer.TDS.TDSPacketStatus)">
+            <summary>
+            Initialization constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.TDSPacketHeader.Inflate(System.IO.Stream)">
+            <summary>
+            Inflate TDS packet from the stream
+            </summary>
+            <param name="source">Source of data</param>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.TDSPacketStatus">
+            <summary>
+            Bitmask of the packet status
+            </summary>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.TDSPacketToken">
+            <summary>
+            Container for the packet data
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.TDSPacketToken.Inflate(System.IO.Stream)">
+            <summary>
+            Inflate the token
+            </summary>
+            <param name="source">Stream to inflate the token from</param>
+            <returns>TRUE if inflation is complete</returns>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.TDSPacketToken.Deflate(System.IO.Stream)">
+            <summary>
+            Deflate the token
+            </summary>
+            <param name="destination">Stream to deflate token to</param>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.TDSStream">
+            <summary>
+            Stream that wraps the data with TDS protocol
+            </summary>
+        </member>
+        <member name="F:Microsoft.SqlServer.TDS.TDSStream._leaveInnerStreamOpen">
+            <summary>
+            Indicates whether inner stream should be closed when TDS stream is closed
+            </summary>
+        </member>
+        <member name="F:Microsoft.SqlServer.TDS.TDSStream._packetSize">
+            <summary>
+            Size of the packet
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.TDSStream.OutgoingPacketHeader">
+            <summary>
+            Header of the packet being processed
+            </summary>
+        </member>
+        <member name="F:Microsoft.SqlServer.TDS.TDSStream._outgoingPacket">
+            <summary>
+            Cache of packet header and data
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.TDSStream.IncomingPacketHeader">
+            <summary>
+            Header of the packet being read
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.TDSStream.IncomingPacketPosition">
+            <summary>
+            Indicates the position inside the request packet data section
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.TDSStream.InnerStream">
+            <summary>
+            Transport stream used to deliver TDS protocol
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.TDSStream.PacketSize">
+            <summary>
+            Size of the TDS packet
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.TDSStream.OutgoingSessionID">
+            <summary>
+            Identifier of the session
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.TDSStream.CanRead">
+            <summary>
+            Indicates whether stream can be read
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.TDSStream.CanSeek">
+            <summary>
+            Indicates whether the stream can be positioned
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.TDSStream.CanWrite">
+            <summary>
+            Indicates whether the stream can be written
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.TDSStream.Length">
+            <summary>
+            Return the length of the stream
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.TDSStream.Position">
+            <summary>
+            Return position in the stream
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.TDSStream.PreWriteCallBack">
+            <summary>
+            Call back function before calling InnerStream.Write 
+            the func should return actual packet length to send
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.TDSStream.#ctor(System.IO.Stream)">
+            <summary>
+            Initialization constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.TDSStream.#ctor(System.IO.Stream,System.Boolean)">
+            <summary>
+            Initialization constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.TDSStream.Close">
+            <summary>
+            Close the stream
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.TDSStream.Flush">
+            <summary>
+            Flush the data into the underlying stream
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.TDSStream.StartMessage(Microsoft.SqlServer.TDS.TDSMessageType)">
+            <summary>
+            Start a new message
+            </summary>
+            <param name="type">Type of the message to start</param>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.TDSStream.EndMessage">
+            <summary>
+            Send the last packet of the message and complete the request/response
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.TDSStream.ReadNextHeader">
+            <summary>
+            Read packet header
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.TDSStream.Read(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Read the data from the stream
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.TDSStream.Seek(System.Int64,System.IO.SeekOrigin)">
+            <summary>
+            Seek position in the stream
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.TDSStream.SetLength(System.Int64)">
+            <summary>
+            Set stream length
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.TDSStream.Write(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Write data into the stream
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.TDSStream._MoveToNextIncomingPacketHeader">
+            <summary>
+            Skip current packet if it is pending and move to the next packet, reading only the header
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.TDSStream._EnsureIncomingPacketHasData">
+            <summary>
+            This routine checks whether current packet still has data to read and moves to the next if it doesn't
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.TDSStream._EnsureOutgoingPacketHasSpace">
+            <summary>
+            Ensures that the current packet has at least a single spare byte
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.TDSStream._CreateOutgoingPacket(Microsoft.SqlServer.TDS.TDSMessageType,System.Byte)">
+            <summary>
+            Create a new TDS packet in the message
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.TDSStream._SendCurrentPacket">
+            <summary>
+            Serialize current packet into the underlying stream
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.TDSStream._AllocateOutgoingPacket">
+            <summary>
+            Allocate or reallocate a packet
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.TDSStream._AllocateIncomingPacket">
+            <summary>
+            Prepare to read and inflate incoming packet
+            </summary>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.TDSTokenFactory">
+            <summary>
+            Constructor for TDS tokens
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.TDSTokenFactory.Create(System.IO.Stream)">
+            <summary>
+            Reconstruct token sequence from the stream
+            </summary>
+            <returns>Token collection</returns>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.TDSTokenType">
+            <summary>
+            Types of the tokens in data buffer of the packet
+            </summary>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.TDSUtilities">
+            <summary>
+            Internal utilities
+            </summary>
+        </member>
+        <member name="F:Microsoft.SqlServer.TDS.TDSUtilities.s_logWriterLock">
+            <summary>
+            Object lock for log writer
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.TDSUtilities.ReadULong(System.IO.Stream)">
+            <summary>
+            Read unsigned long from the stream
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.TDSUtilities.WriteULong(System.IO.Stream,System.UInt64)">
+            <summary>
+            Write unsigned long into the stream
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.TDSUtilities.ReadUInt(System.IO.Stream)">
+            <summary>
+            Read unsigned integer from the stream
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.TDSUtilities.WriteUInt(System.IO.Stream,System.UInt32)">
+            <summary>
+            Write unsigned integer into the stream
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.TDSUtilities.ReadInt(System.IO.Stream)">
+            <summary>
+            Read signed integer from the packet
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.TDSUtilities.WriteInt(System.IO.Stream,System.Int32)">
+            <summary>
+            Write signed integer into the stream
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.TDSUtilities.ReadUShort(System.IO.Stream)">
+            <summary>
+            Read unsigned short from the packet
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.TDSUtilities.WriteUShort(System.IO.Stream,System.UInt16)">
+            <summary>
+            Write unsigned short into the stream
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.TDSUtilities.WriteUShortBigEndian(System.IO.Stream,System.UInt16)">
+            <summary>
+            Write unsigned short into the stream in network byte order (big-endian)
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.TDSUtilities.ReadString(System.IO.Stream,System.UInt16)">
+            <summary>
+            Read string from the packet
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.TDSUtilities.WriteString(System.IO.Stream,System.String)">
+            <summary>
+            Write string from into the packet
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.TDSUtilities.ReadPasswordString(System.IO.Stream,System.UInt16)">
+            <summary>
+            Read a password string and decrypt it
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.TDSUtilities.WritePasswordString(System.IO.Stream,System.String)">
+            <summary>
+            Write password string encrypted into the packet
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.TDSUtilities.GetEncryptionResponse(Microsoft.SqlServer.TDS.PreLogin.TDSPreLoginTokenEncryptionType,Microsoft.SqlServer.TDS.PreLogin.TDSPreLoginTokenEncryptionType)">
+            <summary>
+            Generate an encryption response based on the client request and server setting
+            </summary>
+            <param name="client">A value received from the client</param>
+            <param name="server">Configuration of the server</param>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.TDSUtilities.ResolveEncryption(Microsoft.SqlServer.TDS.PreLogin.TDSPreLoginTokenEncryptionType,Microsoft.SqlServer.TDS.PreLogin.TDSPreLoginTokenEncryptionType)">
+            <summary>
+            Convert indications of encryption support by client and server into expected behavior
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.TDSUtilities.Log(System.IO.TextWriter,System.String,System.Object)">
+            <summary>
+            Log object content into destination
+            </summary>
+            <param name="log">Destination</param>
+            <param name="prefix">Prefix the output with</param>
+            <param name="instance">Object to log</param>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.TDSUtilities.SerializedWriteLineToLog(System.IO.TextWriter,System.String)">
+            <summary>
+            Serialized write line to destination
+            </summary>
+            <param name="log">Destination</param>
+            <param name="text">Text to log</param>        
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.TDSVersion">
+            <summary>
+            TDS version routines
+            </summary>
+        </member>
+        <member name="F:Microsoft.SqlServer.TDS.TDSVersion.SqlServer2005">
+            <summary>
+            Yukon TDS version
+            </summary>
+        </member>
+        <member name="F:Microsoft.SqlServer.TDS.TDSVersion.SqlServer2008">
+            <summary>
+            Katmai TDS version
+            </summary>
+        </member>
+        <member name="F:Microsoft.SqlServer.TDS.TDSVersion.SqlServer2010">
+            <summary>
+            Denali TDS version
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.TDSVersion.GetTDSVersion(System.Version)">
+            <summary>
+            Map SQL Server build version to TDS version
+            </summary>
+            <param name="buildVersion">Build version to analyze</param>
+            <returns>TDS version that corresponding build version supports</returns>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.TDSVersion.Resolve(System.Version,System.Version)">
+            <summary>
+            Resolve conflicts between client and server TDS version
+            </summary>
+            <param name="tdsServer">Version of the server</param>
+            <param name="tdsClient">Version of the client</param>
+            <returns>Resulting version that both parties can talk</returns>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.TDSVersion.IsSupported(System.Version)">
+            <summary>
+            Check whether TDS version is supported by server
+            </summary>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.TransactionIsolationLevelType">
+            <summary>
+            Transaction isolation level
+            </summary>
+        </member>
+        <member name="F:Microsoft.SqlServer.TDS.TransactionIsolationLevelType.ReadUncommited">
+            <summary>
+            Specifies that statements can read rows that have been modified by other transactions but not yet committed
+            </summary>
+        </member>
+        <member name="F:Microsoft.SqlServer.TDS.TransactionIsolationLevelType.ReadCommited">
+            <summary>
+            Specifies that statements cannot read data that has been modified but not committed by other transactions
+            </summary>
+        </member>
+        <member name="F:Microsoft.SqlServer.TDS.TransactionIsolationLevelType.RepeatableRead">
+            <summary>
+            Specifies that statements cannot read data that has been modified but not yet committed by other transactions and that no other transactions can modify data that has been read by the current transaction until the current transaction completes.
+            </summary>
+        </member>
+        <member name="F:Microsoft.SqlServer.TDS.TransactionIsolationLevelType.Serializable">
+            <summary>
+            Specifies that data read by any statement in a transaction will be the transactionally consistent version of the data that existed at the start of the transaction
+            </summary>
+        </member>
+        <member name="F:Microsoft.SqlServer.TDS.TransactionIsolationLevelType.Snapshot">
+            <summary>
+            Statements cannot read data that has been modified but not yet committed by other transactions
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,1220 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Microsoft.SqlServer.TDS.EndPoint</name>
+    </assembly>
+    <members>
+        <member name="T:Microsoft.SqlServer.TDS.EndPoint.FederatedAuthentication.FederatedAuthenticationTicketService">
+            <summary>
+            Point of entry for the Federated Authentication Ticket Service
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.EndPoint.FederatedAuthentication.FederatedAuthenticationTicketService.DecryptTicket(Microsoft.SqlServer.TDS.Login7.TDSFedAuthLibraryType,System.Byte[])">
+            <summary>
+            Given a Federated Authentication ticket, returns the Session Key from the authentication service
+            </summary>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.EndPoint.FederatedAuthentication.IFederatedAuthenticationTicket">
+            <summary>
+            Interface for federated authentication ticket
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.EndPoint.FederatedAuthentication.IFederatedAuthenticationTicket.GetSignature(System.Byte[])">
+            <summary>
+            Computes and returns the signature of the provided buffer using the internal session Key associated with the auth
+            ticket.
+            </summary>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.EndPoint.FederatedAuthentication.RPS">
+            <summary>
+            Wrapper for dynamic loading of RPS dll
+            </summary>
+        </member>
+        <member name="F:Microsoft.SqlServer.TDS.EndPoint.FederatedAuthentication.RPS._rpsAssembly">
+            <summary>
+            Instance of the dynamically loaded RPS assembly from Microsoft.Passport.RPS
+            </summary>
+        </member>
+        <member name="F:Microsoft.SqlServer.TDS.EndPoint.FederatedAuthentication.RPS._rpsType">
+            <summary>
+            Type of Microsoft.Passport.RPS.RPS
+            </summary>
+        </member>
+        <member name="F:Microsoft.SqlServer.TDS.EndPoint.FederatedAuthentication.RPS._rpsTicketType">
+            <summary>
+            Type of Microsoft.Passport.RPS.RPSTicket
+            </summary>
+        </member>
+        <member name="F:Microsoft.SqlServer.TDS.EndPoint.FederatedAuthentication.RPS._rpsPropBagType">
+            <summary>
+            Type of Microsoft.Passport.RPS.RPSPropBag
+            </summary>
+        </member>
+        <member name="F:Microsoft.SqlServer.TDS.EndPoint.FederatedAuthentication.RPS._rpsAuthType">
+            <summary>
+            Type of Microsoft.Passport.RPS.RPSAuth
+            </summary>
+        </member>
+        <member name="F:Microsoft.SqlServer.TDS.EndPoint.FederatedAuthentication.RPS._rpsTicketPropertyType">
+            <summary>
+            Type of Microsoft.Passport.RPS.RPSTicket.RPSTicketProperty
+            </summary>
+        </member>
+        <member name="F:Microsoft.SqlServer.TDS.EndPoint.FederatedAuthentication.RPS._rps">
+            <summary>
+            Instance of the Microsoft.Passport.RPS.RPS object
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.EndPoint.FederatedAuthentication.RPS.#ctor">
+            <summary>
+            RPS Wrapper constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.EndPoint.FederatedAuthentication.RPS.Initialize(System.String)">
+            <summary>
+            Calling Initialize in the RPS real object created from the dynamically loaded RPS assembly
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.EndPoint.FederatedAuthentication.RPS.Authenticate(System.Byte[],System.String)">
+            <summary>
+            Given an encrypted ticket, calls RPS Authenticate and returns the decrypted ticket 
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.EndPoint.FederatedAuthentication.RPS.GetSessionKeyFromRpsDecryptedTicket(System.Object)">
+            <summary>
+            Given an rps decrypted ticket, get the session key
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.EndPoint.FederatedAuthentication.RPS.GetStringAsBytes(System.String)">
+            <summary>
+            Convert a "string" that is actually a byte array into an actual byte array - needed for interop
+            with COM methods that are returning binary data as a BSTR.
+            </summary>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.EndPoint.FederatedAuthentication.RpsTicket">
+            <summary>
+            RPS implementation of federated authentication ticket
+            </summary>
+        </member>
+        <member name="F:Microsoft.SqlServer.TDS.EndPoint.FederatedAuthentication.RpsTicket.siteNameInt">
+            <summary>
+            Singleton instance of an RPS class, which drives authentication at the RPS level.
+            </summary>
+        </member>
+        <member name="F:Microsoft.SqlServer.TDS.EndPoint.FederatedAuthentication.RpsTicket.s_rps">
+            <summary>
+            Singleton instance of an RPS class, which drives authentication at the RPS level.
+            </summary>        
+        </member>
+        <member name="F:Microsoft.SqlServer.TDS.EndPoint.FederatedAuthentication.RpsTicket.sessionKey">
+            <summary>
+            The short-lived session key associated with this authentication ticket
+            </summary>
+        </member>
+        <member name="F:Microsoft.SqlServer.TDS.EndPoint.FederatedAuthentication.RpsTicket._rpsTicket">
+            <summary>
+            The RPS representation of the ticket
+            </summary>                
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.EndPoint.FederatedAuthentication.RpsTicket.#ctor(System.Object,System.Byte[])">
+            <summary>
+            Constructor that takes the RPS representation of the ticket as an argument
+            </summary>                
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.EndPoint.FederatedAuthentication.RpsTicket.#cctor">
+            <summary>
+            Static constructor for the RpsTicket class.
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.EndPoint.FederatedAuthentication.RpsTicket.GetSignature(System.Byte[])">
+            <summary>
+            Computes and returns the HMACSHA256 of the provided buffer using the Session Key associated with the auth
+            ticket.
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.EndPoint.FederatedAuthentication.RpsTicket.DecryptTicket(System.Byte[])">
+            <summary>
+            Takes the encrypted wire format of the ticket and, on successful authentication, returns
+            the resulting ticket.
+            </summary>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.EndPoint.FederatedAuthentication.JwtTicket">
+            <summary>
+            JWT implementation of federated authentication ticket
+            Move this class to a different file once msbuild conversion is completed.
+            </summary>
+        </member>
+        <member name="F:Microsoft.SqlServer.TDS.EndPoint.FederatedAuthentication.JwtTicket._ticket">
+            <summary>
+            the ticket
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.EndPoint.FederatedAuthentication.JwtTicket.GetSignature(System.Byte[])">
+            <summary>
+            Computes and returns the HMACSHA256 of the provided buffer using the Session Key associated with the auth
+            ticket.
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.EndPoint.FederatedAuthentication.JwtTicket.#ctor(System.Byte[])">
+            <summary>
+            Constructor that takes the RPS representation of the ticket as an argument
+            </summary>                
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.EndPoint.FederatedAuthentication.JwtTicket.DecryptTicket(System.Byte[])">
+            <summary>
+            Takes the encrypted wire format of the ticket and, on successful authentication, returns
+            the resulting ticket.
+            </summary>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.EndPoint.ITDSClientContext">
+            <summary>
+            Run time context of the TDS client
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.EndPoint.ITDSClientContext.ServerHost">
+            <summary>
+            Host or IP address on which SQL Server is running
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.EndPoint.ITDSClientContext.ServerPort">
+            <summary>
+            Port number of the SQL Server
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.EndPoint.ITDSClientContext.ServerPipe">
+            <summary>
+            Pipe at which SQL Server is listening
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.EndPoint.ITDSClientContext.ServerName">
+            <summary>
+            Name of the server client connected to.
+            Information is coming from INFO and ERROR tokens
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.EndPoint.ITDSClientContext.ServerDescription">
+            <summary>
+            Description of the server the client connected to.
+            Information originates in LOGINACK token
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.EndPoint.ITDSClientContext.ServerVersion">
+            <summary>
+            Server build version
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.EndPoint.ITDSClientContext.TDSVersion">
+            <summary>
+            TDS version of the conversation
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.EndPoint.ITDSClientContext.Database">
+            <summary>
+            Current database
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.EndPoint.ITDSClientContext.Language">
+            <summary>
+            Current language
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.EndPoint.ITDSClientContext.Collation">
+            <summary>
+            Database collation
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.EndPoint.ITDSClientContext.PacketSize">
+            <summary>
+            Size of the TDS packet
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.EndPoint.ITDSClientContext.FailoverPartner">
+            <summary>
+            Failover partner for connected SQL Server
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.EndPoint.ITDSClientContext.Encryption">
+            <summary>
+            Encryption used on the session
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.EndPoint.ITDSClientContext.Query">
+            <summary>
+            Query text to be sent to the TDS server
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.EndPoint.ITDSClientContext.QueryResponse">
+            <summary>
+            Response to the query
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.EndPoint.ITDSClientContext.ConnectionID">
+            <summary>
+            Connection identifier
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.EndPoint.ITDSClientContext.SessionState">
+            <summary>
+            State of the virtual session
+            </summary>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.EndPoint.ITDSServerSession">
+            <summary>
+            Session of the TDS Server
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.EndPoint.ITDSServerSession.Server">
+            <summary>
+            Server that created the session
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.EndPoint.ITDSServerSession.SessionID">
+            <summary>
+            Session identifier
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.EndPoint.ITDSServerSession.PacketSize">
+            <summary>
+            Size of the TDS packet
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.EndPoint.ITDSServerSession.SQLUserID">
+            <summary>
+            User name if SQL authentication is used
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.EndPoint.ITDSServerSession.NTUserAuthenticationContext">
+            <summary>
+            Context that indicates the stage of SSPI authentication
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.EndPoint.ITDSServerSession.Database">
+            <summary>
+            Database to which connection is established
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.EndPoint.ITDSServerSession.TDSVersion">
+            <summary>
+            TDS version of the communication
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.EndPoint.ITDSServerSession.ServerEndPointInfo">
+            <summary>
+            Local connection end-point information
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.EndPoint.ITDSServerSession.ClientEndPointInfo">
+            <summary>
+            Remote connection end-point information
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.EndPoint.ITDSServerSession.Encryption">
+            <summary>
+            Transport encryption
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.EndPoint.ITDSServerSession.EncryptionCertificate">
+            <summary>
+            Certificate to use for encryption
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.EndPoint.ITDSServerSession.ConnectionResetRequestCount">
+            <summary>
+            Counter of connection reset requests for this session
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.EndPoint.ITDSServerSession.IsSessionRecoveryEnabled">
+            <summary>
+            Indicates whether this session supports transport-level recovery
+            </summary>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.EndPoint.SSPI.SecBuffer">
+            <summary>
+            Security buffer
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.EndPoint.SSPI.SecBuffer.#ctor(System.Int32)">
+            <summary>
+            Initialization constructor that allocates a new security buffer
+            </summary>
+            <param name="bufferSize">Size of the buffer to allocate</param>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.EndPoint.SSPI.SecBuffer.#ctor(System.Byte[])">
+            <summary>
+            Initialization constructor for existing buffer
+            </summary>
+            <param name="buffer">Data</param>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.EndPoint.SSPI.SecBuffer.ToArray">
+            <summary>
+            Extract raw byte data from the security buffer
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.EndPoint.SSPI.SecBuffer.Dispose">
+            <summary>
+            Dispose security buffer
+            </summary>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.EndPoint.SSPI.SecBufferDescType">
+            <summary>
+            Type of security buffer descriptor
+            </summary>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.EndPoint.SSPI.SecConstants">
+            <summary>
+            Constants that are used across security API
+            </summary>
+        </member>
+        <member name="F:Microsoft.SqlServer.TDS.EndPoint.SSPI.SecConstants.Negotiate">
+            <summary>
+            Security packages used for SSPI authentication
+            </summary>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.EndPoint.SSPI.SecBufferDesc">
+            <summary>
+            Security buffer descriptor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.EndPoint.SSPI.SecBufferDesc.#ctor(System.Int32)">
+            <summary>
+            Initialization constructor
+            </summary>
+            <param name="size">Size of the buffer to allocate</param>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.EndPoint.SSPI.SecBufferDesc.#ctor(System.Byte[])">
+            <summary>
+            Initialization constructor for byte array
+            </summary>
+            <param name="buffer">Data</param>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.EndPoint.SSPI.SecBufferDesc.Dispose">
+            <summary>
+            Dispose security buffer descriptor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.EndPoint.SSPI.SecBufferDesc.ToArray">
+            <summary>
+            Convert to byte array
+            </summary>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.EndPoint.SSPI.SecBufferType">
+            <summary>
+            Type of security buffer
+            </summary>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.EndPoint.SSPI.SecContextRequirements">
+            <summary>
+            Security context requirements
+            </summary>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.EndPoint.SSPI.SecDataRepresentation">
+            <summary>
+            Data representation requirements
+            </summary>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.EndPoint.SSPI.SecPgkCredentials">
+            <summary>
+            Security package credentials enumeration
+            </summary>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.EndPoint.SSPI.SecPkgInfo">
+            <summary>
+            Security package info
+            </summary>
+        </member>
+        <member name="F:Microsoft.SqlServer.TDS.EndPoint.SSPI.SecPkgInfo.Capabilities">
+            <summary>
+            Set of bit flags that describes the capabilities of the security package
+            </summary>
+        </member>
+        <member name="F:Microsoft.SqlServer.TDS.EndPoint.SSPI.SecPkgInfo.Version">
+            <summary>
+            Specifies the version of the package protocol. Must be 1.
+            </summary>
+        </member>
+        <member name="F:Microsoft.SqlServer.TDS.EndPoint.SSPI.SecPkgInfo.RPCID">
+            <summary>
+            Specifies a DCE RPC identifier, if appropriate
+            </summary>
+        </member>
+        <member name="F:Microsoft.SqlServer.TDS.EndPoint.SSPI.SecPkgInfo.MaxToken">
+            <summary>
+            Specifies the maximum size, in bytes, of the token.
+            </summary>
+        </member>
+        <member name="F:Microsoft.SqlServer.TDS.EndPoint.SSPI.SecPkgInfo.Name">
+            <summary>
+            Pointer to a null-terminated string that contains the name of the security package.
+            </summary>
+        </member>
+        <member name="F:Microsoft.SqlServer.TDS.EndPoint.SSPI.SecPkgInfo.Comment">
+            <summary>
+            Pointer to a null-terminated string. This can be any additional string passed back by the package.
+            </summary>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.EndPoint.SSPI.SecResult">
+            <summary>
+            Result of security operation
+            </summary>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.EndPoint.SSPI.SecurityHandle">
+            <summary>
+            Security handle
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.EndPoint.SSPI.SecurityHandle.IsValid">
+            <summary>
+            Check if instance of the security handle is valid
+            </summary>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.EndPoint.SSPI.SecurityInteger">
+            <summary>
+            Security integer
+            </summary>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.EndPoint.SSPI.SSPIResponse">
+            <summary>
+            Container for the SSPI handshake response to be sent to the other party
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.EndPoint.SSPI.SSPIResponse.Payload">
+            <summary>
+            Payload to proceed to the next step of authentication
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.EndPoint.SSPI.SSPIResponse.IsFinal">
+            <summary>
+            Indicates whether this is the last payload and no further processing is needed
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.EndPoint.SSPI.SSPIResponse.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.EndPoint.SSPI.SSPIResponse.#ctor(System.Byte[])">
+            <summary>
+            Initialization constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.EndPoint.SSPI.SSPIResponse.#ctor(System.Byte[],System.Boolean)">
+            <summary>
+            Initialization constructor
+            </summary>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.EndPoint.SSPI.SSPIContext">
+            <summary>
+            SSPI context
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.EndPoint.SSPI.SSPIContext.Finalize">
+            <summary>
+            FInalizer
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.EndPoint.SSPI.SSPIContext.CreateServer">
+            <summary>
+            Create SSPI context for server
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.EndPoint.SSPI.SSPIContext.CreateClient">
+            <summary>
+            Create SSPI context for client
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.EndPoint.SSPI.SSPIContext.StartServerAuthentication(System.Byte[])">
+            <summary>
+            Initialize authentication sequence for the server
+            </summary>
+            <param name="clientToken">Token received from the client</param>
+            <returns>Token to be sent to the client in response</returns>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.EndPoint.SSPI.SSPIContext.ContinueServerAuthentication(System.Byte[])">
+            <summary>
+            Continue authentication sequence for the server
+            </summary>
+            <param name="clientToken">Token received from the client</param>
+            <returns>Token to be sent to the client in response</returns>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.EndPoint.SSPI.SSPIContext.StartClientAuthentication(System.String,System.UInt32)">
+            <summary>
+            Initialize authentication sequence for the client
+            </summary>
+            <returns>Token to be sent to the server</returns>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.EndPoint.SSPI.SSPIContext.ContinueClientAuthentication(System.Byte[])">
+            <summary>
+            Initialize authentication sequence for the client
+            </summary>
+            <param name="clientToken">Payload received from the server</param>
+            <returns>Token to be sent to the server</returns>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.EndPoint.SSPI.SSPIContext.GetRemoteIdentity">
+            <summary>
+            Return identity of the party on the other end
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.EndPoint.SSPI.SSPIContext.Dispose">
+            <summary>
+            Dispose
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.EndPoint.SSPI.SSPIContext.Dispose(System.Boolean)">
+            <summary>
+            Dispose the instance
+            </summary>
+            <param name="bIsDisposing"></param>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.EndPoint.PlaceholderStream">
+            <summary>
+            A simple pass-through implementation of stream that allows dynamically switching the underlying stream
+            </summary>
+        </member>
+        <member name="F:Microsoft.SqlServer.TDS.EndPoint.PlaceholderStream._leaveInnerStreamOpen">
+            <summary>
+            Indicates whether inner stream should be closed when TDS stream is closed
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.EndPoint.PlaceholderStream.InnerStream">
+            <summary>
+            Transport stream used to deliver TDS protocol
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.EndPoint.PlaceholderStream.CanRead">
+            <summary>
+            Indicates whether stream can be read
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.EndPoint.PlaceholderStream.CanSeek">
+            <summary>
+            Indicates whether the stream can be positioned
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.EndPoint.PlaceholderStream.CanWrite">
+            <summary>
+            Indicates whether the stream can be written
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.EndPoint.PlaceholderStream.Length">
+            <summary>
+            Return the length of the stream
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.EndPoint.PlaceholderStream.Position">
+            <summary>
+            Return position in the stream
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.EndPoint.PlaceholderStream.#ctor(System.IO.Stream)">
+            <summary>
+            Initialization constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.EndPoint.PlaceholderStream.#ctor(System.IO.Stream,System.Boolean)">
+            <summary>
+            Initialization constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.EndPoint.PlaceholderStream.Close">
+            <summary>
+            Close the stream
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.EndPoint.PlaceholderStream.Flush">
+            <summary>
+            Flush the data into the underlying stream
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.EndPoint.PlaceholderStream.Read(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Read the data from the stream
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.EndPoint.PlaceholderStream.Seek(System.Int64,System.IO.SeekOrigin)">
+            <summary>
+            Seek position in the stream
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.EndPoint.PlaceholderStream.SetLength(System.Int64)">
+            <summary>
+            Set stream length
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.EndPoint.PlaceholderStream.Write(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Write data into the stream
+            </summary>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.EndPoint.TDSClientEndPoint">
+            <summary>
+            Client that talks TDS
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.EndPoint.TDSClientEndPoint.EventLog">
+            <summary>
+            Gets/Sets the event log for the proxy server
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.EndPoint.TDSClientEndPoint.TDSClient">
+            <summary>
+            Client
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.EndPoint.TDSClientEndPoint.ClientSocket">
+            <summary>
+            Socket that talks to TDS server
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.EndPoint.TDSClientEndPoint.ClientParser">
+            <summary>
+            TDS parser
+            </summary>
+        </member>
+        <member name="F:Microsoft.SqlServer.TDS.EndPoint.TDSClientEndPoint._funcTDSStreamPreWriteCallBack">
+            <summary>
+            TDSStream Prewrite call back
+            </summary>
+        </member>
+        <member name="F:Microsoft.SqlServer.TDS.EndPoint.TDSClientEndPoint._funcPostConnect">
+            <summary>
+            PostConnect call back for socket attributes setting
+            </summary>
+        </member>
+        <member name="F:Microsoft.SqlServer.TDS.EndPoint.TDSClientEndPoint._funcTCPClientDisconnect">
+            <summary>
+            PostConnect call back for socket attributes setting
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.EndPoint.TDSClientEndPoint.#ctor(Microsoft.SqlServer.TDS.EndPoint.ITDSClient)">
+            <summary>
+            Initialization constructor
+            </summary>
+            <param name="client">TDS client instance that will drive the communication with the TDS server</param>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.EndPoint.TDSClientEndPoint.#ctor(Microsoft.SqlServer.TDS.EndPoint.ITDSClient,System.Func{System.Byte[],System.Int32,System.Int32,System.UInt16},System.Action{System.Net.Sockets.TcpClient},System.Action{System.Net.Sockets.TcpClient})">
+            <summary>
+            Initialization constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.EndPoint.TDSClientEndPoint.Connect">
+            <summary>
+            Establish connection and log into the SQL Server
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.EndPoint.TDSClientEndPoint.SendRequest">
+            <summary>
+            Dispatch a request to the server
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.EndPoint.TDSClientEndPoint.Disconnect">
+            <summary>
+            Log out and disconnect from SQL Server
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.EndPoint.TDSClientEndPoint.Log(System.String,System.Object[])">
+            <summary>
+            Write a string to the log
+            </summary>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.EndPoint.ITDSClient">
+            <summary>
+            Interface that TDS parser calls into to process TDS stream
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.EndPoint.ITDSClient.State">
+            <summary>
+            Indicates the state of the TDS client
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.EndPoint.ITDSClient.Context">
+            <summary>
+            Run time context of the client
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.EndPoint.ITDSClient.OnPreConnect">
+            <summary>
+            Notification that is fired before the parser establishes a connection to the server. This method should be used to initialize context.
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.EndPoint.ITDSClient.OnPreLogin">
+            <summary>
+            It is called when transport was established with TDS server and client parser is ready to start conversation
+            </summary>
+            <returns>TDS message to initiate conversation with TDS Server</returns>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.EndPoint.ITDSClient.OnPreLoginResponse(Microsoft.SqlServer.TDS.TDSMessage)">
+            <summary>
+            It is called when pre-login response arrives
+            </summary>
+            <param name="message">TDS message received</param>
+            <returns>TDS message to send to the server</returns>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.EndPoint.ITDSClient.OnSSPIResponse(Microsoft.SqlServer.TDS.TDSMessage)">
+            <summary>
+            It is called when SPNEGO response arrives
+            </summary>
+            <param name="message">TDS message received</param>		
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.EndPoint.ITDSClient.OnFedAuthInfoTokenResponse(Microsoft.SqlServer.TDS.TDSMessage)">
+            <summary>
+            It is called when FedAuthInfoToken response arrives
+            </summary>
+            <param name="message">TDS message received</param>		
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.EndPoint.ITDSClient.OnLoginResponse(Microsoft.SqlServer.TDS.TDSMessage)">
+            <summary>
+            It is called when login acknowledgement arrives.
+            </summary>
+            <param name="message">TDS message received</param>		
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.EndPoint.ITDSClient.OnRequest">
+            <summary>
+            Create a request to SQL Server after authentication
+            </summary>
+            <returns>TDS message to send to the server</returns>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.EndPoint.ITDSClient.OnResponse(Microsoft.SqlServer.TDS.TDSMessage)">
+            <summary>
+            Process response to the request
+            </summary>
+            <param name="message">TDS message received</param>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.EndPoint.ITDSClient.OnLogout">
+            <summary>
+            Create a request to SQL Server to logout
+            </summary>
+            <returns>TDS message to send to the server</returns>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.EndPoint.ITDSClient.OnLogoutResponse(Microsoft.SqlServer.TDS.TDSMessage)">
+            <summary>
+            Process response to the logout request
+            </summary>
+            <param name="message">TDS message received</param>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.EndPoint.ITDSServer">
+            <summary>
+            Interface that TDS parser calls into to process TDS stream
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.EndPoint.ITDSServer.OpenSession">
+            <summary>
+            Create a new TDS server session
+            </summary>
+            <returns>A new instance of the TDS server session</returns>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.EndPoint.ITDSServer.CloseSession(Microsoft.SqlServer.TDS.EndPoint.ITDSServerSession)">
+            <summary>
+            Close TDS server session
+            </summary>
+            <param name="session">An instance of the TDS server session to close</param>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.EndPoint.ITDSServer.OnPreLoginRequest(Microsoft.SqlServer.TDS.EndPoint.ITDSServerSession,Microsoft.SqlServer.TDS.TDSMessage)">
+            <summary>
+            It is called when pre-login request arrives
+            </summary>
+            <param name="session"></param>
+            <param name="message">TDS message received</param>
+            <returns>TDS messages to be respond with</returns>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.EndPoint.ITDSServer.OnLogin7Request(Microsoft.SqlServer.TDS.EndPoint.ITDSServerSession,Microsoft.SqlServer.TDS.TDSMessage)">
+            <summary>
+            It is called when login request arrives
+            </summary>
+            <param name="session"></param>
+            <param name="message">TDS message received</param>
+            <returns>TDS message to respond with</returns>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.EndPoint.ITDSServer.OnFederatedAuthenticationTokenMessage(Microsoft.SqlServer.TDS.EndPoint.ITDSServerSession,Microsoft.SqlServer.TDS.TDSMessage)">
+            <summary>
+            It is called when federated authentication token message arrives. Called only when
+            such a message arrives in response to federated authentication info, not when the
+            token is part of a login request.
+            </summary>
+            <param name="session"></param>
+            <param name="message">TDS message received</param>
+            <returns>TDS message to respond with</returns>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.EndPoint.ITDSServer.OnSSPIRequest(Microsoft.SqlServer.TDS.EndPoint.ITDSServerSession,Microsoft.SqlServer.TDS.TDSMessage)">
+            <summary>
+            It is called when SSPI payload arrives
+            </summary>
+            <param name="session"></param>
+            <param name="message">TDS message received</param>
+            <returns>TDS message to respond with</returns>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.EndPoint.ITDSServer.OnSQLBatchRequest(Microsoft.SqlServer.TDS.EndPoint.ITDSServerSession,Microsoft.SqlServer.TDS.TDSMessage)">
+            <summary>
+            It is called when SQL batch request arrives
+            </summary>
+            <param name="session"></param>
+            <param name="message">TDS message received</param>
+            <returns>TDS message to respond with</returns>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.EndPoint.ITDSServer.OnAttention(Microsoft.SqlServer.TDS.EndPoint.ITDSServerSession,Microsoft.SqlServer.TDS.TDSMessage)">
+            <summary>
+            It is called when attention arrives
+            </summary>
+            <param name="session"></param>
+            <param name="message">TDS message received</param>
+            <returns>TDS message to respond with</returns>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.EndPoint.TDSClientParser">
+            <summary>
+            Parser of the TDS packets on the client
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.EndPoint.TDSClientParser.Client">
+            <summary>
+            TDS client that generates data
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.EndPoint.TDSClientParser.#ctor(Microsoft.SqlServer.TDS.EndPoint.ITDSClient,System.IO.Stream)">
+            <summary>
+            Client TDS parser initialization constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.EndPoint.TDSClientParser.Login">
+            <summary>
+            Authenticate against TDS Server
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.EndPoint.TDSClientParser.SendRequest">
+            <summary>
+            Dispatch a request to the server and process the response
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.EndPoint.TDSClientParser.Logout">
+            <summary>
+            Complete 
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.EndPoint.TDSClientParser._ReadResponse">
+            <summary>
+            Read data from TDS server
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.EndPoint.TDSClientParser._WriteRequest(Microsoft.SqlServer.TDS.TDSMessage)">
+            <summary>
+            Send a request to the TDS server
+            </summary>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.EndPoint.TDSEndPointInfo">
+            <summary>
+            Container of the connection end-point information
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.EndPoint.TDSEndPointInfo.Address">
+            <summary>
+            IP address to/from which connection is established
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.EndPoint.TDSEndPointInfo.Port">
+            <summary>
+            Port number
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.EndPoint.TDSEndPointInfo.Transport">
+            <summary>
+            Transport protocol for the end-point
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.EndPoint.TDSEndPointInfo.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.EndPoint.TDSEndPointInfo.#ctor(System.Net.IPAddress)">
+            <summary>
+            Initialization constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.EndPoint.TDSEndPointInfo.#ctor(System.Net.IPAddress,System.Int32)">
+            <summary>
+            Initialization constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.EndPoint.TDSEndPointInfo.#ctor(System.Net.IPAddress,System.Int32,Microsoft.SqlServer.TDS.EndPoint.TDSEndPointTransportType)">
+            <summary>
+            Initialization constructor
+            </summary>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.EndPoint.TDSEndPointTransportType">
+            <summary>
+            Transport of the connection end-point
+            </summary>
+        </member>
+        <member name="F:Microsoft.SqlServer.TDS.EndPoint.TDSEndPointTransportType.TCP">
+            <summary>
+            TCP protocol
+            </summary>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.EndPoint.TDSParser">
+            <summary>
+            Generic TDS parser
+            </summary>
+        </member>
+        <member name="F:Microsoft.SqlServer.TDS.EndPoint.TDSParser._originalTransport">
+            <summary>
+            Transport stream that was assigned to this parser prior to connection encryption
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.EndPoint.TDSParser.EventLog">
+            <summary>
+            Writer to log events to
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.EndPoint.TDSParser.ServerSslProtocol">
+            <summary>
+            Encryption protocol for server to use with AuthenticateAsServer
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.EndPoint.TDSParser.Transport">
+            <summary>
+            Protocol stream between the client and the server
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.EndPoint.TDSParser.#ctor(System.IO.Stream)">
+            <summary>
+            Initialization constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.EndPoint.TDSParser.SetTDSStreamPreWriteCallback(System.Func{System.Byte[],System.Int32,System.Int32,System.UInt16})">
+            <summary>
+            Set PreWriteCallback func in Transport (TDSStream)
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.EndPoint.TDSParser.ResetTargetProtocol">
+            <summary>
+            Resets the targeted encryption protocol for the server.
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.EndPoint.TDSParser.EnableClientTransportEncryption(System.String)">
+            <summary>
+            Enable transport encryption
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.EndPoint.TDSParser.EnableServerTransportEncryption(System.Security.Cryptography.X509Certificates.X509Certificate)">
+            <summary>
+            Enable transport encryption
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.EndPoint.TDSParser.DisableTransportEncryption">
+            <summary>
+            Disable transport encryption
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.EndPoint.TDSParser._ValidateServerCertificate(System.Object,System.Security.Cryptography.X509Certificates.X509Certificate,System.Security.Cryptography.X509Certificates.X509Chain,System.Net.Security.SslPolicyErrors)">
+            <summary>
+            Validate server certificate
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.EndPoint.TDSParser.Log(System.String,System.Object[])">
+            <summary>
+            Write a string to the log
+            </summary>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.EndPoint.TDSServerEndPoint">
+            <summary>
+            Server that talks TDS
+            </summary>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.EndPoint.ServerEndPointHandler`1">
+            <summary>
+            General server handler
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.EndPoint.ServerEndPointHandler`1.EventLog">
+            <summary>
+            Gets/Sets the event log for the proxy server
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.EndPoint.ServerEndPointHandler`1.TDSServer">
+            <summary>
+            Server
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.EndPoint.ServerEndPointHandler`1.Connections">
+            <summary>
+            The list of connections spawned by the server
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.EndPoint.ServerEndPointHandler`1.ServerEndPoint">
+            <summary>
+            End-point which TDS server is listening on
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.EndPoint.ServerEndPointHandler`1.ListenerSocket">
+            <summary>
+            Gets/Sets the listener
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.EndPoint.ServerEndPointHandler`1.ListenerThread">
+            <summary>
+            Gets/Sets the listener thread
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.EndPoint.ServerEndPointHandler`1.StopRequested">
+            <summary>
+            Gets/Sets the flag whether the stop is requested
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.EndPoint.ServerEndPointHandler`1.EndpointName">
+            <summary>
+            Identifier to recognize the client of the Endpoint.
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.EndPoint.ServerEndPointHandler`1.#ctor(Microsoft.SqlServer.TDS.EndPoint.ITDSServer)">
+            <summary>
+            Initialization constructor
+            </summary>
+            <param name="server">TDS server instance that will process requests</param>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.EndPoint.ServerEndPointHandler`1.Start">
+            <summary>
+            Start the listener thread
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.EndPoint.ServerEndPointHandler`1.Stop">
+            <summary>
+            Stop the listener thread
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.EndPoint.ServerEndPointHandler`1._RequestListener">
+            <summary>
+            Processes all incoming requests
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.EndPoint.ServerEndPointHandler`1.CreateConnection(System.Net.Sockets.TcpClient)">
+            <summary>
+            Creates a new connection handler for the given TCP connection
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.EndPoint.ServerEndPointHandler`1._OnConnectionClosed(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for client connection termination
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.EndPoint.ServerEndPointHandler`1.Log(System.String,System.Object[])">
+            <summary>
+            Write a string to the log
+            </summary>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.EndPoint.ConnectionClosedEventHandler">
+            <summary>
+            A delegate for client connection termination
+            </summary>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.EndPoint.TDSServerEndPointConnection">
+            <summary>
+            Connection to a single client that handles TDS data
+            </summary>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.EndPoint.ServerEndPointConnection">
+            <summary>
+            Connection to a single client
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.EndPoint.ServerEndPointConnection.ProcessorThread">
+            <summary>
+            Worker thread
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.EndPoint.ServerEndPointConnection.EventLog">
+            <summary>
+            Gets/Sets the event log for the proxy server
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.EndPoint.ServerEndPointConnection.Server">
+            <summary>
+            TDS Server to which this connection is established
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.EndPoint.ServerEndPointConnection.Session">
+            <summary>
+            TDS Server session that is assigned to this physical connection
+            </summary>
+        </member>
+        <member name="E:Microsoft.SqlServer.TDS.EndPoint.ServerEndPointConnection.OnConnectionClosed">
+            <summary>
+            Event that is fired when connection is closed
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.EndPoint.ServerEndPointConnection.Connection">
+            <summary>
+            Connection itself
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.EndPoint.ServerEndPointConnection.StopRequested">
+            <summary>
+            The flag indicates whether server is being stopped
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.EndPoint.ServerEndPointConnection.#ctor(Microsoft.SqlServer.TDS.EndPoint.ITDSServer,System.Net.Sockets.TcpClient)">
+            <summary>
+            Initialization constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.EndPoint.ServerEndPointConnection.Start">
+            <summary>
+            Start the connection 
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.EndPoint.ServerEndPointConnection.Stop">
+            <summary>
+            Stop the connection
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.EndPoint.ServerEndPointConnection.PrepareForProcessingData(System.IO.Stream)">
+            <summary>
+            Called when the data processing thread is first started
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.EndPoint.ServerEndPointConnection.ProcessData(System.IO.Stream)">
+            <summary>
+            Called every time there is new data available
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.EndPoint.ServerEndPointConnection._ConnectionHandler">
+            <summary>
+            Worker thread
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.EndPoint.ServerEndPointConnection.Log(System.String,System.Object[])">
+            <summary>
+            Write a string to the log
+            </summary>
+        </member>
+        <member name="T:Microsoft.SqlServer.TDS.EndPoint.TDSServerParser">
+            <summary>
+            Parser of the TDS packets on the client
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.EndPoint.TDSServerParser.Server">
+            <summary>
+            Implementation that provides data to be delivered over the protocol
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.EndPoint.TDSServerParser.Session">
+            <summary>
+            TDS server session
+            </summary>
+        </member>
+        <member name="P:Microsoft.SqlServer.TDS.EndPoint.TDSServerParser.MessageBeingReceived">
+            <summary>
+            Communication from the client being received incrementally
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.EndPoint.TDSServerParser.#ctor(Microsoft.SqlServer.TDS.EndPoint.ITDSServer,Microsoft.SqlServer.TDS.EndPoint.ITDSServerSession,System.IO.Stream)">
+            <summary>
+            Server TDS parser initialization constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.SqlServer.TDS.EndPoint.TDSServerParser.Run">
+            <summary>
+            Run one cycle of the parser to process incoming stream of data or dispatch outgoing data
+            </summary>
+        </member>
+    </members>
+</doc>
