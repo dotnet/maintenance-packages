@@ -10,6 +10,8 @@
     <!-- Configures the architecture of test host. -->
     <TargetPlatform>$$TARGETPLATFORM$$</TargetPlatform>
     <DotNetHostPath>$$DOTNETHOSTPATH$$</DotNetHostPath>
+    <!-- Filter out failing (wrong framwork, platform, runtime or activeissue) tests -->
+    <TestCaseFilter>category!=failing</TestCaseFilter>
   </RunConfiguration>
   <LoggerRunSettings>
     <Loggers>
