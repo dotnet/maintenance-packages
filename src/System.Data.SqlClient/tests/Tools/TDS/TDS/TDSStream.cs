@@ -427,7 +427,6 @@ namespace Microsoft.SqlServer.TDS
         /// <summary>
         /// Ensures that the current packet has at least a single spare byte
         /// </summary>
-        /// <param name="type">Type of the packet to look for</param>
         private void _EnsureOutgoingPacketHasSpace()
         {
             // Check if we have a packet

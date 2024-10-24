@@ -23,7 +23,7 @@ namespace System.Data.SqlClient.ManualTesting.Tests
             bool proceed = true;
             string dataSourceStr = builder.DataSource.Replace("tcp:", "");
             string[] serverNamePartsByBackSlash = dataSourceStr.Split('\\');
-            if (!dataSourceStr.Contains(",") && serverNamePartsByBackSlash.Length == 2)
+            if (!dataSourceStr.Contains(',') && serverNamePartsByBackSlash.Length == 2)
             {
                 string hostname = serverNamePartsByBackSlash[0];
                 proceed = !string.IsNullOrWhiteSpace(hostname) && IsBrowserAlive(hostname);

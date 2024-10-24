@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Utf8String</name>
+    </assembly>
+    <members>
+        <member name="M:Microsoft.Samples.SqlServer.Utf8String.Parse(System.Data.SqlTypes.SqlString)">
+            <summary>
+            Parse the given string and return a utf8 representation for it.
+            </summary>
+            <param name="sqlString"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Microsoft.Samples.SqlServer.Utf8String.Utf8Bytes">
+            <summary>
+            Get/Set the utf8 bytes for this string.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Samples.SqlServer.Utf8String.ToString">
+            <summary>
+            Return a unicode string for this type.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Samples.SqlServer.Utf8String.ToSqlString">
+            <summary>
+            Return a SqlStr
+            </summary>
+        </member>
+    </members>
+</doc>

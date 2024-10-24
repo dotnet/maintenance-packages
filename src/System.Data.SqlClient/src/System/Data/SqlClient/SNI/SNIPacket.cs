@@ -68,6 +68,7 @@ namespace System.Data.SqlClient.SNI
         /// <summary>
         /// Allocate space for data
         /// </summary>
+        /// <param name="headerLength">Length of header</param>
         /// <param name="dataLength">Length of byte array to be allocated</param>
         private void Allocate(int headerLength, int dataLength)
         {

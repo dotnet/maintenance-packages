@@ -92,7 +92,9 @@ namespace System.Data.Common
 
         internal static IndexOutOfRangeException IndexOutOfRange(string error)
         {
+#pragma warning disable CA2201 // Do not raise reserved exception types
             IndexOutOfRangeException e = new IndexOutOfRangeException(error);
+#pragma warning restore CA2201 // Do not raise reserved exception types
             TraceExceptionAsReturnValue(e);
             return e;
         }

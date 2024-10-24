@@ -152,10 +152,10 @@ namespace System.Data.SqlClient.ManualTesting.Tests
         /// Create the root scope of the randomizer, this method is thread safe!
         /// Note that scopes themselves are NOT thread-safe, while the pool is.
         /// </summary>
-        public Scope<RandomizerType> RootScope<RandomizerType>()
-            where RandomizerType : Randomizer, new()
+        public Scope<TRandomizerType> RootScope<TRandomizerType>()
+            where TRandomizerType : Randomizer, new()
         {
-            return new Scope<RandomizerType>(this, null);
+            return new Scope<TRandomizerType>(this, null);
         }
 
         /// <summary>
@@ -227,15 +227,15 @@ namespace System.Data.SqlClient.ManualTesting.Tests
         /// <summary>
         /// represents a randomizer scope, that makes use of Randomizer or derived types
         /// </summary>
-        public class Scope<RandomizerType> : IScope, IDisposable
-            where RandomizerType : Randomizer, new()
+        public class Scope<TRandomizerType> : IScope, IDisposable
+            where TRandomizerType : Randomizer, new()
         {
             private readonly RandomizerPool _pool;
-            private RandomizerType _current;
+            private TRandomizerType _current;
             internal Randomizer.State[] _scopeStates;
             private IScope _previousScope;
 
-            public RandomizerType Current
+            public TRandomizerType Current
             {
                 get
                 {
@@ -256,7 +256,7 @@ namespace System.Data.SqlClient.ManualTesting.Tests
                 t_currentScope = this;
                 _pool = pool;
 
-                RandomizerType current;
+                TRandomizerType current;
                 _pool.CreateScopeRandomizer(parent, out _scopeStates, out current);
 
                 // mark the scope as constructed
@@ -296,17 +296,17 @@ namespace System.Data.SqlClient.ManualTesting.Tests
             /// creates a new scope with Randomizer type or derived
             /// </summary>
             /// <returns></returns>
-            public Scope<NestedRandomizerType> NewScope<NestedRandomizerType>()
-                where NestedRandomizerType : Randomizer, new()
+            public Scope<TNestedRandomizerType> NewScope<TNestedRandomizerType>()
+                where TNestedRandomizerType : Randomizer, new()
             {
                 IScope newScope;
 
-                if (typeof(NestedRandomizerType) == typeof(Randomizer))
+                if (typeof(TNestedRandomizerType) == typeof(Randomizer))
                     newScope = new Scope(_pool, this); // to ensure later casting works fine
                 else
-                    newScope = new Scope<NestedRandomizerType>(_pool, this);
+                    newScope = new Scope<TNestedRandomizerType>(_pool, this);
 
-                return (Scope<NestedRandomizerType>)newScope;
+                return (Scope<TNestedRandomizerType>)newScope;
             }
 
             /// <summary>
@@ -348,8 +348,8 @@ namespace System.Data.SqlClient.ManualTesting.Tests
         /// <summary>
         /// saves the repro data for specific scope
         /// </summary>
-        public void SaveRepro<RandomizerType>(string reproFile, Scope<RandomizerType> scope)
-            where RandomizerType : Randomizer, new()
+        public void SaveRepro<TRandomizerType>(string reproFile, Scope<TRandomizerType> scope)
+            where TRandomizerType : Randomizer, new()
         {
             SaveReproInternal(reproFile, scope);
         }
