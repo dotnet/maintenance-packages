@@ -48,7 +48,9 @@ stages:
       enablePublishUsingPipelines: true
       publishAssetsImmediately: true
       enablePublishTestResults: true
+      enableSourceBuild: true
       testResultsFormat: vstest
+      enableSourceBuild: true
       enableSourceIndex: ${{ and(eq(variables._RunAsInternal, True), eq(variables['Build.SourceBranch'], 'refs/heads/main')) }}
       workspace:
         clean: all
