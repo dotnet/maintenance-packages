@@ -59,9 +59,5 @@
       <Name>TDS</Name>
     </ProjectReference>
   </ItemGroup>
-
-  <ItemGroup Condition="'$(TargetPlatformIdentifier)' == 'windows'">
-    <PackageReference Include="System.Security.Principal.Windows" />
-  </ItemGroup>
   
 </Project>

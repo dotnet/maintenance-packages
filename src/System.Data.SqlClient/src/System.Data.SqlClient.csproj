@@ -527,10 +527,11 @@
     </EmbeddedResource>
   </ItemGroup>
 
-  <ItemGroup Condition="'$(IsPartialFacadeAssembly)' != 'true'">
-    <PackageReference Include="System.Buffers" />
-    <PackageReference Include="System.Diagnostics.DiagnosticSource" />
+  <ItemGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETStandard'">
+    <PackageReference Include="System.Diagnostics.DiagnosticSource"  />
     <PackageReference Include="System.Text.Encoding.CodePages" />
+
+    <ProjectReference Include="$(RepoRoot)src\System.Buffers\src\System.Buffers.csproj" />
   </ItemGroup>
 
   <Import Project="GenerateThisAssemblyCs.targets" Condition="'$(IsPartialFacadeAssembly)' != 'true'" />
