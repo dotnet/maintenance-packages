@@ -1,14 +1,14 @@
 {
   "sdk": {
-    "version": "8.0.110",
+    "version": "8.0.403",
     "allowPrerelease": true,
     "rollForward": "major"
   },
   "tools": {
-    "dotnet": "8.0.110",
+    "dotnet": "8.0.403",
     "runtimes": {
       "dotnet": [
-        "6.0.27"
+        "6.0.35"
       ]
     }
   },
