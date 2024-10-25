@@ -2,15 +2,10 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
+using System.IO;
 using System.Runtime.InteropServices;
 
-#if MS_IO_REDIST
-using System.IO;
-
 namespace Microsoft.IO
-#else
-namespace System.IO
-#endif
 {
     internal static partial class FileSystem
     {

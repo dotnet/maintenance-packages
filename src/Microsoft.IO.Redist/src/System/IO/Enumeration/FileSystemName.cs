@@ -4,11 +4,7 @@
 using System;
 using System.Text;
 
-#if MS_IO_REDIST
 namespace Microsoft.IO.Enumeration
-#else
-namespace System.IO.Enumeration
-#endif
 {
     /// <summary>Provides methods for matching file system names.</summary>
     public static class FileSystemName
