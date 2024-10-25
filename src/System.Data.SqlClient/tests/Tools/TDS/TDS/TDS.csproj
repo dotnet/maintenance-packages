@@ -1,11 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
+    <TargetFrameworks>$(NetMinimum)-unix;$(NetMinimum)-windows</TargetFrameworks>
     <RootNamespace>Microsoft.SqlServer.TDS</RootNamespace>
     <AssemblyName>Microsoft.SqlServer.TDS</AssemblyName>
     <ClsCompliant>false</ClsCompliant>
-    <TargetFrameworks>$(NetMinimum)-unix;$(NetMinimum)-windows</TargetFrameworks>
-    <NoWarn>$(NoWarn);CA1001;CA1068;CA1069;CA1309;CA1310;CA1419;CA1507;CA1711;CA1716;CA1805;CA1806;CA1816;CA1822;CA1830;CA1834;CA1835;CA1836;CA1840;CA1844;CA2016;CA2101;CA2200;CA2201;CA2208;CA2211;CA2219;CA2249;CA2251;CA5366;CS0168;CS0649;IDE0073;SYSLIB0004;SYSLIB0023;nullable;</NoWarn>
+    <NoWarn>$(NoWarn);CA1001;CA1068;CA1069;CA1309;CA1310;CA1419;CA1507;CA1711;CA1716;CA1805;CA1806;CA1816;CA1822;CA1830;CA1834;CA1835;CA1836;CA1840;CA1844;CA2016;CA2101;CA2200;CA2201;CA2208;CA2211;CA2219;CA2249;CA2251;CA5366;CS0168;CS0649;IDE0073;SYSLIB0004;SYSLIB0023;nullable</NoWarn>
   </PropertyGroup>
 
 </Project>
