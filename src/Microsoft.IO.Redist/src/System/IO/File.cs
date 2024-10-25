@@ -1,10 +1,12 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
+using System;
 using System.Buffers;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
+using System.IO;
 using System.Runtime.ExceptionServices;
 using System.Runtime.Versioning;
 using System.Text;
@@ -12,14 +14,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Win32.SafeHandles;
 
-#if MS_IO_REDIST
-using System;
-using System.IO;
-
 namespace Microsoft.IO
-#else
-namespace System.IO
-#endif
 {
     // Class for creating FileStream objects, and some basic file management
     // routines such as Delete, etc.
@@ -338,14 +333,6 @@ namespace System.IO
                 {
                     throw new IOException(SR.IO_FileTooLong2GB);
                 }
-                if (fileLength == 0)
-                {
-#if !MS_IO_REDIST
-                    // Some file systems (e.g. procfs on Linux) return 0 for length even when there's content; also there is non-seekable file stream.
-                    // Thus we need to assume 0 doesn't mean empty.
-                    return ReadAllBytesUnknownLength(fs);
-#endif
-                }
 
                 int index = 0;
                 int count = (int)fileLength;
@@ -374,13 +361,8 @@ namespace System.IO
             if (bytes == null)
                 throw new ArgumentNullException(nameof(bytes));
 
-#if MS_IO_REDIST
             using FileStream fs = new FileStream(path, FileMode.Create, FileAccess.Write, FileShare.Read);
             fs.Write(bytes, 0, bytes.Length);
-#else
-            using SafeFileHandle sfh = OpenHandle(path, FileMode.Create, FileAccess.Write, FileShare.Read);
-            RandomAccess.WriteAtOffset(sfh, bytes, 0);
-#endif
         }
         public static string[] ReadAllLines(string path)
         {
@@ -666,11 +648,7 @@ namespace System.IO
                 StringBuilder sb = new StringBuilder();
                 while (true)
                 {
-#if MS_IO_REDIST
                     int read = await sr.ReadAsync(buffer, 0, buffer.Length).ConfigureAwait(false);
-#else
-                    int read = await sr.ReadAsync(new Memory<char>(buffer), cancellationToken).ConfigureAwait(false);
-#endif
                     if (read == 0)
                     {
                         return sb.ToString();
@@ -733,9 +711,6 @@ namespace System.IO
                 if (fs.CanSeek && (fileLength = fs.Length) > int.MaxValue)
                 {
                     var e = new IOException(SR.IO_FileTooLong2GB);
-#if !MS_IO_REDIST
-                    ExceptionDispatchInfo.SetCurrentStackTrace(e);
-#endif
                     return Task.FromException<byte[]>(e);
                 }
 
@@ -761,11 +736,7 @@ namespace System.IO
                 byte[] bytes = new byte[count];
                 do
                 {
-#if MS_IO_REDIST
                     int n = await fs.ReadAsync(bytes, index, count - index, cancellationToken).ConfigureAwait(false);
-#else
-                    int n = await fs.ReadAsync(new Memory<byte>(bytes, index, count - index), cancellationToken).ConfigureAwait(false);
-#endif
                     if (n == 0)
                     {
                         ThrowHelper.ThrowEndOfFileException();
@@ -804,11 +775,7 @@ namespace System.IO
                     }
 
                     Debug.Assert(bytesRead < rentedArray.Length);
-#if MS_IO_REDIST
                     int n = await fs.ReadAsync(rentedArray, bytesRead, rentedArray.Length - bytesRead, cancellationToken).ConfigureAwait(false);
-#else
-                    int n = await fs.ReadAsync(rentedArray.AsMemory(bytesRead), cancellationToken).ConfigureAwait(false);
-#endif
                     if (n == 0)
                     {
                         return rentedArray.AsSpan(0, bytesRead).ToArray();
@@ -838,13 +805,8 @@ namespace System.IO
 
             static async Task Core(string path, byte[] bytes, CancellationToken cancellationToken)
             {
-#if MS_IO_REDIST
                 using FileStream fs = new FileStream(path, FileMode.Create, FileAccess.Write, FileShare.Read, 1, FileOptions.Asynchronous | FileOptions.SequentialScan);
                 await fs.WriteAsync(bytes, 0, bytes.Length, cancellationToken).ConfigureAwait(false);
-#else
-                using SafeFileHandle sfh = OpenHandle(path, FileMode.Create, FileAccess.Write, FileShare.Read, FileOptions.Asynchronous | FileOptions.SequentialScan);
-                await RandomAccess.WriteAtOffsetAsync(sfh, bytes, 0, cancellationToken).ConfigureAwait(false);
-#endif
             }
         }
 
@@ -924,7 +886,6 @@ namespace System.IO
 
         private static async Task InternalWriteAllTextAsync(StreamWriter sw, string contents, CancellationToken cancellationToken)
         {
-#if MS_IO_REDIST
             char[]? buffer = null;
             try
             {
@@ -950,13 +911,6 @@ namespace System.IO
                     ArrayPool<char>.Shared.Return(buffer);
                 }
             }
-#else
-            using (sw)
-            {
-                await sw.WriteAsync(contents.AsMemory(), cancellationToken).ConfigureAwait(false);
-                await sw.FlushAsync().ConfigureAwait(false);
-            }
-#endif
         }
 
         public static Task AppendAllTextAsync(string path, string? contents, CancellationToken cancellationToken = default(CancellationToken))

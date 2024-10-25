@@ -1,19 +1,14 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
+using System;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
+using System.IO;
 using System.Runtime.InteropServices;
 using System.Text;
 
-#if MS_IO_REDIST
-using System;
-using System.IO;
-
 namespace Microsoft.IO
-#else
-namespace System.IO
-#endif
 {
     // Provides methods for processing file system strings in a cross-platform manner.
     // Most of the methods don't do a complete parsing (such as examining a UNC hostname),
@@ -77,15 +72,9 @@ namespace System.IO
             }
 
             ReadOnlySpan<char> subpath = path.AsSpan(0, subLength);
-#if MS_IO_REDIST
             return extension.Length != 0 && extension[0] == '.' ?
                 StringExtensions.Concat(subpath, extension.AsSpan()) :
                 StringExtensions.Concat(subpath, ".".AsSpan(), extension.AsSpan());
-#else
-            return extension.StartsWith('.') ?
-                string.Concat(subpath, extension) :
-                string.Concat(subpath, ".", extension);
-#endif
         }
 
         /// <summary>
@@ -253,11 +242,7 @@ namespace System.IO
             byte* pKey = stackalloc byte[KeyLength];
             Interop.GetRandomBytes(pKey, KeyLength);
 
-#if MS_IO_REDIST
             return StringExtensions.Create(
-#else
-            return string.Create(
-#endif
                     12, (IntPtr)pKey, (span, key) => // 12 == 8 + 1 (for period) + 3
                          Populate83FileNameFromRandomBytes((byte*)key, KeyLength, span));
         }
@@ -645,11 +630,6 @@ namespace System.IO
             bool hasSeparator = PathInternal.IsDirectorySeparator(first[first.Length - 1])
                 || PathInternal.IsDirectorySeparator(second[0]);
 
-#if !MS_IO_REDIST
-            return hasSeparator ?
-                string.Concat(first, second) :
-                string.Concat(first, PathInternal.DirectorySeparatorCharAsString, second);
-#else
             fixed (char* f = &MemoryMarshal.GetReference(first), s = &MemoryMarshal.GetReference(second))
             {
                 return StringExtensions.Create(
@@ -663,7 +643,6 @@ namespace System.IO
                         new Span<char>((char*)state.Second, state.SecondLength).CopyTo(destination.Slice(destination.Length - state.SecondLength));
                     });
             }
-#endif
         }
 
         private unsafe readonly struct Join3Payload
@@ -702,11 +681,8 @@ namespace System.IO
                 var payload = new Join3Payload(
                     f, first.Length, s, second.Length, t, third.Length,
                     (byte)(firstNeedsSeparator | secondNeedsSeparator << 1));
-#if MS_IO_REDIST
+
                 return StringExtensions.Create(
-#else
-                return string.Create(
-#endif
                     first.Length + second.Length + third.Length + firstNeedsSeparator + secondNeedsSeparator,
                     (IntPtr)(&payload),
                     static (destination, statePtr) =>
@@ -765,11 +741,8 @@ namespace System.IO
                 var payload = new Join4Payload(
                     f, first.Length, s, second.Length, t, third.Length, u, fourth.Length,
                     (byte)(firstNeedsSeparator | secondNeedsSeparator << 1 | thirdNeedsSeparator << 2));
-#if MS_IO_REDIST
+
                 return StringExtensions.Create(
-#else
-                return string.Create(
-#endif
                     first.Length + second.Length + third.Length + fourth.Length + firstNeedsSeparator + secondNeedsSeparator + thirdNeedsSeparator,
                     (IntPtr)(&payload),
                     static (destination, statePtr) =>

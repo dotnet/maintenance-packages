@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
     <TargetFramework>net472</TargetFramework>
     <PackageDescription>Downlevel support package for System.IO classes.</PackageDescription>
-    <DefineConstants>$(DefineConstants);MS_IO_REDIST</DefineConstants>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <StrongNameKeyId>Open</StrongNameKeyId>
     <CLSCompliant>false</CLSCompliant>
@@ -24,8 +24,6 @@
   <ItemGroup>
     <ProjectReference Include="..\..\System.Memory\src\System.Memory.csproj" />
     <ProjectReference Include="..\..\System.Buffers\src\System.Buffers.csproj" />
-    <!-- S.R.C.Unsafe isn't a primary but transitive dependency and this P2P makes sure that the live version is used. -->
-    <ProjectReference Include="..\..\System.Runtime.CompilerServices.Unsafe\src\System.Runtime.CompilerServices.Unsafe.ilproj" PrivateAssets="all" />
   </ItemGroup>
 
 </Project>
