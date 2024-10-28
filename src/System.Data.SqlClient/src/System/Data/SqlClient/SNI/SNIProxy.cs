@@ -566,11 +566,7 @@ namespace System.Data.SqlClient.SNI
                 ? _workingDataSource.Substring(firstIndexOfColon + 1).Trim() : _workingDataSource;
 
             // Pipe paths only allow back slashes
-#if netcoreapp
             if (_dataSourceAfterTrimmingProtocol.Contains('/')) // string.Contains(char) is .NetCore2.1+ specific
-#else
-            if (_dataSourceAfterTrimmingProtocol.Contains("/"))
-#endif
             {
                 if (ConnectionProtocol == DataSource.Protocol.None)
                     ReportSNIError(SNIProviders.INVALID_PROV);

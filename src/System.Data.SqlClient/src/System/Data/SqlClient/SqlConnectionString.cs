@@ -56,9 +56,7 @@ namespace System.Data.SqlClient
             internal const string Application_Name = "application name";
             internal const string AsynchronousProcessing = "asynchronous processing";
             internal const string AttachDBFilename = "attachdbfilename";
-#if netcoreapp
             internal const string PoolBlockingPeriod = "poolblockingperiod";
-#endif
             internal const string Connect_Timeout = "connect timeout";
             internal const string Connection_Reset = "connection reset";
             internal const string Context_Connection = "context connection";
@@ -220,9 +218,7 @@ namespace System.Data.SqlClient
             }
 
             _integratedSecurity = ConvertValueToIntegratedSecurity();
-#if netcoreapp
             _poolBlockingPeriod = ConvertValueToPoolBlockingPeriod();
-#endif
             _encrypt = ConvertValueToBoolean(KEY.Encrypt, DEFAULT.Encrypt);
             _enlist = ConvertValueToBoolean(KEY.Enlist, DEFAULT.Enlist);
             _mars = ConvertValueToBoolean(KEY.MARS, DEFAULT.MARS);
@@ -420,9 +416,7 @@ namespace System.Data.SqlClient
             _userInstance = userInstance;
             _connectTimeout = connectionOptions._connectTimeout;
             _loadBalanceTimeout = connectionOptions._loadBalanceTimeout;
-#if netcoreapp
             _poolBlockingPeriod = connectionOptions._poolBlockingPeriod;
-#endif
             _maxPoolSize = connectionOptions._maxPoolSize;
             _minPoolSize = connectionOptions._minPoolSize;
             _multiSubnetFailover = connectionOptions._multiSubnetFailover;
@@ -504,9 +498,7 @@ namespace System.Data.SqlClient
                     { KEY.Application_Name, KEY.Application_Name },
                     { KEY.AsynchronousProcessing, KEY.AsynchronousProcessing },
                     { KEY.AttachDBFilename, KEY.AttachDBFilename },
-#if netcoreapp
                     { KEY.PoolBlockingPeriod, KEY.PoolBlockingPeriod},
-#endif
                     { KEY.Connect_Timeout, KEY.Connect_Timeout },
                     { KEY.Connection_Reset, KEY.Connection_Reset },
                     { KEY.Context_Connection, KEY.Context_Connection },
