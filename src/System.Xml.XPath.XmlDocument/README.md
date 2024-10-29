@@ -4,7 +4,8 @@ Provides extension methods that add System.Xml.XPath support to the System.Xml.X
 
 ## Commonly Used Types
 
-- System.Xml.XPath.XmlDocumentExtensions
+- System.Xml.XPath.XmlDocumentXPathExtensions
+
 
 ## Contribution bar
 
