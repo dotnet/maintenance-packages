@@ -15,7 +15,9 @@ namespace System.Data.SqlClient.Tests
         [InlineData("Test combination of Access Token and User Id", new object[] { "UID", "sampleUserId" })]
         [InlineData("Test combination of Access Token and Password", new object[] { "PWD", "samplePassword" })]
         [InlineData("Test combination of Access Token and Credentials", new object[] { "sampleUserId" })]
+#pragma warning disable xUnit1026 // Theory methods should use all of their parameters
         public void InvalidCombinationOfAccessToken(string description, object[] Params)
+#pragma warning restore xUnit1026 // Theory methods should use all of their parameters
         {
             _builder = new SqlConnectionStringBuilder
             {

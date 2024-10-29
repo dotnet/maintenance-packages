@@ -100,19 +100,19 @@ namespace System.Data.SqlClient.ManualTesting.Tests
         }
 
         [ConditionalFact(typeof(DataTestUtility),nameof(DataTestUtility.AreConnStringsSetup))]
-        public static void TimeoutCancel()
+        public static void TimeoutCancel1()
         {
             TimeoutCancel(s_connStr);
         }
 
         [ConditionalFact(typeof(DataTestUtility),nameof(DataTestUtility.AreConnStringsSetup))]
-        public static void CancelAndDisposePreparedCommand()
+        public static void CancelAndDisposePreparedCommand1()
         {
             CancelAndDisposePreparedCommand(s_connStr);
         }
 
         [ConditionalFact(typeof(DataTestUtility),nameof(DataTestUtility.AreConnStringsSetup))]
-        public static void TimeOutDuringRead()
+        public static void TimeOutDuringRead1()
         {
             TimeOutDuringRead(s_connStr);
         }
@@ -260,7 +260,7 @@ namespace System.Data.SqlClient.ManualTesting.Tests
                     proxy.PauseCopying();
                     string errorMessage = SystemDataResourceManager.Instance.SQL_Timeout;
                     Exception exception = Assert.Throws<SqlException>(() => reader.GetValue(0));
-                    Assert.True(exception.Message.Contains(errorMessage));
+                    Assert.Contains(errorMessage, exception.Message);
 
                     // Return everything to normal and close
                     proxy.ResumeCopying();

@@ -603,12 +603,8 @@ namespace System.Data.SqlClient
         internal void SetGuid(Guid value)
         {
             Debug.Assert(SmiXetterAccessMap.IsSetterAccessValid(_metaData, SmiXetterTypeCode.XetGuid));
-#if netcoreapp
             Span<byte> bytes = stackalloc byte[16];
             value.TryWriteBytes(bytes);
-#else
-            byte[] bytes = value.ToByteArray();
-#endif
             Debug.Assert(SmiMetaData.DefaultUniqueIdentifier.MaxLength == bytes.Length, "Invalid length for guid bytes: " + bytes.Length);
 
             if (SqlDbType.Variant == _metaData.SqlDbType)
@@ -621,11 +617,7 @@ namespace System.Data.SqlClient
 
                 _stateObj.WriteByte((byte)_metaData.MaxLength);
             }
-#if netcoreapp
             _stateObj.WriteByteSpan(bytes);
-#else
-            _stateObj.WriteByteArray(bytes, bytes.Length, 0);
-#endif
         }
 
         // valid for SqlDbType.Time

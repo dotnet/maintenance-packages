@@ -43,14 +43,14 @@ namespace System.Data.SqlClient.Tests
             }
 
             record.SetBoolean(0, true);
-            Assert.Equal(true, record.GetBoolean(0));
+            Assert.True(record.GetBoolean(0));
 
             record.SetByte(1, 1);
             Assert.Equal(1, record.GetByte(1));
 
             byte[] bb1 = new byte[] { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
             byte[] bb2 = new byte[5];
-            record.SetSqlBinary(2, new SqlBinary(new byte[0]));
+            record.SetSqlBinary(2, new SqlBinary(Array.Empty<byte>()));
             record.SetBytes(2, 0, bb1, 0, 3);
             record.SetBytes(2, 2, bb1, 6, 3);
 

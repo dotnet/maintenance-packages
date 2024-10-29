@@ -36,6 +36,7 @@ namespace Microsoft.SqlServer.TDS.Authentication
         /// Initialization constructor.
         /// </summary>
         /// <param name="token">Token</param>
+        /// <param name="nonce"></param>
         public TDSFedAuthToken(byte[] token, byte[] nonce) :
             this()
         {

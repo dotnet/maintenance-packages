@@ -67,7 +67,7 @@ namespace System.Data.SqlClient
         //
         // LOCKS: don't update _nextTimeout outside of the _dependencyHash.SyncRoot lock.
 
-        private bool _sqlDependencyTimeOutTimerStarted = false;
+        private bool _sqlDependencyTimeOutTimerStarted;
         // Next timeout for any of the dependencies in the dependency table.
         private DateTime _nextTimeout;
         // Timer to periodically check the dependencies in the table and see if anyone needs
@@ -91,6 +91,9 @@ namespace System.Data.SqlClient
 
         //  When remoted across appdomains, MarshalByRefObject links by default time out if there is no activity 
         //  within a few minutes.  Add this override to prevent marshaled links from timing out.
+#if NET6_0_OR_GREATER
+        [Obsolete]
+#endif
         public override object InitializeLifetimeService()
         {
             return null;

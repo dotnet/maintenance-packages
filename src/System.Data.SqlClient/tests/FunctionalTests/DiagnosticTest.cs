@@ -463,7 +463,7 @@ namespace System.Data.SqlClient.Tests
             }).Dispose();
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotWindowsSubsystemForLinux))] // [ActiveIssue(11057)]
+        [Fact] // [ActiveIssue(11057)]
         [SkipOnTargetFramework(TargetFrameworkMonikers.NetFramework,  "Feature not available on Framework")]
         public void ConnectionOpenErrorTest()
         {
@@ -497,7 +497,7 @@ namespace System.Data.SqlClient.Tests
             }).Dispose();
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotWindowsSubsystemForLinux))] // [ActiveIssue(11057)]
+        [Fact] // [ActiveIssue(11057)]
         [SkipOnTargetFramework(TargetFrameworkMonikers.NetFramework,  "Feature not available on Framework")]
         public void ConnectionOpenAsyncErrorTest()
         {
