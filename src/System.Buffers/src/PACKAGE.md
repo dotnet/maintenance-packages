@@ -33,8 +33,8 @@ The main types provided by this library are:
 
 ArrayPool is shipped as part of the shared framework starting with .NET Core 3.1.
 
-## Feedback & Contributing
+## License
 
 <!-- How to provide feedback on this package and contribute to it -->
 
-System.Buffers is released as open source under the [MIT license](https://licenses.nuget.org/MIT). Bug reports and contributions are welcome at [the GitHub repository](https://github.com/dotnet/runtime).
+System.Buffers is released as open source under the [MIT license](https://licenses.nuget.org/MIT).

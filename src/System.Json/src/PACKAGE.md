@@ -39,8 +39,8 @@ The main types provided by this library are:
 
 - https://www.nuget.org/packages/System.Text.Json
 
-## Feedback & Contributing
+## License
 
 <!-- How to provide feedback on this package and contribute to it -->
 
-System.Json is released as open source under the [MIT license](https://licenses.nuget.org/MIT). Bug reports and contributions are welcome at [the GitHub repository](https://github.com/dotnet/runtime).
+System.Json is released as open source under the [MIT license](https://licenses.nuget.org/MIT).

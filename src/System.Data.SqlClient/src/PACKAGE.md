@@ -1,25 +1,10 @@
 ## About
 
-<!-- A description of the package and where one can find more documentation -->
+The legacy .NET Data Provider for SQL Server. These classes provide access to versions of SQL Server and encapsulate database-specific protocols, including tabular data stream (TDS).
 
-Provides the .NET Data Provider for SQL Server. These classes provide access to versions of SQL Server and encapsulate database-specific protocols, including tabular data stream (TDS).
-
-System.Data.SqlClient is deprecated. Please use Microsoft.Data.SqlClient instead.
-
-## Key Features
-
-<!-- The key features of this package -->
-
-*
-
-## How to Use
-
-<!-- A compelling example on how to use this package with code, as well as any specific guidelines for when to use the package -->
-
+**System.Data.SqlClient is deprecated. Please use Microsoft.Data.SqlClient instead.**
 
 ## Main Types
-
-<!-- The main types provided in this library -->
 
 The main types provided by this library are:
 
@@ -43,12 +28,8 @@ The main types provided by this library are:
 
 ## Related Packages
 
-<!-- The related packages associated with this package -->
-
 - https://www.nuget.org/packages/Microsoft.Data.SqlClient
 
-## Feedback & Contributing
+## License
 
-<!-- How to provide feedback on this package and contribute to it -->
-
-System.Data.SqlClient is released as open source under the [MIT license](https://licenses.nuget.org/MIT). Bug reports and contributions are welcome at [the GitHub repository](https://github.com/dotnet/runtime).
+System.Data.SqlClient is released as open source under the [MIT license](https://licenses.nuget.org/MIT).

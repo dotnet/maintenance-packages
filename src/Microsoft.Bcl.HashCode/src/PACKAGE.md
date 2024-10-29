@@ -1,18 +1,14 @@
 ## About
 
-<!-- A description of the package and where one can find more documentation -->
-
 Provides the HashCode type for .NET Standard 2.0. This package is not required starting with .NET Standard 2.1 and .NET Core 3.0.
+
+The HashCode type is shipped as part of the shared framework starting with .NET 5.
 
 ## Key Features
 
-<!-- The key features of this package -->
-
-The HashCode type combines the hash code for multiple values into a single hash code.
+The HashCode type offered in this assembly combines the hash code for multiple values into a single hash code.
 
 ## How to Use
-
-<!-- A compelling example on how to use this package with code, as well as any specific guidelines for when to use the package -->
 
 The static methods in this class combine the default hash codes of _up to eight_ values.
 
@@ -233,8 +229,6 @@ class Program
 
 ## Main Types
 
-<!-- The main types provided in this library -->
-
 The main types provided by this library are:
 
 - System.HashCode
@@ -244,14 +238,6 @@ The main types provided by this library are:
 - [Security design doc for System.HashCode](https://github.com/dotnet/runtime/tree/main/docs/design/security/System.HashCode.md)
 - API reference can be found in: https://learn.microsoft.com/en-us/dotnet/api/system.hashcode
 
-## Related Packages
+## License
 
-<!-- The related packages associated with this package -->
-
-HashCode is shipped as part of the shared framework starting with .NET 5.
-
-## Feedback & Contributing
-
-<!-- How to provide feedback on this package and contribute to it -->
-
-Microsoft.Bcl.HashCode is released as open source under the [MIT license](https://licenses.nuget.org/MIT). Bug reports and contributions are welcome at [the GitHub repository](https://github.com/dotnet/runtime).
+Microsoft.Bcl.HashCode is released as open source under the [MIT license](https://licenses.nuget.org/MIT).

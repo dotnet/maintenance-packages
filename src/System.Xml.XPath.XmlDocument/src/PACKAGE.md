@@ -31,8 +31,8 @@ The main types provided by this library are:
 
 <!-- The related packages associated with this package -->
 
-## Feedback & Contributing
+## License
 
 <!-- How to provide feedback on this package and contribute to it -->
 
-<AssemblyName> is released as open source under the [MIT license](https://licenses.nuget.org/MIT). Bug reports and contributions are welcome at [the GitHub repository](https://github.com/dotnet/runtime).
+<AssemblyName> is released as open source under the [MIT license](https://licenses.nuget.org/MIT).
