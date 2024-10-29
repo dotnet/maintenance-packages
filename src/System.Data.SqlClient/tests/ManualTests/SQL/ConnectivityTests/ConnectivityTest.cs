@@ -98,7 +98,7 @@ namespace System.Data.SqlClient.ManualTesting.Tests
         {
             SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder(DataTestUtility.TcpConnStr);
             string sqlProviderName = builder.ApplicationName;
-            string sqlProviderProcessID = System.Diagnostics.Process.GetCurrentProcess().Id.ToString();
+            string sqlProviderProcessID = Environment.ProcessId.ToString();
 
             using (SqlConnection sqlConnection = new SqlConnection(builder.ConnectionString))
             {

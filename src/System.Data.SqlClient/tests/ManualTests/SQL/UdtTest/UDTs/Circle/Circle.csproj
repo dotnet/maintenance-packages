@@ -1,7 +1,12 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>$(NetFrameworkMinimum)</TargetFramework>
+    <TargetFrameworks>$(NetMinimum)-unix;$(NetMinimum)-windows</TargetFrameworks>
+    <NoWarn>$(NoWarn);CA2208;</NoWarn>
   </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\..\..\src\System.Data.SqlClient.csproj" />
+  </ItemGroup>
 
 </Project>

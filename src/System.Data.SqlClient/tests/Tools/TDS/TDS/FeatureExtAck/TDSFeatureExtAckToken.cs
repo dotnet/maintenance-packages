@@ -29,7 +29,7 @@ namespace Microsoft.SqlServer.TDS.FeatureExtAck
         /// <summary>
         /// Initialization constructor.
         /// </summary>
-        /// <param name="source"></param>
+        /// <param name="options"></param>
         public TDSFeatureExtAckToken(params TDSFeatureExtAckOption[] options) :
             this()
         {
