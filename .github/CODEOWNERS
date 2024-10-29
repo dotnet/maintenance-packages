@@ -1,7 +1,6 @@
 # Users referenced in this file will automatically be requested as reviewers for PRs that modify the given paths.
 # See https://help.github.com/articles/about-code-owners/
 
-/eng/SourceBuild*                                                                 @dotnet/source-build
 /src/Microsoft.Bcl.HashCode                                                       @dotnet/area-system-runtime
 /src/Microsoft.IO.Redist                                                          @dotnet/area-system-io
 /src/System.Buffers                                                               @dotnet/area-system-buffers
