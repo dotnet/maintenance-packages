@@ -14,7 +14,7 @@ namespace System.Data.SqlClient.ManualTesting.Tests
 {
     public class AdapterTest
     {
-        private char[] _appendNewLineIndentBuffer = new char[0];
+        private char[] _appendNewLineIndentBuffer = Array.Empty<char>();
 
         // data value and server consts
         private const string MagicName = "Magic";

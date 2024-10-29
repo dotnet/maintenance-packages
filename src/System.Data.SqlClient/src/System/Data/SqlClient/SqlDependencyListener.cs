@@ -22,7 +22,9 @@ using System.Diagnostics.CodeAnalysis;
 internal class SqlDependencyProcessDispatcher : MarshalByRefObject
 {
     // Class to contain/store all relevant information about a connection that waits on the SSB queue.
+#pragma warning disable CA1001 // Types that own disposable fields should be disposable
     private class SqlConnectionContainer
+#pragma warning restore CA1001 // Types that own disposable fields should be disposable
     {
         private SqlConnection _con;
         private SqlCommand _com;
@@ -34,20 +36,20 @@ internal class SqlDependencyProcessDispatcher : MarshalByRefObject
         private string _beginConversationQuery;
         private string _endConversationQuery;
         private string _concatQuery;
-        private readonly int _defaultWaitforTimeout = 60000; // Waitfor(Receive) timeout (milleseconds)
+        private readonly int _defaultWaitforTimeout; // Waitfor(Receive) timeout (milleseconds)
         private string _escapedQueueName;
         private string _sprocName;
         private string _dialogHandle;
         private string _cachedServer;
         private string _cachedDatabase;
-        private volatile bool _errorState = false;
-        private volatile bool _stop = false; // Can probably simplify this slightly - one bool instead of two.
-        private volatile bool _stopped = false;
-        private volatile bool _serviceQueueCreated = false;
-        private int _startCount = 0;     // Each container class is called once per Start() - we refCount 
+        private volatile bool _errorState;
+        private volatile bool _stop; // Can probably simplify this slightly - one bool instead of two.
+        private volatile bool _stopped;
+        private volatile bool _serviceQueueCreated;
+        private int _startCount;     // Each container class is called once per Start() - we refCount 
                                          // to track when we can dispose.
-        private Timer _retryTimer = null;
-        private Dictionary<string, int> _appDomainKeyHash = null;  // AppDomainKey->Open RefCount
+        private Timer _retryTimer;
+        private Dictionary<string, int> _appDomainKeyHash;  // AppDomainKey->Open RefCount
 
         // Constructor
 
@@ -75,10 +77,6 @@ internal class SqlDependencyProcessDispatcher : MarshalByRefObject
                 // Always use ConnectionStringBuilder since in default case it is different from the 
                 // connection string used in the hashHelper.
                 _con = new SqlConnection(_hashHelper.ConnectionStringBuilder.ConnectionString); // Create connection and open.
-
-                // Assert permission for this particular connection string since it differs from the user passed string
-                // which we have already demanded upon.  
-                SqlConnectionString connStringObj = (SqlConnectionString)_con.ConnectionOptions;
 
                 _con.Open();
 
@@ -207,7 +205,7 @@ internal class SqlDependencyProcessDispatcher : MarshalByRefObject
                     int value = _appDomainKeyHash[appDomainKey];
                     Debug.Assert(value > 0, "Why is value 0 or less?");
 
-                    bool ignored = false;
+                    bool ignored;
                     while (value > 0)
                     {
                         Debug.Assert(!_stopped, "We should not yet be stopped!");
@@ -400,7 +398,9 @@ internal class SqlDependencyProcessDispatcher : MarshalByRefObject
                     {
                         if (!ADP.IsCatchableExceptionType(e))
                         {
+#pragma warning disable CA2219 // Do not raise exceptions in finally clauses
                             throw;
+#pragma warning restore CA2219 // Do not raise exceptions in finally clauses
                         }
                         ADP.TraceExceptionWithoutRethrow(e); // Discard failure, but trace for now.
                     }
@@ -886,7 +886,7 @@ internal class SqlDependencyProcessDispatcher : MarshalByRefObject
         {
             using (XmlReader xmlReader = xmlMessage.CreateReader())
             {
-                string keyvalue = string.Empty;
+                string keyvalue;
 
                 MessageAttributes messageAttributes = MessageAttributes.None;
 
@@ -894,7 +894,7 @@ internal class SqlDependencyProcessDispatcher : MarshalByRefObject
                 SqlNotificationInfo info = SqlNotificationInfo.Unknown;
                 SqlNotificationSource source = SqlNotificationSource.Unknown;
 
-                string key = string.Empty;
+                string key;
 
                 // Move to main node, expecting "QueryNotification".
                 xmlReader.Read();
@@ -1087,7 +1087,7 @@ internal class SqlDependencyProcessDispatcher : MarshalByRefObject
         {
             SqlConnectionContainerHashHelper temp = (SqlConnectionContainerHashHelper)value;
 
-            bool result = false;
+            bool result;
 
             // Ignore SqlConnectionStringBuilder, since it is present largely for debug purposes.
 
@@ -1160,7 +1160,7 @@ internal class SqlDependencyProcessDispatcher : MarshalByRefObject
 
     // SqlDependencyProcessDispatcher static members
 
-    private static SqlDependencyProcessDispatcher s_staticInstance = new SqlDependencyProcessDispatcher(null);
+    private static SqlDependencyProcessDispatcher s_staticInstance;
 
     // Dictionaries used as maps.
     private Dictionary<SqlConnectionContainerHashHelper, SqlConnectionContainer> _connectionContainers;                 // NT_ID+ConStr+Service->Container
@@ -1228,6 +1228,9 @@ internal class SqlDependencyProcessDispatcher : MarshalByRefObject
     }
 
     // Needed for remoting to prevent lifetime issues and default GC cleanup.
+#if NET6_0_OR_GREATER
+    [Obsolete]
+#endif
     public override object InitializeLifetimeService()
     {
         return null;
@@ -1391,7 +1394,7 @@ internal class SqlDependencyProcessDispatcher : MarshalByRefObject
 
         bool started = false;
 
-        SqlConnectionContainer container = null;
+        SqlConnectionContainer container;
         lock (_connectionContainers)
         {
             if (!_connectionContainers.ContainsKey(hashHelper))

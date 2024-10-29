@@ -72,6 +72,7 @@ namespace Microsoft.SqlServer.TDS.FeatureExtAck
         /// <summary>
         /// Inflating constructor
         /// </summary>
+        /// <param name="featureID"></param>
         /// <param name="source"></param>
         public TDSFeatureExtAckGenericOption(TDSFeatureID featureID, Stream source) :
             this(source)

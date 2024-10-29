@@ -38,6 +38,9 @@
     <PropertyGroup>
       <RunSettingsFilePath>$(RunSettingsOutputFilePath)</RunSettingsFilePath>
       <VSTestRunSettingsFile>$(RunSettingsFilePath)</VSTestRunSettingsFile>
+
+      <!-- Workaround for https://github.com/dotnet/arcade/pull/15199. Pass inner build specific runsettings file in but only if the project multi targets. -->
+      <TestRunnerAdditionalArguments Condition="'$(TargetFrameworks)' != ''">--settings "$(RunSettingsFilePath)"</TestRunnerAdditionalArguments>
     </PropertyGroup>
   </Target>
 </Project>

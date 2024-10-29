@@ -1,12 +1,9 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
-// See the LICENSE file in the project root for more information.
 
 using System;
 using System.Data.SqlTypes;
 using System.Globalization;
-
-using Microsoft.SqlServer.Server;
 
 namespace Microsoft.Samples.SqlServer
 {
@@ -235,6 +232,16 @@ namespace Microsoft.Samples.SqlServer
                 return 1;
 
             return this.ToString().CompareTo(s.ToString());
+        }
+
+        public static bool operator <=(Utf8String left, Utf8String right)
+        {
+            return ReferenceEquals(left, null) || left.CompareTo(right) <= 0;
+        }
+
+        public static bool operator >=(Utf8String left, Utf8String right)
+        {
+            return ReferenceEquals(left, null) ? ReferenceEquals(right, null) : left.CompareTo(right) >= 0;
         }
 
         #endregion
