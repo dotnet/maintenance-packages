@@ -2,6 +2,17 @@
 
 Downlevel support package for System.IO classes.
 
+## Commonly Used Types
+
+- Microsoft.IO.Directory
+- Microsoft.IO.DirectoryInfo
+- Microsoft.IO.EnumerationOptions
+- Microsoft.IO.File
+- Microsoft.IO.FileInfo
+- Microsoft.IO.FileSystemEnumerable
+- Microsoft.IO.FileSystemEnumerator
+- Microsoft.IO.FileSystemEntry
+
 ## Contribution bar
 
 - [We only consider fixes that unblock critical issues](https://github.com/dotnet/runtime/blob/main/src/libraries/README.md#primary-bar)
