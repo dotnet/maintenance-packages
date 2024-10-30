@@ -5,5 +5,31 @@
     <AllowEmptySignList>true</AllowEmptySignList>
     <AllowEmptySignPostBuildList>true</AllowEmptySignPostBuildList>
   </PropertyGroup>
+  
+  <ItemGroup>
+    <!--
+      Replace the default items to sign with the specific set we want. This allows the build to call
+      Arcade's Sign.proj multiple times for different sets of files as the build progresses.
+    -->
+    <ItemsToSign Remove="@(ItemsToSign)" />
+
+    <!-- Exclude symbol packages from getting a NuGet signature. These are never pushed to NuGet.org or
+         other feeds (in fact, that have identical identity to their non-symbol variant) -->
+    <DownloadedSymbolPackages Include="$(ArtifactsDir)**\*.symbols.nupkg" />
+    <DownloadedSymbolPackagesWithoutPaths Include="@(DownloadedSymbolPackages->'%(Filename)%(Extension)')" />
+    <FileSignInfo Include="@(DownloadedSymbolPackagesWithoutPaths->Distinct())" CertificateName="None" />
+    
+    <!-- Update existing defaults from arcade that were using Microsoft400 to use the .NET-specific cert -->
+    <FileExtensionSignInfo Update="@(FileExtensionSignInfo->WithMetadataValue('CertificateName','Microsoft400'))" CertificateName="MicrosoftDotNet500" />
+    <StrongNameSignInfo Update="@(StrongNameSignInfo->WithMetadataValue('CertificateName','Microsoft400'))" CertificateName="MicrosoftDotNet500" />
+    <FileSignInfo Update="@(FileSignInfo->WithMetadataValue('CertificateName','Microsoft400'))" CertificateName="MicrosoftDotNet500" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(IsPackable)' == 'true'">
+    <ItemsToSignWithPaths Include="$(ArtifactsDir)**\*.nupkg" />
+    <ItemsToSignWithoutPaths Include="@(ItemsToSignWithPaths->'%(Filename)%(Extension)')" />
+    <ItemsToSignPostBuild Include="@(ItemsToSignWithoutPaths->Distinct())" Condition="'$(PostBuildSign)' == 'true'" />
+    <ItemsToSign Include="@(ItemsToSignWithPaths->Distinct())" Condition="'$(PostBuildSign)' != 'true'" />
+  </ItemGroup>
 
 </Project>
