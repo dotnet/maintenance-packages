@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>$(NetMinimum);$(NetMinimum)-unix;$(NetMinimum)-windows;$(NetCurrent);$(NetCurrent)-unix;$(NetCurrent)-windows;netstandard2.0;$(NetFrameworkMinimum)</TargetFrameworks>
+    <TargetFrameworks>$(NetCurrent)-windows;$(NetCurrent)-unix;$(NetCurrent);$(NetMinimum)-windows;$(NetMinimum)-unix;$(NetMinimum);netstandard2.0;$(NetFrameworkMinimum)</TargetFrameworks>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <StrongNameKeyId>Microsoft</StrongNameKeyId>
     <AssemblyVersion>4.6.1.6</AssemblyVersion> <!-- NO-INCREMENT: This version is frozen for .NET Standard and .NETCoreApp because the assembly ships inbox. -->
@@ -519,6 +519,10 @@
   <ItemGroup>
     <Compile Include="System.Data.SqlClient.TypeForwards.cs" />
   </ItemGroup>
+
+  <Target Name="CheckTFMs" BeforeTargets="CoreCompile" Condition="'$(NetMinimum)' == 'net8.0'">
+    <Error Text="NetMinimum got updated to net8.0. Remove the NetCurrent TFMs from this project and the test projects." />
+  </Target>
 
   <Import Project="GenerateThisAssemblyCs.targets" Condition="'$(IsFunctionalAssembly)' == 'true'" />
 
