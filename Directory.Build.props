@@ -21,6 +21,9 @@
     <BeforeTargetFrameworkInferenceTargets>$(RepositoryEngineeringDir)BeforeTargetFrameworkInference.targets</BeforeTargetFrameworkInferenceTargets>
     <!-- Only upgrade NuGetAudit warnings to errors for official builds. -->
     <WarningsNotAsErrors Condition="'$(OfficialBuild)' != 'true'">$(WarningsNotAsErrors);NU1901;NU1902;NU1903;NU1904</WarningsNotAsErrors>
+    <IsSourceProject Condition="'$(IsSourceProject)' == '' and
+                                '$(IsTestProject)' != 'true' and
+                                '$(UsingMicrosoftTraversalSdk)' != 'true'">true</IsSourceProject>
     <!-- Suppress "CS1591 - Missing XML comment for publicly visible type or member" in tests. -->
     <NoWarn Condition="'$(IsTestProject)' == 'true'">$(NoWarn);CS1573</NoWarn>
   </PropertyGroup>

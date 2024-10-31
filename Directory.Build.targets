@@ -15,12 +15,6 @@
     <DefaultExcludesInProjectFolder Condition="'$(TargetFrameworkIdentifier)' != '.NETFramework'">$(DefaultExcludesInProjectFolder);**/*.netframework$(DefaultLanguageSourceExtension)</DefaultExcludesInProjectFolder>
   </PropertyGroup>
 
-  <PropertyGroup>
-    <IsSourceProject Condition="'$(IsSourceProject)' == '' and
-                                '$(IsTestProject)' != 'true' and
-                                '$(UsingMicrosoftTraversalSdk)' != 'true'">true</IsSourceProject>
-  </PropertyGroup>
-
   <PropertyGroup Condition="'$(IsTestProject)' == 'true'">
     <!-- Don't run .NET Framework only tests on non Windows. -->
     <SkipTests Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework' and '$(OS)' != 'Windows_NT'">true</SkipTests>
@@ -30,7 +24,7 @@
     <!-- Unsafe code is required by PlatformDetection. -->
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
-  
+
   <PropertyGroup Condition="'$(IsSourceProject)' == 'true'">
     <GenerateDocumentationFile>false</GenerateDocumentationFile>
     <CLSCompliant Condition="'$(CLSCompliant)' == '' and '$(MSBuildProjectExtension)' != '.ilproj'">true</CLSCompliant>
