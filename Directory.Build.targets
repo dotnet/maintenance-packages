@@ -19,7 +19,6 @@
     <IsSourceProject Condition="'$(IsSourceProject)' == '' and
                                 '$(IsTestProject)' != 'true' and
                                 '$(UsingMicrosoftTraversalSdk)' != 'true'">true</IsSourceProject>
-    <CLSCompliant Condition="'$(CLSCompliant)' == '' and '$(IsSourceProject)' == 'true' and '$(MSBuildProjectExtension)' != '.ilproj'">true</CLSCompliant>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(IsTestProject)' == 'true'">
@@ -34,6 +33,7 @@
   
   <PropertyGroup Condition="'$(IsSourceProject)' == 'true'">
     <GenerateDocumentationFile>false</GenerateDocumentationFile>
+    <CLSCompliant Condition="'$(CLSCompliant)' == '' and '$(MSBuildProjectExtension)' != '.ilproj'">true</CLSCompliant>
     <DocumentationFile>$(MSBuildProjectDirectory)\$(AssemblyName).xml</DocumentationFile>
 
     <Description Condition="'$(Description)' == ''">$(AssemblyName)</Description>
