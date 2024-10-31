@@ -28,8 +28,6 @@
   <PropertyGroup Condition="'$(IsSourceProject)' == 'true'">
     <GenerateDocumentationFile>false</GenerateDocumentationFile>
     <CLSCompliant Condition="'$(CLSCompliant)' == '' and '$(MSBuildProjectExtension)' != '.ilproj'">true</CLSCompliant>
-    <DocumentationFile>$(MSBuildProjectDirectory)\$(AssemblyName).xml</DocumentationFile>
-
     <Description Condition="'$(Description)' == ''">$(AssemblyName)</Description>
     <PackageDescription Condition="'$(PackageDescription)' == ''">$(AssemblyName)</PackageDescription>
   </PropertyGroup>
@@ -50,8 +48,6 @@
   </ItemGroup>
 
   <ItemGroup Condition="'$(IsSourceProject)' == 'true'">
-    <None Include="$(DocumentationFile)" CopyToOutputDirectory="PreserveNewest" />
-
     <AssemblyAttribute Include="System.CLSCompliantAttribute" Condition="'$(CLSCompliant)' == 'true'">
       <_Parameter1>true</_Parameter1>
     </AssemblyAttribute>
