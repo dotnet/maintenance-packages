@@ -26,7 +26,7 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(IsSourceProject)' == 'true'">
-    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+    <XmlPath>$(MSBuildProjectDirectory)\$(AssemblyName).xml</XmlPath>
     <CLSCompliant Condition="'$(CLSCompliant)' == '' and '$(MSBuildProjectExtension)' != '.ilproj'">true</CLSCompliant>
     <Description Condition="'$(Description)' == ''">$(AssemblyName)</Description>
     <PackageDescription Condition="'$(PackageDescription)' == ''">$(AssemblyName)</PackageDescription>
@@ -48,6 +48,8 @@
   </ItemGroup>
 
   <ItemGroup Condition="'$(IsSourceProject)' == 'true'">
+    <!-- Ensures docs xmls get copied to the artifacts bin output folder. -->
+    <None Include="$(XmlPath)" CopyToOutputDirectory="PreserveNewest" />
     <AssemblyAttribute Include="System.CLSCompliantAttribute" Condition="'$(CLSCompliant)' == 'true'">
       <_Parameter1>true</_Parameter1>
     </AssemblyAttribute>
@@ -80,5 +82,12 @@
     <None Include="$(MSBuildProjectDirectory)\**\*$(DefaultLanguageSourceExtension)"
           Exclude="$(DefaultItemExcludes);$(DefaultExcludesInProjectFolder);@(Compile)" />
   </ItemGroup>
+
+  <!-- Include docs xmls in the final packages. -->
+  <Target Name="AddDocumentationFileForPackaging" AfterTargets="DocumentationProjectOutputGroup">
+    <ItemGroup>
+      <DocumentationProjectOutputGroupOutput Include="$(XmlPath)" />
+    </ItemGroup>
+  </Target>
 
 </Project>

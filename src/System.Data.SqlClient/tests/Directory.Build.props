@@ -3,8 +3,9 @@
   <Import Project="$([MSBuild]::GetPathOfFileAbove(Directory.Build.props, $(MSBuildThisFileDirectory)..))" />
 
   <PropertyGroup>
-    <!-- Workaround: There are many .csprojs under this tests directory which do not meet the criteria of IsTestProject. -->
-    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+    <!-- Workaround: There are many .csprojs under this tests directory which do not meet
+         the criteria of IsTestProject but still meet the criteria of IsSourceProject. -->
+    <IsSourceProject>false</IsSourceProject>
   </PropertyGroup>
 
 </Project>

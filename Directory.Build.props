@@ -24,7 +24,8 @@
     <IsSourceProject Condition="'$(IsSourceProject)' == '' and
                                 '$(IsTestProject)' != 'true' and
                                 '$(UsingMicrosoftTraversalSdk)' != 'true'">true</IsSourceProject>
-    <GenerateDocumentationFile Condition="'$(IsSourceProject)' == 'true'">true</GenerateDocumentationFile>
+    <!-- Prevent generating docs xmls from triple slash. Use the commited xml files instead. -->
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
     <!-- Suppress "CS1591 - Missing XML comment for publicly visible type or member" in tests. -->
     <NoWarn Condition="'$(IsTestProject)' == 'true'">$(NoWarn);CS1573</NoWarn>
   </PropertyGroup>
