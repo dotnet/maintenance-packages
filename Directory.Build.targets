@@ -16,6 +16,8 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(IsTestProject)' == 'true'">
+      <!-- Suppress "CS1591 - Missing XML comment for publicly visible type or member" in tests. -->
+    <NoWarn>$(NoWarn);CS1573</NoWarn>
     <!-- Don't run .NET Framework only tests on non Windows. -->
     <SkipTests Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework' and '$(OS)' != 'Windows_NT'">true</SkipTests>
     <!-- Make sure the target platform identifier matches the OS for running tests. -->
@@ -26,7 +28,7 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(IsSourceProject)' == 'true'">
-    <XmlPath>$(MSBuildProjectDirectory)\$(AssemblyName).xml</XmlPath>
+    <XmlDocumentationFilePath>$(MSBuildProjectDirectory)\$(AssemblyName).xml</XmlDocumentationFilePath>
     <CLSCompliant Condition="'$(CLSCompliant)' == '' and '$(MSBuildProjectExtension)' != '.ilproj'">true</CLSCompliant>
     <Description Condition="'$(Description)' == ''">$(AssemblyName)</Description>
     <PackageDescription Condition="'$(PackageDescription)' == ''">$(AssemblyName)</PackageDescription>
@@ -49,7 +51,7 @@
 
   <ItemGroup Condition="'$(IsSourceProject)' == 'true'">
     <!-- Ensures docs xmls get copied to the artifacts bin output folder. -->
-    <None Include="$(XmlPath)" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="$(XmlDocumentationFilePath)" CopyToOutputDirectory="PreserveNewest" />
     <AssemblyAttribute Include="System.CLSCompliantAttribute" Condition="'$(CLSCompliant)' == 'true'">
       <_Parameter1>true</_Parameter1>
     </AssemblyAttribute>
@@ -86,7 +88,7 @@
   <!-- Include docs xmls in the final packages. -->
   <Target Name="AddDocumentationFileForPackaging" AfterTargets="DocumentationProjectOutputGroup">
     <ItemGroup>
-      <DocumentationProjectOutputGroupOutput Include="$(XmlPath)" />
+      <DocumentationProjectOutputGroupOutput Include="$(XmlDocumentationFilePath)" />
     </ItemGroup>
   </Target>
 
