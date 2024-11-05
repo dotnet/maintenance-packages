@@ -51,7 +51,7 @@
 
   <ItemGroup Condition="'$(IsSourceProject)' == 'true'">
     <!-- Ensures docs xmls get copied to the artifacts bin output folder. -->
-    <None Include="$(XmlDocumentationFilePath)" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="$(XmlDocumentationFilePath)" CopyToOutputDirectory="PreserveNewest" Condition="'$(GenerateDocumentationFile)' == 'false'" />
     <AssemblyAttribute Include="System.CLSCompliantAttribute" Condition="'$(CLSCompliant)' == 'true'">
       <_Parameter1>true</_Parameter1>
     </AssemblyAttribute>
@@ -86,9 +86,20 @@
   </ItemGroup>
 
   <!-- Include docs xmls in the final packages. -->
-  <Target Name="AddDocumentationFileForPackaging" AfterTargets="DocumentationProjectOutputGroup">
+  <Target Name="AddDocumentationFileForPackaging"
+          AfterTargets="DocumentationProjectOutputGroup"
+          Condition="'$(GenerateDocumentationFile)' == 'false'">
     <ItemGroup>
       <DocumentationProjectOutputGroupOutput Include="$(XmlDocumentationFilePath)" />
+    </ItemGroup>
+  </Target>
+  
+    <!-- Allow P2Ps to retrieve the DocFileItem path. -->
+  <Target Name="AnnotateTargetPathWithTargetPlatformMonikerWithDocFileItem"
+          DependsOnTargets="GetTargetPathWithTargetPlatformMoniker"
+          BeforeTargets="GetTargetPath">
+    <ItemGroup>
+      <TargetPathWithTargetPlatformMoniker DocFileItem="@(DocFileItem)" />
     </ItemGroup>
   </Target>
 
