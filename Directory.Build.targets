@@ -15,14 +15,9 @@
     <DefaultExcludesInProjectFolder Condition="'$(TargetFrameworkIdentifier)' != '.NETFramework'">$(DefaultExcludesInProjectFolder);**/*.netframework$(DefaultLanguageSourceExtension)</DefaultExcludesInProjectFolder>
   </PropertyGroup>
 
-  <PropertyGroup>
-    <IsSourceProject Condition="'$(IsSourceProject)' == '' and
-                                '$(IsTestProject)' != 'true' and
-                                '$(UsingMicrosoftTraversalSdk)' != 'true'">true</IsSourceProject>
-    <CLSCompliant Condition="'$(CLSCompliant)' == '' and '$(IsSourceProject)' == 'true' and '$(MSBuildProjectExtension)' != '.ilproj'">true</CLSCompliant>
-  </PropertyGroup>
-
   <PropertyGroup Condition="'$(IsTestProject)' == 'true'">
+      <!-- Suppress "CS1591 - Missing XML comment for publicly visible type or member" in tests. -->
+    <NoWarn>$(NoWarn);CS1573</NoWarn>
     <!-- Don't run .NET Framework only tests on non Windows. -->
     <SkipTests Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework' and '$(OS)' != 'Windows_NT'">true</SkipTests>
     <!-- Make sure the target platform identifier matches the OS for running tests. -->
@@ -31,11 +26,10 @@
     <!-- Unsafe code is required by PlatformDetection. -->
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
-  
-  <PropertyGroup Condition="'$(IsSourceProject)' == 'true'">
-    <GenerateDocumentationFile>false</GenerateDocumentationFile>
-    <DocumentationFile>$(MSBuildProjectDirectory)\$(AssemblyName).xml</DocumentationFile>
 
+  <PropertyGroup Condition="'$(IsSourceProject)' == 'true'">
+    <XmlDocumentationFilePath>$(MSBuildProjectDirectory)\$(AssemblyName).xml</XmlDocumentationFilePath>
+    <CLSCompliant Condition="'$(CLSCompliant)' == '' and '$(MSBuildProjectExtension)' != '.ilproj'">true</CLSCompliant>
     <Description Condition="'$(Description)' == ''">$(AssemblyName)</Description>
     <PackageDescription Condition="'$(PackageDescription)' == ''">$(AssemblyName)</PackageDescription>
   </PropertyGroup>
@@ -56,8 +50,8 @@
   </ItemGroup>
 
   <ItemGroup Condition="'$(IsSourceProject)' == 'true'">
-    <None Include="$(DocumentationFile)" CopyToOutputDirectory="PreserveNewest" />
-
+    <!-- Ensures docs xmls get copied to the artifacts bin output folder. -->
+    <None Include="$(XmlDocumentationFilePath)" CopyToOutputDirectory="PreserveNewest" />
     <AssemblyAttribute Include="System.CLSCompliantAttribute" Condition="'$(CLSCompliant)' == 'true'">
       <_Parameter1>true</_Parameter1>
     </AssemblyAttribute>
@@ -90,5 +84,12 @@
     <None Include="$(MSBuildProjectDirectory)\**\*$(DefaultLanguageSourceExtension)"
           Exclude="$(DefaultItemExcludes);$(DefaultExcludesInProjectFolder);@(Compile)" />
   </ItemGroup>
+
+  <!-- Include docs xmls in the final packages. -->
+  <Target Name="AddDocumentationFileForPackaging" AfterTargets="DocumentationProjectOutputGroup">
+    <ItemGroup>
+      <DocumentationProjectOutputGroupOutput Include="$(XmlDocumentationFilePath)" />
+    </ItemGroup>
+  </Target>
 
 </Project>
