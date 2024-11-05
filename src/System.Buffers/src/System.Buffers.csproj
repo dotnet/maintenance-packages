@@ -6,7 +6,6 @@
     <StrongNameKeyId>Open</StrongNameKeyId>
     <AssemblyVersion>4.0.3.0</AssemblyVersion> <!-- NO-INCREMENT: This version is frozen for .NET Standard and .NETCoreApp because the assembly ships inbox. -->
     <IsPlaceholderTargetFramework Condition="$([MSBuild]::GetTargetFrameworkIdentifier('$(TargetFramework)')) == '.NETCoreApp'">true</IsPlaceholderTargetFramework>
-    <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
 
   <!-- Package servicing properties -->
