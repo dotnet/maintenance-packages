@@ -93,14 +93,5 @@
       <DocumentationProjectOutputGroupOutput Include="$(XmlDocumentationFilePath)" />
     </ItemGroup>
   </Target>
-  
-    <!-- Allow P2Ps to retrieve the DocFileItem path. -->
-  <Target Name="AnnotateTargetPathWithTargetPlatformMonikerWithDocFileItem"
-          DependsOnTargets="GetTargetPathWithTargetPlatformMoniker"
-          BeforeTargets="GetTargetPath">
-    <ItemGroup>
-      <TargetPathWithTargetPlatformMoniker DocFileItem="@(DocFileItem)" />
-    </ItemGroup>
-  </Target>
 
 </Project>
