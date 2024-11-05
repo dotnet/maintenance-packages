@@ -5,19 +5,7 @@
     </assembly>
     <members>
         <member name="T:System.Buffers.ArrayPool`1">
-            <summary>
-            Provides a resource pool that enables reusing instances of type <see cref="T:T[]"/>. 
-            </summary>
-            <remarks>
-            <para>
-            Renting and returning buffers with an <see cref="T:System.Buffers.ArrayPool`1"/> can increase performance
-            in situations where arrays are created and destroyed frequently, resulting in significant
-            memory pressure on the garbage collector.
-            </para>
-            <para>
-            This class is thread-safe.  All members may be used by multiple threads concurrently.
-            </para>
-            </remarks>
+            <summary>IF YOU SEE THIS, IT DID NOT WORK!!!!!!!!!</summary>
         </member>
         <member name="F:System.Buffers.ArrayPool`1.s_sharedInstance">
             <summary>The lazily-initialized shared pool instance.</summary>

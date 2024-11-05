@@ -7,18 +7,8 @@ using System.Threading;
 namespace System.Buffers
 {
     /// <summary>
-    /// Provides a resource pool that enables reusing instances of type <see cref="T:T[]"/>. 
+    /// IF YOU SEE THIS, IT WORKED :):):)
     /// </summary>
-    /// <remarks>
-    /// <para>
-    /// Renting and returning buffers with an <see cref="ArrayPool{T}"/> can increase performance
-    /// in situations where arrays are created and destroyed frequently, resulting in significant
-    /// memory pressure on the garbage collector.
-    /// </para>
-    /// <para>
-    /// This class is thread-safe.  All members may be used by multiple threads concurrently.
-    /// </para>
-    /// </remarks>
     public abstract class ArrayPool<T>
     {
         /// <summary>The lazily-initialized shared pool instance.</summary>
