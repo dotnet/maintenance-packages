@@ -86,7 +86,7 @@ extends:
             - script: eng\common\cibuild.cmd
                 -configuration Release
                 -prepareMachine
-                /p:SkipTests=true
+                /p:Test=false
                 $(_AdditionalBuildArgs)
                 $(_InternalBuildArgs)
               displayName: $(_BuildJobDisplayName)
