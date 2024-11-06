@@ -2,7 +2,8 @@
 
   <PropertyGroup>
     <TargetFrameworks>$(NetMinimum)-unix;$(NetMinimum)-windows</TargetFrameworks>
-    <NoWarn>$(NoWarn);CA2208;</NoWarn>
+    <IsTestUtilityProject>true</IsTestUtilityProject>
+    <NoWarn>$(NoWarn);CA2208</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>

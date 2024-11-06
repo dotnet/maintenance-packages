@@ -119,6 +119,7 @@ stages:
             --prepareMachine
             /p:Test=false
             /p:IsPackable=true
+            /p:UnsetIsPackableForNonSourceProjects=true
             $(_AdditionalBuildArgs)
             $(_InternalBuildArgs)
           displayName: 'Build and pack'
