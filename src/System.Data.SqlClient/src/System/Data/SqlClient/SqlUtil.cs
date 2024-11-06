@@ -221,7 +221,6 @@ namespace System.Data.SqlClient
         }
     }
 
-
     internal static class SQL
     {
         // The class SQL defines the exceptions that are specific to the SQL Adapter.

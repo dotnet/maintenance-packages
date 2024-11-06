@@ -2,7 +2,6 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
-
 namespace System.Data.SqlClient
 {
     // this structure is used for transporting packet handle references between the TdsParserStateObject
@@ -12,7 +11,6 @@ namespace System.Data.SqlClient
     // it is a ref struct so that it can only be used to transport the handles and not store them
 
     // N.B. If you change this type you must also change the version for the other platform
-
     internal readonly ref struct SessionHandle
     {
         public const int NativeHandleType = 1;

@@ -8,6 +8,9 @@ using System.Data.Common;
 namespace Microsoft.SqlServer.Server
 {
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct, AllowMultiple = false, Inherited = false)]
+#if NET8_0_OR_GREATER
+    [Obsolete("Use the Microsoft.SqlServer.Server package instead.")]
+#endif
     public sealed class SqlUserDefinedAggregateAttribute : Attribute
     {
         private int _maxByteSize;

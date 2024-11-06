@@ -2,12 +2,16 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
+using System;
 using System.IO;
 
 namespace Microsoft.SqlServer.Server
 {
     // This interface is used by types that want full control over the
     // binary serialization format.
+#if NET8_0_OR_GREATER
+    [Obsolete("Use the Microsoft.SqlServer.Server package instead.")]
+#endif
     public interface IBinarySerialize
     {
         // Read from the specified binary reader.

@@ -72,6 +72,9 @@ namespace System.Data.SqlClient
     }
 
     [TypeConverter(typeof(SqlParameterConverter))]
+#if NET8_0_OR_GREATER
+    [Obsolete("Use the Microsoft.Data.SqlClient package instead.")]
+#endif
     public sealed partial class SqlParameter : DbParameter, IDbDataParameter, ICloneable
     {
         [Flags]

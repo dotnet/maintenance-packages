@@ -2,15 +2,10 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
-
-
-//------------------------------------------------------------------------------
-
 using System.Data.Common;
 using System.Data.ProviderBase;
 using System.Diagnostics;
 using System.Transactions;
-
 
 namespace System.Data.SqlClient
 {
