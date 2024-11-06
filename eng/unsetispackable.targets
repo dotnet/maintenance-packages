@@ -2,7 +2,7 @@
 
   <!-- Unset global IsPackable property. -->
   <PropertyGroup>
-    <IsPackable>false</IsPackable>
+    <IsPackable />
   </PropertyGroup>
 
 </Project>
