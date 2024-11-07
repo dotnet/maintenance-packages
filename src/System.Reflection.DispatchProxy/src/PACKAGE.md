@@ -1,23 +1,62 @@
 ## About
 
-<!-- A description of the package and where one can find more documentation -->
-
-Provides a class to dynamically create proxy types that implement a specified interface and derive from a specified DispatchProxy type. Method invocations on the generated proxyinstance are dispatched to that DispatchProxy base type.
+Provides a `DispatchProxy` class to dynamically create proxy instances that implement a specified interface.
 
 ## Key Features
 
-<!-- The key features of this package -->
-
-*
+Method invocations on a generated proxy instance are dispatched to a `Invoke()` method. Having a single invoke method allows centralized handling for scenarios such as logging, error handling and caching.
 
 ## How to Use
 
-<!-- A compelling example on how to use this package with code, as well as any specific guidelines for when to use the package -->
+Create the proxy class that derives from `DispatchProxy`, override `Invoke()` and call one of the static `DispatchProxy.Create()` methods to generate the proxy type.
 
+The example below intercepts calls to the `ICallMe` interface and logs them.
+
+```c#
+class Program
+{
+    static void Main(string[] args)
+    {
+        ICallMe proxy = LoggingDispatchProxy.Create<ICallMe>(new MyClass());
+        proxy.CallMe("Hello!");
+    }
+}
+
+public interface ICallMe
+{
+    void CallMe(string name);
+}
+
+public class MyClass : ICallMe
+{
+    public void CallMe(string message)
+    {
+        Console.WriteLine($"Inside the called method with input '{message}'");
+    }
+}
+
+public class LoggingDispatchProxy : DispatchProxy
+{
+    private ICallMe _target;
+
+    protected override object Invoke(MethodInfo targetMethod, object[] args)
+    {
+        Console.WriteLine($"Calling method: '{targetMethod.Name}' with arguments: '{string.Join(", ", args)}'");
+        object result = targetMethod.Invoke(_target, args);
+        Console.WriteLine($"Called method: '{targetMethod.Name}'.");
+        return result;
+    }
+
+    public static T Create<T>(T target) where T : class
+    {
+        LoggingDispatchProxy proxy = DispatchProxy.Create<T, LoggingDispatchProxy>() as LoggingDispatchProxy;
+        proxy._target = (ICallMe)target;
+        return proxy as T;
+    }
+}
+```
 
 ## Main Types
-
-<!-- The main types provided in this library -->
 
 The main types provided by this library are:
 
@@ -29,11 +68,8 @@ The main types provided by this library are:
 
 ## Related Packages
 
-<!-- The related packages associated with this package -->
-
+<!-- N/A -->
 
 ## License
-
-<!-- How to provide feedback on this package and contribute to it -->
 
 System.Reflection.DispatchProxy is released as open source under the [MIT license](https://licenses.nuget.org/MIT).
