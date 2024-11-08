@@ -12,6 +12,9 @@ using System.Threading;
 
 namespace System.Data.SqlClient
 {
+#if NET8_0_OR_GREATER
+    [Obsolete("Use the Microsoft.Data.SqlClient package instead.")]
+#endif
     public sealed class SqlCommandBuilder : DbCommandBuilder
     {
         public SqlCommandBuilder() : base()

@@ -7,6 +7,9 @@ using System;
 namespace Microsoft.SqlServer.Server
 {
     [Serializable]
+#if NET8_0_OR_GREATER
+    [Obsolete("Use the Microsoft.SqlServer.Server package instead.")]
+#endif
     public enum DataAccessKind
     {
         None = 0,
@@ -14,6 +17,9 @@ namespace Microsoft.SqlServer.Server
     }
 
     [Serializable]
+#if NET8_0_OR_GREATER
+    [Obsolete("Use the Microsoft.SqlServer.Server package instead.")]
+#endif
     public enum SystemDataAccessKind
     {
         None = 0,
@@ -22,6 +28,9 @@ namespace Microsoft.SqlServer.Server
 
     // sql specific attribute
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = false, Inherited = false), Serializable]
+#if NET8_0_OR_GREATER
+    [Obsolete("Use the Microsoft.SqlServer.Server package instead.")]
+#endif
     public class SqlFunctionAttribute : Attribute
     {
         private bool _isDeterministic;

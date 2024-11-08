@@ -7,6 +7,9 @@ using System.Data.Common;
 
 namespace Microsoft.SqlServer.Server
 {
+#if NET8_0_OR_GREATER
+    [Obsolete("Use the Microsoft.SqlServer.Server package instead.")]
+#endif
     public enum Format
     {
         Unknown = 0,
@@ -19,6 +22,9 @@ namespace Microsoft.SqlServer.Server
     // physical attributes that will be used when the type is registered
     // with SqlServer.
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct, AllowMultiple = false, Inherited = true)]
+#if NET8_0_OR_GREATER
+    [Obsolete("Use the Microsoft.SqlServer.Server package instead.")]
+#endif
     public sealed class SqlUserDefinedTypeAttribute : Attribute
     {
         private int _maxByteSize;

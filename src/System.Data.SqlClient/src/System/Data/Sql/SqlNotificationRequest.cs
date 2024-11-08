@@ -7,6 +7,9 @@ using System.Data.SqlClient;
 
 namespace System.Data.Sql
 {
+#if NET8_0_OR_GREATER
+    [Obsolete("Use the Microsoft.SqlServer.Server package instead.")]
+#endif
     public sealed class SqlNotificationRequest
     {
         private string _userData;

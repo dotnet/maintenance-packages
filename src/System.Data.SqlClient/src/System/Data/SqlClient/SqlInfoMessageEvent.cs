@@ -2,13 +2,11 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
-
-
-//------------------------------------------------------------------------------
-
-
 namespace System.Data.SqlClient
 {
+#if NET8_0_OR_GREATER
+    [Obsolete("Use the Microsoft.Data.SqlClient package instead.")]
+#endif
     public sealed class SqlInfoMessageEventArgs : System.EventArgs
     {
         private SqlException _exception;

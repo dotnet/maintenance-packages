@@ -9,6 +9,9 @@ using System.Runtime.Serialization;
 namespace Microsoft.SqlServer.Server
 {
     [Serializable]
+#if NET8_0_OR_GREATER
+    [Obsolete("Use the Microsoft.SqlServer.Server package instead.")]
+#endif
     public sealed class InvalidUdtException : SystemException
     {
         private const int InvalidUdtHResult = unchecked((int)0x80131937);

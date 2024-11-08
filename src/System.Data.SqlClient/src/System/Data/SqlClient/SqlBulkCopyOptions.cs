@@ -9,6 +9,9 @@
 namespace System.Data.SqlClient
 {
     [Flags]
+#if NET8_0_OR_GREATER
+    [Obsolete("Use the Microsoft.Data.SqlClient package instead.")]
+#endif
     public enum SqlBulkCopyOptions
     {
         Default = 0,

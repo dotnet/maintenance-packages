@@ -7,6 +7,9 @@ using System.IO;
 
 namespace System.Data.SqlTypes
 {
+#if NET8_0_OR_GREATER
+    [Obsolete("Use the Microsoft.Data.SqlClient package instead.")]
+#endif
     public sealed partial class SqlFileStream : System.IO.Stream
     {
         public SqlFileStream(string path, byte[] transactionContext, FileAccess access)
