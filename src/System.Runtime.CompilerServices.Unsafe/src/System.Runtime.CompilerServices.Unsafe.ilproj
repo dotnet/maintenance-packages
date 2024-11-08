@@ -14,6 +14,7 @@
 
 Commonly Used Types:
 System.Runtime.CompilerServices.Unsafe</PackageDescription>
+    <DocumentationFile>$(MSBuildProjectDirectory)\$(AssemblyName).xml</DocumentationFile>
   </PropertyGroup>
 
   <!-- VersionPrefix and IsPackable are defined in the parent folder's Versioning.props file. -->
@@ -37,7 +38,7 @@ System.Runtime.CompilerServices.Unsafe</PackageDescription>
   </PropertyGroup>
 
   <ItemGroup>
-    <DocFileItem Include="$(DocumentationFile)" Condition="'$(DocumentationFile)'!=''"/>
+    <DocFileItem Include="$(DocumentationFile)" Condition="'$(DocumentationFile)' != ''"/>
     <!-- mscorlib is passed in as an explicit reference from C# targets but not via the IL SDK. -->
     <Reference Include="$(CoreAssembly)" Condition="'$(TargetFramework)' == '$(NetFrameworkMinimum)'" />
     <Compile Remove="System.Runtime.CompilerServices.Unsafe.il" Condition="'$(IsPlaceholderTargetFramework)' == 'true'" />

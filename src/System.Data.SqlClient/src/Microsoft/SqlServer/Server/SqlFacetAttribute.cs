@@ -6,6 +6,9 @@ using System;
 
 namespace Microsoft.SqlServer.Server
 {
+#if NET8_0_OR_GREATER
+    [Obsolete("Use the Microsoft.Data.SqlClient package instead.")]
+#endif
     [AttributeUsage(AttributeTargets.Field | AttributeTargets.Property | AttributeTargets.ReturnValue | AttributeTargets.Parameter, AllowMultiple = false, Inherited = false)]
     public class SqlFacetAttribute : Attribute
     {

@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFrameworks>$(NetMinimum)-unix;$(NetMinimum)-windows</TargetFrameworks>
+    <IsTestUtilityProject>true</IsTestUtilityProject>
   </PropertyGroup>
 
   <ItemGroup>

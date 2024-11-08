@@ -1,0 +1,8 @@
+<Project TreatAsLocalProperty="IsPackable">
+
+  <!-- Unset global IsPackable property. -->
+  <PropertyGroup>
+    <IsPackable />
+  </PropertyGroup>
+
+</Project>

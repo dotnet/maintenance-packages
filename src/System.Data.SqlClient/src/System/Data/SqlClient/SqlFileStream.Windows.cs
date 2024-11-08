@@ -15,6 +15,9 @@ using System.Buffers;
 
 namespace System.Data.SqlTypes
 {
+#if NET8_0_OR_GREATER
+    [Obsolete("Use the Microsoft.Data.SqlClient package instead.")]
+#endif
     public sealed partial class SqlFileStream : System.IO.Stream
     {
         // NOTE: if we ever unseal this class, be sure to specify the Name, SafeFileHandle, and 

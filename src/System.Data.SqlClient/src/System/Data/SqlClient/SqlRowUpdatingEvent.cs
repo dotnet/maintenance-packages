@@ -7,6 +7,9 @@ using System.Data.Common;
 
 namespace System.Data.SqlClient
 {
+#if NET8_0_OR_GREATER
+    [Obsolete("Use the Microsoft.Data.SqlClient package instead.")]
+#endif
     public sealed class SqlRowUpdatingEventArgs : RowUpdatingEventArgs
     {
         public SqlRowUpdatingEventArgs(DataRow row, IDbCommand command, StatementType statementType, DataTableMapping tableMapping)

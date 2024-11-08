@@ -4,6 +4,7 @@
     <!-- This repository uses incremental servicing therefore packages might not be produced. -->
     <AllowEmptySignList>true</AllowEmptySignList>
     <AllowEmptySignPostBuildList>true</AllowEmptySignPostBuildList>
+    <UseDotNetCertificate>true</UseDotNetCertificate>
   </PropertyGroup>
 
 </Project>

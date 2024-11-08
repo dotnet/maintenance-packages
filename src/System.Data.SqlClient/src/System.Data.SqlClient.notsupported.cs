@@ -5,26 +5,41 @@
 
 namespace Microsoft.SqlServer.Server
 {
+#if NETSTANDARD || NET8_0_OR_GREATER
+    [System.Obsolete("Use the Microsoft.SqlServer.Server package instead.")]
+#endif
     public enum DataAccessKind
     {
         None = 0,
         Read = 1,
     }
+#if NETSTANDARD || NET8_0_OR_GREATER
+    [System.Obsolete("Use the Microsoft.SqlServer.Server package instead.")]
+#endif
     public enum Format
     {
         Unknown = 0,
         Native = 1,
         UserDefined = 2,
     }
+#if NETSTANDARD || NET8_0_OR_GREATER
+    [System.Obsolete("Use the Microsoft.SqlServer.Server package instead.")]
+#endif
     public partial interface IBinarySerialize
     {
         void Read(System.IO.BinaryReader r);
         void Write(System.IO.BinaryWriter w);
     }
+#if NETSTANDARD || NET8_0_OR_GREATER
+    [System.Obsolete("Use the Microsoft.SqlServer.Server package instead.")]
+#endif
     public sealed partial class InvalidUdtException : System.SystemException
     {
         internal InvalidUdtException() { }
     }
+#if NETSTANDARD || NET8_0_OR_GREATER
+    [System.Obsolete("Use the Microsoft.SqlServer.Server package instead.")]
+#endif
     public partial class SqlDataRecord : System.Data.IDataRecord
     {
         public SqlDataRecord(params Microsoft.SqlServer.Server.SqlMetaData[] metaData) { throw new System.PlatformNotSupportedException(System.SR.PlatformNotSupported_DataSqlClient); }
@@ -112,6 +127,9 @@ namespace Microsoft.SqlServer.Server
         System.Data.IDataReader System.Data.IDataRecord.GetData(int ordinal) { throw new System.PlatformNotSupportedException(System.SR.PlatformNotSupported_DataSqlClient); }
     }
 #if NET
+#if NET8_0_OR_GREATER
+    [System.Obsolete("Use the Microsoft.SqlServer.Server package instead.")]
+#endif
     [System.AttributeUsageAttribute(System.AttributeTargets.Field | System.AttributeTargets.Parameter | System.AttributeTargets.Property | System.AttributeTargets.ReturnValue, AllowMultiple=false, Inherited=false)]
     public partial class SqlFacetAttribute : System.Attribute
     {
@@ -124,6 +142,9 @@ namespace Microsoft.SqlServer.Server
     }
 #endif
     [System.AttributeUsageAttribute(System.AttributeTargets.Method, AllowMultiple=false, Inherited=false)]
+#if NETSTANDARD || NET8_0_OR_GREATER
+    [System.Obsolete("Use the Microsoft.SqlServer.Server package instead.")]
+#endif
     public partial class SqlFunctionAttribute : System.Attribute
     {
         public SqlFunctionAttribute() { throw new System.PlatformNotSupportedException(System.SR.PlatformNotSupported_DataSqlClient); }
@@ -135,6 +156,9 @@ namespace Microsoft.SqlServer.Server
         public Microsoft.SqlServer.Server.SystemDataAccessKind SystemDataAccess { get { throw new System.PlatformNotSupportedException(System.SR.PlatformNotSupported_DataSqlClient); } set { throw new System.PlatformNotSupportedException(System.SR.PlatformNotSupported_DataSqlClient); } }
         public string TableDefinition { get { throw new System.PlatformNotSupportedException(System.SR.PlatformNotSupported_DataSqlClient); } set { throw new System.PlatformNotSupportedException(System.SR.PlatformNotSupported_DataSqlClient); } }
     }
+#if NETSTANDARD || NET8_0_OR_GREATER
+    [System.Obsolete("Use the Microsoft.SqlServer.Server package instead.")]
+#endif
     public sealed partial class SqlMetaData
     {
         public SqlMetaData(string name, System.Data.SqlDbType dbType) { throw new System.PlatformNotSupportedException(System.SR.PlatformNotSupported_DataSqlClient); }
@@ -206,6 +230,9 @@ namespace Microsoft.SqlServer.Server
         public static Microsoft.SqlServer.Server.SqlMetaData InferFromValue(object value, string name) { throw new System.PlatformNotSupportedException(System.SR.PlatformNotSupported_DataSqlClient); }
     }
     [System.AttributeUsageAttribute(System.AttributeTargets.Method, AllowMultiple=false, Inherited=false)]
+#if NETSTANDARD || NET8_0_OR_GREATER
+    [System.Obsolete("Use the Microsoft.SqlServer.Server package instead.")]
+#endif
     public sealed partial class SqlMethodAttribute : Microsoft.SqlServer.Server.SqlFunctionAttribute
     {
         public SqlMethodAttribute() { throw new System.PlatformNotSupportedException(System.SR.PlatformNotSupported_DataSqlClient); }
@@ -214,6 +241,9 @@ namespace Microsoft.SqlServer.Server
         public bool OnNullCall { get { throw new System.PlatformNotSupportedException(System.SR.PlatformNotSupported_DataSqlClient); } set { throw new System.PlatformNotSupportedException(System.SR.PlatformNotSupported_DataSqlClient); } }
     }
     [System.AttributeUsageAttribute(System.AttributeTargets.Class | System.AttributeTargets.Struct, AllowMultiple=false, Inherited=false)]
+#if NETSTANDARD || NET8_0_OR_GREATER
+    [System.Obsolete("Use the Microsoft.SqlServer.Server package instead.")]
+#endif
     public sealed partial class SqlUserDefinedAggregateAttribute : System.Attribute
     {
         public const int MaxByteSizeValue = 8000;
@@ -227,6 +257,9 @@ namespace Microsoft.SqlServer.Server
         public string Name { get { throw new System.PlatformNotSupportedException(System.SR.PlatformNotSupported_DataSqlClient); } set { throw new System.PlatformNotSupportedException(System.SR.PlatformNotSupported_DataSqlClient); } }
     }
     [System.AttributeUsageAttribute(System.AttributeTargets.Class | System.AttributeTargets.Struct, AllowMultiple=false, Inherited=true)]
+#if NETSTANDARD || NET8_0_OR_GREATER
+    [System.Obsolete("Use the Microsoft.SqlServer.Server package instead.")]
+#endif
     public sealed partial class SqlUserDefinedTypeAttribute : System.Attribute
     {
         public SqlUserDefinedTypeAttribute(Microsoft.SqlServer.Server.Format format) { throw new System.PlatformNotSupportedException(System.SR.PlatformNotSupported_DataSqlClient); }
@@ -237,6 +270,9 @@ namespace Microsoft.SqlServer.Server
         public string Name { get { throw new System.PlatformNotSupportedException(System.SR.PlatformNotSupported_DataSqlClient); } set { throw new System.PlatformNotSupportedException(System.SR.PlatformNotSupported_DataSqlClient); } }
         public string ValidationMethodName { get { throw new System.PlatformNotSupportedException(System.SR.PlatformNotSupported_DataSqlClient); } set { throw new System.PlatformNotSupportedException(System.SR.PlatformNotSupported_DataSqlClient); } }
     }
+#if NETSTANDARD || NET8_0_OR_GREATER
+    [System.Obsolete("Use the Microsoft.SqlServer.Server package instead.")]
+#endif
     public enum SystemDataAccessKind
     {
         None = 0,
@@ -245,6 +281,9 @@ namespace Microsoft.SqlServer.Server
 }
 namespace System.Data
 {
+#if NETSTANDARD || NET8_0_OR_GREATER
+    [System.Obsolete("Use the Microsoft.Data.SqlClient package instead.")]
+#endif
     public sealed partial class OperationAbortedException : System.SystemException
     {
         internal OperationAbortedException() { }
@@ -252,6 +291,9 @@ namespace System.Data
 }
 namespace System.Data.Sql
 {
+#if NETSTANDARD || NET8_0_OR_GREATER
+    [System.Obsolete("Use the Microsoft.Data.SqlClient package instead.")]
+#endif
     public sealed partial class SqlNotificationRequest
     {
         public SqlNotificationRequest() { throw new System.PlatformNotSupportedException(System.SR.PlatformNotSupported_DataSqlClient); }
@@ -263,13 +305,22 @@ namespace System.Data.Sql
 }
 namespace System.Data.SqlClient
 {
+#if NETSTANDARD || NET8_0_OR_GREATER
+    [System.Obsolete("Use the Microsoft.Data.SqlClient package instead.")]
+#endif
     public enum ApplicationIntent
     {
         ReadWrite = 0,
         ReadOnly = 1,
     }
+#if NETSTANDARD || NET8_0_OR_GREATER
+    [System.Obsolete("Use the Microsoft.Data.SqlClient package instead.")]
+#endif
     public delegate void OnChangeEventHandler(object sender, System.Data.SqlClient.SqlNotificationEventArgs e);
 #if NET
+#if NET8_0_OR_GREATER
+    [System.Obsolete("Use the Microsoft.Data.SqlClient package instead.")]
+#endif
     public enum PoolBlockingPeriod
     {
         Auto = 0,
@@ -277,12 +328,18 @@ namespace System.Data.SqlClient
         NeverBlock = 2,
     }
 #endif
+#if NETSTANDARD || NET8_0_OR_GREATER
+    [System.Obsolete("Use the Microsoft.Data.SqlClient package instead.")]
+#endif
     public enum SortOrder
     {
         Unspecified = -1,
         Ascending = 0,
         Descending = 1,
     }
+#if NETSTANDARD || NET8_0_OR_GREATER
+    [System.Obsolete("Use the Microsoft.Data.SqlClient package instead.")]
+#endif
     public sealed partial class SqlBulkCopy : System.IDisposable
     {
         public SqlBulkCopy(System.Data.SqlClient.SqlConnection connection) { throw new System.PlatformNotSupportedException(System.SR.PlatformNotSupported_DataSqlClient); }
@@ -314,6 +371,9 @@ namespace System.Data.SqlClient
         public System.Threading.Tasks.Task WriteToServerAsync(System.Data.IDataReader reader) { throw new System.PlatformNotSupportedException(System.SR.PlatformNotSupported_DataSqlClient); }
         public System.Threading.Tasks.Task WriteToServerAsync(System.Data.IDataReader reader, System.Threading.CancellationToken cancellationToken) { throw new System.PlatformNotSupportedException(System.SR.PlatformNotSupported_DataSqlClient); }
     }
+#if NETSTANDARD || NET8_0_OR_GREATER
+    [System.Obsolete("Use the Microsoft.Data.SqlClient package instead.")]
+#endif
     public sealed partial class SqlBulkCopyColumnMapping
     {
         public SqlBulkCopyColumnMapping() { throw new System.PlatformNotSupportedException(System.SR.PlatformNotSupported_DataSqlClient); }
@@ -326,6 +386,9 @@ namespace System.Data.SqlClient
         public string SourceColumn { get { throw new System.PlatformNotSupportedException(System.SR.PlatformNotSupported_DataSqlClient); } set { throw new System.PlatformNotSupportedException(System.SR.PlatformNotSupported_DataSqlClient); } }
         public int SourceOrdinal { get { throw new System.PlatformNotSupportedException(System.SR.PlatformNotSupported_DataSqlClient); } set { throw new System.PlatformNotSupportedException(System.SR.PlatformNotSupported_DataSqlClient); } }
     }
+#if NETSTANDARD || NET8_0_OR_GREATER
+    [System.Obsolete("Use the Microsoft.Data.SqlClient package instead.")]
+#endif
     public sealed partial class SqlBulkCopyColumnMappingCollection : System.Collections.CollectionBase
     {
         internal SqlBulkCopyColumnMappingCollection() { }
@@ -344,6 +407,9 @@ namespace System.Data.SqlClient
         public new void RemoveAt(int index) { throw new System.PlatformNotSupportedException(System.SR.PlatformNotSupported_DataSqlClient); }
     }
     [System.FlagsAttribute]
+#if NETSTANDARD || NET8_0_OR_GREATER
+    [System.Obsolete("Use the Microsoft.Data.SqlClient package instead.")]
+#endif
     public enum SqlBulkCopyOptions
     {
         Default = 0,
@@ -354,6 +420,9 @@ namespace System.Data.SqlClient
         FireTriggers = 16,
         UseInternalTransaction = 32,
     }
+#if NETSTANDARD || NET8_0_OR_GREATER
+    [System.Obsolete("Use the Microsoft.Data.SqlClient package instead.")]
+#endif
     public sealed partial class SqlClientFactory : System.Data.Common.DbProviderFactory
     {
         internal SqlClientFactory() { }
@@ -365,6 +434,9 @@ namespace System.Data.SqlClient
         public override System.Data.Common.DbDataAdapter CreateDataAdapter() { throw new System.PlatformNotSupportedException(System.SR.PlatformNotSupported_DataSqlClient); }
         public override System.Data.Common.DbParameter CreateParameter() { throw new System.PlatformNotSupportedException(System.SR.PlatformNotSupported_DataSqlClient); }
     }
+#if NETSTANDARD || NET8_0_OR_GREATER
+    [System.Obsolete("Use the Microsoft.Data.SqlClient package instead.")]
+#endif
     public static partial class SqlClientMetaDataCollectionNames
     {
         public static readonly string Columns;
@@ -381,6 +453,9 @@ namespace System.Data.SqlClient
         public static readonly string ViewColumns;
         public static readonly string Views;
     }
+#if NETSTANDARD || NET8_0_OR_GREATER
+    [System.Obsolete("Use the Microsoft.Data.SqlClient package instead.")]
+#endif
     public sealed partial class SqlCommand : System.Data.Common.DbCommand, System.ICloneable
     {
         public SqlCommand() { throw new System.PlatformNotSupportedException(System.SR.PlatformNotSupported_DataSqlClient); }
@@ -435,6 +510,9 @@ namespace System.Data.SqlClient
         public void ResetCommandTimeout() { throw new System.PlatformNotSupportedException(System.SR.PlatformNotSupported_DataSqlClient); }
         object System.ICloneable.Clone() { throw new System.PlatformNotSupportedException(System.SR.PlatformNotSupported_DataSqlClient); }
     }
+#if NETSTANDARD || NET8_0_OR_GREATER
+    [System.Obsolete("Use the Microsoft.Data.SqlClient package instead.")]
+#endif
     public sealed partial class SqlCommandBuilder : System.Data.Common.DbCommandBuilder
     {
         public SqlCommandBuilder() { throw new System.PlatformNotSupportedException(System.SR.PlatformNotSupported_DataSqlClient); }
@@ -462,6 +540,9 @@ namespace System.Data.SqlClient
         protected override void SetRowUpdatingHandler(System.Data.Common.DbDataAdapter adapter) { throw new System.PlatformNotSupportedException(System.SR.PlatformNotSupported_DataSqlClient); }
         public override string UnquoteIdentifier(string quotedIdentifier) { throw new System.PlatformNotSupportedException(System.SR.PlatformNotSupported_DataSqlClient); }
     }
+#if NETSTANDARD || NET8_0_OR_GREATER
+    [System.Obsolete("Use the Microsoft.Data.SqlClient package instead.")]
+#endif
     public sealed partial class SqlConnection : System.Data.Common.DbConnection, System.ICloneable
     {
         public SqlConnection() { throw new System.PlatformNotSupportedException(System.SR.PlatformNotSupported_DataSqlClient); }
@@ -504,6 +585,9 @@ namespace System.Data.SqlClient
         public System.Collections.IDictionary RetrieveStatistics() { throw new System.PlatformNotSupportedException(System.SR.PlatformNotSupported_DataSqlClient); }
         object System.ICloneable.Clone() { throw new System.PlatformNotSupportedException(System.SR.PlatformNotSupported_DataSqlClient); }
     }
+#if NETSTANDARD || NET8_0_OR_GREATER
+    [System.Obsolete("Use the Microsoft.Data.SqlClient package instead.")]
+#endif
     public sealed partial class SqlConnectionStringBuilder : System.Data.Common.DbConnectionStringBuilder
     {
         public SqlConnectionStringBuilder() { throw new System.PlatformNotSupportedException(System.SR.PlatformNotSupported_DataSqlClient); }
@@ -549,12 +633,18 @@ namespace System.Data.SqlClient
         public override bool ShouldSerialize(string keyword) { throw new System.PlatformNotSupportedException(System.SR.PlatformNotSupported_DataSqlClient); }
         public override bool TryGetValue(string keyword, out object value) { throw new System.PlatformNotSupportedException(System.SR.PlatformNotSupported_DataSqlClient); }
     }
+#if NETSTANDARD || NET8_0_OR_GREATER
+    [System.Obsolete("Use the Microsoft.Data.SqlClient package instead.")]
+#endif
     public sealed partial class SqlCredential
     {
         public SqlCredential(string userId, System.Security.SecureString password) { throw new System.PlatformNotSupportedException(System.SR.PlatformNotSupported_DataSqlClient); }
         public System.Security.SecureString Password { get { throw new System.PlatformNotSupportedException(System.SR.PlatformNotSupported_DataSqlClient); } }
         public string UserId { get { throw new System.PlatformNotSupportedException(System.SR.PlatformNotSupported_DataSqlClient); } }
     }
+#if NETSTANDARD || NET8_0_OR_GREATER
+    [System.Obsolete("Use the Microsoft.Data.SqlClient package instead.")]
+#endif
     public sealed partial class SqlDataAdapter : System.Data.Common.DbDataAdapter, System.Data.IDataAdapter, System.Data.IDbDataAdapter, System.ICloneable
     {
         public SqlDataAdapter() { throw new System.PlatformNotSupportedException(System.SR.PlatformNotSupported_DataSqlClient); }
@@ -576,6 +666,9 @@ namespace System.Data.SqlClient
         protected override void OnRowUpdating(System.Data.Common.RowUpdatingEventArgs value) { throw new System.PlatformNotSupportedException(System.SR.PlatformNotSupported_DataSqlClient); }
         object System.ICloneable.Clone() { throw new System.PlatformNotSupportedException(System.SR.PlatformNotSupported_DataSqlClient); }
     }
+#if NETSTANDARD || NET8_0_OR_GREATER
+    [System.Obsolete("Use the Microsoft.Data.SqlClient package instead.")]
+#endif
     public partial class SqlDataReader : System.Data.Common.DbDataReader
 #if NET
 , System.Data.Common.IDbColumnSchemaGenerator
@@ -653,6 +746,9 @@ namespace System.Data.SqlClient
         public override bool Read() { throw new System.PlatformNotSupportedException(System.SR.PlatformNotSupported_DataSqlClient); }
         public override System.Threading.Tasks.Task<bool> ReadAsync(System.Threading.CancellationToken cancellationToken) { throw new System.PlatformNotSupportedException(System.SR.PlatformNotSupported_DataSqlClient); }
     }
+#if NETSTANDARD || NET8_0_OR_GREATER
+    [System.Obsolete("Use the Microsoft.Data.SqlClient package instead.")]
+#endif
     public sealed partial class SqlDependency
     {
         public SqlDependency() { throw new System.PlatformNotSupportedException(System.SR.PlatformNotSupported_DataSqlClient); }
@@ -667,6 +763,9 @@ namespace System.Data.SqlClient
         public static bool Stop(string connectionString) { throw new System.PlatformNotSupportedException(System.SR.PlatformNotSupported_DataSqlClient); }
         public static bool Stop(string connectionString, string queue) { throw new System.PlatformNotSupportedException(System.SR.PlatformNotSupported_DataSqlClient); }
     }
+#if NETSTANDARD || NET8_0_OR_GREATER
+    [System.Obsolete("Use the Microsoft.Data.SqlClient package instead.")]
+#endif
     public sealed partial class SqlError
     {
         internal SqlError() { }
@@ -680,6 +779,9 @@ namespace System.Data.SqlClient
         public byte State { get { throw new System.PlatformNotSupportedException(System.SR.PlatformNotSupported_DataSqlClient); } }
         public override string ToString() { throw new System.PlatformNotSupportedException(System.SR.PlatformNotSupported_DataSqlClient); }
     }
+#if NETSTANDARD || NET8_0_OR_GREATER
+    [System.Obsolete("Use the Microsoft.Data.SqlClient package instead.")]
+#endif
     public sealed partial class SqlErrorCollection : System.Collections.ICollection, System.Collections.IEnumerable
     {
         internal SqlErrorCollection() { }
@@ -691,6 +793,9 @@ namespace System.Data.SqlClient
         public void CopyTo(System.Data.SqlClient.SqlError[] array, int index) { throw new System.PlatformNotSupportedException(System.SR.PlatformNotSupported_DataSqlClient); }
         public System.Collections.IEnumerator GetEnumerator() { throw new System.PlatformNotSupportedException(System.SR.PlatformNotSupported_DataSqlClient); }
     }
+#if NETSTANDARD || NET8_0_OR_GREATER
+    [System.Obsolete("Use the Microsoft.Data.SqlClient package instead.")]
+#endif
     public sealed partial class SqlException : System.Data.Common.DbException
     {
         internal SqlException() { }
@@ -706,6 +811,9 @@ namespace System.Data.SqlClient
         public override void GetObjectData(System.Runtime.Serialization.SerializationInfo si, System.Runtime.Serialization.StreamingContext context) { throw new System.PlatformNotSupportedException(System.SR.PlatformNotSupported_DataSqlClient); }
         public override string ToString() { throw new System.PlatformNotSupportedException(System.SR.PlatformNotSupported_DataSqlClient); }
     }
+#if NETSTANDARD || NET8_0_OR_GREATER
+    [System.Obsolete("Use the Microsoft.Data.SqlClient package instead.")]
+#endif
     public sealed partial class SqlInfoMessageEventArgs : System.EventArgs
     {
         internal SqlInfoMessageEventArgs() { }
@@ -714,7 +822,13 @@ namespace System.Data.SqlClient
         public string Source { get { throw new System.PlatformNotSupportedException(System.SR.PlatformNotSupported_DataSqlClient); } }
         public override string ToString() { throw new System.PlatformNotSupportedException(System.SR.PlatformNotSupported_DataSqlClient); }
     }
+#if NETSTANDARD || NET8_0_OR_GREATER
+    [System.Obsolete("Use the Microsoft.Data.SqlClient package instead.")]
+#endif
     public delegate void SqlInfoMessageEventHandler(object sender, System.Data.SqlClient.SqlInfoMessageEventArgs e);
+#if NETSTANDARD || NET8_0_OR_GREATER
+    [System.Obsolete("Use the Microsoft.Data.SqlClient package instead.")]
+#endif
     public partial class SqlNotificationEventArgs : System.EventArgs
     {
         public SqlNotificationEventArgs(System.Data.SqlClient.SqlNotificationType type, System.Data.SqlClient.SqlNotificationInfo info, System.Data.SqlClient.SqlNotificationSource source) { throw new System.PlatformNotSupportedException(System.SR.PlatformNotSupported_DataSqlClient); }
@@ -722,6 +836,9 @@ namespace System.Data.SqlClient
         public System.Data.SqlClient.SqlNotificationSource Source { get { throw new System.PlatformNotSupportedException(System.SR.PlatformNotSupported_DataSqlClient); } }
         public System.Data.SqlClient.SqlNotificationType Type { get { throw new System.PlatformNotSupportedException(System.SR.PlatformNotSupported_DataSqlClient); } }
     }
+#if NETSTANDARD || NET8_0_OR_GREATER
+    [System.Obsolete("Use the Microsoft.Data.SqlClient package instead.")]
+#endif
     public enum SqlNotificationInfo
     {
         AlreadyChanged = -2,
@@ -744,6 +861,9 @@ namespace System.Data.SqlClient
         TemplateLimit = 15,
         Merge = 16,
     }
+#if NETSTANDARD || NET8_0_OR_GREATER
+    [System.Obsolete("Use the Microsoft.Data.SqlClient package instead.")]
+#endif
     public enum SqlNotificationSource
     {
         Client = -2,
@@ -758,12 +878,18 @@ namespace System.Data.SqlClient
         Execution = 7,
         Owner = 8,
     }
+#if NETSTANDARD || NET8_0_OR_GREATER
+    [System.Obsolete("Use the Microsoft.Data.SqlClient package instead.")]
+#endif
     public enum SqlNotificationType
     {
         Unknown = -1,
         Change = 0,
         Subscribe = 1,
     }
+#if NETSTANDARD || NET8_0_OR_GREATER
+    [System.Obsolete("Use the Microsoft.Data.SqlClient package instead.")]
+#endif
     public sealed partial class SqlParameter : System.Data.Common.DbParameter, System.ICloneable
     {
         public SqlParameter() { throw new System.PlatformNotSupportedException(System.SR.PlatformNotSupported_DataSqlClient); }
@@ -799,6 +925,9 @@ namespace System.Data.SqlClient
         object System.ICloneable.Clone() { throw new System.PlatformNotSupportedException(System.SR.PlatformNotSupported_DataSqlClient); }
         public override string ToString() { throw new System.PlatformNotSupportedException(System.SR.PlatformNotSupported_DataSqlClient); }
     }
+#if NETSTANDARD || NET8_0_OR_GREATER
+    [System.Obsolete("Use the Microsoft.Data.SqlClient package instead.")]
+#endif
     public sealed partial class SqlParameterCollection : System.Data.Common.DbParameterCollection
     {
         internal SqlParameterCollection() { }
@@ -837,26 +966,47 @@ namespace System.Data.SqlClient
         protected override void SetParameter(int index, System.Data.Common.DbParameter value) { throw new System.PlatformNotSupportedException(System.SR.PlatformNotSupported_DataSqlClient); }
         protected override void SetParameter(string parameterName, System.Data.Common.DbParameter value) { throw new System.PlatformNotSupportedException(System.SR.PlatformNotSupported_DataSqlClient); }
     }
+#if NETSTANDARD || NET8_0_OR_GREATER
+    [System.Obsolete("Use the Microsoft.Data.SqlClient package instead.")]
+#endif
     public partial class SqlRowsCopiedEventArgs : System.EventArgs
     {
         public SqlRowsCopiedEventArgs(long rowsCopied) { throw new System.PlatformNotSupportedException(System.SR.PlatformNotSupported_DataSqlClient); }
         public bool Abort { get { throw new System.PlatformNotSupportedException(System.SR.PlatformNotSupported_DataSqlClient); } set { throw new System.PlatformNotSupportedException(System.SR.PlatformNotSupported_DataSqlClient); } }
         public long RowsCopied { get { throw new System.PlatformNotSupportedException(System.SR.PlatformNotSupported_DataSqlClient); } }
     }
+#if NETSTANDARD || NET8_0_OR_GREATER
+    [System.Obsolete("Use the Microsoft.Data.SqlClient package instead.")]
+#endif
     public delegate void SqlRowsCopiedEventHandler(object sender, System.Data.SqlClient.SqlRowsCopiedEventArgs e);
+#if NETSTANDARD || NET8_0_OR_GREATER
+    [System.Obsolete("Use the Microsoft.Data.SqlClient package instead.")]
+#endif
     public sealed partial class SqlRowUpdatedEventArgs : System.Data.Common.RowUpdatedEventArgs
     {
         public SqlRowUpdatedEventArgs(System.Data.DataRow row, System.Data.IDbCommand command, System.Data.StatementType statementType, System.Data.Common.DataTableMapping tableMapping) : base (default(System.Data.DataRow), default(System.Data.IDbCommand), default(System.Data.StatementType), default(System.Data.Common.DataTableMapping)) { throw new System.PlatformNotSupportedException(System.SR.PlatformNotSupported_DataSqlClient); }
         public new System.Data.SqlClient.SqlCommand Command { get { throw new System.PlatformNotSupportedException(System.SR.PlatformNotSupported_DataSqlClient); } }
     }
+#if NETSTANDARD || NET8_0_OR_GREATER
+    [System.Obsolete("Use the Microsoft.Data.SqlClient package instead.")]
+#endif
     public delegate void SqlRowUpdatedEventHandler(object sender, System.Data.SqlClient.SqlRowUpdatedEventArgs e);
+#if NETSTANDARD || NET8_0_OR_GREATER
+    [System.Obsolete("Use the Microsoft.Data.SqlClient package instead.")]
+#endif
     public sealed partial class SqlRowUpdatingEventArgs : System.Data.Common.RowUpdatingEventArgs
     {
         public SqlRowUpdatingEventArgs(System.Data.DataRow row, System.Data.IDbCommand command, System.Data.StatementType statementType, System.Data.Common.DataTableMapping tableMapping) : base (default(System.Data.DataRow), default(System.Data.IDbCommand), default(System.Data.StatementType), default(System.Data.Common.DataTableMapping)) { throw new System.PlatformNotSupportedException(System.SR.PlatformNotSupported_DataSqlClient); }
         protected override System.Data.IDbCommand BaseCommand { get { throw new System.PlatformNotSupportedException(System.SR.PlatformNotSupported_DataSqlClient); } set { throw new System.PlatformNotSupportedException(System.SR.PlatformNotSupported_DataSqlClient); } }
         public new System.Data.SqlClient.SqlCommand Command { get { throw new System.PlatformNotSupportedException(System.SR.PlatformNotSupported_DataSqlClient); } set { throw new System.PlatformNotSupportedException(System.SR.PlatformNotSupported_DataSqlClient); } }
     }
+#if NETSTANDARD || NET8_0_OR_GREATER
+    [System.Obsolete("Use the Microsoft.Data.SqlClient package instead.")]
+#endif
     public delegate void SqlRowUpdatingEventHandler(object sender, System.Data.SqlClient.SqlRowUpdatingEventArgs e);
+#if NETSTANDARD || NET8_0_OR_GREATER
+    [System.Obsolete("Use the Microsoft.Data.SqlClient package instead.")]
+#endif
     public sealed partial class SqlTransaction : System.Data.Common.DbTransaction
     {
         internal SqlTransaction() { }
@@ -873,6 +1023,9 @@ namespace System.Data.SqlClient
 #if NET
 namespace System.Data.SqlTypes
 {
+#if NETSTANDARD || NET8_0_OR_GREATER
+    [System.Obsolete("Use the Microsoft.Data.SqlClient package instead.")]
+#endif
     public sealed partial class SqlFileStream : System.IO.Stream
     {
         public SqlFileStream(string path, byte[] transactionContext, System.IO.FileAccess access) { throw new System.PlatformNotSupportedException(System.SR.PlatformNotSupported_DataSqlClient); }

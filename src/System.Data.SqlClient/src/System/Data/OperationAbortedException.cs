@@ -7,6 +7,9 @@ namespace System.Data
 {
     [Serializable]
     [System.Runtime.CompilerServices.TypeForwardedFrom("System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+#if NET8_0_OR_GREATER
+    [Obsolete("Use the Microsoft.Data.SqlClient package instead.")]
+#endif
     public sealed class OperationAbortedException : SystemException
     {
         private OperationAbortedException(string message, Exception innerException) : base(message, innerException)

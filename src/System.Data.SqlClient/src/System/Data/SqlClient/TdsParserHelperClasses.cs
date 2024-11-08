@@ -701,7 +701,6 @@ namespace System.Data.SqlClient
             }
         }
     }
-
     internal sealed class _SqlRPC
     {
         internal string rpcName;

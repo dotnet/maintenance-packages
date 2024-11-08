@@ -18,6 +18,9 @@ using Microsoft.SqlServer.Server;
 
 namespace System.Data.SqlClient
 {
+#if NET8_0_OR_GREATER
+    [Obsolete("Use the Microsoft.Data.SqlClient package instead.")]
+#endif
     public sealed partial class SqlCommand : DbCommand, ICloneable
     {
         private string _commandText;
