@@ -4,7 +4,7 @@
     <TargetFrameworks>netcoreapp2.0;netstandard2.0;$(NetFrameworkMinimum)</TargetFrameworks>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <StrongNameKeyId>Microsoft</StrongNameKeyId>
-    <AssemblyVersion>4.1.4.0</AssemblyVersion><!-- NO-INCREMENT: This version is frozen for .NETCoreApp because the assembly ships inbox. -->
+    <AssemblyVersion>4.1.4.0</AssemblyVersion> <!-- NO-INCREMENT: This version is frozen for .NETStandard and .NETCoreApp because the assembly ships inbox. -->
     <IsPlaceholderTargetFramework Condition="$([MSBuild]::GetTargetFrameworkIdentifier('$(TargetFramework)')) == '.NETCoreApp'">true</IsPlaceholderTargetFramework>
   </PropertyGroup>
 
@@ -13,8 +13,7 @@
     <IsPackable>true</IsPackable>
     <VersionPrefix>4.5.0</VersionPrefix>
     <VersionPrefix Condition="'$(IsPackable)' == 'true'">4.6.0</VersionPrefix>
-    <AssemblyVersion Condition="$([MSBuild]::GetTargetFrameworkIdentifier('$(TargetFramework)')) != '.NETCoreApp'">4.1.4.0</AssemblyVersion>
-    <AssemblyVersion Condition="'$(IsPackable)' == 'true' and $([MSBuild]::GetTargetFrameworkIdentifier('$(TargetFramework)')) != '.NETCoreApp'">4.1.5.0</AssemblyVersion>
+    <AssemblyVersion Condition="'$(IsPackable)' == 'true'">4.1.5.0</AssemblyVersion>
     <PackageValidationBaselineVersion>4.5.0</PackageValidationBaselineVersion>
   </PropertyGroup>
 
