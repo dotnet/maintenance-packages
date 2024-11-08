@@ -1,25 +1,10 @@
 ## About
 
-<!-- A description of the package and where one can find more documentation -->
-
 Downlevel support package for System.IO classes.
 
-Regular users do not need to reference this package directly unless they are working with analyzers and source generators and see unexpected behaviors when doing file and folder IO operations using System.IO APIs.
-
-## Key Features
-
-<!-- The key features of this package -->
-
-*
-
-## How to Use
-
-<!-- A compelling example on how to use this package with code, as well as any specific guidelines for when to use the package -->
-
+Regular users do not need to reference this package directly. Please use System.IO instead.
 
 ## Main Types
-
-<!-- The main types provided in this library -->
 
 The main types provided by this library are:
 
@@ -34,15 +19,8 @@ The main types provided by this library are:
 
 ## Additional Documentation
 
-- API reference can be found under the System.IO namespace: https://learn.microsoft.com/en-us/dotnet/api/system.io
-
-## Related Packages
-
-<!-- The related packages associated with this package -->
-
+- System.IO namespace: https://learn.microsoft.com/en-us/dotnet/api/system.io
 
 ## License
-
-<!-- How to provide feedback on this package and contribute to it -->
 
 Microsoft.IO.Redist is released as open source under the [MIT license](https://licenses.nuget.org/MIT).

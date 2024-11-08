@@ -66,10 +66,6 @@ The main types provided by this library are:
 
 - API reference can be found in: https://learn.microsoft.com/en-us/dotnet/api/system.reflection.dispatchproxy
 
-## Related Packages
-
-<!-- N/A -->
-
 ## License
 
 System.Reflection.DispatchProxy is released as open source under the [MIT license](https://licenses.nuget.org/MIT).

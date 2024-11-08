@@ -1,23 +1,8 @@
 ## About
 
-<!-- A description of the package and where one can find more documentation -->
-
 Provides extension methods that add System.Xml.XPath support to the System.Xml.XmlDocument package.
 
-## Key Features
-
-<!-- The key features of this package -->
-
-*
-
-## How to Use
-
-<!-- A compelling example on how to use this package with code, as well as any specific guidelines for when to use the package -->
-
-
 ## Main Types
-
-<!-- The main types provided in this library -->
 
 The main types provided by this library are:
 
@@ -27,12 +12,6 @@ The main types provided by this library are:
 
 - API reference can be found in: https://learn.microsoft.com/en-us/dotnet/api/system.xml.xmldocumentxpathextensions
 
-## Related Packages
-
-<!-- The related packages associated with this package -->
-
 ## License
 
-<!-- How to provide feedback on this package and contribute to it -->
-
-<AssemblyName> is released as open source under the [MIT license](https://licenses.nuget.org/MIT).
+ System.Xml.XmlDocument is released as open source under the [MIT license](https://licenses.nuget.org/MIT).

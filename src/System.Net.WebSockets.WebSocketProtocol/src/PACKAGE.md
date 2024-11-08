@@ -20,7 +20,7 @@ WebSocket ws = WebSocketProtocol.CreateFromStream(opaqueTransport, isServer: tru
 
 ### Remarks
 
-The API is considered *osolete* and is not recommented for use.
+The API is considered *obsolete* and is not recommented for use.
 
 On **.NET Framework** or **.NET Standard 2.0**:
 
@@ -48,11 +48,6 @@ The main types provided by this library are:
     - ClientWebSocket: https://learn.microsoft.com/en-us/dotnet/api/system.net.websockets.clientwebsocket
     - HttpListener context: https://learn.microsoft.com/en-us/dotnet/api/system.net.httplistenercontext
     - ASP.NET HttpContext: https://learn.microsoft.com/en-us/dotnet/api/system.web.httpcontext
-
-
-## Related Packages
-
-<!-- N/A -->
 
 ## License
 
