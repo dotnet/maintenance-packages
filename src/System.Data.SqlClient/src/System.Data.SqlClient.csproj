@@ -21,8 +21,8 @@
     <IsPackable>true</IsPackable>
     <VersionPrefix>4.8.6</VersionPrefix>
     <VersionPrefix Condition="'$(IsPackable)' == 'true'">4.9.0</VersionPrefix>
-    <AssemblyVersion Condition="$([MSBuild]::GetTargetFrameworkIdentifier('$(TargetFramework)')) != '.NETCoreApp'">4.6.1.6</AssemblyVersion>
-    <AssemblyVersion Condition="'$(IsPackable)' == 'true' and $([MSBuild]::GetTargetFrameworkIdentifier('$(TargetFramework)')) != '.NETCoreApp'">4.6.2.0</AssemblyVersion>
+    <AssemblyVersion Condition="$([MSBuild]::GetTargetFrameworkIdentifier('$(TargetFramework)')) == '.NETFramework'">4.6.1.6</AssemblyVersion>
+    <AssemblyVersion Condition="'$(IsPackable)' == 'true' and $([MSBuild]::GetTargetFrameworkIdentifier('$(TargetFramework)')) == '.NETFramework'">4.6.2.0</AssemblyVersion>
     <PackageValidationBaselineVersion>4.8.6</PackageValidationBaselineVersion>
   </PropertyGroup>
 
