@@ -5,7 +5,6 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <StrongNameKeyId>Open</StrongNameKeyId>
     <Nullable>disable</Nullable>
-    <AssemblyVersion>4.0.1.2</AssemblyVersion><!-- NO-INCREMENT: This version is frozen for .NET Standard and .NETCoreApp because the assembly ships inbox. -->
     <IsPlaceholderTargetFramework Condition="$([MSBuild]::GetTargetFrameworkIdentifier('$(TargetFramework)')) == '.NETCoreApp'">true</IsPlaceholderTargetFramework>
   </PropertyGroup>
 
@@ -14,8 +13,8 @@
     <IsPackable>true</IsPackable>
     <VersionPrefix>4.5.5</VersionPrefix>
     <VersionPrefix Condition="'$(IsPackable)' == 'true'">4.6.0</VersionPrefix>
-    <AssemblyVersion Condition="$([MSBuild]::GetTargetFrameworkIdentifier('$(TargetFramework)')) == '.NETFramework'">4.0.1.2</AssemblyVersion>
-    <AssemblyVersion Condition="'$(IsPackable)' == 'true' and $([MSBuild]::GetTargetFrameworkIdentifier('$(TargetFramework)')) == '.NETFramework'">4.0.2.0</AssemblyVersion>
+    <AssemblyVersion>4.0.1.2</AssemblyVersion>
+    <AssemblyVersion Condition="'$(IsPackable)' == 'true'">4.0.2.0</AssemblyVersion><!-- Must increment after a new version is released. Keep it under 4.1.xx. -->
     <PackageValidationBaselineVersion>4.5.5</PackageValidationBaselineVersion>
   </PropertyGroup>
 
