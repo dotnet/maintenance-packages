@@ -22,7 +22,8 @@ System.Runtime.CompilerServices.Unsafe</PackageDescription>
 
   <!-- Package servicing properties -->
   <PropertyGroup>
-    <AssemblyVersion Condition="'$(IsPackable)' == 'true'">6.0.1.0</AssemblyVersion>
+    <AssemblyVersion Condition="$([MSBuild]::GetTargetFrameworkIdentifier('$(TargetFramework)')) == '.NETFramework'">6.0.0.0</AssemblyVersion>
+    <AssemblyVersion Condition="'$(IsPackable)' == 'true' and $([MSBuild]::GetTargetFrameworkIdentifier('$(TargetFramework)')) == '.NETFramework'">6.0.1.0</AssemblyVersion>
     <PackageValidationBaselineVersion>4.7.1</PackageValidationBaselineVersion>
     <IsPlaceholderTargetFramework Condition="$([MSBuild]::GetTargetFrameworkIdentifier('$(TargetFramework)')) == '.NETCoreApp'">true</IsPlaceholderTargetFramework>
   </PropertyGroup>

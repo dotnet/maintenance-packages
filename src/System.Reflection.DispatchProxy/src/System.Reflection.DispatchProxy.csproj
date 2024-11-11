@@ -13,7 +13,8 @@
     <IsPackable>true</IsPackable>
     <VersionPrefix>4.7.1</VersionPrefix>
     <VersionPrefix Condition="'$(IsPackable)' == 'true'">4.8.0</VersionPrefix>
-    <AssemblyVersion Condition="'$(IsPackable)' == 'true'">4.0.7.0</AssemblyVersion>
+    <AssemblyVersion Condition="$([MSBuild]::GetTargetFrameworkIdentifier('$(TargetFramework)')) == '.NETFramework'">4.0.6.0</AssemblyVersion>
+    <AssemblyVersion Condition="'$(IsPackable)' == 'true' and $([MSBuild]::GetTargetFrameworkIdentifier('$(TargetFramework)')) == '.NETFramework'">4.0.7.0</AssemblyVersion>
     <PackageValidationBaseLineVersion>4.7.1</PackageValidationBaseLineVersion>
   </PropertyGroup>
 
