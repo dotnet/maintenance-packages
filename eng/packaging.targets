@@ -3,8 +3,8 @@
   <PropertyGroup>
     <EnablePackageValidation Condition="'$(EnablePackageValidation)' == ''">true</EnablePackageValidation>
     <PlaceholderFile>$(MSBuildThisFileDirectory)_._</PlaceholderFile>
-    <BeforePack>$(BeforePack);AddNETStandardCompatErrorFileForPackaging</BeforePack>
-    <PackageReadmeFile Condition="'$(PackageReadmeFile)' == '' and Exists('PACKAGE.md')">PACKAGE.md</PackageReadmeFile>
+    <BeforePack>$(BeforePack);AddNETStandardCompatErrorFileForPackaging;ValidatePackageReadmeExists</BeforePack>
+    <PackageReadmeFile>PACKAGE.md</PackageReadmeFile>
     <TargetsForTfmSpecificContentInPackage>$(TargetsForTfmSpecificContentInPackage);AddRuntimeSpecificFilesToPackage</TargetsForTfmSpecificContentInPackage>
     <!-- Don't include target platform specific dependencies, since we use the target platform to represent RIDs instead -->
     <IncludeBuildOutput Condition="'$(PackageUsePlatformTargeting)' != 'true' and '$(TargetPlatformIdentifier)' != '' and '$(TargetFrameworkIdentifier)' == '.NETCoreApp'">false</IncludeBuildOutput>
@@ -27,7 +27,7 @@
   </ItemGroup>
 
   <!-- Add a package README file from. -->
-  <ItemGroup Condition="'$(PackageReadmeFile)' != ''">
+  <ItemGroup>
     <None Include="$(PackageReadmeFile)" Pack="true" PackagePath="\" />
   </ItemGroup>
 
@@ -123,6 +123,10 @@
                                    TargetFramework="$(_targetFrameworkWithoutSuffix)"
                                    Condition="'$(IncludeSymbols)' == 'true' and Exists('%(_RuntimeSymbolPath.Identity)')" />
     </ItemGroup>
+  </Target>
+
+  <Target Name="ValidatePackageReadmeExists" Condition="'$(IsShipping)' == 'true' and !Exists('$(PackageReadmeFile)')">
+    <Error Text="$(PackageId) is a shipping package and is missing a required package README file. Add a 'PACKAGE.md' file to the source project folder." />
   </Target>
 
 </Project>
