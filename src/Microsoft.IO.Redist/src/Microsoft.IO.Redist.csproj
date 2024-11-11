@@ -16,8 +16,6 @@
     <IsPackable>true</IsPackable>
     <VersionPrefix>6.0.1</VersionPrefix>
     <VersionPrefix Condition="'$(IsPackable)' == 'true'">6.1.0</VersionPrefix>
-    <AssemblyVersion>6.0.0.1</AssemblyVersion>
-    <AssemblyVersion Condition="'$(IsPackable)' == 'true'">6.0.1.0</AssemblyVersion>
     <PackageValidationBaselineVersion>6.0.1</PackageValidationBaselineVersion>
   </PropertyGroup>
 
