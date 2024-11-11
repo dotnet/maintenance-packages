@@ -10,8 +10,6 @@
     <IsPackable>true</IsPackable>
     <VersionPrefix>4.7.1</VersionPrefix>
     <VersionPrefix Condition="'$(IsPackable)' == 'true'">4.8.0</VersionPrefix>
-    <AssemblyVersion>2.0.8.0</AssemblyVersion>
-    <AssemblyVersion Condition="'$(IsPackable)' == 'true'">2.0.9.0</AssemblyVersion>
     <PackageValidationBaselineVersion>4.7.1</PackageValidationBaselineVersion>
   </PropertyGroup>
 
