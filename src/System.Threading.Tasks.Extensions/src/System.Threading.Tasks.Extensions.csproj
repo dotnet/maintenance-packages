@@ -12,8 +12,8 @@
     <IsPackable>true</IsPackable>
     <VersionPrefix>4.5.4</VersionPrefix>
     <VersionPrefix Condition="'$(IsPackable)' == 'true'">4.6.0</VersionPrefix>
-    <AssemblyVersion>4.2.0.1</AssemblyVersion><!-- Must increment after a new version is released. Keep it under 4.3.xx. -->
-    <AssemblyVersion Condition="'$(IsPackable)' == 'true'">4.2.1.0</AssemblyVersion>
+    <AssemblyVersion>4.2.0.1</AssemblyVersion>
+    <AssemblyVersion Condition="'$(IsPackable)' == 'true'">4.2.1.0</AssemblyVersion><!-- Must increment after a new version is released. Keep it under 4.3.xx. -->
     <PackageValidationBaselineVersion>4.5.4</PackageValidationBaselineVersion>
   </PropertyGroup>
 
