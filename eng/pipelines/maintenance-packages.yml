@@ -83,10 +83,15 @@ extends:
               fetchDepth: 0
               clean: true
             steps:
+            # Manually run an Azure DevOps job with the variable 'DotNetFinalVersionKind' set to 'release' to
+            # generate a stable version (package names without preview suffix strings).
+            # For nightly builds this value should be empty (default value).
+            # https://github.com/dotnet/arcade/blob/master/Documentation/CorePackages/Versioning.md#package-versioning
             - script: eng\common\cibuild.cmd
                 -configuration Release
                 -prepareMachine
                 /p:Test=false
+                /p:DotNetFinalVersionKind=$(DotNetFinalVersionKind)
                 $(_AdditionalBuildArgs)
                 $(_InternalBuildArgs)
               displayName: $(_BuildJobDisplayName)

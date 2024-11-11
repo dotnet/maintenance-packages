@@ -3,8 +3,6 @@
   <PropertyGroup>
     <PreReleaseVersionLabel>rtm</PreReleaseVersionLabel>
     <PreReleaseVersionIteration></PreReleaseVersionIteration>
-    <!-- Enables removing prerelease labels. -->
-    <DotNetFinalVersionKind>release</DotNetFinalVersionKind>
     <!-- Opt-out repo features -->
     <UseVSTestRunner>true</UseVSTestRunner>
     <UsingToolXliff>false</UsingToolXliff>
