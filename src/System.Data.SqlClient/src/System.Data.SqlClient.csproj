@@ -520,6 +520,10 @@
     <Compile Include="System.Data.SqlClient.TypeForwards.cs" />
   </ItemGroup>
 
+  <ItemGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETCoreApp'">
+    <PackageReference Include="runtime.native.System.Data.SqlClient.sni" />
+  </ItemGroup>
+
   <Target Name="CheckTFMs" BeforeTargets="CoreCompile" Condition="'$(NetMinimum)' == 'net8.0'">
     <Error Text="NetMinimum got updated to net8.0. Remove the NetCurrent TFMs from this project and the test projects." />
   </Target>

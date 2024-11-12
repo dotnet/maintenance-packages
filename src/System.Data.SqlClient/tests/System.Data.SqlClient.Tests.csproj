@@ -48,8 +48,4 @@
     </ProjectReference>
   </ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="runtime.native.System.Data.SqlClient.sni" />
-  </ItemGroup>
-
 </Project>
