@@ -25,6 +25,8 @@ variables:
     value: '/p:Test=false'
   - name: _BuildJobDisplayName
     value: 'Build, Sign and Publish'
+  - name: DotNetFinalVersionKind
+    value: ${{ variables.DotNetFinalVersionKind }}
 
 resources:
   repositories:
