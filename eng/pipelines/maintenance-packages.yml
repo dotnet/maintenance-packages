@@ -91,7 +91,6 @@ extends:
                 -configuration Release
                 -prepareMachine
                 /p:Test=false
-                /p:DotNetFinalVersionKind=$(DotNetFinalVersionKind)
                 $(_AdditionalBuildArgs)
                 $(_InternalBuildArgs)
               displayName: $(_BuildJobDisplayName)
