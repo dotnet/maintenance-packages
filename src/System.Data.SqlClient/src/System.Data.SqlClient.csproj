@@ -520,7 +520,7 @@
     <Compile Include="System.Data.SqlClient.TypeForwards.cs" />
   </ItemGroup>
 
-  <ItemGroup Condition="'$(IsFunctionalAssembly)' == 'true'">
+  <ItemGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETCoreApp'">
     <PackageReference Include="runtime.native.System.Data.SqlClient.sni" />
   </ItemGroup>
 
