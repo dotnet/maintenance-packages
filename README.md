@@ -95,11 +95,6 @@ After executing the script, do the following:
 5.  Squash all the _new_ commits introduced by you in this repo, excluding the migrated commit history.
 6.  Submit the PR and tag @dotnet/area-infrastructure-libraries for review.
 
-
-## How to produce stable package versions
-
-Package versions produced by official builds for this repo will automatically contain a prerelease suffix. This is in order to be able to iterate through changes until we are ready to have a final build when we are ready for a new servicing release. When that time comes, all that is needed in order to produce packages that don't have the prerelease suffix is to manually queue a build in the official pipeline, and set the azdo pipeline variable `DotNetFinalVersionKind` to `release`. This will automatically cause Arcade to set the right version for the package, as well as use a dedicated NuGet feed to push the final build assets into an isolated feed where its name is suffixed with the commit number (in order to avoid potential version clashes).
-
 ## How to service a library
 
 The official build automatically builds and tests all the assemblies in this repo, but does not generate new packages by default. To enable the production of a new package for servicing, you need to set the `<IsPackable>` property to `true` in the assembly's src project file. Do not bump version numbers at this stage.
@@ -145,4 +140,17 @@ This project has adopted the [Microsoft Open Source Code of Conduct](https://ope
 
 ## Deployment
 
-All the assemblies in this repository are shipped as NuGet packages.
+### Produce the stable package versions
+
+Packages produced by builds for this repo will have a prerelease suffix appended to their name by default. This allows us to iterate through changes until we are ready to have a final build when we are ready for a new servicing release. When that time comes, all that is needed in order to produce packages that don't have the prerelease suffix is to manually queue a build in the official pipeline, and set the azdo pipeline variable `DotNetFinalVersionKind` to `release`. This will automatically cause Arcade to set the right version for the package, as well as use a dedicated NuGet feed to push the final build assets into an isolated feed where its name is suffixed with the commit number (in order to avoid potential version clashes).
+
+### Push the packages to NuGet
+
+A maintainer from @dotnet/area-infrastructure-libraries with the right permissions needs to download the produced stable artifacts and push them to NuGet.
+
+### Create the release notes
+
+1. Create a tag with the date of publishing in the format `YYYY.MM.DD`. There are no "release versions" in this repository because every package has its own release cadence.
+2. Choose the commit from which the stable package versions were produced.
+3. Add a title with the format "<Month> <Day> <Year> Release". See previous examples for guidance.
+4. In the release notes text, describe the changes, any new packages that were added to the repo since the last release, any fixes merged to the packages, and add a link to the changelog. See previous examples for guidance.
