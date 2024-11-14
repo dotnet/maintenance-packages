@@ -20,24 +20,17 @@ Some packages follow the same release cadence as the .NET release cadence, meani
 - [System.Text.Json](https://www.nuget.org/packages/System.Text.Json), which is part of the shared framework, but is also available as a NuGet package.
 - [Microsoft.Extensions.Configuration.Abstractions](https://www.nuget.org/packages/Microsoft.Extensions.Configuration.Abstractions), which is exclusively released as a NuGet package.
 
-Note that the source code of those two packages is hosted in the [dotnet/runtime](https://github.com/dotnet/runtime) repo.
+Note that the source code of those two packages lives in the [dotnet/runtime](https://github.com/dotnet/runtime) repo.
 
-On the other hand, the packages that come out from the maintenance-packages repo have a separate, independent release cadence, meaning their servicing releases will come out of this repo and will not be bound by any pre-defined release schedule.
-
-These are packages that originally had their source code hosted in branches that are already out of support, but the packages themselves are still in-support, because they target frameworks that are still supported. Some examples:
-
-- [System.Xml.XPath.XmlDocument](https://www.nuget.org/packages/System.Xml.XPath.XmlDocument) - Its source code used to be hosted in the .NET Core 1.1 branch.
-- [System.Buffers](https://www.nuget.org/packages/System.Buffers) - Its source code used to be hosted in the .NET Core 2.1 branch.
-- [Microsoft.Bcl.HashCode](https://www.nuget.org/packages/Microsoft.Bcl.HashCode) - Its source code used to be hosted in the.NET Core 3.1 branch.
-- [System.Net.WebSockets.WebSocketProtocol](https://www.nuget.org/packages/System.Net.WebSockets.WebSocketProtocol) - Its source code used to be hosted in the .NET 5.0 branch.
+On the other hand, the packages that come out from the dotnet/maintenance-packages repo have a separate, independent release cadence, meaning their servicing releases will come out of this repo and will not be bound by any pre-defined release schedule.
 
 ## End of support
 
-A package will be supported for as long as it targets frameworks that are still supported. For example: [System.Numerics.Vectors](https://www.nuget.org/packages/System.Json#supportedframeworks-body-tab) will is supported because it provides an implementation on .NET Framework 4.6.2, which is still in support.
+A package will be supported for as long as it targets frameworks that are still supported. For example: [System.Numerics.Vectors](https://www.nuget.org/packages/System.Json#supportedframeworks-body-tab) is supported because it provides an implementation on .NET Framework 4.6.2, which is still in support.
 
 ## Reporting issues
 
-If you find an issue in an assembly that is hosted in this repo, please report it in our central repo: https://github.com/dotnet/runtime/issues/new/choose.
+If you find an issue in an assembly that lives in this repo, please report it in our central repo: https://github.com/dotnet/runtime/issues/new/choose.
 
 ## Should I consume this package? Which version should I consume?
 
@@ -63,5 +56,5 @@ Please refer to the table below to:
 | System.Runtime.WindowsRuntime           | No               | [Built-in support for WinRT has been removed from .NET.](https://learn.microsoft.com/en-us/dotnet/core/compatibility/interop/5.0/built-in-support-for-winrt-removed) | Do not reference the package. Follow [the recommended actions](https://learn.microsoft.com/en-us/dotnet/core/compatibility/interop/5.0/built-in-support-for-winrt-removed#recommended-action). |
 | System.Runtime.WindowsRuntime.UI.Xaml   | No               | [Built-in support for WinRT has been removed from .NET.](https://learn.microsoft.com/en-us/dotnet/core/compatibility/interop/5.0/built-in-support-for-winrt-removed) | Do not reference the package. Follow [the recommended actions](https://learn.microsoft.com/en-us/dotnet/core/compatibility/interop/5.0/built-in-support-for-winrt-removed#recommended-action). |
 | System.Threading.Tasks.Extensions       | Yes              | Provides implementations of [`ValueTask`](https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.valuetask) and [`ValueTask<TResult>`](https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.valuetask-1) for .NET Framework. | <ul><li>.NET Framework 4.6.2+: Update to the latest version of the package.</li><li>.NET 6+: No need to reference the package. The types are part of the shared framework.</li></ul> |
-| System.ValueTuple                       | No               | The .NET Framework implementation is simply an in-box façade. | Do not reference the package. |
+| System.ValueTuple                       | No               | The .NET Framework implementation contained in the package is simply an in-box façade that forwards to the system-installed framework. | Do not reference the package. |
 | System.Xml.XPath.XmlDocument            | Yes              | Provides the implementation of the [`XmlDocumentXPathExtensions`](https://learn.microsoft.com/en-us/dotnet/api/system.xml.xmldocumentxpathextensions) extension methods. | Preferably, call the extended APIs directly. But if you need to call the extension methods, then update to the latest version of the package. |
