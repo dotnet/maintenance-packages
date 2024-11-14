@@ -28,7 +28,7 @@ variables:
   - name: _BuildJobDisplayName
     value: 'Build, Sign and Publish'
   - name: _DotNetFinalVersionKind
-    value: /p:DotNetFinalVersionKind=${{ variables.DotNetFinalVersionKind }}
+    value: $(variables.DotNetFinalVersionKind)
 
 resources:
   repositories:
@@ -95,7 +95,7 @@ extends:
                 -configuration Release
                 -prepareMachine
                 /p:Test=false
-                $(_DotNetFinalVersionKind)
+                /p:DotNetFinalVersionKind=$(_DotNetFinalVersionKind)
                 $(_AdditionalBuildArgs)
                 $(_InternalBuildArgs)
               displayName: $(_BuildJobDisplayName)
