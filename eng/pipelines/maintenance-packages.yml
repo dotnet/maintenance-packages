@@ -38,7 +38,10 @@ variables:
   - name: _BuildJobDisplayName
     value: 'Build, Sign and Publish'
   - name: _DotNetFinalVersionKind
-    value: /p:DotNetFinalVersionKind=${{ parameters.DotNetFinalVersionKind }}
+    ${{ if eq(parameters.DotNetFinalVersionKind, 'none') }}:
+      value: ''
+    ${{ else }}:
+      value: /p:DotNetFinalVersionKind=${{ parameters.DotNetFinalVersionKind }}
 
 resources:
   repositories:
