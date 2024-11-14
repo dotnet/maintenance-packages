@@ -41,11 +41,12 @@ stages:
     parameters:
       artifacts:
         publish:
-          artifacts: false
+          artifacts: true
           logs: true
           manifests: true
       enableMicrobuild: true
       enablePublishUsingPipelines: true
+      enablePublishBuildArtifacts: true
       publishAssetsImmediately: true
       enablePublishTestResults: true
       testResultsFormat: vstest
