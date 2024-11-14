@@ -43,7 +43,7 @@ Please refer to the table below to:
   - **Migrate** to another library.
   - *Something else*.
 
-| Package                                 | Still supported? | Supported where and why?                        | Actions to take                        |
+| Package                                 | Support | Supported where and why?                        | Actions to take                        |
 |-----------------------------------------|------------------|-------------------------------------------------|----------------------------------------|
 | Microsoft.Bcl.HashCode                  | Yes              | <ul><li>.NET Framework 4.6.2+: Provides the implementation of [`HashCode`](https://learn.microsoft.com/en-us/dotnet/api/system.hashcode).</li><li>.NET 6+: The type is already part of the shared framework.</li></ul> | <ul><li>.NET Framework 4.6.2+: Update.</li><li>.NET 6+: Remove.</li></ul> |
 | Microsoft.CSharp                        | Limited          | <ul><li>.NET Standard 2.0: Only used as a _reference_. Other uses are not supported.</li><li>.NET Framework 4.6.2+ and .NET 6+: The library is already part of the shared framework.</li></ul> | <ul><li>.NETStandard 2.0: Update.</li><li>.NET Framework 4.6.2+ and .NET 6+: Remove.</li></ul> |
