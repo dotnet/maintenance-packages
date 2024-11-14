@@ -3,9 +3,9 @@ parameters:
   type: string
   displayName: .NET Final Version Kind
   values:
-  - ''
+  - 
   - /p:DotNetFinalVersionKind=release
-  default: ''
+  default:
 
 trigger:
   batch: true
