@@ -3,9 +3,9 @@ parameters:
   type: string
   displayName: .NET Final Version Kind
   values:
-  - 
-  - /p:DotNetFinalVersionKind=release
-  default:
+  - prerelease
+  - release
+  default: prerelease
 
 trigger:
   batch: true
@@ -100,7 +100,7 @@ extends:
                 -configuration Release
                 -prepareMachine
                 /p:Test=false
-                ${{ parameters.DotNetFinalVersionKind }}
+                /p:DotNetFinalVersionKind=${{ parameters.DotNetFinalVersionKind }}
                 $(_AdditionalBuildArgs)
                 $(_InternalBuildArgs)
               displayName: $(_BuildJobDisplayName)
