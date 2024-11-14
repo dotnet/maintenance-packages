@@ -3,9 +3,10 @@ parameters:
   type: string
   displayName: .NET Final Version Kind
   values:
+  - none
   - prerelease
   - release
-  default: prerelease
+  default: none
 
 trigger:
   batch: true
