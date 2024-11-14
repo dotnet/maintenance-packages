@@ -1,7 +1,7 @@
 <Project>
 
   <PropertyGroup>
-    <IsPackable>false</IsPackable>
+    <IsPackable>true</IsPackable>
     <VersionPrefix>6.1.0</VersionPrefix>
     <VersionPrefix Condition="'$(IsPackable)' == 'true'">6.1.1</VersionPrefix>
   </PropertyGroup>
