@@ -41,7 +41,7 @@ stages:
     parameters:
       artifacts:
         publish:
-          artifacts: false
+          artifacts: true
           logs: true
           manifests: true
       enableMicrobuild: true
@@ -104,8 +104,9 @@ stages:
         parameters:
           artifacts:
             publish:
-              artifacts: true
-              name: "Publishing packing artifacts"
+              # Disable artifacts publish just for this job
+              # But override the copying and publish tasks below
+              artifacts: false
         enablePublishBuildArtifacts: true
         displayName: 'Pack Linux'
         timeoutInMinutes: 60
