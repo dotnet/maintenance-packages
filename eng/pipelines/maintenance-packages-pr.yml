@@ -105,6 +105,7 @@ stages:
           artifacts:
             publish:
               artifacts: true
+              name: "Publishing packing artifacts"
         enablePublishBuildArtifacts: true
         displayName: 'Pack Linux'
         timeoutInMinutes: 60
