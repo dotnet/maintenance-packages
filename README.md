@@ -93,7 +93,8 @@ After executing the script, do the following:
 3.  Build the whole repo using the base `build.cmd|sh` script.
 4.  Turn `<IsPackable>` to `true`, then run `dotnet pack` to see if APICompat / PackageValidation complain, in which case you'll have to address the issues. When done, set it back to `false`.
 5.  Squash all the _new_ commits introduced by you in this repo, excluding the migrated commit history.
-6.  Submit the PR and tag @dotnet/area-infrastructure-libraries for review.
+6.  Add the new assembly folder to .github/CODEOWNERS and tag the correct area owner from https://github.com/dotnet/runtime/blob/main/docs/area-owners.md .
+7.  Submit the PR and tag @dotnet/area-infrastructure-libraries for review.
 
 ## How to service a library
 
