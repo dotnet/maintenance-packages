@@ -101,10 +101,6 @@ stages:
             displayName: $(_BuildJobDisplayName)
 
       - job: pack_linux
-        parameters:
-          artifacts:
-            publish:
-              artifacts: true
         enablePublishBuildArtifacts: true
         displayName: 'Pack Linux'
         timeoutInMinutes: 60
