@@ -46,7 +46,6 @@ stages:
           manifests: true
       enableMicrobuild: true
       enablePublishUsingPipelines: true
-      enablePublishBuildArtifacts: true
       publishAssetsImmediately: true
       enablePublishTestResults: true
       testResultsFormat: vstest
