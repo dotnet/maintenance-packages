@@ -41,11 +41,12 @@ stages:
     parameters:
       artifacts:
         publish:
-          artifacts: false
+          artifacts: true
           logs: true
           manifests: true
       enableMicrobuild: true
       enablePublishUsingPipelines: true
+      enablePublishBuildArtifacts: true
       publishAssetsImmediately: true
       enablePublishTestResults: true
       testResultsFormat: vstest
@@ -101,7 +102,6 @@ stages:
             displayName: $(_BuildJobDisplayName)
 
       - job: pack_linux
-        enablePublishBuildArtifacts: true
         displayName: 'Pack Linux'
         timeoutInMinutes: 60
         container: LinuxContainer
@@ -124,22 +124,6 @@ stages:
             $(_AdditionalBuildArgs)
             $(_InternalBuildArgs)
           displayName: 'Build and pack'
-        # When artifacts.publish.artifacts is true, the bin folder is also published but
-        # we don't want that, so instead we manually copy and publish the artifacts here
-        - task: CopyFiles@2
-          displayName: Gather packages for artifact publishing
-          inputs:
-            SourceFolder: 'artifacts/packages'
-            Contents: '**'
-            TargetFolder: '$(Build.ArtifactStagingDirectory)/artifacts/packages'
-        - task: PublishBuildArtifacts@1
-          displayName: Publish the packages to artifacts
-          inputs:
-            PathtoPublish: '$(Build.ArtifactStagingDirectory)/artifacts'
-            PublishLocation: Container
-            ArtifactName: ${{ coalesce(parameters.artifacts.publish.artifacts.name , 'Artifacts_$(Agent.Os)_$(_BuildConfig)') }}
-          continueOnError: true
-          condition: always()
 
 - ${{ if eq(variables._RunAsInternal, True) }}:
   - template: /eng/common/templates/post-build/post-build.yml
