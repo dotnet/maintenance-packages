@@ -1,8 +1,9 @@
 <Project TreatAsLocalProperty="IsPackable">
 
-  <!-- Unset global IsPackable property. -->
+  <!-- Unset global IsPackable property.
+       Explicitly set to false as NuGet.targets would set an empty value to true. -->
   <PropertyGroup>
-    <IsPackable />
+    <IsPackable>false</IsPackable>
   </PropertyGroup>
 
 </Project>
