@@ -6,7 +6,7 @@
                                 '$(IsTestUtilityProject)' != 'true'">true</IsSourceProject>
   </PropertyGroup>
 
-  <Import Project="$(RepositoryEngineeringDir)unsetispackable.targets" Condition="'$(UnsetIsPackableForNonSourceProjects)' == 'true' and '$(IsSourceProject)' != 'true'" />
+  <Import Project="$(RepositoryEngineeringDir)overrideispackable.targets" Condition="'$(OverrideIsPackableForNonSourceProjects)' == 'true' and '$(IsSourceProject)' != 'true'" />
   <Import Project="$(RepositoryEngineeringDir)resources.targets" />
   <Import Project="Sdk.targets" Sdk="Microsoft.DotNet.Arcade.Sdk" />
 
