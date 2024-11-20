@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk.IL">
 
   <PropertyGroup>
-    <TargetFrameworks>$(NetFrameworkMinimum);netstandard2.0;net7.0</TargetFrameworks>
+    <TargetFrameworks>$(NetFrameworkMinimum);netstandard2.0;$(NetMinimum);net7.0</TargetFrameworks>
     <StrongNameKeyId>Microsoft</StrongNameKeyId>
     <AssemblyVersion>6.0.0.0</AssemblyVersion> <!-- NO-INCREMENT: This version is frozen for .NET Standard and .NETCoreApp because the assembly ships inbox. -->
     <SetIsTrimmable>true</SetIsTrimmable>
@@ -10,11 +10,9 @@
     <DebugOptimization Condition="'$(Configuration)' == 'Release'">OPT</DebugOptimization>
     <CoreCompileDependsOn>$(CoreCompileDependsOn);GenerateVersionFile</CoreCompileDependsOn>
     <IlasmFlags>$(IlasmFlags) -DEBUG=$(DebugOptimization)</IlasmFlags>
-    <PackageDescription>Provides the System.Runtime.CompilerServices.Unsafe class, which provides generic, low-level functionality for manipulating pointers.
-
-Commonly Used Types:
-System.Runtime.CompilerServices.Unsafe</PackageDescription>
+    <PackageDescription>Provides the System.Runtime.CompilerServices.Unsafe class, which provides generic, low-level functionality for manipulating pointers.</PackageDescription>
     <DocumentationFile>$(MSBuildProjectDirectory)\$(AssemblyName).xml</DocumentationFile>
+    <IsPlaceholderTargetFramework Condition="'$(TargetFramework)' == 'net7.0'">true</IsPlaceholderTargetFramework>
   </PropertyGroup>
 
   <!-- VersionPrefix and IsPackable are defined in the parent folder's Versioning.props file. -->
@@ -22,10 +20,14 @@ System.Runtime.CompilerServices.Unsafe</PackageDescription>
 
   <!-- Package servicing properties -->
   <PropertyGroup>
-    <AssemblyVersion Condition="$([MSBuild]::GetTargetFrameworkIdentifier('$(TargetFramework)')) == '.NETFramework'">6.0.0.0</AssemblyVersion>
-    <AssemblyVersion Condition="'$(IsPackable)' == 'true' and $([MSBuild]::GetTargetFrameworkIdentifier('$(TargetFramework)')) == '.NETFramework'">6.0.1.0</AssemblyVersion>
-    <PackageValidationBaselineVersion>4.7.1</PackageValidationBaselineVersion>
-    <IsPlaceholderTargetFramework Condition="$([MSBuild]::GetTargetFrameworkIdentifier('$(TargetFramework)')) == '.NETCoreApp'">true</IsPlaceholderTargetFramework>
+    <AssemblyVersion Condition="$([MSBuild]::GetTargetFrameworkIdentifier('$(TargetFramework)')) == '.NETFramework'">6.0.1.0</AssemblyVersion>
+    <AssemblyVersion Condition="'$(IsPackable)' == 'true' and $([MSBuild]::GetTargetFrameworkIdentifier('$(TargetFramework)')) == '.NETFramework'">6.0.2.0</AssemblyVersion>
+    <PackageValidationBaselineVersion>6.1.0</PackageValidationBaselineVersion>
+  </PropertyGroup>
+  
+  <PropertyGroup Condition="$([MSBuild]::GetTargetFrameworkIdentifier('$(TargetFramework)')) == '.NETCoreApp' and '$(IsPlaceholderTargetFramework)' != 'true'">
+    <ExtraMacros>#define netcoreapp</ExtraMacros>
+    <CoreAssembly>System.Runtime</CoreAssembly>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">

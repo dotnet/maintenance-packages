@@ -11,7 +11,7 @@ The main types provided by this library are:
 
 ## Additional Documentation
 
-- API reference can be found in: https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.extensions
+- API reference can be found in: https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks
 - https://devblogs.microsoft.com/dotnet/understanding-the-whys-whats-and-whens-of-valuetask/
 
 ## Related Packages
