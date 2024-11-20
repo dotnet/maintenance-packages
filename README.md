@@ -4,6 +4,11 @@
 
 This repo contains packages that are in maintenance and primarily updated for security servicing, as opposed to new features. They were previously hosted in repos or branches that are no longer active.
 
+## Package support policy
+
+This repo follows the [.NET Release policies](https://github.com/dotnet/core/blob/main/release-policies.md) document for release, servicing and support rules.
+For additional, specific rules that belong to this repo, please consult [Package support policy for maintenance-packages](package-support-policy.md).
+
 # How do I know if a particular package belongs on this repo?
 
 If a package is still building in a supported branch, then this repository is not the right place for it, and the supported branch where they're still building is their preferred servicing vehicle.
