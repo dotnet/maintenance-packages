@@ -41,7 +41,7 @@ stages:
     parameters:
       artifacts:
         publish:
-          artifacts: false
+          artifacts: true
           logs: true
           manifests: true
       enableMicrobuild: true

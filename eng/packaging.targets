@@ -124,6 +124,8 @@
                                    Condition="'$(IncludeSymbols)' == 'true' and Exists('%(_RuntimeSymbolPath.Identity)')" />
     </ItemGroup>
   </Target>
+  
+  <Target Name="Pack" Condition="'$(IsSourceProject)' != 'true'" />
 
   <Target Name="ValidatePackageReadmeExists" Condition="'$(IsShipping)' == 'true' and !Exists('$(PackageReadmeFile)')">
     <Error Text="$(PackageId) is a shipping package and is missing a required package README file. Add a 'PACKAGE.md' file to the source project folder." />
