@@ -12,10 +12,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\src\System.Memory.csproj" />
+    <ProjectReference Include="..\..\System.ValueTuple\src\System.ValueTuple.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="System.ValueTuple" />
   </ItemGroup>
 
 </Project>
