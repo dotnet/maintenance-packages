@@ -13,6 +13,10 @@
     <EnableDefaultItems>false</EnableDefaultItems>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="@(Compile)" />
+  </ItemGroup>
+
   <!-- Override to prevent building. -->
   <Target Name="CoreCompile" />
 

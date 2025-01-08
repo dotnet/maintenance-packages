@@ -15,7 +15,4 @@
     <ProjectReference Include="..\..\System.ValueTuple\src\System.ValueTuple.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-  </ItemGroup>
-
 </Project>

@@ -1,12 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk" InitialTargets="FailForNet47AsNetMinimum">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;$(NetFrameworkMinimum);net47;netcoreapp2.0</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;$(NetFrameworkMinimum);net47;net471;netcoreapp2.0</TargetFrameworks>
     <AssemblyKey>Open</AssemblyKey>
-    <IsPlaceholderTargetFramework
-      Condition="$([MSBuild]::GetTargetFrameworkIdentifier('$ (TargetFramework)')) == '.NETCoreApp'
-                 or ($([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'netstandard2.0'))
-                     and '$(TargetFramework)' != 'net462')">true</IsPlaceholderTargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <IsPlaceholderTargetFramework Condition="'$(TargetFramework)' != 'net462' and '$(TargetFramework)' != 'net47'">true</IsPlaceholderTargetFramework>
   </PropertyGroup>
 
   <!-- Package servicing properties -->
@@ -20,6 +20,15 @@
   </PropertyGroup>
 
   <Choose>
+    <!-- Real implementation -->
+    <When Condition="'$(TargetFramework)' == 'net462'">
+      <ItemGroup>
+        <Compile Remove="TypeForwards.cs" />
+        <Compile Include="$(CommonPath)src\System\Numerics\Hashing\HashHelpers.cs" Link="Common\System\Numerics\Hashing\HashHelpers.cs" />
+      </ItemGroup>
+    </When>
+
+    <!-- Type forwards -->
     <When Condition="'$(TargetFramework)' == 'net47'">
       <PropertyGroup>
         <EnableDefaultItems>false</EnableDefaultItems>
@@ -27,13 +36,6 @@
 
       <ItemGroup>
         <Compile Include="TypeForwards.cs" />
-      </ItemGroup>
-    </When>
-
-    <When Condition="'$(IsPlaceholderTargetFramework)' != true">
-      <ItemGroup>
-        <Compile Remove="TypeForwards.cs" />
-        <Compile Include="$(CommonPath)src\System\Numerics\Hashing\HashHelpers.cs" Link="Common\System\Numerics\Hashing\HashHelpers.cs" />
       </ItemGroup>
     </When>
   </Choose>
