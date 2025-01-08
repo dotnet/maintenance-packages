@@ -7,7 +7,7 @@ Provides additional types for efficiently representing asynchronous operations.
 The main types provided by this library are:
 
 - System.Threading.Tasks.ValueTask
-- System.Threading.Tasks.ValueTask<TResult>
+- System.Threading.Tasks.ValueTask&lt;TResult&gt;
 
 ## Additional Documentation
 

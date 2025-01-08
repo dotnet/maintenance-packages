@@ -15,7 +15,6 @@ namespace System
         //
 
         public static bool IsWindows => RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
-        public static bool IsWindows7 => IsWindows && GetWindowsVersion() == 6 && GetWindowsMinorVersion() == 1;
         private static volatile Version s_windowsVersionObject;
         internal static Version GetWindowsVersionObject()
         {
