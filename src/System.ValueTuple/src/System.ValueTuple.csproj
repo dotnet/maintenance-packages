@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk" InitialTargets="FailForNet47AsNetMinimum">
+<Project Sdk="Microsoft.NET.Sdk" InitialTargets="FailForUpdatedNetFrameworkMinimum">
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;$(NetFrameworkMinimum);net47;net471;netcoreapp2.0</TargetFrameworks>
@@ -40,8 +40,8 @@
     </When>
   </Choose>
 
-  <Target Name="FailForNet47AsNetMinimum" Condition="'$(NetFrameworkMinimum)' == 'net47'">
-    <Error Text="NetMinimum is net47 now. Consider removing this implementation or the whole library." />
+  <Target Name="FailForUpdatedNetFrameworkMinimum" Condition="'$(NetFrameworkMinimum)' != 'net462'">
+    <Error Text="NetFrameworkMinimum got changed to '$(NetFrameworkMinimum)'. Consider removing this implementation or the whole library." />
   </Target>
 
 </Project>
