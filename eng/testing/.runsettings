@@ -11,7 +11,7 @@
     <TargetPlatform>$$TARGETPLATFORM$$</TargetPlatform>
     <DotNetHostPath>$$DOTNETHOSTPATH$$</DotNetHostPath>
     <!-- Filter out failing (wrong framwork, platform, runtime or activeissue) tests -->
-    <TestCaseFilter>category!=failing&category!=OuterLoop</TestCaseFilter>
+    <TestCaseFilter>category!=failing&amp;category!=OuterLoop</TestCaseFilter>
   </RunConfiguration>
   <LoggerRunSettings>
     <Loggers>
