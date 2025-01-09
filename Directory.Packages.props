@@ -17,7 +17,6 @@
   <ItemGroup>
     <PackageVersion Include="runtime.native.System.Data.SqlClient.sni" Version="4.4.0" />
     <PackageVersion Include="System.Reflection.Emit" Version="4.7.0" />
-    <PackageVersion Include="System.ValueTuple" Version="4.5.0" />
   </ItemGroup>
 
   <ItemGroup>
