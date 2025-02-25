@@ -23,14 +23,7 @@ namespace System.Reflection
         /// <param name="targetMethod">The method the caller invoked</param>
         /// <param name="args">The arguments the caller passed to the method</param>
         /// <returns>The object to return to the caller, or <c>null</c> for void methods</returns>
-#if NETSTANDARD2_0
-        protected object Invoke(MethodInfo targetMethod, object[] args)
-        {
-            throw new PlatformNotSupportedException(SR.PlatformNotSupported_ReflectionDispatchProxy);
-        }
-#else
         protected abstract object Invoke(MethodInfo targetMethod, object[] args);
-#endif
 
         /// <summary>
         /// Creates an object instance that derives from class <typeparamref name="TProxy"/>
