@@ -19,8 +19,9 @@
     <PackageVersion Include="System.Reflection.Emit" Version="4.7.0" />
   </ItemGroup>
 
+  <!-- Dependencies from dotnet/sdk -->
   <ItemGroup>
-    <GlobalPackageReference Include="Microsoft.DotNet.ApiCompat.Task" Version="$(MicrosoftDotNetApiCompatTaskVersion)" />
+    <GlobalPackageReference Include="Microsoft.DotNet.ApiCompat.Task" Version="10.0.100-preview.3.25124.13" />
   </ItemGroup>
 
 </Project>
