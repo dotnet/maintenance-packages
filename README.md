@@ -62,7 +62,7 @@ On the other hand, if the package is still targeting frameworks that are still i
       -AssemblyFileOrDirectoryRelativeDirectoryPath src/libraries \
       -DestinationRepoPath D:/maintenance-packages
     ```
-    
+
     d. Migrating a package from .NET 6.0:
     ```powershell
       .\eng\Migrate-Package.ps1 \
@@ -106,6 +106,16 @@ After executing the script, do the following:
 The official build automatically builds and tests all the assemblies in this repo, but does not generate new packages by default. To enable the production of a new package for servicing, you need to set the `<IsPackable>` property to `true` in the assembly's src project file. Do not bump version numbers at this stage.
 
 Make sure to investigate any ApiCompat failures that arise, as they only show up when packing.
+
+Make sure to also update the version of any projects that depend on the one you're updating, and do this recursively as needed. Only a handful of projects are dependencies of others:
+
+| Project                                | Dependents |
+|----------------------------------------|------------|
+| System.Buffers                         | <ul><li>System.Buffers</li><li>System.Memory</li><li>System.Net.WebSockets.WebSocketProtocol</li></ul> |
+| System.Memory                          | <ul><li>Microsoft.IO.Redist</li><li>System.Net.WebSockets.WebSocketProtocol</li></ul> |
+| System.Numerics.Vectors                | <ul><li>System.Memory</li><li>System.Net.WebSockets.WebSocketProtocol</li></ul> |
+| System.Runtime.CompilerServices.Unsafe | <ul><li>Microsoft.IO.Redist</li><li>System.Memory</li><li>System.Net.WebSockets.WebSocketProtocol</li><li>System.Threading.Tasks.Extensions</li></ul> |
+| System.Threading.Tasks.Extensions      | <ul><li>System.Net.WebSockets.WebSocketProtocol</li></ul> |
 
 ## How to disable servicing a library
 
