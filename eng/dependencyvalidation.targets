@@ -4,14 +4,8 @@
   <Target Name="_AddTransitiveServicedPackagesToOutput"
           AfterTargets="GetTargetPathWithTargetPlatformMoniker"
           Condition="'$(IsInnerBuild)' == 'true'">
-    <PropertyGroup>
-      <_TransitiveServicedPackages
-          Condition="'%(ReferencePath.ReferenceSourceTarget)' == 'ProjectReference' and
-                     '%(ReferencePath.IsPackable)' == 'true'"
-                     >@(ReferencePath->'%(OriginalProjectReferenceItemSpec)')</_TransitiveServicedPackages>
-    </PropertyGroup>
     <ItemGroup>
-      <TargetPathWithTargetPlatformMoniker TransitiveServicedPackages="$(_TransitiveServicedPackages)" />
+      <TargetPathWithTargetPlatformMoniker TransitiveServicedPackages="@(ReferencePath->WithMetadataValue('ReferenceSourceTarget', 'ProjectReference')->WithMetadataValue('IsPackable', 'true')->Metadata('OriginalProjectReferenceItemSpec'))" />
     </ItemGroup>
   </Target>
 
@@ -20,15 +14,11 @@
           Condition="'$(IsInnerBuild)' != 'true'"
           AfterTargets="Build">
     <ItemGroup>
-      <TransitiveServicedPackages Include="%(InnerOutput.TransitiveServicedPackages)"
-                                  Condition="'$(IsCrossTargetingBuild)' == 'true'" />
-      <TransitiveServicedPackages Include="'%(ReferencePath.OriginalProjectReferenceItemSpec)"
-                                  Condition="'%(ReferencePath.ReferenceSourceTarget)' == 'ProjectReference' and
-                                             '%(ReferencePath.IsPackable)' == 'true'" />
+      <TransitiveServicedPackages Include="%(InnerOutput.TransitiveServicedPackages)" Condition="'$(IsCrossTargetingBuild)' == 'true'" />
+      <TransitiveServicedPackages Include="@(ReferencePath->WithMetadataValue('ReferenceSourceTarget', 'ProjectReference')->WithMetadataValue('IsPackable', 'true')->Metadata('OriginalProjectReferenceItemSpec'))" />
     </ItemGroup>
     <Error Condition="'@(TransitiveServicedPackages)' != ''"
            Text="'$(MSBuildProjectName)' did not set 'IsPackable' to 'true', but one or more of its dependencies did: '@(TransitiveServicedPackages->'%(FileName)')'. Please ship '$(MSBuildProjectName)' by setting 'IsPackable' to 'true'." />
   </Target>
-
 
 </Project>
