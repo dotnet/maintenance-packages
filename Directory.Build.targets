@@ -6,6 +6,7 @@
                                 '$(IsTestUtilityProject)' != 'true'">true</IsSourceProject>
   </PropertyGroup>
 
+  <!-- This is used by dependencyvalidation.targets -->
   <ItemDefinitionGroup>
     <TargetPathWithTargetPlatformMoniker>
       <IsPackable>$(IsPackable)</IsPackable>
