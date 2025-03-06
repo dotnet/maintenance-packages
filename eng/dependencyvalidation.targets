@@ -1,0 +1,24 @@
+<Project>
+
+  <!-- Flows the list of ProjectReferences that are enabled for packaging when building a multi-targeting project -->
+  <Target Name="_AddTransitiveServicedPackagesToOutput"
+          AfterTargets="GetTargetPathWithTargetPlatformMoniker"
+          Condition="'$(IsInnerBuild)' == 'true'">
+    <ItemGroup>
+      <TargetPathWithTargetPlatformMoniker TransitiveServicedPackages="@(ReferencePath->WithMetadataValue('ReferenceSourceTarget', 'ProjectReference')->WithMetadataValue('IsPackable', 'true')->Metadata('OriginalProjectReferenceItemSpec'))" />
+    </ItemGroup>
+  </Target>
+
+  <!-- Validate that if a dependency that lives in this repo set IsPackable to true, the current project also set IsPackable to true. -->
+  <Target Name="ValidateServicingProperties"
+          Condition="'$(IsInnerBuild)' != 'true'"
+          AfterTargets="Build">
+    <ItemGroup>
+      <TransitiveServicedPackages Include="%(InnerOutput.TransitiveServicedPackages)" Condition="'$(IsCrossTargetingBuild)' == 'true'" />
+      <TransitiveServicedPackages Include="@(ReferencePath->WithMetadataValue('ReferenceSourceTarget', 'ProjectReference')->WithMetadataValue('IsPackable', 'true')->Metadata('OriginalProjectReferenceItemSpec'))" />
+    </ItemGroup>
+    <Error Condition="'@(TransitiveServicedPackages)' != ''"
+           Text="'$(MSBuildProjectName)' did not set 'IsPackable' to 'true', but one or more of its dependencies did: '@(TransitiveServicedPackages->'%(FileName)')'. Please ship '$(MSBuildProjectName)' by setting 'IsPackable' to 'true'." />
+  </Target>
+
+</Project>
