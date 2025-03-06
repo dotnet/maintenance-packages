@@ -19,7 +19,7 @@
   <Import Project="$(RepositoryEngineeringDir)testing\runsettings.targets" Condition="'$(IsTestProject)' == 'true'" />
   <Import Project="$(RepositoryEngineeringDir)placeholderpackaging.targets" Condition="'$(IsPlaceholderTargetFramework)' == 'true' and '$(IsCrossTargetingBuild)' != 'true'" />
   <Import Project="$(RepositoryEngineeringDir)packaging.targets" Condition="'$(IsPackable)' == 'true'" />
-  <Import Project="$(RepositoryEngineeringDir)servicingValidation.targets" Condition="'$(IsPackable)' != 'true' and '$(IsSourceProject)' == 'true'" />
+  <Import Project="$(RepositoryEngineeringDir)dependencyvalidation.targets" Condition="'$(IsPackable)' != 'true' and '$(IsSourceProject)' == 'true'" />
 
   <PropertyGroup>
     <!-- Libraries have never generated these attributes so don't let the SDK generate them. -->
