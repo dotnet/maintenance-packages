@@ -27,7 +27,7 @@
                                              '%(ReferencePath.IsPackable)' == 'true'" />
     </ItemGroup>
     <Error Condition="'@(TransitiveServicedPackages)' != ''"
-           Text="'$(MSBuildProjectName)' did not set 'IsPackable' to 'true', but one or more of its dependencies did: '@(TransitiveServicedPackages->'%(FileName)')'. Please ship '$(MSBuildProjectName)' by setting 'IsPackable' to 'true' and incrementing its servicing version(s)." />
+           Text="'$(MSBuildProjectName)' did not set 'IsPackable' to 'true', but one or more of its dependencies did: '@(TransitiveServicedPackages->'%(FileName)')'. Please ship '$(MSBuildProjectName)' by setting 'IsPackable' to 'true'." />
   </Target>
 
 
