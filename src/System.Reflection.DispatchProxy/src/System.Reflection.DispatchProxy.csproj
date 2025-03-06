@@ -10,7 +10,7 @@
 
   <!-- Package servicing properties -->
   <PropertyGroup>
-    <IsPackable>true</IsPackable>
+    <IsPackable>false</IsPackable>
     <VersionPrefix>4.8.0</VersionPrefix>
     <VersionPrefix Condition="'$(IsPackable)' == 'true'">4.8.1</VersionPrefix>
     <AssemblyVersion Condition="$([MSBuild]::GetTargetFrameworkIdentifier('$(TargetFramework)')) == '.NETFramework'">4.0.7.0</AssemblyVersion>

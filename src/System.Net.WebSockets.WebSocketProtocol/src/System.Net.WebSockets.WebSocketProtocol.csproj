@@ -9,7 +9,7 @@
 
   <!-- Package servicing properties -->
   <PropertyGroup>
-    <IsPackable>true</IsPackable>
+    <IsPackable>false</IsPackable>
     <VersionPrefix>5.1.0</VersionPrefix>
     <VersionPrefix Condition="'$(IsPackable)' == 'true'">5.1.1</VersionPrefix>
     <PackageValidationBaselineVersion>5.1.0</PackageValidationBaselineVersion>
