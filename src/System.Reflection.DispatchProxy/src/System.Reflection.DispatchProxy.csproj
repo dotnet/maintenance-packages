@@ -10,12 +10,12 @@
 
   <!-- Package servicing properties -->
   <PropertyGroup>
-    <IsPackable>true</IsPackable>
-    <VersionPrefix>4.8.0</VersionPrefix>
-    <VersionPrefix Condition="'$(IsPackable)' == 'true'">4.8.1</VersionPrefix>
-    <AssemblyVersion Condition="$([MSBuild]::GetTargetFrameworkIdentifier('$(TargetFramework)')) == '.NETFramework'">4.0.7.0</AssemblyVersion>
-    <AssemblyVersion Condition="'$(IsPackable)' == 'true' and $([MSBuild]::GetTargetFrameworkIdentifier('$(TargetFramework)')) == '.NETFramework'">4.0.8.0</AssemblyVersion>
-    <PackageValidationBaseLineVersion>4.8.0</PackageValidationBaseLineVersion>
+    <IsPackable>false</IsPackable>
+    <VersionPrefix>4.8.1</VersionPrefix>
+    <VersionPrefix Condition="'$(IsPackable)' == 'true'">4.8.2</VersionPrefix>
+    <AssemblyVersion Condition="$([MSBuild]::GetTargetFrameworkIdentifier('$(TargetFramework)')) == '.NETFramework'">4.0.8.0</AssemblyVersion>
+    <AssemblyVersion Condition="'$(IsPackable)' == 'true' and $([MSBuild]::GetTargetFrameworkIdentifier('$(TargetFramework)')) == '.NETFramework'">4.0.9.0</AssemblyVersion>
+    <PackageValidationBaseLineVersion>4.8.1</PackageValidationBaseLineVersion>
   </PropertyGroup>
 
   <ItemGroup Condition="!$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'netstandard2.1'))">

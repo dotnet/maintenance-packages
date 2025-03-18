@@ -9,10 +9,10 @@
 
   <!-- Package servicing properties -->
   <PropertyGroup>
-    <IsPackable>true</IsPackable>
-    <VersionPrefix>5.1.0</VersionPrefix>
-    <VersionPrefix Condition="'$(IsPackable)' == 'true'">5.1.1</VersionPrefix>
-    <PackageValidationBaselineVersion>5.1.0</PackageValidationBaselineVersion>
+    <IsPackable>false</IsPackable>
+    <VersionPrefix>5.1.1</VersionPrefix>
+    <VersionPrefix Condition="'$(IsPackable)' == 'true'">5.1.2</VersionPrefix>
+    <PackageValidationBaselineVersion>5.1.1</PackageValidationBaselineVersion>
   </PropertyGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' == '$(NetMinimum)'">
