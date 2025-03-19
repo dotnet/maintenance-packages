@@ -1,11 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>$(NetFrameworkMinimum);netstandard2.0;netstandard2.1;netcoreapp2.0</TargetFrameworks>
+    <TargetFrameworks>$(NetFrameworkMinimum);netstandard2.0;netstandard2.1;netcoreapp2.1</TargetFrameworks>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <StrongNameKeyId>Open</StrongNameKeyId>
     <AssemblyVersion>4.2.1.0</AssemblyVersion> <!-- NO-INCREMENT: This version is frozen for netstandard2.0. -->
-    <IsPlaceholderTargetFramework Condition="'$(TargetFramework)' == 'netstandard2.1' or '$(TargetFramework)' == 'netcoreapp2.0'">true</IsPlaceholderTargetFramework>
+    <IsPlaceholderTargetFramework Condition="'$(TargetFramework)' == 'netstandard2.1' or '$(TargetFramework)' == 'netcoreapp2.1'">true</IsPlaceholderTargetFramework>
   </PropertyGroup>
 
   <!-- Package servicing properties -->
@@ -13,8 +13,8 @@
     <IsPackable>true</IsPackable>
     <VersionPrefix>4.6.1</VersionPrefix>
     <VersionPrefix Condition="'$(IsPackable)' == 'true'">4.6.2</VersionPrefix>
-    <AssemblyVersion>4.2.2.0</AssemblyVersion>
-    <AssemblyVersion Condition="'$(IsPackable)' == 'true'">4.2.3.0</AssemblyVersion><!-- Keep the new assembly version under 4.3.x.x! -->
+    <AssemblyVersion Condition="$([MSBuild]::GetTargetFrameworkIdentifier('$(TargetFramework)')) == '.NETFramework'">4.2.2.0</AssemblyVersion>
+    <AssemblyVersion Condition="'$(IsPackable)' == 'true' and $([MSBuild]::GetTargetFrameworkIdentifier('$(TargetFramework)')) == '.NETFramework'">4.2.3.0</AssemblyVersion><!-- Keep the new assembly version under 4.3.x.x! -->
     <PackageValidationBaselineVersion>4.6.1</PackageValidationBaselineVersion>
   </PropertyGroup>
 
