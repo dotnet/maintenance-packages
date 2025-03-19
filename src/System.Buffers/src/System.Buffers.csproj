@@ -1,20 +1,19 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;$(NetFrameworkMinimum);netcoreapp2.1</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;$(NetFrameworkMinimum);netstandard2.1</TargetFrameworks>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <StrongNameKeyId>Open</StrongNameKeyId>
-    <AssemblyVersion>4.0.2.0</AssemblyVersion> <!-- NO-INCREMENT: This version is frozen for .NET Standard and .NETCoreApp because the assembly ships inbox. This version matches the applicable ref assembly. -->
-    <IsPlaceholderTargetFramework Condition="$([MSBuild]::GetTargetFrameworkIdentifier('$(TargetFramework)')) == '.NETCoreApp'">true</IsPlaceholderTargetFramework>
+    <IsPlaceholderTargetFramework Condition="'$(TargetFramework)' == 'netstandard2.1'">true</IsPlaceholderTargetFramework>
   </PropertyGroup>
 
   <!-- Package servicing properties -->
   <PropertyGroup>
-    <IsPackable>false</IsPackable>
+    <IsPackable>true</IsPackable>
     <VersionPrefix>4.6.0</VersionPrefix>
     <VersionPrefix Condition="'$(IsPackable)' == 'true'">4.6.1</VersionPrefix>
-    <AssemblyVersion Condition="$([MSBuild]::GetTargetFrameworkIdentifier('$(TargetFramework)')) == '.NETFramework'">4.0.4.0</AssemblyVersion>
-    <AssemblyVersion Condition="'$(IsPackable)' == 'true' and $([MSBuild]::GetTargetFrameworkIdentifier('$(TargetFramework)')) == '.NETFramework'">4.0.5.0</AssemblyVersion>
+    <AssemblyVersion>4.0.4.0</AssemblyVersion>
+    <AssemblyVersion Condition="'$(IsPackable)' == 'true'">4.0.5.0</AssemblyVersion>
     <PackageValidationBaselineVersion>4.6.0</PackageValidationBaselineVersion>
   </PropertyGroup>
 

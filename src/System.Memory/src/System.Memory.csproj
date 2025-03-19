@@ -1,16 +1,16 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;$(NetFrameworkMinimum);netcoreapp2.1</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;$(NetFrameworkMinimum);netstandard2.1</TargetFrameworks>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <StrongNameKeyId>Open</StrongNameKeyId>
     <Nullable>disable</Nullable>
-    <IsPlaceholderTargetFramework Condition="$([MSBuild]::GetTargetFrameworkIdentifier('$(TargetFramework)')) == '.NETCoreApp'">true</IsPlaceholderTargetFramework>
+    <IsPlaceholderTargetFramework Condition="'$(TargetFramework)' == 'netstandard2.1'">true</IsPlaceholderTargetFramework>
   </PropertyGroup>
 
   <!-- Package servicing properties -->
   <PropertyGroup>
-    <IsPackable>false</IsPackable>
+    <IsPackable>true</IsPackable>
     <VersionPrefix>4.6.1</VersionPrefix>
     <VersionPrefix Condition="'$(IsPackable)' == 'true'">4.6.2</VersionPrefix>
     <AssemblyVersion>4.0.3.0</AssemblyVersion>
