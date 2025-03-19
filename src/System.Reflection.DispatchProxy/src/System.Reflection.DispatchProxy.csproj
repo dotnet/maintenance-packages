@@ -4,6 +4,7 @@
     <TargetFrameworks>$(NetFrameworkMinimum);netstandard2.0;netcoreapp2.0;netstandard2.1</TargetFrameworks>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <StrongNameKeyId>Microsoft</StrongNameKeyId>
+    <AssemblyVersion>4.0.6.0</AssemblyVersion> <!-- NO-INCREMENT: This version is frozen for netstandard2.0. -->
     <IsPlaceholderTargetFramework Condition="'$(TargetFramework)' == 'netcoreapp2.0' or '$(TargetFramework)' == 'netstandard2.1'">true</IsPlaceholderTargetFramework>
   </PropertyGroup>
 
@@ -12,8 +13,8 @@
     <IsPackable>true</IsPackable>
     <VersionPrefix>4.8.1</VersionPrefix>
     <VersionPrefix Condition="'$(IsPackable)' == 'true'">4.8.2</VersionPrefix>
-    <AssemblyVersion>4.0.8.0</AssemblyVersion>
-    <AssemblyVersion Condition="'$(IsPackable)' == 'true'">4.0.9.0</AssemblyVersion>
+    <AssemblyVersion Condition="$([MSBuild]::GetTargetFrameworkIdentifier('$(TargetFramework)')) == '.NETFramework'">4.0.8.0</AssemblyVersion>
+    <AssemblyVersion Condition="'$(IsPackable)' == 'true' and $([MSBuild]::GetTargetFrameworkIdentifier('$(TargetFramework)')) == '.NETFramework'">4.0.9.0</AssemblyVersion>
     <PackageValidationBaseLineVersion>4.8.1</PackageValidationBaseLineVersion>
   </PropertyGroup>
 
