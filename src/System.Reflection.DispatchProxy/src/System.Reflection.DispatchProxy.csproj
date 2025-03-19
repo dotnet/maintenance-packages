@@ -15,7 +15,7 @@
     <VersionPrefix Condition="'$(IsPackable)' == 'true'">4.8.2</VersionPrefix>
     <AssemblyVersion Condition="$([MSBuild]::GetTargetFrameworkIdentifier('$(TargetFramework)')) == '.NETFramework'">4.0.8.0</AssemblyVersion>
     <AssemblyVersion Condition="'$(IsPackable)' == 'true' and $([MSBuild]::GetTargetFrameworkIdentifier('$(TargetFramework)')) == '.NETFramework'">4.0.9.0</AssemblyVersion>
-    <PackageValidationBaseLineVersion>4.8.1</PackageValidationBaseLineVersion>
+    <PackageValidationBaseLineVersion>4.8.0</PackageValidationBaseLineVersion>
   </PropertyGroup>
 
   <ItemGroup>
