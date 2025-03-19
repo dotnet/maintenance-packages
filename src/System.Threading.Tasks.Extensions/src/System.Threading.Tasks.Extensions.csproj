@@ -1,11 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>$(NetFrameworkMinimum);netstandard2.0;netstandard2.1</TargetFrameworks>
+    <TargetFrameworks>$(NetFrameworkMinimum);netstandard2.0;netstandard2.1;netcoreapp2.0</TargetFrameworks>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <StrongNameKeyId>Open</StrongNameKeyId>
     <AssemblyVersion>4.2.1.0</AssemblyVersion> <!-- NO-INCREMENT: This version is frozen for netstandard2.0. -->
-    <IsPlaceholderTargetFramework Condition="'$(TargetFramework)' == 'netstandard2.1'">true</IsPlaceholderTargetFramework>
+    <IsPlaceholderTargetFramework Condition="'$(TargetFramework)' == 'netstandard2.1' or '$(TargetFramework)' == 'netcoreapp2.0'">true</IsPlaceholderTargetFramework>
   </PropertyGroup>
 
   <!-- Package servicing properties -->
