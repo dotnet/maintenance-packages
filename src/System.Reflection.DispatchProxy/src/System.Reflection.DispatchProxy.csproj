@@ -1,30 +1,22 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>$(NetFrameworkMinimum);netstandard2.0;netstandard2.1;netcoreapp3.1</TargetFrameworks>
+    <TargetFrameworks>$(NetFrameworkMinimum);netstandard2.0;netcoreapp2.0;netstandard2.1</TargetFrameworks>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <StrongNameKeyId>Microsoft</StrongNameKeyId>
-    <AssemblyVersion>4.0.6.0</AssemblyVersion> <!-- NO-INCREMENT: This version is frozen for .NET Standard and .NETCoreApp because the assembly ships inbox. -->
-    <IsPlaceholderTargetFramework Condition="'$(TargetFramework)' == 'netcoreapp3.1'">true</IsPlaceholderTargetFramework>
+    <AssemblyVersion>4.0.6.0</AssemblyVersion> <!-- NO-INCREMENT: This version is frozen for netstandard2.0. -->
+    <IsPlaceholderTargetFramework Condition="'$(TargetFramework)' == 'netcoreapp2.0' or '$(TargetFramework)' == 'netstandard2.1'">true</IsPlaceholderTargetFramework>
   </PropertyGroup>
 
   <!-- Package servicing properties -->
   <PropertyGroup>
-    <IsPackable>false</IsPackable>
+    <IsPackable>true</IsPackable>
     <VersionPrefix>4.8.1</VersionPrefix>
     <VersionPrefix Condition="'$(IsPackable)' == 'true'">4.8.2</VersionPrefix>
     <AssemblyVersion Condition="$([MSBuild]::GetTargetFrameworkIdentifier('$(TargetFramework)')) == '.NETFramework'">4.0.8.0</AssemblyVersion>
     <AssemblyVersion Condition="'$(IsPackable)' == 'true' and $([MSBuild]::GetTargetFrameworkIdentifier('$(TargetFramework)')) == '.NETFramework'">4.0.9.0</AssemblyVersion>
-    <PackageValidationBaseLineVersion>4.8.1</PackageValidationBaseLineVersion>
+    <PackageValidationBaseLineVersion>4.8.0</PackageValidationBaseLineVersion>
   </PropertyGroup>
-
-  <ItemGroup Condition="!$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'netstandard2.1'))">
-    <Compile Remove="System.Reflection.DispatchProxy.Forwards.cs" />
-  </ItemGroup>
-
-  <ItemGroup Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'netstandard2.1'))">
-    <Compile Remove="System\Reflection\DispatchProxy.cs" />
-  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="System.Reflection.Emit" Condition="'$(TargetFramework)' == 'netstandard2.0'" />
