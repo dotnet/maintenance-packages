@@ -1,9 +1,12 @@
 <Project>
 
   <PropertyGroup>
-    <IsPackable>false</IsPackable>
+    <IsPackable>true</IsPackable>
     <VersionPrefix>6.1.1</VersionPrefix>
     <VersionPrefix Condition="'$(IsPackable)' == 'true'">6.1.2</VersionPrefix>
+    <AssemblyVersion Condition="$([MSBuild]::GetTargetFrameworkIdentifier('$(TargetFramework)')) == '.NETFramework'">6.0.2.0</AssemblyVersion>
+    <AssemblyVersion Condition="'$(IsPackable)' == 'true' and $([MSBuild]::GetTargetFrameworkIdentifier('$(TargetFramework)')) == '.NETFramework'">6.0.3.0</AssemblyVersion>
+    <PackageValidationBaselineVersion>6.1.1</PackageValidationBaselineVersion>
   </PropertyGroup>
 
 </Project>
