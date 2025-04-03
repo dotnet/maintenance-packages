@@ -6,7 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="$(RepoRoot)\src\*\src\*.csproj" />
-    <ProjectReference Include="$(RepoRoot)\src\System.Runtime.CompilerServices.Unsafe\Versioning.props" />
+    <!-- <ProjectReference Include="$(RepoRoot)\src\System.Runtime.CompilerServices.Unsafe\Versioning.props" /> -->
   </ItemGroup>
 
   <Target Name="CollectSourceProjects">
