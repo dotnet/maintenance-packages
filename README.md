@@ -4,6 +4,31 @@
 
 This repo contains packages that are in maintenance and primarily updated for security servicing, as opposed to new features. They were previously hosted in repos or branches that are no longer active.
 
+## Build status
+
+Visibility|All jobs|
+|:------|:------|
+|Public|[![Status](https://dev.azure.com/dnceng-public/public/_apis/build/status/234)](https://dev.azure.com/dnceng-public/public/_build?definitionId=234)|
+|Microsoft Internal|[![Status](https://dev.azure.com/dnceng/internal/_apis/build/status/1199)](https://dev.azure.com/dnceng/internal/_build?definitionId=1199)|
+
+## NuGet packages
+
+| NuGet Version                                                                                     | Package Name                                      |
+|--------------------------------------------------------------------------------------------------|--------------------------------------------------|
+| [![NuGet Version](https://img.shields.io/nuget/v/Microsoft.Bcl.HashCode.svg?style=flat)](https://www.nuget.org/packages/Microsoft.Bcl.HashCode/) | Microsoft.Bcl.HashCode                           |
+| [![NuGet Version](https://img.shields.io/nuget/v/Microsoft.IO.Redist.svg?style=flat)](https://www.nuget.org/packages/Microsoft.IO.Redist/) | Microsoft.IO.Redist                              |
+| [![NuGet Version](https://img.shields.io/nuget/v/System.Buffers.svg?style=flat)](https://www.nuget.org/packages/System.Buffers/) | System.Buffers                                   |
+| [![NuGet Version](https://img.shields.io/nuget/v/System.Data.SqlClient.svg?style=flat)](https://www.nuget.org/packages/System.Data.SqlClient/) | System.Data.SqlClient                            |
+| [![NuGet Version](https://img.shields.io/nuget/v/System.Json.svg?style=flat)](https://www.nuget.org/packages/System.Json/) | System.Json                                      |
+| [![NuGet Version](https://img.shields.io/nuget/v/System.Memory.svg?style=flat)](https://www.nuget.org/packages/System.Memory/) | System.Memory                                    |
+| [![NuGet Version](https://img.shields.io/nuget/v/System.Net.WebSockets.WebSocketProtocol.svg?style=flat)](https://www.nuget.org/packages/System.Net.WebSockets.WebSocketProtocol/) | System.Net.WebSockets.WebSocketProtocol          |
+| [![NuGet Version](https://img.shields.io/nuget/v/System.Numerics.Vectors.svg?style=flat)](https://www.nuget.org/packages/System.Numerics.Vectors/) | System.Numerics.Vectors                          |
+| [![NuGet Version](https://img.shields.io/nuget/v/System.Reflection.DispatchProxy.svg?style=flat)](https://www.nuget.org/packages/System.Reflection.DispatchProxy/) | System.Reflection.DispatchProxy                  |
+| [![NuGet Version](https://img.shields.io/nuget/v/System.Runtime.CompilerServices.Unsafe.svg?style=flat)](https://www.nuget.org/packages/System.Runtime.CompilerServices.Unsafe/) | System.Runtime.CompilerServices.Unsafe           |
+| [![NuGet Version](https://img.shields.io/nuget/v/System.Threading.Tasks.Extensions.svg?style=flat)](https://www.nuget.org/packages/System.Threading.Tasks.Extensions/) | System.Threading.Tasks.Extensions                |
+| [![NuGet Version](https://img.shields.io/nuget/v/System.ValueTuple.svg?style=flat)](https://www.nuget.org/packages/System.ValueTuple/) | System.ValueTuple                                |
+| [![NuGet Version](https://img.shields.io/nuget/v/System.Xml.XPath.XmlDocument.svg?style=flat)](https://www.nuget.org/packages/System.Xml.XPath.XmlDocument/) | System.Xml.XPath.XmlDocument                     |
+
 ## Package support policy
 
 This repo follows the [.NET Release policies](https://github.com/dotnet/core/blob/main/release-policies.md) document for release, servicing and support rules.
@@ -17,11 +42,11 @@ On the other hand, if the package is still targeting frameworks that are still i
 
 ## How to migrate a library
 
-1. You can use the `eng/Migrate-Package.ps1` script to automate most of the migration work, which includes most commit history relevant to the chosen assembly. Depending on the repo and branches of origin, as well as the root for all your cloned repos, you'll have to adjust the arguments. For example:
+1. You can use the `eng/scripts/Migrate-Package.ps1` script to automate most of the migration work, which includes most commit history relevant to the chosen assembly. Depending on the repo and branches of origin, as well as the root for all your cloned repos, you'll have to adjust the arguments. For example:
 
     a. Migrating a package from .NET Core 1.1:
    ```powershell
-   .\eng\Migrate-Package.ps1 \
+   .\eng\scripts\Migrate-Package.ps1 \
       -OriginRepoPath D:/corefx \
       -OriginRemote upstream \
       -OriginBranch v1.1.13 \
@@ -32,7 +57,7 @@ On the other hand, if the package is still targeting frameworks that are still i
 
     a. Migrating a package from .NET Core 2.1:
    ```powershell
-   .\eng\Migrate-Package.ps1 \
+   .\eng\scripts\Migrate-Package.ps1 \
       -OriginRepoPath D:/corefx \
       -OriginRemote upstream \
       -OriginBranch v2.1.30 \
@@ -43,7 +68,7 @@ On the other hand, if the package is still targeting frameworks that are still i
 
     b. Migrating a package from .NET Core 3.1:
     ```powershell
-    .\eng\Migrate-Package.ps1 \
+    .\eng\scripts\Migrate-Package.ps1 \
       -OriginRepoPath D:/corefx \
       -OriginRemote upstream \
       -OriginBranch v3.1.32 \
@@ -54,7 +79,7 @@ On the other hand, if the package is still targeting frameworks that are still i
 
     c. Migrating a package from .NET 5.0:
     ```powershell
-      .\eng\Migrate-Package.ps1 \
+      .\eng\scripts\Migrate-Package.ps1 \
       -OriginRepoPath D:/runtime \
       -OriginRemote upstream \
       -OriginBranch v5.0.18 \
@@ -62,10 +87,10 @@ On the other hand, if the package is still targeting frameworks that are still i
       -AssemblyFileOrDirectoryRelativeDirectoryPath src/libraries \
       -DestinationRepoPath D:/maintenance-packages
     ```
-    
+
     d. Migrating a package from .NET 6.0:
     ```powershell
-      .\eng\Migrate-Package.ps1 \
+      .\eng\scripts\Migrate-Package.ps1 \
       -OriginRepoPath D:/runtime \
       -OriginRemote upstream \
       -OriginBranch v6.0.36 \
