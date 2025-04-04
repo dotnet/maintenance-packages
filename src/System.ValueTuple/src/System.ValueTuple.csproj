@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk" InitialTargets="FailForUpdatedNetFrameworkMinimum">
+﻿<Project Sdk="Microsoft.NET.Sdk" InitialTargets="FailForUpdatedNetFrameworkMinimum">
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;$(NetFrameworkMinimum);net47;net471;netcoreapp2.0</TargetFrameworks>
