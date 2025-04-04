@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFrameworks>$(NetMinimum);netstandard2.1;netstandard2.0;$(NetFrameworkMinimum)</TargetFrameworks>
@@ -9,10 +9,10 @@
 
   <!-- Package servicing properties -->
   <PropertyGroup>
-    <IsPackable>true</IsPackable>
-    <VersionPrefix>6.0.-1</VersionPrefix>
-    <VersionPrefix Condition="'$(IsPackable)' == 'true'">6.0.0</VersionPrefix>
-    <PackageValidationBaselineVersion>6.0.-1</PackageValidationBaselineVersion>
+    <IsPackable>false</IsPackable>
+    <VersionPrefix>6.0.0</VersionPrefix>
+    <VersionPrefix Condition="'$(IsPackable)' == 'true'">6.0.1</VersionPrefix>
+    <PackageValidationBaselineVersion>6.0.0</PackageValidationBaselineVersion>
   </PropertyGroup>
 
   <Choose>

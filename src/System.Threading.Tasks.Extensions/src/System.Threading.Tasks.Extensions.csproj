@@ -10,12 +10,12 @@
 
   <!-- Package servicing properties -->
   <PropertyGroup>
-    <IsPackable>true</IsPackable>
-    <VersionPrefix>4.6.1</VersionPrefix>
-    <VersionPrefix Condition="'$(IsPackable)' == 'true'">4.6.2</VersionPrefix>
-    <AssemblyVersion Condition="$([MSBuild]::GetTargetFrameworkIdentifier('$(TargetFramework)')) == '.NETFramework'">4.2.2.0</AssemblyVersion>
-    <AssemblyVersion Condition="'$(IsPackable)' == 'true' and $([MSBuild]::GetTargetFrameworkIdentifier('$(TargetFramework)')) == '.NETFramework'">4.2.3.0</AssemblyVersion><!-- Keep the new assembly version under 4.3.x.x! -->
-    <PackageValidationBaselineVersion>4.6.1</PackageValidationBaselineVersion>
+    <IsPackable>false</IsPackable>
+    <VersionPrefix>4.6.2</VersionPrefix>
+    <VersionPrefix Condition="'$(IsPackable)' == 'true'">4.6.3</VersionPrefix>
+    <AssemblyVersion Condition="$([MSBuild]::GetTargetFrameworkIdentifier('$(TargetFramework)')) == '.NETFramework'">4.2.3.0</AssemblyVersion>
+    <AssemblyVersion Condition="'$(IsPackable)' == 'true' and $([MSBuild]::GetTargetFrameworkIdentifier('$(TargetFramework)')) == '.NETFramework'">4.2.4.0</AssemblyVersion><!-- Keep the new assembly version under 4.3.x.x! -->
+    <PackageValidationBaselineVersion>4.6.2</PackageValidationBaselineVersion>
   </PropertyGroup>
 
   <ItemGroup>
