@@ -1,133 +1,92 @@
 # Licensed to the .NET Foundation under one or more agreements.
 # The .NET Foundation licenses this file to you under the MIT license.
 
+###########
+# Imports #
+###########
+
 . $PSScriptRoot/Shared.ps1
 
-Function Get-LatestNuGetVersion
-{
-    Param (
-        [Parameter(Mandatory = $true)]
-        [ValidateNotNullOrWhiteSpace()]
-        [string]$PackageId
-    )
-
-    $packageIdLower = $PackageId.ToLowerInvariant()
-    $url = "https://api.nuget.org/v3/flatcontainer/$packageIdLower/index.json"
-    $response = Invoke-RestMethod -Uri $url -Method Get
-    return $response.versions[-1]
-}
+#############
+# Functions #
+#############
 
 Function Get-NewVersion
 {
-    Param (
+    Param(
         [Parameter(Mandatory = $true)]
         [ValidateNotNullOrWhiteSpace()]
-        [string]$number,
+        [string]$ElementValue,
         [Parameter(Mandatory = $true)]
-        [int]$negativePosition
+        [ValidateNotNullOrWhiteSpace()]
+        [int]$NegativePosition
     )
 
-    # Check if the version number is valid
-    if ($negativePosition -ge 0)
+    if ($NegativePosition -ge 0)
     {
-        Write-Error "The position must be negative." -ErrorAction Stop
-    }
-    $components = $number -Split '\.'
-    if (($negativePosition * -1) -gt $components.Length)
-    {
-        Write-Error "Version number is out of range." -ErrorAction Stop
+        Write-Error "The position number '$NegativePosition' should have been negative." -ErrorAction Stop
     }
 
-    # Split this version number into its components then rewrite it by incrementing the component from right to left
-    $components[$negativePosition] = [int]$components[$negativePosition] + 1
-    return [string]::Join('.', $components)
+    $components = $ElementValue -Split '\.'
+
+    if (($NegativePosition * -1) -gt $components.Length)
+    {
+        Write-Error "Version number '$ElementValue' is out of range." -ErrorAction Stop
+    }
+
+    $components[$NegativePosition] = [int]$components[$NegativePosition] + 1
+
+    Return [string]::Join('.', $components)
 }
 
-Function Update-CsProj
+###############
+# Main Script #
+###############
+
+$RepoRootPath = Join-Path -Path $PSScriptRoot -ChildPath "../.."
+$csprojFiles = Get-ChildItem -Path (Join-Path $RepoRootPath "src\*\src") -Filter "*.csproj" -Recurse
+
+foreach ($csprojFile in $csprojFiles)
 {
-    param (
-        [Parameter(Mandatory = $true)]
-        [ValidateNotNullOrWhiteSpace()]
-        [string]
-        $CsprojPath
-    )
+    $xdoc = [System.Xml.Linq.XDocument]::Load($csprojFile)
 
-    Add-Type -AssemblyName System.Xml.Linq
-    $csproj = [System.Xml.Linq.XDocument]::Load($CsprojPath)
-
-    $propertyGroup = $csproj.Root.Elements("PropertyGroup") |
+    $propertyGroup = $xdoc.Root.Elements("PropertyGroup") |
                      Where-Object { $null -ne $_.Element("IsPackable") -And $_.Element("IsPackable").Value -eq "true" } |
                      Select-Object -First 1
 
-    $propertyGroup.Elements("IsPackable")[0].Value = "false"
-
-    foreach ($versionPrefix in $propertyGroup.Elements("VersionPrefix"))
+    if ($propertyGroup)
     {
-        $versionPrefix.Value = Get-NewVersion $versionPrefix.Value -negativePosition -1
-    }
+        $assemblyNameLowerCase = [System.IO.Path]::GetFileNameWithoutExtension($csprojFile).ToLowerInvariant()
+        $response = Invoke-RestMethod -Uri "https://api.nuget.org/v3/flatcontainer/$assemblyNameLowerCase/index.json" -Method Get
+        $latestNuGetVersion = $response.versions[-1]
 
-    foreach ($assemblyVersion in $propertyGroup.Elements("AssemblyVersion"))
-    {
-        $assemblyVersion.Value = Get-NewVersion $assemblyVersion.Value -negativePosition -2
-    }
+        $conditionedVersionPrefix = $propertyGroup.Elements("VersionPrefix") |
+                         Where-Object { $_.Attribute("Condition") -and $_.Attribute("Condition").Value -eq "`'`$(IsPackable)`' == 'true'" } |
+                         Select-Object -First 1
 
-    foreach ($packageValidationBaselineVersion in $propertyGroup.Elements("PackageValidationBaselineVersion"))
-    {
-        $packageValidationBaselineVersion.Value = Get-NewVersion $packageValidationBaselineVersion.Value -negativePosition -1
-    }
-
-
-    $csproj.Save($CsprojPath)
-}
-
-$RepoRootPath = Join-Path -Path $PSScriptRoot -ChildPath "../.."
-$RepoEngPath = Join-Path -Path $RepoRootPath -ChildPath "eng"
-
-$VersionUpdaterPath = Join-Path -Path $RepoEngPath -ChildPath "VersionUpdater.csproj"
-
-$msBuildOutput = Invoke-Expression "dotnet msbuild /nologo /t:CollectSourceProjects $VersionUpdaterPath" 2>$1
-
-foreach ($projectOutput in $msBuildOutput)
-{
-    $pairs = $projectOutput -Split ','
-
-    $Project = $null
-    $IsPackable = $null
-    $VersionPrefix = $null
-    $AssemblyVersion = $null
-    $PackageValidationBaselineVersion = $null
-
-    foreach ($pair in $pairs)
-    {
-        $key, $value = $pair -Split '=', 2
-        $key = $key.Trim()
-        $value = $value.Trim("'")
-
-        switch ($key)
+        if ($null -ne $conditionedVersionPrefix -and $conditionedVersionPrefix.GetType() -eq [System.Xml.Linq.XElement])
         {
-            "Project" { $Project = $value }
-            "IsPackable" { $IsPackable = $value }
-            "VersionPrefix" { $VersionPrefix = $value }
-            "AssemblyVersion" { $AssemblyVersion = $value }
-            "PackageValidationBaselineVersion" { $PackageValidationBaselineVersion = $value }
-        }
-    }
+            if ($latestNuGetVersion -eq $conditionedVersionPrefix.Value)
+            {
+                foreach ($isPackableElement in $propertyGroup.Elements("IsPackable"))
+                {
+                    $isPackableElement.Value = "false"
+                }
+                foreach ($versionPrefixElement in $propertyGroup.Elements("VersionPrefix"))
+                {
+                    $versionPrefixElement.Value = Get-NewVersion -ElementValue $versionPrefixElement.Value -NegativePosition -1
+                }
+                foreach ($assemblyVersionElement in $propertyGroup.Elements("AssemblyVersion"))
+                {
+                    $assemblyVersionElement.Value = Get-NewVersion -ElementValue $assemblyVersionElement.Value -NegativePosition -2
+                }
+                foreach ($packageValidationBaselineVersionElement in $propertyGroup.Elements("PackageValidationBaselineVersion"))
+                {
+                    $packageValidationBaselineVersionElement.Value = Get-NewVersion -ElementValue $packageValidationBaselineVersionElement.Value -NegativePosition -1
+                }
 
-    If ($IsPackable -eq "true")
-    {
-        Write-Host "Project: $Project"
-        Write-Host "  - VersionPrefix: $VersionPrefix"
-        Write-Host "  - AssemblyVersion: $AssemblyVersion"
-        Write-Host "  - PackageValidationBaselineVersion: $PackageValidationBaselineVersion"
-
-        $assemblyName  = [System.IO.Path]::GetFileNameWithoutExtension($Project)
-
-        $latest = Get-LatestNuGetVersion $assemblyName
-
-        if ($latest -eq $VersionPrefix)
-        {
-            Write-Host "$assemblyName has been published to nuget so the repo versions need to be bumped."
-            Update-CsProj $Project
+                $xdoc.Save($csprojFile)
+            }
         }
     }
 }
