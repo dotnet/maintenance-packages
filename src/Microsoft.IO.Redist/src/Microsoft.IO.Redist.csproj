@@ -14,9 +14,9 @@
   <!-- Package servicing properties -->
   <PropertyGroup>
     <IsPackable>true</IsPackable>
-    <VersionPrefix>6.1.2</VersionPrefix>
-    <VersionPrefix Condition="'$(IsPackable)' == 'true'">6.1.3</VersionPrefix>
-    <PackageValidationBaselineVersion>6.1.2</PackageValidationBaselineVersion>
+    <VersionPrefix>6.1.1</VersionPrefix>
+    <VersionPrefix Condition="'$(IsPackable)' == 'true'">6.1.2</VersionPrefix>
+    <PackageValidationBaselineVersion>6.1.1</PackageValidationBaselineVersion>
   </PropertyGroup>
 
   <ItemGroup>
