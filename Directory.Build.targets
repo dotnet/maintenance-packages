@@ -110,16 +110,4 @@
     </ItemGroup>
   </Target>
 
-  <Target Name="GetProjectVersioningProperties" Outputs="@(EvaluatedProjectProperties)">
-    <ItemGroup>
-     <EvaluatedProjectProperties Include="$(MSBuildProjectFullPath)">
-        <IsPackable>$(IsPackable)</IsPackable>
-        <!-- If IsPackable is true, the versions will be the ones with the condition. -->
-        <VersionPrefix>$(VersionPrefix)</VersionPrefix>
-        <AssemblyVersion>$(AssemblyVersion)</AssemblyVersion>
-        <PackageValidationBaselineVersion>$(PackageValidationBaselineVersion)</PackageValidationBaselineVersion>
-      </EvaluatedProjectProperties>
-    </ItemGroup>
-  </Target>
-
 </Project>
