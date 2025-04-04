@@ -80,7 +80,6 @@ Function Save-Project
 
     $stringWriter = New-Object System.IO.StringWriter
     $xmlWriterSettings = New-Object System.Xml.XmlWriterSettings
-    $xmlWriterSettings.Indent = $false
     $xmlWriterSettings.OmitXmlDeclaration = $true
 
     $xmlWriter = [System.Xml.XmlWriter]::Create($stringWriter, $xmlWriterSettings)
