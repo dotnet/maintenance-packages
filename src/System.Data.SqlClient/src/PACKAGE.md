@@ -21,7 +21,7 @@ The main types provided by this library are:
 ## Additional Documentation
 
 - [Introducing the new Microsoft.Data.SqlClient](https://devblogs.microsoft.com/dotnet/introducing-the-new-microsoftdatasqlclient/)
-- [https://techcommunity.microsoft.com/t5/sql-server-blog/announcement-system-data-sqlclient-package-is-now-deprecated/ba-p/4227205](Announcement: System.Data.SqlClient package is now deprecated)
+- [Announcement: System.Data.SqlClient package is now deprecated](https://techcommunity.microsoft.com/t5/sql-server-blog/announcement-system-data-sqlclient-package-is-now-deprecated/ba-p/4227205)
 - For conceptual information about using this namespace when programming with .NET, see [SQL Server and ADO.NET](https://learn.microsoft.com/en-us/dotnet/framework/data/adonet/sql/).
 - API reference for System.Data.SqlClient can be found in: https://learn.microsoft.com/en-us/dotnet/api/system.data.sqlclient?view=netframework-4.8.1
 - API reference for Microsoft.Data.SqlClient can be found in: https://learn.microsoft.com/en-us/dotnet/api/microsoft.data.sqlclient
