@@ -9,8 +9,8 @@
   </PropertyGroup>
   <PropertyGroup>
     <!-- Arcade dependencies -->
-    <MicrosoftDotNetRemoteExecutorVersion>8.0.0-beta.25422.2</MicrosoftDotNetRemoteExecutorVersion>
-    <MicrosoftDotNetXUnitExtensionsVersion>8.0.0-beta.25422.2</MicrosoftDotNetXUnitExtensionsVersion>
-    <MicrosoftDotNetBuildTasksTargetFrameworkVersion>8.0.0-beta.25422.2</MicrosoftDotNetBuildTasksTargetFrameworkVersion>
+    <MicrosoftDotNetRemoteExecutorVersion>8.0.0-beta.25427.4</MicrosoftDotNetRemoteExecutorVersion>
+    <MicrosoftDotNetXUnitExtensionsVersion>8.0.0-beta.25427.4</MicrosoftDotNetXUnitExtensionsVersion>
+    <MicrosoftDotNetBuildTasksTargetFrameworkVersion>8.0.0-beta.25427.4</MicrosoftDotNetBuildTasksTargetFrameworkVersion>
   </PropertyGroup>
 </Project>
