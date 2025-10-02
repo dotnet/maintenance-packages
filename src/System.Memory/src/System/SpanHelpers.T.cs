@@ -595,6 +595,7 @@ namespace System
             return index;
         }
 
+#nullable enable
         public static bool SequenceEqual<T>(ref T first, ref T second, int length)
             where T : IEquatable<T>
         {
@@ -604,25 +605,43 @@ namespace System
                 goto Equal;
 
             IntPtr index = (IntPtr)0; // Use IntPtr for arithmetic to avoid unnecessary 64->32->64 truncations
+            T lookUp0;
+            T lookUp1;
             while (length >= 8)
             {
                 length -= 8;
 
-                if (!Unsafe.Add(ref first, index).Equals(Unsafe.Add(ref second, index)))
+                lookUp0 = Unsafe.Add(ref first, index);
+                lookUp1 = Unsafe.Add(ref second, index);
+                if (!(lookUp0?.Equals(lookUp1) ?? (object?)lookUp1 is null))
                     goto NotEqual;
-                if (!Unsafe.Add(ref first, index + 1).Equals(Unsafe.Add(ref second, index + 1)))
+                lookUp0 = Unsafe.Add(ref first, index + 1);
+                lookUp1 = Unsafe.Add(ref second, index + 1);
+                if (!(lookUp0?.Equals(lookUp1) ?? (object?)lookUp1 is null))
                     goto NotEqual;
-                if (!Unsafe.Add(ref first, index + 2).Equals(Unsafe.Add(ref second, index + 2)))
+                lookUp0 = Unsafe.Add(ref first, index + 2);
+                lookUp1 = Unsafe.Add(ref second, index + 2);
+                if (!(lookUp0?.Equals(lookUp1) ?? (object?)lookUp1 is null))
                     goto NotEqual;
-                if (!Unsafe.Add(ref first, index + 3).Equals(Unsafe.Add(ref second, index + 3)))
+                lookUp0 = Unsafe.Add(ref first, index + 3);
+                lookUp1 = Unsafe.Add(ref second, index + 3);
+                if (!(lookUp0?.Equals(lookUp1) ?? (object?)lookUp1 is null))
                     goto NotEqual;
-                if (!Unsafe.Add(ref first, index + 4).Equals(Unsafe.Add(ref second, index + 4)))
+                lookUp0 = Unsafe.Add(ref first, index + 4);
+                lookUp1 = Unsafe.Add(ref second, index + 4);
+                if (!(lookUp0?.Equals(lookUp1) ?? (object?)lookUp1 is null))
                     goto NotEqual;
-                if (!Unsafe.Add(ref first, index + 5).Equals(Unsafe.Add(ref second, index + 5)))
+                lookUp0 = Unsafe.Add(ref first, index + 5);
+                lookUp1 = Unsafe.Add(ref second, index + 5);
+                if (!(lookUp0?.Equals(lookUp1) ?? (object?)lookUp1 is null))
                     goto NotEqual;
-                if (!Unsafe.Add(ref first, index + 6).Equals(Unsafe.Add(ref second, index + 6)))
+                lookUp0 = Unsafe.Add(ref first, index + 6);
+                lookUp1 = Unsafe.Add(ref second, index + 6);
+                if (!(lookUp0?.Equals(lookUp1) ?? (object?)lookUp1 is null))
                     goto NotEqual;
-                if (!Unsafe.Add(ref first, index + 7).Equals(Unsafe.Add(ref second, index + 7)))
+                lookUp0 = Unsafe.Add(ref first, index + 7);
+                lookUp1 = Unsafe.Add(ref second, index + 7);
+                if (!(lookUp0?.Equals(lookUp1) ?? (object?)lookUp1 is null))
                     goto NotEqual;
 
                 index += 8;
@@ -632,13 +651,21 @@ namespace System
             {
                 length -= 4;
 
-                if (!Unsafe.Add(ref first, index).Equals(Unsafe.Add(ref second, index)))
+                lookUp0 = Unsafe.Add(ref first, index);
+                lookUp1 = Unsafe.Add(ref second, index);
+                if (!(lookUp0?.Equals(lookUp1) ?? (object?)lookUp1 is null))
                     goto NotEqual;
-                if (!Unsafe.Add(ref first, index + 1).Equals(Unsafe.Add(ref second, index + 1)))
+                lookUp0 = Unsafe.Add(ref first, index + 1);
+                lookUp1 = Unsafe.Add(ref second, index + 1);
+                if (!(lookUp0?.Equals(lookUp1) ?? (object?)lookUp1 is null))
                     goto NotEqual;
-                if (!Unsafe.Add(ref first, index + 2).Equals(Unsafe.Add(ref second, index + 2)))
+                lookUp0 = Unsafe.Add(ref first, index + 2);
+                lookUp1 = Unsafe.Add(ref second, index + 2);
+                if (!(lookUp0?.Equals(lookUp1) ?? (object?)lookUp1 is null))
                     goto NotEqual;
-                if (!Unsafe.Add(ref first, index + 3).Equals(Unsafe.Add(ref second, index + 3)))
+                lookUp0 = Unsafe.Add(ref first, index + 3);
+                lookUp1 = Unsafe.Add(ref second, index + 3);
+                if (!(lookUp0?.Equals(lookUp1) ?? (object?)lookUp1 is null))
                     goto NotEqual;
 
                 index += 4;
@@ -646,7 +673,9 @@ namespace System
 
             while (length > 0)
             {
-                if (!Unsafe.Add(ref first, index).Equals(Unsafe.Add(ref second, index)))
+                lookUp0 = Unsafe.Add(ref first, index);
+                lookUp1 = Unsafe.Add(ref second, index);
+                if (!(lookUp0?.Equals(lookUp1) ?? (object?)lookUp1 is null))
                     goto NotEqual;
                 index += 1;
                 length--;
@@ -658,6 +687,7 @@ namespace System
         NotEqual: // Workaround for https://github.com/dotnet/coreclr/issues/13549
             return false;
         }
+#nullable restore
 
         public static int SequenceCompareTo<T>(ref T first, int firstLength, ref T second, int secondLength)
             where T : IComparable<T>
