@@ -10,7 +10,7 @@ namespace System
     internal static partial class SpanHelpers
     {
         public static int IndexOf<T>(ref T searchSpace, int searchSpaceLength, ref T value, int valueLength)
-            where T : IEquatable<T>  // This is Contains<T> (runtime repo)
+            where T : IEquatable<T>
         {
             Debug.Assert(searchSpaceLength >= 0);
             Debug.Assert(valueLength >= 0);

@@ -230,5 +230,12 @@ namespace System.SpanTests
             int index = span.IndexOf(value);
             Assert.Equal(-1, index);
         }
+
+        [Theory]
+        [MemberData(nameof(TestHelpers.IndexOfNullSequenceData), MemberType = typeof(TestHelpers))]
+        public static void IndexOfNullSequence_String(string[] source, string[] target, int expected)
+        {
+            Assert.Equal(expected, new ReadOnlySpan<string>(source).IndexOf(target));
+        }
     }
 }
