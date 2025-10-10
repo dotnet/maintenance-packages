@@ -184,5 +184,12 @@ namespace System.SpanTests
                 Assert.Equal(length - 1, idx);
             }
         }
+
+        [Theory]
+        [MemberData(nameof(TestHelpers.LastIndexOfNullData), MemberType = typeof(TestHelpers))]
+        public static void LastIndexOfNull_String(string[] spanInput, int expected)
+        {
+            Assert.Equal(expected, new ReadOnlySpan<string>(spanInput).LastIndexOf((string)null));
+        }
     }
 }
