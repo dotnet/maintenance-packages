@@ -208,14 +208,8 @@ namespace System
                 for (index = 0; index < length; index++)
                 {
                     lookUp = Unsafe.Add(ref searchSpace, index);
-                    if ((object)lookUp is null)
-                    {
-                        if ((object)value0 is null || (object)value1 is null)
-                        {
-                            goto Found;
-                        }
-                    }
-                    else if (lookUp.Equals(value0) || lookUp.Equals(value1))
+                    // Already know either value0 or value1 is null
+                    if ((object)lookUp is null || lookUp.Equals(value0) || lookUp.Equals(value1))
                     {
                         goto Found;
                     }
@@ -315,14 +309,8 @@ namespace System
                 for (index = 0; index < length; index++)
                 {
                     lookUp = Unsafe.Add(ref searchSpace, index);
-                    if ((object)lookUp is null)
-                    {
-                        if ((object)value0 is null || (object)value1 is null || (object)value2 is null)
-                        {
-                            goto Found;
-                        }
-                    }
-                    else if (lookUp.Equals(value0) || lookUp.Equals(value1) || lookUp.Equals(value2))
+                    // Already know either value0 or value1 is null
+                    if ((object)lookUp is null || lookUp.Equals(value0) || lookUp.Equals(value1) || lookUp.Equals(value2))
                     {
                         goto Found;
                     }
@@ -564,14 +552,8 @@ namespace System
                 for (length--; length >= 0; length--)
                 {
                     lookUp = Unsafe.Add(ref searchSpace, length);
-                    if ((object)lookUp is null)
-                    {
-                        if ((object)value0 is null || (object)value1 is null)
-                        {
-                            goto Found;
-                        }
-                    }
-                    else if (lookUp.Equals(value0) || lookUp.Equals(value1))
+                    // Already know either value0 or value1 is null
+                    if ((object)lookUp is null || lookUp.Equals(value0) || lookUp.Equals(value1))
                     {
                         goto Found;
                     }
@@ -670,14 +652,8 @@ namespace System
                 for (length--; length >= 0; length--)
                 {
                     lookUp = Unsafe.Add(ref searchSpace, length);
-                    if ((object)lookUp is null)
-                    {
-                        if ((object)value0 is null || (object)value1 is null || (object)value2 is null)
-                        {
-                            goto Found;
-                        }
-                    }
-                    else if (lookUp.Equals(value0) || lookUp.Equals(value1) || lookUp.Equals(value2))
+                    // Already know either value0 or value1 is null
+                    if ((object)lookUp is null || lookUp.Equals(value0) || lookUp.Equals(value1) || lookUp.Equals(value2))
                     {
                         goto Found;
                     }
