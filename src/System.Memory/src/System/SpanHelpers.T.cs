@@ -730,7 +730,7 @@ namespace System
             if (Unsafe.AreSame(ref first, ref second))
                 goto Equal;
 
-            IntPtr index = (IntPtr)0; // Use IntPtr for arithmetic to avoid unnecessary 64->32->64 truncations
+            nint index = 0; // Use nint for arithmetic to avoid unnecessary 64->32->64 truncations
             T lookUp0;
             T lookUp1;
             while (length >= 8)
