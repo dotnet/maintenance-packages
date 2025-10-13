@@ -1,21 +1,13 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
+using System.Collections.Generic;
 using Xunit;
 
 namespace System.SpanTests
 {
     public static partial class SpanTests
     {
-        [Fact]
-        public static void NullReferenceSequenceEqual()
-        {
-            Span<string> first = new Span<string>(new string[] { "a", "b", null, null });
-            Span<string> second = new Span<string>(new string[] { "a", "b", null, null });
-            bool b = first.SequenceEqual(second);
-            Assert.True(b);
-        }
-
         [Fact]
         public static void ZeroLengthSequenceEqual()
         {
@@ -137,6 +129,16 @@ namespace System.SpanTests
                 bool b = firstSpan.SequenceEqual(secondSpan);
                 Assert.True(b);
             }
+        }
+
+        [Theory]
+        [MemberData(nameof(TestHelpers.SequenceEqualNullData), MemberType = typeof(TestHelpers))]
+        public static void SequenceEqual_NullData_String(string[] firstInput, string[] secondInput, bool expected)
+        {
+            Span<string> theStrings = firstInput;
+
+            Assert.Equal(expected, theStrings.SequenceEqual(secondInput));
+            Assert.Equal(expected, theStrings.SequenceEqual((ReadOnlySpan<string>)secondInput));
         }
     }
 }
