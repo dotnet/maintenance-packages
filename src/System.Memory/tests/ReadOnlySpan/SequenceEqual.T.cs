@@ -129,5 +129,14 @@ namespace System.SpanTests
                 Assert.True(b);
             }
         }
+
+        [Theory]
+        [MemberData(nameof(TestHelpers.SequenceEqualNullData), MemberType = typeof(TestHelpers))]
+        public static void SequenceEqual_NullData_String(string[] firstInput, string[] secondInput, bool expected)
+        {
+            ReadOnlySpan<string> theStrings = firstInput;
+
+            Assert.Equal(expected, theStrings.SequenceEqual(secondInput));
+        }
     }
 }

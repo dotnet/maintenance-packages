@@ -9,6 +9,15 @@ namespace System.SpanTests
     public static partial class SpanTests
     {
         [Fact]
+        public static void NullReferenceSequenceEqual()
+        {
+            Span<string> first = new Span<string>(new string[] { "a", "b", null, null });
+            Span<string> second = new Span<string>(new string[] { "a", "b", null, null });
+            bool b = first.SequenceEqual(second);
+            Assert.True(b);
+        }
+
+        [Fact]
         public static void ZeroLengthSequenceEqual()
         {
             int[] a = new int[3];
