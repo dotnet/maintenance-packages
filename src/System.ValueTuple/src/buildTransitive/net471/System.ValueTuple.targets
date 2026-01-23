@@ -1,6 +1,6 @@
 <Project>
   <!-- Ensure we bring in the System.ValueTuple facade from the targeting pack
-       SpecificVersion="true" prevents a waring from ResolveAssemblyReference about a mismatch in reference versions 
+       SpecificVersion="true" prevents a warning from ResolveAssemblyReference about a mismatch in reference versions 
        that will be ignored at runtime by .NETFramework's assembly unification -->
   <ItemGroup>
     <Reference Include="System.ValueTuple" SpecificVersion="true" />
