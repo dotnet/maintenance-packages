@@ -8,7 +8,7 @@
     <!-- Prevent including the build output in the package. -->
     <IncludeBuildOutput>false</IncludeBuildOutput>
     <!-- Hook up a target to include the placeholder file in the package. -->
-    <TargetsForTfmSpecificContentInPackage>$(TargetsForTfmSpecificBuildOutput);_AddPlaceholderFileToPackage</TargetsForTfmSpecificContentInPackage>
+    <TargetsForTfmSpecificContentInPackage>$(TargetsForTfmSpecificContentInPackage);_AddPlaceholderFileToPackage</TargetsForTfmSpecificContentInPackage>
     <!-- TFMs that are only used as placeholders should not include any default items. -->
     <EnableDefaultItems>false</EnableDefaultItems>
   </PropertyGroup>
