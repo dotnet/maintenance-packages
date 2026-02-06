@@ -1,17 +1,12 @@
 <Project>
-  <!-- Ensure we bring in the System.ValueTuple facade from the targeting pack
-       SpecificVersion="true" prevents a warning from ResolveAssemblyReference about a mismatch in reference versions 
-       that will be ignored at runtime by .NETFramework's assembly unification -->
+  <!-- Use the reference from the package instead of the targeting pack, avoiding conflict -->
   <ItemGroup>
-    <Reference Include="System.ValueTuple" SpecificVersion="true" />
+    <!-- We cannot have more than one primary reference, since others might resolve to the lower versioned framework assembly and the conflict will persist.-->
+    <Reference Remove="System.ValueTuple" />
+    <!-- Private="false" prevents the assembly from being copied to the output directory.
+         SpecificVersion="true" prevents a warning from ResolveAssemblyReference about a mismatch in reference versions
+         that will be ignored at runtime by .NETFramework's assembly unification.-->
+    <Reference Include="$([MSBuild]::NormalizePath($(MSBuildThisFileDirectory), '..', '..', 'lib', 'net47', 'System.ValueTuple.dll'))" Private="false" SpecificVersion="true" />
   </ItemGroup>
-
-  <!-- System.ValueTuple is inbox on .NET Framework >= 4.7.1 and therefore any potential redirect for it should be removed.
-       This is necessary as the assembly version in the already shipped packages is higher than what's provided inbox on .NET Framework. -->
-  <Target Name="RemoveValueTupleRedirectForNet471AndAbove" DependsOnTargets="ResolveAssemblyReferences" BeforeTargets="GenerateBindingRedirects">
-    <ItemGroup>
-      <SuggestedBindingRedirects Remove="System.ValueTuple, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51" />
-    </ItemGroup>
-  </Target>
 
 </Project>
