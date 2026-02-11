@@ -39,6 +39,13 @@
         <Compile Include="TypeForwards.cs" />
       </ItemGroup>
     </When>
+
+    <!-- Ensure a framework assembly reference where inbox. -->
+    <When Condition="'$(TargetFramework)' == 'net471'">
+      <ItemGroup>
+        <Reference Include="System.ValueTuple" />
+      </ItemGroup>
+    </When>
   </Choose>
 
   <!-- Also put into build folder for packages.config support. -->
