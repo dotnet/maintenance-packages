@@ -32,6 +32,7 @@
     <When Condition="'$(TargetFramework)' == 'net47'">
       <PropertyGroup>
         <EnableDefaultItems>false</EnableDefaultItems>
+        <OmitResources>true</OmitResources>
       </PropertyGroup>
 
       <ItemGroup>
@@ -50,4 +51,32 @@
     <Error Text="NetFrameworkMinimum got changed to '$(NetFrameworkMinimum)'. Consider removing this implementation or the whole library." />
   </Target>
 
+  <PropertyGroup>
+    <TargetsForTfmSpecificContentInPackage>$(TargetsForTfmSpecificContentInPackage);CreateRedistList</TargetsForTfmSpecificContentInPackage>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.DotNet.Build.Tasks.Templating" PrivateAssets="All"/>
+    <RedistListInputPath Include="ValueTupleFrameworkList.xml" />
+    <RedistListOutputPath Include="$(IntermediateOutputPath)ValueTupleFrameworkList.xml" />
+  </ItemGroup>
+
+  <Target Name="CreateRedistList"
+          Condition="'$(TargetFramework)' == 'net471'"
+          Inputs="@(RedistListInputPath)"
+          Outputs="@(RedistListOutputPath)">
+    <ItemGroup>
+      <CreateRedistListTemplateProperty Include="AssemblyVersion=$(AssemblyVersion)" />
+    </ItemGroup>
+
+    <GenerateFileFromTemplate
+      TemplateFile="@(RedistListInputPath)"
+      Properties="@(CreateRedistListTemplateProperty)"
+      OutputPath="@(RedistListOutputPath)" />
+
+    <ItemGroup>
+      <TfmSpecificPackageFile Include="@(RedistListOutputPath)" PackagePath="build\net471" />
+      <TfmSpecificPackageFile Include="@(RedistListOutputPath)" PackagePath="buildTransitive\net471" />
+    </ItemGroup>
+  </Target>
 </Project>
