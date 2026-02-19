@@ -18,12 +18,12 @@
 
   <!-- Package servicing properties -->
   <PropertyGroup>
-    <IsPackable>true</IsPackable>
-    <VersionPrefix>4.9.0</VersionPrefix>
-    <VersionPrefix Condition="'$(IsPackable)' == 'true'">4.9.1</VersionPrefix>
+    <IsPackable>false</IsPackable>
+    <VersionPrefix>4.9.1</VersionPrefix>
+    <VersionPrefix Condition="'$(IsPackable)' == 'true'">4.9.2</VersionPrefix>
     <AssemblyVersion Condition="$([MSBuild]::GetTargetFrameworkIdentifier('$(TargetFramework)')) == '.NETFramework'">4.6.2.0</AssemblyVersion>
     <AssemblyVersion Condition="'$(IsPackable)' == 'true' and $([MSBuild]::GetTargetFrameworkIdentifier('$(TargetFramework)')) == '.NETFramework'">4.6.3.0</AssemblyVersion>
-    <PackageValidationBaselineVersion>4.9.0</PackageValidationBaselineVersion>
+    <PackageValidationBaselineVersion>4.9.1</PackageValidationBaselineVersion>
   </PropertyGroup>
 
   <ItemGroup>
