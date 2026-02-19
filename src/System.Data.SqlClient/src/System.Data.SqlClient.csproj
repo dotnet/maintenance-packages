@@ -18,7 +18,7 @@
 
   <!-- Package servicing properties -->
   <PropertyGroup>
-    <IsPackable>true</IsPackable>
+    <IsPackable>false</IsPackable>
     <VersionPrefix>4.9.1</VersionPrefix>
     <VersionPrefix Condition="'$(IsPackable)' == 'true'">4.9.2</VersionPrefix>
     <AssemblyVersion Condition="$([MSBuild]::GetTargetFrameworkIdentifier('$(TargetFramework)')) == '.NETFramework'">4.6.2.0</AssemblyVersion>
