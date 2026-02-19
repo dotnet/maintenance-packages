@@ -132,11 +132,11 @@ The official build automatically builds and tests all the assemblies in this rep
 
 Make sure to investigate any ApiCompat failures that arise, as they only show up when packing.
 
-## How to disable servicing a library
+## How to reset a library after servicing
 
 1. set the `<IsPackable>` property to `false`. The assembly will continue getting built and tested in the official builds, but will not generate a new package.
 2. Copy the `VersionPrefix` (and `AssemblyVersion` if it applies) from the `'$(IsPackable)' == 'true'` conditioned property, to the unconditioned property. Also copy the conditioned `VersionPrefix` value to the `PackageValidationBaselineVersion` property (if it applies).
-3. Bump the minor version numbers (second number from the right) of the `VersionPrefix` (and `AssemblyVersion` if it applies) properties that are conditioned with `'$(IsPackable)' == 'true'`, and reset the revision number (first number from the right) to `0`.
+3. Bump the build version numbers (third part in major.minor.build.revision) of the `VersionPrefix` (and `AssemblyVersion` if it applies) properties that are conditioned with `'$(IsPackable)' == 'true'`, and reset the revision number (first number from the right) to `0`.
 
 ### Example
 
