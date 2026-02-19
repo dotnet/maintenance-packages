@@ -143,6 +143,7 @@ Make sure to investigate any ApiCompat failures that arise, as they only show up
 Assuming these are the initial property values of your assembly:
 
 ```xml
+<IsPackable>true</IsPackable>
 <VersionPrefix>1.1.1</VersionPrefix>
 <VersionPrefix Condition="'$(IsPackable)' == 'true'">1.2.0</VersionPrefix>
 <AssemblyVersion>2.2.2.2</AssemblyVersion><!-- NO-INCREMENT: This version is frozen for .NET Standard and .NETCoreApp because the assembly ships inbox. -->
@@ -154,6 +155,7 @@ Assuming these are the initial property values of your assembly:
 You need to change them to this:
 
 ```xml
+<IsPackable>false</IsPackable>
 <VersionPrefix>1.2.0</VersionPrefix>
 <VersionPrefix Condition="'$(IsPackable)' == 'true'">1.2.1</VersionPrefix>
 <AssemblyVersion>2.2.2.2</AssemblyVersion><!-- NO-INCREMENT: This version is frozen for .NET Standard and .NETCoreApp because the assembly ships inbox. -->
