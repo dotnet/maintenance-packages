@@ -132,17 +132,18 @@ The official build automatically builds and tests all the assemblies in this rep
 
 Make sure to investigate any ApiCompat failures that arise, as they only show up when packing.
 
-## How to disable servicing a library
+## How to reset a library after servicing
 
 1. set the `<IsPackable>` property to `false`. The assembly will continue getting built and tested in the official builds, but will not generate a new package.
 2. Copy the `VersionPrefix` (and `AssemblyVersion` if it applies) from the `'$(IsPackable)' == 'true'` conditioned property, to the unconditioned property. Also copy the conditioned `VersionPrefix` value to the `PackageValidationBaselineVersion` property (if it applies).
-3. Bump the minor version numbers (second number from the right) of the `VersionPrefix` (and `AssemblyVersion` if it applies) properties that are conditioned with `'$(IsPackable)' == 'true'`, and reset the revision number (first number from the right) to `0`.
+3. Bump the build version numbers (third part in major.minor.build.revision) of the `VersionPrefix` (and `AssemblyVersion` if it applies) properties that are conditioned with `'$(IsPackable)' == 'true'`, and reset the revision number (first number from the right) to `0`.
 
 ### Example
 
 Assuming these are the initial property values of your assembly:
 
 ```xml
+<IsPackable>true</IsPackable>
 <VersionPrefix>1.1.1</VersionPrefix>
 <VersionPrefix Condition="'$(IsPackable)' == 'true'">1.2.0</VersionPrefix>
 <AssemblyVersion>2.2.2.2</AssemblyVersion><!-- NO-INCREMENT: This version is frozen for .NET Standard and .NETCoreApp because the assembly ships inbox. -->
@@ -154,6 +155,7 @@ Assuming these are the initial property values of your assembly:
 You need to change them to this:
 
 ```xml
+<IsPackable>false</IsPackable>
 <VersionPrefix>1.2.0</VersionPrefix>
 <VersionPrefix Condition="'$(IsPackable)' == 'true'">1.2.1</VersionPrefix>
 <AssemblyVersion>2.2.2.2</AssemblyVersion><!-- NO-INCREMENT: This version is frozen for .NET Standard and .NETCoreApp because the assembly ships inbox. -->
