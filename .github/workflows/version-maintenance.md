@@ -195,7 +195,15 @@ def process(path, pkg):
 3. **Verify changes** – `git diff` to review that only the expected properties
    were touched and that `NO-INCREMENT` lines are untouched.
 
-4. **Create a pull request** using the `create_pull_request` safe-output tool with:
+4. **Build and pack** – run the repository build script with the `-pack` switch
+   to compile the solution and generate NuGet packages.  This ensures the
+   version changes produce a valid build.
+
+   ```bash
+   ./build.sh -pack
+   ```
+
+5. **Create a pull request** using the `create_pull_request` safe-output tool with:
    * Title: `Post-servicing version updates`
    * Body: a summary listing every file changed and what was updated.
 
