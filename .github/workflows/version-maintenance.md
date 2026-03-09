@@ -140,7 +140,8 @@ RE_ASMVER = re.compile(
     r"(?P<post></AssemblyVersion>.*)$")
 
 def process(path, pkg):
-    raw = open(path, "rb").read()
+    with open(path, "rb") as f:
+        raw = f.read()
     bom = b""
     if raw.startswith(b"\xef\xbb\xbf"):
         bom, raw = raw[:3], raw[3:]
@@ -170,7 +171,8 @@ def process(path, pkg):
             changed = True
         out.append(nl)
     if changed:
-        open(path, "wb").write(bom + le.join(out).encode("utf-8"))
+        with open(path, "wb") as f:
+            f.write(bom + le.join(out).encode("utf-8"))
     return changed
 ```
 
