@@ -6,8 +6,7 @@ description: >
   AssemblyVersion patch numbers.  Creates a pull request with any changes.
 
 on:
-  schedule:
-    - cron: "0 8 * * *"
+  schedule: daily
   workflow_dispatch:
 
 permissions:
