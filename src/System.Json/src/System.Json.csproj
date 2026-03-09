@@ -8,8 +8,8 @@
   <!-- Package servicing properties -->
   <PropertyGroup>
     <IsPackable>false</IsPackable>
-    <VersionPrefix>4.8.0</VersionPrefix>
-    <VersionPrefix Condition="'$(IsPackable)' == 'true'">4.8.1</VersionPrefix>
+    <VersionPrefix>4.8.1</VersionPrefix>
+    <VersionPrefix Condition="'$(IsPackable)' == 'true'">4.8.2</VersionPrefix>
     <PackageValidationBaselineVersion>4.8.0</PackageValidationBaselineVersion>
   </PropertyGroup>
 
