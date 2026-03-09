@@ -55,9 +55,8 @@ Apply the following four rules **in order** to every in-scope file.
 
 ### Rule 1 – Update `PackageValidationBaselineVersion`
 
-If the file defines a `<PackageValidationBaselineVersion>` (or the alternate
-casing `<PackageValidationBaseLineVersion>`) property, compare its value to
-the **latest stable version** of that package on nuget.org.
+If the file defines a `<PackageValidationBaselineVersion>` property, compare
+its value to the **latest stable version** of that package on nuget.org.
 
 Derive the NuGet package name from the first directory component after `src/`
 in the file path (e.g. `src/System.Buffers/…` → package `System.Buffers`).
@@ -129,9 +128,9 @@ def bump_patch(v):
     return ".".join(p)
 
 RE_BASELINE = re.compile(
-    r"^(?P<pre>\s*<PackageValidationBase[Ll]ineVersion>)"
+    r"^(?P<pre>\s*<PackageValidationBaselineVersion>)"
     r"(?P<ver>[^<]+)"
-    r"(?P<post></PackageValidationBase[Ll]ineVersion>.*)$")
+    r"(?P<post></PackageValidationBaselineVersion>.*)$")
 RE_PACKABLE = re.compile(
     r"^(?P<pre>\s*<IsPackable>)true(?P<post></IsPackable>.*)$")
 RE_VERPREFIX = re.compile(
@@ -202,8 +201,6 @@ def process(path, pkg):
 
 ## Important notes
 
-* The `PackageValidationBaseLineVersion` property name has an alternate casing
-  (`BaseLineVersion` with a capital L) in some project files – handle both.
 * Some versioning properties live in a shared `Versioning.props` file rather
   than directly in the `.csproj` / `.ilproj` – make sure those are included in
   the scan.
