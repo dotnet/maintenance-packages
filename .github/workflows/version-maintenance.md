@@ -104,14 +104,17 @@ There are two kinds of `<VersionPrefix>` element:
   (the same value used for `PackageValidationBaselineVersion` in Rule 1).
 * **Conditional** (has an MSBuild `Condition` attribute, typically
   `Condition="'$(IsPackable)' == 'true'"`) – this is the **next** version to
-  ship.  Increment the **third** numeric component (the patch number).
+  ship.  Its value must be the unconditional version with the patch number
+  incremented by one.  Only update it if it doesn't already have the correct
+  value.
 
 Examples (assuming latest NuGet version is `4.6.1`):
 
-| Before | After |
-|---|---|
-| `<VersionPrefix>4.6.0</VersionPrefix>` | `<VersionPrefix>4.6.1</VersionPrefix>` |
-| `<VersionPrefix Condition="…">4.6.1</VersionPrefix>` | `<VersionPrefix Condition="…">4.6.2</VersionPrefix>` |
+| Before | After | Notes |
+|---|---|---|
+| `<VersionPrefix>4.6.0</VersionPrefix>` | `<VersionPrefix>4.6.1</VersionPrefix>` | Set to latest NuGet |
+| `<VersionPrefix Condition="…">4.6.1</VersionPrefix>` | `<VersionPrefix Condition="…">4.6.2</VersionPrefix>` | = unconditional + 1 |
+| `<VersionPrefix Condition="…">4.6.2</VersionPrefix>` | *(no change)* | Already correct |
 
 ### Rule 4 – Increment `AssemblyVersion`
 
@@ -218,8 +221,13 @@ def process(path, pkg):
                 ver_prefix_changed = True
         m = RE_VERPREFIX_COND.match(line)
         if m and not skip:
-            nl = m.group("pre") + bump_patch(m.group("ver")) + m.group("post")
-            ver_prefix_changed = True
+            if nuget_ver is None:
+                nuget_ver = latest_nuget(pkg)
+            if nuget_ver:
+                expected = bump_patch(nuget_ver)
+                if m.group("ver") != expected:
+                    nl = m.group("pre") + expected + m.group("post")
+                    ver_prefix_changed = True
         if nl != line:
             changed = True
         out.append(nl)
