@@ -14,6 +14,11 @@ permissions:
   contents: read
   pull-requests: read
 
+network:
+  allowed:
+    - defaults
+    - dotnet
+
 tools:
   github:
     toolsets: [repos, pull_requests]
