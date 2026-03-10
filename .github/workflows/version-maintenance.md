@@ -6,12 +6,18 @@ description: >
   AssemblyVersion patch numbers.  Creates a pull request with any changes.
 
 on:
-  schedule: daily
+  schedule: weekly
   workflow_dispatch:
 
 permissions:
   contents: read
   pull-requests: read
+
+runtimes:
+  dotnet:
+    version: "8.0"
+  python:
+    version: "3.x"
 
 network:
   allowed:
@@ -26,7 +32,7 @@ tools:
 safe-outputs:
   create-pull-request:
     title-prefix: "[Automated] "
-    labels: [automation, maintenance]
+    labels: [automation]
     max: 1
 ---
 
@@ -65,7 +71,7 @@ Query the NuGet V3 flat-container API to find the latest version:
 
 ```bash
 PACKAGE="system.buffers"  # lowercase
-curl -s "https://api.nuget.org/v3-flatcontainer/${PACKAGE}/index.json" \
+curl -sSL "https://api.nuget.org/v3-flatcontainer/${PACKAGE}/index.json" \
   | python3 -c "
 import sys, json
 versions = json.load(sys.stdin).get('versions', [])
@@ -73,6 +79,12 @@ stable = [v for v in versions if '-' not in v]
 print(stable[-1] if stable else '')
 "
 ```
+
+> **Proxy note:** This workflow runs inside a sandboxed container where all
+> HTTPS traffic is routed through a Squid proxy.  Use `curl` (which handles
+> CONNECT-tunnel proxying and SSL natively) rather than Python's
+> `urllib.request` for the NuGet HTTP calls.  The environment variables
+> `HTTP_PROXY` / `HTTPS_PROXY` are pre-configured.
 
 If the latest stable version differs from the current value, update the
 property value in the file.
@@ -83,17 +95,34 @@ If the file contains `<IsPackable>true</IsPackable>`, change `true` to
 `false`.  This property is only flipped to `true` during a servicing release
 and must be switched back immediately afterward.
 
-### Rule 3 – Increment `VersionPrefix`
+### Rule 3 – Update `VersionPrefix`
 
-For every `<VersionPrefix>` element (with or without an MSBuild `Condition`
-attribute), increment the **third** numeric component (the patch number).
+There are two kinds of `<VersionPrefix>` element:
 
-Example: `4.6.1` → `4.6.2`, `6.0.0` → `6.0.1`.
+* **Unconditional** (no `Condition` attribute) – this records the **last
+  published** version.  Set it to the **latest stable version** on nuget.org
+  (the same value used for `PackageValidationBaselineVersion` in Rule 1).
+* **Conditional** (has an MSBuild `Condition` attribute, typically
+  `Condition="'$(IsPackable)' == 'true'"`) – this is the **next** version to
+  ship.  Its value must be the unconditional version with the patch number
+  incremented by one.  Only update it if it doesn't already have the correct
+  value.
+
+Examples (assuming latest NuGet version is `4.6.1`):
+
+| Before | After | Notes |
+|---|---|---|
+| `<VersionPrefix>4.6.0</VersionPrefix>` | `<VersionPrefix>4.6.1</VersionPrefix>` | Set to latest NuGet |
+| `<VersionPrefix Condition="…">4.6.1</VersionPrefix>` | `<VersionPrefix Condition="…">4.6.2</VersionPrefix>` | = unconditional + 1 |
+| `<VersionPrefix Condition="…">4.6.2</VersionPrefix>` | *(no change)* | Already correct |
 
 ### Rule 4 – Increment `AssemblyVersion`
 
-For every `<AssemblyVersion>` element (with or without a `Condition`
-attribute), increment the **third** numeric component.
+Only increment `<AssemblyVersion>` when the corresponding `<VersionPrefix>` in
+the **same file** was actually changed by Rule 3.  If no `VersionPrefix` was
+modified, leave all `AssemblyVersion` elements untouched.
+
+When incrementing, bump the **third** numeric component.
 
 Example: `4.0.5.0` → `4.0.6.0`, `6.0.3.0` → `6.0.4.0`.
 
@@ -107,18 +136,32 @@ file.  You may use it as-is or adapt it.
 
 ```python
 #!/usr/bin/env python3
-import json, os, re, urllib.request
+import json, os, re, subprocess
 
 NO_INCREMENT = "NO-INCREMENT"
 
 def latest_nuget(pkg):
+    """Fetch the latest stable version from NuGet using curl.
+
+    Uses curl instead of urllib.request because the sandboxed container routes
+    HTTPS through a Squid CONNECT-tunnel proxy.  curl handles this natively
+    via HTTP_PROXY / HTTPS_PROXY, whereas Python's urllib.request may fail
+    during the SSL handshake inside the tunnel.
+    """
     url = f"https://api.nuget.org/v3-flatcontainer/{pkg.lower()}/index.json"
     try:
-        with urllib.request.urlopen(url, timeout=30) as r:
-            vers = json.loads(r.read()).get("versions", [])
+        result = subprocess.run(
+            ["curl", "-sSL", "--max-time", "30", url],
+            capture_output=True, text=True, timeout=35,
+        )
+        if result.returncode != 0:
+            print(f"  WARNING: curl failed for {pkg}: {result.stderr.strip()}")
+            return None
+        vers = json.loads(result.stdout).get("versions", [])
         stable = [v for v in vers if "-" not in v]
         return stable[-1] if stable else None
-    except Exception:
+    except Exception as e:
+        print(f"  WARNING: Could not fetch NuGet version for {pkg}: {e}")
         return None
 
 def bump_patch(v):
@@ -133,8 +176,12 @@ RE_BASELINE = re.compile(
     r"(?P<post></PackageValidationBaselineVersion>.*)$")
 RE_PACKABLE = re.compile(
     r"^(?P<pre>\s*<IsPackable>)true(?P<post></IsPackable>.*)$")
-RE_VERPREFIX = re.compile(
-    r"^(?P<pre>\s*<VersionPrefix[^>]*>)"
+RE_VERPREFIX_UNCOND = re.compile(
+    r"^(?P<pre>\s*<VersionPrefix>)"
+    r"(?P<ver>\d+\.\d+\.\d+)"
+    r"(?P<post></VersionPrefix>.*)$")
+RE_VERPREFIX_COND = re.compile(
+    r"^(?P<pre>\s*<VersionPrefix\s+Condition[^>]*>)"
     r"(?P<ver>\d+\.\d+\.\d+)"
     r"(?P<post></VersionPrefix>.*)$")
 RE_ASMVER = re.compile(
@@ -152,6 +199,7 @@ def process(path, pkg):
     text = raw.decode("utf-8")
     lines, out, changed = text.split(le), [], False
     nuget_ver = None
+    ver_prefix_changed = False
     for line in lines:
         nl = line
         skip = NO_INCREMENT in line
@@ -164,15 +212,38 @@ def process(path, pkg):
         m = RE_PACKABLE.match(line)
         if m:
             nl = m.group("pre") + "false" + m.group("post")
-        m = RE_VERPREFIX.match(line)
+        m = RE_VERPREFIX_UNCOND.match(line)
         if m and not skip:
-            nl = m.group("pre") + bump_patch(m.group("ver")) + m.group("post")
-        m = RE_ASMVER.match(line)
+            if nuget_ver is None:
+                nuget_ver = latest_nuget(pkg)
+            if nuget_ver and nuget_ver != m.group("ver"):
+                nl = m.group("pre") + nuget_ver + m.group("post")
+                ver_prefix_changed = True
+        m = RE_VERPREFIX_COND.match(line)
         if m and not skip:
-            nl = m.group("pre") + bump_patch(m.group("ver")) + m.group("post")
+            if nuget_ver is None:
+                nuget_ver = latest_nuget(pkg)
+            if nuget_ver:
+                expected = bump_patch(nuget_ver)
+                if m.group("ver") != expected:
+                    nl = m.group("pre") + expected + m.group("post")
+                    ver_prefix_changed = True
         if nl != line:
             changed = True
         out.append(nl)
+    # Second pass: only bump AssemblyVersion if a VersionPrefix was changed
+    if ver_prefix_changed:
+        final = []
+        for line in out:
+            nl = line
+            skip = NO_INCREMENT in line
+            m = RE_ASMVER.match(line)
+            if m and not skip:
+                nl = m.group("pre") + bump_patch(m.group("ver")) + m.group("post")
+            if nl != line:
+                changed = True
+            final.append(nl)
+        out = final
     if changed:
         with open(path, "wb") as f:
             f.write(bom + le.join(out).encode("utf-8"))
@@ -205,7 +276,8 @@ def process(path, pkg):
 
 5. **Create a pull request** using the `create_pull_request` safe-output tool with:
    * Title: `Post-servicing version updates`
-   * Body: a summary listing every file changed and what was updated.
+   * Body: a summary table listing the **package name** (e.g. `Microsoft.IO.Redist`,
+     not the full file path) and the changes applied to each package.
 
 ## Important notes
 
