@@ -12,10 +12,10 @@
   <!-- Package servicing properties -->
   <PropertyGroup>
     <IsPackable>false</IsPackable>
-    <VersionPrefix>4.6.2</VersionPrefix>
-    <VersionPrefix Condition="'$(IsPackable)' == 'true'">4.6.3</VersionPrefix>
-    <AssemblyVersion>4.0.5.0</AssemblyVersion>
-    <AssemblyVersion Condition="'$(IsPackable)' == 'true'">4.0.5.0</AssemblyVersion>
+    <VersionPrefix>4.6.3</VersionPrefix>
+    <VersionPrefix Condition="'$(IsPackable)' == 'true'">4.6.4</VersionPrefix>
+    <AssemblyVersion>4.0.6.0</AssemblyVersion>
+    <AssemblyVersion Condition="'$(IsPackable)' == 'true'">4.0.6.0</AssemblyVersion>
     <PackageValidationBaselineVersion>4.6.2</PackageValidationBaselineVersion>
   </PropertyGroup>
 

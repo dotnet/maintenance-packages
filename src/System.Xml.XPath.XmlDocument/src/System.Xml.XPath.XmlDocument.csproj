@@ -9,8 +9,8 @@
   <!-- Package servicing properties -->
   <PropertyGroup>
     <IsPackable>false</IsPackable>
-    <VersionPrefix>4.7.0</VersionPrefix>
-    <VersionPrefix Condition="'$(IsPackable)' == 'true'">4.7.1</VersionPrefix>
+    <VersionPrefix>4.7.1</VersionPrefix>
+    <VersionPrefix Condition="'$(IsPackable)' == 'true'">4.7.2</VersionPrefix>
     <PackageValidationBaselineVersion>4.7.0</PackageValidationBaselineVersion>
   </PropertyGroup>
 

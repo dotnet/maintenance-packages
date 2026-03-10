@@ -11,10 +11,10 @@
   <!-- Package servicing properties -->
   <PropertyGroup>
     <IsPackable>false</IsPackable>
-    <VersionPrefix>4.6.1</VersionPrefix>
-    <VersionPrefix Condition="'$(IsPackable)' == 'true'">4.6.2</VersionPrefix>
-    <AssemblyVersion Condition="$([MSBuild]::GetTargetFrameworkIdentifier('$(TargetFramework)')) == '.NETFramework'">4.1.6.0</AssemblyVersion>
-    <AssemblyVersion Condition="'$(IsPackable)' == 'true' and $([MSBuild]::GetTargetFrameworkIdentifier('$(TargetFramework)')) == '.NETFramework'">4.1.7.0</AssemblyVersion>
+    <VersionPrefix>4.6.2</VersionPrefix>
+    <VersionPrefix Condition="'$(IsPackable)' == 'true'">4.6.3</VersionPrefix>
+    <AssemblyVersion Condition="$([MSBuild]::GetTargetFrameworkIdentifier('$(TargetFramework)')) == '.NETFramework'">4.1.7.0</AssemblyVersion>
+    <AssemblyVersion Condition="'$(IsPackable)' == 'true' and $([MSBuild]::GetTargetFrameworkIdentifier('$(TargetFramework)')) == '.NETFramework'">4.1.8.0</AssemblyVersion>
     <PackageValidationBaselineVersion>4.6.1</PackageValidationBaselineVersion>
   </PropertyGroup>
 
