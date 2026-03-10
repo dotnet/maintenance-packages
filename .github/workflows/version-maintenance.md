@@ -34,6 +34,8 @@ safe-outputs:
     title-prefix: "[Automated] "
     labels: [automation]
     max: 1
+  noop:
+    report-as-issue: false
 ---
 
 # Post-Servicing Version Maintenance
