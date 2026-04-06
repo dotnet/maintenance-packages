@@ -69,7 +69,7 @@ extends:
       os: windows
     containers:
       LinuxContainer:
-        image: mcr.microsoft.com/dotnet-buildtools/prereqs:cbl-mariner-2.0-fpm
+        image: mcr.microsoft.com/dotnet-buildtools/prereqs:azurelinux-3.0-net8.0-fpm-amd64
     stages:
     - stage: build
       displayName: CI
