@@ -586,6 +586,17 @@ namespace System.Numerics
         }
 
         /// <summary>
+        /// Returns the sum of all the elements inside the specified vector.
+        /// </summary>
+        /// <param name="value">The vector whose elements will be summed.</param>
+        /// <returns>The sum of all the elements inside <paramref name="value"/>.</returns>
+        [MethodImplAttribute(MethodImplOptions.AggressiveInlining)]
+        public static T Sum<T>(Vector<T> value) where T : struct
+        {
+            return Dot(value, Vector<T>.One);
+        }
+
+        /// <summary>
         /// Returns a new vector whose elements are the square roots of the given vector's elements.
         /// </summary>
         /// <param name="value">The source vector.</param>

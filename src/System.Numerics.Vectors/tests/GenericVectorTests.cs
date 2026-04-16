@@ -1807,6 +1807,40 @@ namespace System.Numerics.Tests
         }
 
         [Fact]
+        public void SumByte() { TestSum<Byte>(); }
+        [Fact]
+        public void SumSByte() { TestSum<SByte>(); }
+        [Fact]
+        public void SumUInt16() { TestSum<UInt16>(); }
+        [Fact]
+        public void SumInt16() { TestSum<Int16>(); }
+        [Fact]
+        public void SumUInt32() { TestSum<UInt32>(); }
+        [Fact]
+        public void SumInt32() { TestSum<Int32>(); }
+        [Fact]
+        public void SumUInt64() { TestSum<UInt64>(); }
+        [Fact]
+        public void SumInt64() { TestSum<Int64>(); }
+        [Fact]
+        public void SumSingle() { TestSum<Single>(); }
+        [Fact]
+        public void SumDouble() { TestSum<Double>(); }
+        private void TestSum<T>() where T : struct
+        {
+            T[] values = Util.GenerateRandomValues<T>(Vector<T>.Count);
+            Vector<T> vector = new Vector<T>(values);
+
+            T sum = Vector.Sum(vector);
+            T expected = Util.Zero<T>();
+            for (int g = 0; g < Vector<T>.Count; g++)
+            {
+                expected = Util.Add(expected, values[g]);
+            }
+            Assert.Equal(expected, sum);
+        }
+
+        [Fact]
         public void MaxByte() { TestMax<Byte>(); }
         [Fact]
         public void MaxSByte() { TestMax<SByte>(); }

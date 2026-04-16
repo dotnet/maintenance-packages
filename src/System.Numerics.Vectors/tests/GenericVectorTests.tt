@@ -1336,6 +1336,29 @@ namespace System.Numerics.Tests
     {
 #>
         [Fact]
+        public void Sum<#=type.Name#>() { TestSum<<#=type.Name#>>(); }
+<#
+    }
+#>
+        private void TestSum<T>() where T : struct
+        {
+            T[] values = Util.GenerateRandomValues<T>(Vector<T>.Count);
+            Vector<T> vector = new Vector<T>(values);
+
+            T sum = Vector.Sum(vector);
+            T expected = Util.Zero<T>();
+            for (int g = 0; g < Vector<T>.Count; g++)
+            {
+                expected = Util.Add(expected, values[g]);
+            }
+            Assert.Equal(expected, sum);
+        }
+
+<# 
+    foreach (var type in supportedTypes)
+    {
+#>
+        [Fact]
         public void Max<#=type.Name#>() { TestMax<<#=type.Name#>>(); }
 <#
     }
