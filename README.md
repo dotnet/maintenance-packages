@@ -169,8 +169,6 @@ You need to change them to this:
 - [We only consider fixes that unblock critical issues](https://github.com/dotnet/runtime/blob/main/src/libraries/README.md#primary-bar)
 - [We don't accept refactoring changes due to new language features](https://github.com/dotnet/runtime/blob/main/src/libraries/README.md#secondary-bars)
 
-This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/). For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
-
 ## Deployment
 
 ### Produce the stable package versions
