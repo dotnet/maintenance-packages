@@ -6,6 +6,8 @@
     <!-- Opt-out repo features -->
     <UseVSTestRunner>true</UseVSTestRunner>
     <UsingToolXliff>false</UsingToolXliff>
+    <!-- Preserve the analyzer baseline used by the existing tests. -->
+    <XUnitAnalyzersVersion>1.1.0</XUnitAnalyzersVersion>
   </PropertyGroup>
   <PropertyGroup>
     <!-- Arcade dependencies -->

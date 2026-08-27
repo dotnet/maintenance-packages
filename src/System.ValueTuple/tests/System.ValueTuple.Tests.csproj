@@ -5,7 +5,8 @@
   </PropertyGroup>
   
   <ItemGroup>
-    <ProjectReference Include="..\src\System.ValueTuple.csproj" />
+    <!-- net481 selects the net471 placeholder by default, but that target intentionally produces no assembly. -->
+    <ProjectReference Include="..\src\System.ValueTuple.csproj" AdditionalProperties="TargetFramework=net47" />
   </ItemGroup>
 
 </Project>
