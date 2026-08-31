@@ -35,7 +35,12 @@ namespace System.Buffers.ArrayPool.Tests
             }
         }
 
-        protected static void RemoteInvokeWithTrimming(Action method, int timeout = RemoteExecutor.FailWaitTimeoutMilliseconds)
+        protected static void RemoteInvokeWithTrimming(Action method)
+        {
+            RemoteInvokeWithTrimming(method, RemoteExecutor.FailWaitTimeoutMilliseconds);
+        }
+
+        protected static void RemoteInvokeWithTrimming(Action method, int timeout)
         {
             RemoteInvokeOptions options = new RemoteInvokeOptions
             {

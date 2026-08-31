@@ -6,12 +6,14 @@
     <!-- Opt-out repo features -->
     <UseVSTestRunner>true</UseVSTestRunner>
     <UsingToolXliff>false</UsingToolXliff>
+    <!-- Preserve the analyzer baseline used by the existing tests. -->
+    <XUnitAnalyzersVersion>1.1.0</XUnitAnalyzersVersion>
   </PropertyGroup>
   <PropertyGroup>
     <!-- Arcade dependencies -->
-    <MicrosoftDotNetRemoteExecutorVersion>8.0.0-beta.25611.2</MicrosoftDotNetRemoteExecutorVersion>
-    <MicrosoftDotNetXUnitExtensionsVersion>8.0.0-beta.25611.2</MicrosoftDotNetXUnitExtensionsVersion>
-    <MicrosoftDotNetBuildTasksTargetFrameworkVersion>8.0.0-beta.25611.2</MicrosoftDotNetBuildTasksTargetFrameworkVersion>
-    <MicrosoftDotNetBuildTasksTemplatingVersion>8.0.0-beta.25611.2</MicrosoftDotNetBuildTasksTemplatingVersion>
+    <MicrosoftDotNetRemoteExecutorVersion>10.0.0-beta.26429.1</MicrosoftDotNetRemoteExecutorVersion>
+    <MicrosoftDotNetXUnitExtensionsVersion>10.0.0-beta.26429.1</MicrosoftDotNetXUnitExtensionsVersion>
+    <MicrosoftDotNetBuildTasksTargetFrameworkVersion>10.0.0-beta.26429.1</MicrosoftDotNetBuildTasksTargetFrameworkVersion>
+    <MicrosoftDotNetBuildTasksTemplatingVersion>10.0.0-beta.26429.1</MicrosoftDotNetBuildTasksTemplatingVersion>
   </PropertyGroup>
 </Project>
