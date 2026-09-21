@@ -71,7 +71,13 @@ stages:
           fetchDepth: 0
           clean: true
         steps:
-        - script: eng\common\cibuild.cmd
+        - script: eng\common\build.cmd
+            -restore
+            -build
+            -test
+            -sign
+            -pack
+            -ci
             -configuration $(_BuildConfig)
             -prepareMachine
             $(_AdditionalBuildArgs)
@@ -93,7 +99,12 @@ stages:
           - checkout: self
             clean: true
           steps:
-          - script: eng/common/cibuild.sh
+          - script: eng/common/build.sh
+              --restore
+              --build
+              --test
+              --pack
+              --ci
               --configuration $(_BuildConfig)
               --prepareMachine
               $(_AdditionalBuildArgs)
