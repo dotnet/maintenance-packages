@@ -1,7 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>$(NetFrameworkMinimum)</TargetFramework>
+    <TargetFramework>$(NetFrameworkCurrent)</TargetFramework>
+    <!-- These tests intentionally verify that null-backed spans equal default. -->
+    <NoWarn>$(NoWarn);CA2265</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>
@@ -12,7 +14,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\src\System.Memory.csproj" />
-    <ProjectReference Include="..\..\System.ValueTuple\src\System.ValueTuple.csproj" />
+    <!-- net481 selects the net471 placeholder by default, but that target intentionally produces no assembly. -->
+    <ProjectReference Include="..\..\System.ValueTuple\src\System.ValueTuple.csproj" AdditionalProperties="TargetFramework=net47" />
   </ItemGroup>
 
 </Project>

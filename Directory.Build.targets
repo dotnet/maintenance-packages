@@ -43,6 +43,11 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(IsTestUtilityProject)' == 'true'">
+    <!-- Legacy test infrastructure intentionally uses obsolete SQL CLR APIs and interface-typed collections. -->
+    <NoWarn>$(NoWarn);CS0618;CA1311;CA1852;CA1859;CA1861</NoWarn>
+  </PropertyGroup>
+
   <PropertyGroup Condition="'$(IsSourceProject)' == 'true'">
     <XmlDocumentationFilePath>$(MSBuildProjectDirectory)\$(AssemblyName).xml</XmlDocumentationFilePath>
     <CLSCompliant Condition="'$(CLSCompliant)' == '' and '$(MSBuildProjectExtension)' != '.ilproj'">true</CLSCompliant>

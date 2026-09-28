@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <!-- Using NetFrameworkCurrent because some APIs used in the tests are unavailable in net462. -->
-    <TargetFrameworks>$(NetMinimum);$(NetFrameworkCurrent)</TargetFrameworks>
+    <TargetFrameworks>$(NetCurrent);$(NetFrameworkCurrent)</TargetFrameworks>
   </PropertyGroup>
 
   <ItemGroup>
