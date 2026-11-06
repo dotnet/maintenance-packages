@@ -177,10 +177,10 @@ namespace System.Json.Tests
         {
             JsonObject obj = new JsonObject(new KeyValuePair<string, JsonValue>("key", new JsonPrimitive(true)));
             obj.Clear();
-            Assert.Empty(obj);
+            Assert.Empty((IEnumerable<KeyValuePair<string, JsonValue>>)obj);
 
             obj.Clear();
-            Assert.Empty(obj);
+            Assert.Empty((IEnumerable<KeyValuePair<string, JsonValue>>)obj);
         }
 
         [Fact]
@@ -231,11 +231,11 @@ namespace System.Json.Tests
             JsonObject obj = new JsonObject(item);
 
             obj.Remove(item.Key);
-            Assert.Empty(obj);
+            Assert.Empty((IEnumerable<KeyValuePair<string, JsonValue>>)obj);
             Assert.False(obj.ContainsKey(item.Key));
 
             obj.Remove(item.Key);
-            Assert.Empty(obj);
+            Assert.Empty((IEnumerable<KeyValuePair<string, JsonValue>>)obj);
         }
 
         [Fact]
@@ -253,11 +253,11 @@ namespace System.Json.Tests
             ICollection<KeyValuePair<string, JsonValue>> iCollection = obj;
 
             iCollection.Remove(item);
-            Assert.Empty(obj);
+            Assert.Empty((IEnumerable<KeyValuePair<string, JsonValue>>)obj);
             Assert.False(obj.ContainsKey(item.Key));
 
             iCollection.Remove(item);
-            Assert.Empty(obj);
+            Assert.Empty((IEnumerable<KeyValuePair<string, JsonValue>>)obj);
         }
 
         [Fact]
